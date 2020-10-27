@@ -138,18 +138,20 @@ addLayer("s", {
                 return hasUpgrade(this.layer, 21);
             },
             style() {
-                if(player[this.layer].unlocked) return {
+                if (hasUpgrade(this.layer, this.id)) return {
                     'background-color': '#1a9cb2',
                     'border-color': '#00353F',
                     'height': '200px',
                     'width': '200px'
                     }
-                    'background-color': '#77bf5f',
-                    'border-color': '#68A753',
-                    'height': '200px',
-                    'width': '200px'
-		    }
-	        },
+                    else if (!canAffordUpgrade(this.layer, this.id)) {
+                        return {
+                            'background-color': '#00353F' 
+                            'border-color': '#1a9cb2',
+                            'height': '200px',
+                            'width': '200px'
+                        }
+	          },
 	    },
         23: {
             title: "Another exponent...?",
@@ -231,13 +233,13 @@ addLayer("s", {
                 return inChallenge(this.layer, 21);
 	    },
             style() {
-                if(player[this.layer].unlocked) return {
+                if (hasUpgrade(this.layer, this.id)) return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px'
                     }
-                    return {
+                else if (!canAffordUpgrade(this.layer, this.id)) {
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
