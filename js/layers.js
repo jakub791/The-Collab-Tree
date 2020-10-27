@@ -25,7 +25,7 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
-            if (inChallenge("s", 21)) mult = mult.petrate(new Decimal(0.01))
+            if (inChallenge("s", 21)) mult = mult.pentate(new Decimal(0.01))
             return mult;
         },
         gainExp() {
@@ -263,11 +263,11 @@ clickables: {
             rewardDescription: "You gain 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("100000"),
+            goal: new Decimal("2000000"),
 	},
         21: {
             name: "The Endgamer",
-            challengeDescription: "Petrates your plots and shenanigans gain by 0.01 because I can lmao.",
+            challengeDescription: "Pentates your plots and shenanigans gain by 0.01 because I can lmao.",
             unlocked() {
                 return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
