@@ -54,7 +54,9 @@ addLayer("s", {
                 content:
                     [["display-text",
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
-                    {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
+                    {"color": "gray", "font-size": "32px", "font-family": "Arial"},
+                    if(inChallenge("s", 11)) return 'You have ' + format(player.s.buyables[12]) + ' predicted boredoms.'},
+                    {"color": "red", "font-size": "50px", "font-family": "Impact"}],
                     ["blank", "5px"],
                     "buyables"],
         },
