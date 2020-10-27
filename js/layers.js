@@ -76,7 +76,7 @@ addLayer("s", {
                 else return hasUpgrade(this.layer, 11);
             },
             effect() {
-                let ret = player[this.layer].points.root(2);
+                let ret = player[this.layer].points.add(1).root(2);
                 if (hasUpgrade("s", 21)) ret = ret.pow(upgradeEffect("s", 21));
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
