@@ -22,7 +22,7 @@ addLayer("s", {
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) {
-            if (inChallenge("s", 12)) mult = mult.mul(getBuyableAmt("s", 11).mul(0.01).add(1));
+            if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
             if (inChallenge("s", 21)) mult = mult.petrate(new Decimal(0.01))
@@ -212,15 +212,10 @@ addLayer("s", {
             canAfford() { return player[this.layer].unlocked; },
             buy() {
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
-            player[this.layer].bigbrainmoment = player[this.layer].bigbrainmoment.add(1);
         },
             effect() {
             let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
             if (inChallenge("s", 11)) eff = eff.pow(2)
-            if (inChallenge("s", 12)) {
-            let negativeEff = eff
-            eff = eff.div(negativeEff.pow(2))
-	    }
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
