@@ -10,7 +10,7 @@ addLayer("s", {
         resource: "shenanigans",
         row: 0,
 
-        baseResource: "shenanigans",
+        baseResource: "plots",
         baseAmount() {return player.points;},
 
         requires: new Decimal(1),
@@ -234,11 +234,11 @@ clickables: {
         return hasUpgrade([this.layer], 14);
         },
     },
-challenges: {
+    challenges: {
         rows: 1,
         cols: 1,
-       11: {
-            name: "Your Usual Challenge",
+        11: {
+            name: "The Endgamer",
             challengeDescription: "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but ''Boredom'''s first effect is increased to the power of 2.",
             currencyDisplayName: "plots",
             currencyInternalName: "plots",
@@ -246,9 +246,9 @@ challenges: {
                 return hasUpgrade(this.layer, 34);
             },
             rewardDescription: "doubles your plot gain, i guess.",
-            goal: new Decimal("40000"),
-        },
-},
+            goal: new Decimal(9001),
+	},
+    },
 	hotkeys: [
 		{ key: "s", desc: "S: Reset for shenanigans", onPress() { doReset(this.layer); } },
 	],
