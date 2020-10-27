@@ -149,7 +149,6 @@ addLayer("s", {
                 'width': '200px'
 		}
 	    },
-        },
         23: {
             title: "Another exponent...?",
             description: "Adds another ^1.01 to both ''T.D.E.'' and ''Exponent'' upgrades.",
