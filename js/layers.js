@@ -25,7 +25,7 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
-            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(1).div((1e9999999).tetrate(1e9999999)))
+            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(1).div((1e9999999)))
             return mult;
         },
         gainExp() {
@@ -268,7 +268,7 @@ clickables: {
 	},
         21: {
             name: "The Endgamer",
-            challengeDescription: "Tetrates your plots and shenanigans gain by 1/(1e9999999^^1e9999999) times because I can lmao (Don't even try to complete it with hyperinflation, smartass).",
+            challengeDescription: "Tetrates your plots and shenanigans gain by 1/1e9999999 times because I can lmao (Don't even try to complete it with hyperinflation, smartass).",
             unlocked() {
                 return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
