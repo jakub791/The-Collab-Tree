@@ -144,9 +144,6 @@ addLayer("s", {
                     'height': '200px',
                     'width': '200px'
                     }
-                    return {
-                    'background-color': '#1a9cb2',
-                    'border-color': '#00353F',
                     'height': '200px',
                     'width': '200px'
 		    }
@@ -234,13 +231,13 @@ addLayer("s", {
             style() {
                 if(player[this.layer].unlocked) return {
                     'background-color': '#AE4242',
-                    'border-color': '#AE4242',
+                    'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px'
                     }
                     return {
-                    'background-color': '#AE4242',
-                    'border-color': '#AE4242',
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px'
 		    }
