@@ -244,6 +244,7 @@ clickables: {
                 return hasUpgrade(this.layer, 34);
             },
             rewardDescription: "doubles your plot gain, i guess.",
+            currencyDisplayName: "points",
             goal: new Decimal(9001),
 	},
     },
