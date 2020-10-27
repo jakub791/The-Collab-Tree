@@ -238,7 +238,7 @@ addLayer("s", {
         },
             effect() {
             let eff = player.points.div(100).add(1)
-            eff = eff.pow(player.points.root(3).max(1)).pow(player.points.root(3).max(1))
+            eff = eff.pow(player.points.max(1)).pow(player.max(1))
             return eff;
         },
         display() {
