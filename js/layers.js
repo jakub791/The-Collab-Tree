@@ -20,11 +20,11 @@ addLayer("s", {
         gainMult() {
             let mult = new Decimal(1);
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
-            if (hasUpgrade("s", 34)) {
-            if (inChallenge("s", 12)) mult = mult.mul((buyableEffect("s", 11)).sub(1)).div(10).add(1);
-            else mult = mult.mul(player.s.buyables[11].mul(0.01).add(1))
-	    }
             if (hasChallenge("s", 11)) mult = mult.mul(3)
+            if (hasUpgrade("s", 34)) {
+            if (inChallenge("s", 12)) mult = mult.mul(getBuyableAmt("s", 11).mul(0.01).add(1));
+            else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
+	    }
             if (inChallenge("s", 21)) mult = mult.petrate(new Decimal(0.01))
             return mult;
         },
@@ -224,7 +224,7 @@ addLayer("s", {
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
-            if (inChallenge("s",12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id).div(buyableEffect(this.layer, this.id).pow(2)) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id)
+            if (inChallenge("s",12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id).div(buyableEffect(this.layer, this.id).pow(2))
             else if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id).sub(1).div(10).add(1) + "x.";
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x.";
 	    },
