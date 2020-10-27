@@ -62,7 +62,7 @@ addLayer("s", {
 
     upgrades: {
         rows: 4,
-        cols: 5,
+        cols: 4,
         11: {
             title: "Every 60 seconds in real life a minute passes.",
             description: "Boosts your plot gain by ALOT.",
@@ -79,7 +79,7 @@ addLayer("s", {
             effect() {
                 let ret = player[this.layer].points.add(1).root(2);
                 if (hasUpgrade("s", 21)) ret = ret.pow(upgradeEffect("s", 21));
-                if (hasUpgrade("s", 25)) ret = ret.pow(upgradeEffect("s", 25));
+                if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
                 if (inChallenge("s", 21)) ret = new Decimal(1);
                 return ret;
@@ -94,7 +94,7 @@ addLayer("s", {
             cost: new Decimal(1200),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
-                else return hasUpgrade(this.layer, 23);                
+                else return hasUpgrade(this.layer, 22);                
             },
             effect () {
                 if(inChallenge("s", 11)) return new Decimal(1)
@@ -110,7 +110,7 @@ addLayer("s", {
             cost: new Decimal(1800),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
-                else return hasUpgrade(this.layer, 23); 
+                else return hasUpgrade(this.layer, 22); 
             },
         },
         21: {
@@ -122,7 +122,7 @@ addLayer("s", {
             },
             effect() {
                 let ret = new Decimal(1.01);
-                if (hasUpgrade("s", 25)) ret = ret.pow(upgradeEffect("s", 25));
+                if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
                 return ret;
             },
@@ -131,32 +131,28 @@ addLayer("s", {
             },
         },
         22: {
-	},
-        23: {
             title: "Supreme Hexagonity.",
-            description: "Unlocks 4 more upgrades, 2 challenges and halves ''But enough grinding, have at you!'''s root effect.",
+            description: "Unlocks a bunch of things and buffs ''B.E.G,H.A.Y!'' upgrade.",
             cost: new Decimal(999),
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
             },
             style() {
                 if(player[this.layer].unlocked) return {
-                    'background-color': '#00353F',
-                    'border-color': '#1a9cb2',
+                    'background-color': '#1a9cb2',
+                    'border-color': '#00353F',
                     'height': '200px',
-                    'width': '200pz'
+                    'width': '200px'
                     }
                     return {
-                    'background-color': '#00353F',
-                    'border-color': '#1a9cb2',
+                    'background-color': '#1a9cb2',
+                    'border-color': '#00353F',
                     'height': '200px',
                     'width': '200px'
 		    }
-	      },
-        },
-        24: {
-	},
-        25: {
+	        },
+	    },
+        23: {
             title: "Another exponent...?",
             description: "Adds another ^1.01 to both ''T.D.E.'' and ''Exponent'' upgrades.",
             cost: new Decimal(100),
@@ -171,18 +167,18 @@ addLayer("s", {
             effectDisplay() {
                 return "^" + format(this.effect());
             },
-	},
+        },
         31: {
             title: "But enough grinding, have at you!",
             description: "Exponents most of upgrades around ''S.H.'' based on unspent points.",
             cost: new Decimal(250),
             unlocked() { 
                 if (inChallenge("s", 21)) return false;
-                else return hasUpgrade(this.layer, 25);
+                else return hasUpgrade(this.layer, 23);
             },
             effect() {
                 let ret = {};
-                if (hasUpgrade("s", 23)) ret = player.points.add(1).root(32);
+                if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
         else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
                 if (inChallenge("s", 21)) ret = new Decimal(1)
@@ -194,7 +190,7 @@ addLayer("s", {
             description: "Tetrates the upgrade left to it by 1.420.",
             cost: new Decimal(400),
             unlocked(){ 
-                return hasUpgrade(this.layer, 25);
+                return hasUpgrade(this.layer, 23);
         },
             effect() {
                 let ret = new Decimal(1.42);
@@ -209,7 +205,7 @@ addLayer("s", {
             description: "Boosts shenanigans gain by the passed time at reduced rate.",
             cost: new Decimal(2500),
             unlocked(){ 
-                return hasUpgrade(this.layer, 23);
+                return hasUpgrade(this.layer, 22);
             },
             effect() {
             return new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
@@ -223,7 +219,7 @@ addLayer("s", {
             description: "Boredom now weakly boosts shenanigans gain too, apparently.",
             cost: new Decimal(15000),
             unlocked(){ 
-                return hasUpgrade(this.layer, 23);
+                return hasUpgrade(this.layer, 22);
             },
         },
         41: {
@@ -238,7 +234,7 @@ addLayer("s", {
                     'background-color': '#AE4242',
                     'border-color': '#AE4242',
                     'height': '150px',
-                    'width': '480pz'
+                    'width': '480px'
                     }
                     return {
                     'background-color': '#AE4242',
@@ -335,7 +331,7 @@ clickables: {
             name: "Typical Challenge",
             challengeDescription: "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but predicted boredoms's first effect is increased to the power of 2.",
             unlocked() {
-                return hasUpgrade(this.layer, 23);
+                return hasUpgrade(this.layer, 22);
             },
             rewardDescription: "Triples your shenanigans gain because you were a good boy.",
             currencyDisplayName: "plots",
@@ -346,7 +342,7 @@ clickables: {
             name: "The Reverser",
             challengeDescription: "Predicted boredoms's first effect is divided by itself twice, making it weaker. In exchange, it's second effect is as powerful as first effect outside this challenge.",
             unlocked() {
-                return hasUpgrade(this.layer, 23);
+                return hasUpgrade(this.layer, 22);
             },
             rewardDescription: "You gain 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
