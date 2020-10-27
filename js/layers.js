@@ -229,6 +229,19 @@ addLayer("s", {
             else if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
 	    },
+        style() {
+            if(player[this.layer].unlocked) return {
+                'background-color': '#808080',
+                'border-color': '#808080',
+                'height': '200px',
+                'width': '300px'
+                }
+                return {
+                'border-color': '#808080',
+                'height': '200px',
+                'width': '300px'
+		}
+	    },
 	},
         12: {
             title: "Impatience Transformation",
@@ -244,6 +257,19 @@ addLayer("s", {
         display() {
         return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience are getting transformed into anger, exponentionally boosting your plot and shenanigans gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
 	},
+        style() {
+            if(player[this.layer].unlocked) return {
+                'background-color': '#AE4242',
+                'border-color': '#AE4242',
+                'height': '200px',
+                'width': '300px'
+                }
+                return {
+                'border-color': '#AE4242',
+                'height': '200px',
+                'width': '300px'
+		}
+	    },
 	},
     },
 clickables: {
