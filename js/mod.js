@@ -1,5 +1,5 @@
 let modInfo = {
-	name: "Antimatter Tree...?",
+	name: "Antimatter Tree.",
 	id: "olegat",
 	author: "an idiot sandwich",
 	pointsName: "plots",
