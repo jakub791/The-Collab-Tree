@@ -35,7 +35,7 @@ addLayer("s", {
         update(diff) {
         if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1)) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(diff)
         if(player[this.layer].upgradeTime.gt(60)) player[this.layer].upgradeTime = new Decimal(60)
-        if(hasChallenge(this.layer, 12)) player.s.buyables[11] = player.s.buyables[11].add(diff.times(10))
+        if(hasChallenge(this.layer, 12)) player.s.buyables[11] = player.s.buyables[11].add(diff*10)
 	},
 
         layerShown() {return true;},
