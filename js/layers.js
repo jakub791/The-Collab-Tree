@@ -66,7 +66,7 @@ addLayer("s", {
             description: "Boosts your plot gain by unspent shenanigans.",
             cost: new Decimal(10),
             unlocked(){ 
-                return hasUpgrade([this.layer], 11);
+                return hasUpgrade(this.layer, 11);
             },
             effect() {
                 let ret = player[this.layer].points.root(2);
@@ -85,10 +85,11 @@ addLayer("s", {
             cost: new Decimal(1200),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
-                else return hasUpgrade([this.layer], 22);                
+                else return hasUpgrade(this.layer, 22);                
             },
             effect () {
-                return new Decimal(5).sub(player[this.layer].upgradeTime.div(15))
+                if(inChallenge("s", 11)) return new Decimal(1)
+                else return new Decimal(5).sub(player[this.layer].upgradeTime.div(15))
             },
             effectDisplay() {
                 return format(this.effect()) + "x";
@@ -100,7 +101,7 @@ addLayer("s", {
             cost: new Decimal(1800),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
-                else return hasUpgrade([this.layer], 22); 
+                else return hasUpgrade(this.layer, 22); 
             },
         },
         21: {
@@ -108,7 +109,7 @@ addLayer("s", {
             description: "Adds ^1.01 to the previous upgrade.",
             cost: new Decimal(20),
             unlocked(){ 
-                return hasUpgrade([this.layer], 12);
+                return hasUpgrade(this.layer, 12);
             },
             effect() {
                 let ret = new Decimal(1.01);
@@ -125,7 +126,7 @@ addLayer("s", {
             description: "Unlocks a bunch of things and buffs ''B.E.G,H.A.Y!'' upgrade.",
             cost: new Decimal(999),
             unlocked(){ 
-                return hasUpgrade([this.layer], 21);
+                return hasUpgrade(this.layer, 21);
             },
         },
         23: {
@@ -133,7 +134,7 @@ addLayer("s", {
             description: "Adds another ^1.01 to both ''T.D.E.'' and ''Exponent'' upgrades.",
             cost: new Decimal(100),
             unlocked(){ 
-                return hasUpgrade([this.layer], 21);
+                return hasUpgrade(this.layer, 21);
             },
             effect() {
                 let ret = new Decimal(1.01);
@@ -149,7 +150,7 @@ addLayer("s", {
             description: "Exponents most of upgrades around ''S.H.'' based on unspent points.",
             cost: new Decimal(250),
             unlocked() { 
-                return hasUpgrade([this.layer], 23);
+                return hasUpgrade(this.layer, 23);
             },
             effect() {
                 let ret = {};
@@ -231,7 +232,8 @@ clickables: {
         if (player[this.layer].upgradeTime.eq(60)) return "Reset 3rd upgrade's effect.";
 	},// **optional** text to display on the Master Button
         showMasterButton() {
-        return hasUpgrade([this.layer], 14);
+        if(inChallenge("s", 11)) return false;
+        else return hasUpgrade([this.layer], 14);
         },
     },
     challenges: {
