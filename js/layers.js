@@ -220,6 +220,26 @@ addLayer("s", {
                 return hasUpgrade(this.layer, 22);
             },
         },
+        41: {
+            title: "Hatred"
+            description: "''Impatience Transformation'' is now getting exponented by this much <nr> ^ (insert your plots here) * (insert your plots here)."
+            cost: new Decimal(30),
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            style() {
+                if(player[this.layer].unlocked) return {
+                    'background-color': '#AE4242',
+                    'border-color': '#AE4242',
+                    'height': '150px',
+                    'width': '480px'
+                    }
+                    return {
+                    'border-color': '#AE4242',
+                    'height': '150px',
+                    'width': '480px'
+		    }
+	    },
     },
     buyables: {
         rows: 1,
@@ -264,6 +284,7 @@ addLayer("s", {
             effect() {
             let eff = player.points.div(100).add(1)
             eff = eff.pow(player.points.max(1)).pow(player.points.max(1))
+            if (hasUpgrade(this.layer, 41)) eff = eff.pow(player.points.mul(player.points).max(1))
             return eff;
         },
         display() {
