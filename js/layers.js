@@ -268,7 +268,7 @@ clickables: {
 	},
         21: {
             name: "The Endgamer",
-            challengeDescription: "Tetrates your plots and shenanigans gain by nonillionth because I can lmao (Don't even try to complete it with hyperinflation, smartass).",
+            challengeDescription: "Tetrates your plots and shenanigans gain by undecillionth times because I can lmao (Don't even try to complete it with hyperinflation, smartass).",
             unlocked() {
                 return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
