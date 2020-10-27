@@ -144,6 +144,8 @@ addLayer("s", {
                     'height': '200px',
                     'width': '200px'
                     }
+                    'background-color': '#77bf5f',
+                    'border-color': '#68A753',
                     'height': '200px',
                     'width': '200px'
 		    }
