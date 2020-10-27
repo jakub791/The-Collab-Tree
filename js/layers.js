@@ -237,11 +237,11 @@ addLayer("s", {
             buy() {;
         },
             effect() {
-            let eff = player.points.div(100).add(1)
+            let eff = player.points.pow(player.points.div(100).add(1)).div(100).add(1).pow(player.points.div(100).add(1))
             return eff;
         },
         display() {
-        return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience are getting transformed into anger, exponentionally boosting your plot and shenanigans gain by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
+        return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience are getting transformed into anger, exponentionally boosting your plot and shenanigans gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
 	},
 	},
     },
