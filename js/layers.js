@@ -242,6 +242,8 @@ addLayer("s", {
         },
         display() {
         return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does the creator of this game think I'm gonna reach such a goal without these two only ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' And with that, your impatience are transforming into anger, exponentionally boosting your plot and shenanigans gain by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
+	},
+	},
     },
 clickables: {
         rows: 1,
