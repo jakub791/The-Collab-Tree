@@ -39,24 +39,32 @@ var colors_theme
 function drawTree() {
 	if (!retrieveCanvasData()) return;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	for (let layer in LAYER_DATA) {
-		let data = LAYER_DATA[layer]
-		for (let x in data.branches) {
-			let colorDefined = data.branches[x] instanceof Array
-			drawTreeBranch((colorDefined?data.branches[x][0]:data.branches[x]), layer, colorDefined?data.branches[x][1]:1)
+	for (layer in layers){
+		if (tmp[layer].layerShown && tmp[layer].branches){
+			for (branch in tmp[layer].branches)
+				{
+					drawTreeBranch(layer, tmp[layer].branches[branch])
+				}
 		}
 	}
-	needCanvasUpdate = false;
 }
 
-function drawTreeBranch(num1, num2, color_id = 1) { // taken from Antimatter Dimensions & adjusted slightly
-	if (!LAYER_DATA[num1]) return;
-	if (!LAYER_DATA[num2]) return;
-	
-	if (!LAYER_DATA[num1].shown()) return;
-	if (!LAYER_DATA[num2].shown()) return;
-	
-    let start = document.getElementById(num1).getBoundingClientRect();
+function drawTreeBranch(num1, data) { // taken from Antimatter Dimensions & adjusted slightly
+	let num2 = data
+	let color_id = 1
+
+	if (Array.isArray(data)){
+		num2 = data[0]
+		color_id = data[1]
+	}
+
+	if(typeof(color_id) == "number")
+		color_id = colors_theme[color_id]
+
+	if (document.getElementById(num1) == null || document.getElementById(num2) == null)
+		return
+
+	let start = document.getElementById(num1).getBoundingClientRect();
     let end = document.getElementById(num2).getBoundingClientRect();
     let x1 = start.left + (start.width / 2) + (document.getElementById("treeTab").scrollLeft || document.body.scrollLeft);
     let y1 = start.top + (start.height / 2) + (document.getElementById("treeTab").scrollTop || document.body.scrollTop);
@@ -64,7 +72,7 @@ function drawTreeBranch(num1, num2, color_id = 1) { // taken from Antimatter Dim
     let y2 = end.top + (end.height / 2) + (document.getElementById("treeTab").scrollTop || document.body.scrollTop);
     ctx.lineWidth = 15;
     ctx.beginPath();
-    ctx.strokeStyle = colors_theme[color_id]
+    ctx.strokeStyle = color_id
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
