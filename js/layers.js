@@ -252,7 +252,7 @@ clickables: {
             rewardDescription: "Triples your shenanigans gain because you were a good boy.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("14000"),
+            goal: new Decimal("24000"),
 	},
         12: {
             name: "The Reverser",
@@ -263,7 +263,7 @@ clickables: {
             rewardDescription: "You gain 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("24000"),
+            goal: new Decimal("100000"),
 	},
         21: {
             name: "The Endgamer",
