@@ -1,19 +1,19 @@
 let modInfo = {
 	name: "Antimatter Tree.",
 	id: "olegat",
-	author: "an idiot sandwich",
+	author: "Oleg (Low Poly Pichu#0530)",
 	pointsName: "plots",
-	discordName: "Low Poly Pichu#0530",
+	discordName: "",
 	discordLink: "",
 	changelogLink: "https://github.com/Acamaeda/The-Modding-Tree/blob/master/changelog.md",
-    offlineLimit: 24,  // In hours
+    offlineLimit: 8760,  // In hours
     initialStartPoints: new Decimal (0) // Used for hard resets and new players
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.2",
-	name: "Now with all 10 upgrades.",
+	num: "0.2.1.3.1",
+	name: "Fork Update.",
 }
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
