@@ -232,7 +232,7 @@ addLayer("s", {
 	},
         12: {
             title: "Impatience Transformation",
-            unlocked() { inChallenge("s", 21); }, 
+            unlocked() { return inChallenge("s", 21); }, 
             canAfford() { return player[this.layer].unlocked; },
             buy() {;
         },
