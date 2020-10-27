@@ -224,7 +224,7 @@ addLayer("s", {
         },
         41: {
             title: "Hatred"
-            description: "''Impatience Transformation'' is now getting exponented by this much <nr> ^ (insert your plots here) * (insert your plots here)."
+            description: "''Impatience Transformation'' is now getting exponented by ^" + format(player.points) + " * " + format(player.points) + ".";
             cost: new Decimal(30),
             unlocked(){
                 return inChallenge(this.layer, 21);
@@ -241,7 +241,7 @@ addLayer("s", {
                     'border-color': '#AE4242',
                     'height': '150px',
                     'width': '480px'
-		    },
+		    }
 	        },
 	    },
     },
