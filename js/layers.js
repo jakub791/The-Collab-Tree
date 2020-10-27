@@ -20,7 +20,11 @@ addLayer("s", {
         gainMult() {
             let mult = new Decimal(1);
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
-            if (hasUpgrade("s", 34)) mult = mult.mul((buyableEffect("s", 11)).sub(1)).div(10).add(1);
+            if (hasUpgrade("s", 34)) {
+            if (inChallenge("s", 12)) mult = mult.mul((buyableEffect("s", 11)).sub(1)).div(10).add(1);
+            else mult = mult.mul(player.s.buyables[11].mul(0.01).add(1))
+	    }
+            if (inChallenge("s", 21)) mult = mult.petrate(0.01)
             return mult;
         },
         gainExp() {
@@ -212,10 +216,14 @@ addLayer("s", {
             effect() {
             let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
             if (inChallenge("s", 11)) eff = eff.pow(2)
+            if (inChallenge("s", 12)) {
+            let negativeEff = eff
+            return negativeEff
+            eff = eff.div(negativeEff.pow(2))
+	    }
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
-                    let ret = {};
             if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id).sub(1).div(10).add(1) + "x.";
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x.";
 	    },
@@ -237,18 +245,40 @@ clickables: {
         },
     },
     challenges: {
-        rows: 1,
-        cols: 1,
+        rows: 2,
+        cols: 2,
         11: {
-            name: "The Endgamer",
-            challengeDescription: "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but ''Boredom'''s first effect is increased to the power of 2.",
+            name: "Typical Challenge",
+            challengeDescription: "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but predicted boredoms's first effect is increased to the power of 2.",
             unlocked() {
                 return hasUpgrade(this.layer, 34);
             },
-            rewardDescription: "doubles your plot gain, i guess.",
+            rewardDescription: "Triples your shenanigans gain because you were a good boy.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("9001"),
+            goal: new Decimal("24000"),
+	},
+        12: {
+            name: "The Reverser",
+            challengeDescription: "Predicted boredoms's first effect is divided by itself twice, making it weaker. In exchange, it's second effect is as powerful as first effect outside this challenge.",
+            unlocked() {
+                return hasUpgrade(this.layer, 34);
+            },
+            rewardDescription: "You gain 10 predicted boredoms per second.",
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            goal: new Decimal("10000"),
+	},
+        21: {
+            name: "The Endgamer",
+            challengeDescription: "Petrates your plots and shenanigans gain by 0.01 because I can lmao.",
+            unlocked() {
+                return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
+            },
+            rewardDescription: "no.",
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            goal: new Decimal("1e420"),
 	},
     },
 	hotkeys: [
