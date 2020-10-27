@@ -264,7 +264,7 @@ clickables: {
             rewardDescription: "You gain 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("2000000"),
+            goal: new Decimal("20000000"),
 	},
         21: {
             name: "The Endgamer",
