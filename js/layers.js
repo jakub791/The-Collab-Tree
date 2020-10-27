@@ -61,7 +61,7 @@ addLayer("s", {
     },
 
     upgrades: {
-        rows: 3,
+        rows: 4,
         cols: 4,
         11: {
             title: "Every 60 seconds in real life a minute passes.",
@@ -168,6 +168,8 @@ addLayer("s", {
                 return "^" + format(this.effect());
             },
         },
+        24: {
+	},
         31: {
             title: "But enough grinding, have at you!",
             description: "Exponents most of upgrades around ''S.H.'' based on unspent points.",
