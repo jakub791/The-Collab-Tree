@@ -142,13 +142,13 @@ addLayer("s", {
                     'background-color': '#1a9cb2',
                     'border-color': '#00353F',
                     'height': '200px',
-                    'width': '200px'
+                    'width': '200px',
                     }
                     else if (!canAffordUpgrade(this.layer, this.id)) return {
-                            'background-color': '#00353F' 
+                            'background-color': '#00353F', 
                             'border-color': '#1a9cb2',
                             'height': '200px',
-                            'width': '200px'
+                            'width': '200px',
                         }
 	          },
 	    },
@@ -236,13 +236,13 @@ addLayer("s", {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
-                    'width': '480px'
+                    'width': '480px',
                     }
                 else if (!canAffordUpgrade(this.layer, this.id)) return {
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
-                    'width': '480px'
+                    'width': '480px',
 		    }
 	        },
 	    },
