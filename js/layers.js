@@ -24,7 +24,7 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul((buyableEffect("s", 11)).sub(1)).div(10).add(1);
             else mult = mult.mul(player.s.buyables[11].mul(0.01).add(1))
 	    }
-            if (hasChallenge("s", 12)) mult = mult.mul(3)
+            if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (inChallenge("s", 21)) mult = mult.petrate(new Decimal(0.01))
             return mult;
         },
