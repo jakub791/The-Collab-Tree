@@ -144,7 +144,7 @@ addLayer("s", {
                     'height': '200px',
                     'width': '200px',
                     }
-                    else if (!canAffordUpgrade(this.layer, this.id)) return {
+                    return {
                             'background-color': '#00353F', 
                             'border-color': '#1a9cb2',
                             'height': '200px',
@@ -238,7 +238,7 @@ addLayer("s", {
                     'height': '150px',
                     'width': '480px',
                     }
-                else if (!canAffordUpgrade(this.layer, this.id)) return {
+                return {
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
