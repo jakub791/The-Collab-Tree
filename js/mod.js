@@ -45,7 +45,7 @@ function getPointGen() {
         if (hasUpgrade("s", 12)) gain = gain.times(upgradeEffect("s", 12));
         if (hasUpgrade("s", 13) && upgradeEffect("s", 13).gt(1)) gain = gain.times(upgradeEffect("s", 13));
         if (inChallenge("s", 11)) gain = gain.tetrate(new Decimal(0.5));
-        if (inChallenge("s", 21)) gain = gain.tetrate(new Decimal(1).div((1e9999999)))
+        if (inChallenge("s", 21)) gain = gain.tetrate(new Decimal(0.000000000000000000000000000000000001))
 	return gain
 }
 
