@@ -137,17 +137,20 @@ addLayer("s", {
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
             },
-                'background-color': '#00353F',
-                'border-color': '#1a9cb2 ',
-                'height': '200px',
-                'width': '200px'
-                }
-                return {
-                'background-color': '#00353F',
-                'border-color': '#1a9cb2 ',
-                'height': '200px',
-                'width': '200px'
-		}
+            style() {
+                if(player[this.layer].unlocked) return {
+                    'background-color': '#00353F',
+                    'border-color': '#1a9cb2',
+                    'height': '200px',
+                    'width': '200pz'
+                    }
+                    return {
+                    'background-color': '#00353F',
+                    'border-color': '#1a9cb2',
+                    'height': '200px',
+                    'width': '200px'
+		    }
+	        },
 	    },
         23: {
             title: "Another exponent...?",
