@@ -218,13 +218,13 @@ addLayer("s", {
             if (inChallenge("s", 11)) eff = eff.pow(2)
             if (inChallenge("s", 12)) {
             let negativeEff = eff
-            return negativeEff
             eff = eff.div(negativeEff.pow(2))
 	    }
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
-            if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id).sub(1).div(10).add(1) + "x.";
+            if (inChallenge("s",12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id).div(buyableEffect(this.layer, this.id).pow(2)) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id)
+            else if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x and shenanigans gain by " + buyableEffect(this.layer, this.id).sub(1).div(10).add(1) + "x.";
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + buyableEffect(this.layer, this.id) + "x.";
 	    },
 	},
@@ -256,7 +256,7 @@ clickables: {
             rewardDescription: "Triples your shenanigans gain because you were a good boy.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("24000"),
+            goal: new Decimal("14000"),
 	},
         12: {
             name: "The Reverser",
@@ -267,7 +267,7 @@ clickables: {
             rewardDescription: "You gain 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            goal: new Decimal("10000"),
+            goal: new Decimal("24000"),
 	},
         21: {
             name: "The Endgamer",
