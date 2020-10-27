@@ -52,10 +52,10 @@ addLayer("s", {
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
                 content:
-                    ["blank", "5px"],
                     [["display-text",
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
                     {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
+                    ["blank", "5px"],
                     "buyables"],
         },
     },
