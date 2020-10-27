@@ -132,11 +132,23 @@ addLayer("s", {
         },
         22: {
             title: "Supreme Hexagonity.",
-            description: "Unlocks a bunch of things and buffs ''B.E.G,H.A.Y!'' upgrade.",
+            description: "Unlocks 4 more upgrades, 2 challenges and halves ''But enough grinding, have at you!'''s root effect.",
             cost: new Decimal(999),
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
             },
+                'background-color': '#00353F',
+                'border-color': '#1a9cb2 ',
+                'height': '200px',
+                'width': '200px'
+                }
+                return {
+                'background-color': '#00353F',
+                'border-color': '#1a9cb2 ',
+                'height': '200px',
+                'width': '200px'
+		}
+	    },
         },
         23: {
             title: "Another exponent...?",
@@ -294,7 +306,7 @@ clickables: {
             name: "Typical Challenge",
             challengeDescription: "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but predicted boredoms's first effect is increased to the power of 2.",
             unlocked() {
-                return hasUpgrade(this.layer, 34);
+                return hasUpgrade(this.layer, 22);
             },
             rewardDescription: "Triples your shenanigans gain because you were a good boy.",
             currencyDisplayName: "plots",
@@ -305,7 +317,7 @@ clickables: {
             name: "The Reverser",
             challengeDescription: "Predicted boredoms's first effect is divided by itself twice, making it weaker. In exchange, it's second effect is as powerful as first effect outside this challenge.",
             unlocked() {
-                return hasUpgrade(this.layer, 34);
+                return hasUpgrade(this.layer, 22);
             },
             rewardDescription: "You gain 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
