@@ -52,11 +52,11 @@ addLayer("s", {
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
                 content:
+                    ["blank", "5px"]
                     [["display-text",
-                    ["blank", "5px"],
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
                     {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
-                    "infoboxes", "buyables"],
+                    "buyables"],
         },
     },
 
@@ -211,10 +211,10 @@ addLayer("s", {
     },
     buyables: {
         rows: 1,
-        cols: 1,
+        cols: 2,
         11: {
             title: "Predict boredom.",
-            unlocked(){ return player[this.layer].unlocked; }, 
+            unlocked() { return player[this.layer].unlocked; }, 
             canAfford() { return player[this.layer].unlocked; },
             buy() {
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
@@ -230,6 +230,18 @@ addLayer("s", {
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
 	    },
 	},
+        12: {
+            title: "Impatience Transformation",
+            unlocked() { inChallenge("s", 21)); }, 
+            canAfford() { return player[this.layer].unlocked; },
+            buy() {;
+        },
+            effect() {
+            let eff = player.points.div(100).add(1)
+            return eff;
+        },
+        display() {
+        return "'Like, seriously, this game is a complete garbage.' You said. 'How does the creator of this game think I'm gonna reach such a goal without these two only upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.' And with that, your impatience are transforming into anger, exponentionally boosting your plot and shenanigans gain by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
     },
 clickables: {
         rows: 1,
@@ -282,11 +294,6 @@ clickables: {
             currencyInternalName: "points",
             goal: new Decimal("1e420"),
 	},
-    },
-    infoboxes: {
-        infobox: {
-            display() {return "testing lmao"},
-        },
     },
 	hotkeys: [
 		{ key: "s", desc: "S: Reset for shenanigans", onPress() { doReset(this.layer); } },
