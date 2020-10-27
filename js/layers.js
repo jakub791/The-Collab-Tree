@@ -25,7 +25,7 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
-            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(1).div(1e9999999.tetrate(1e9999999)))
+            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(1).div((1e9999999).tetrate(1e9999999)))
             return mult;
         },
         gainExp() {
