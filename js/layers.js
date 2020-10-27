@@ -223,8 +223,8 @@ addLayer("s", {
             },
         },
         41: {
-            title: "Hatred"
-            description: "''Impatience Transformation'' is now getting exponented by ^" + format(player.points) + " * " + format(player.points) + ".";
+            title: "Hatred",
+            description {return "''Impatience Transformation'' is now getting exponented by ^" + format(player.points) + " * " + format(player.points) + "."},
             cost: new Decimal(30),
             unlocked(){
                 return inChallenge(this.layer, 21);
