@@ -165,7 +165,7 @@ addLayer("s", {
             description: "Tetrates the upgrade left to it by 1.420.",
             cost: new Decimal(400),
             unlocked(){ 
-                return hasUpgrade([this.layer], 23);
+                return hasUpgrade(this.layer, 23);
         },
             effect() {
                 let ret = new Decimal(1.42);
@@ -180,7 +180,7 @@ addLayer("s", {
             description: "Boosts shenanigans gain by the passed time at reduced rate.",
             cost: new Decimal(2500),
             unlocked(){ 
-                return hasUpgrade([this.layer], 22);
+                return hasUpgrade(this.layer, 22);
             },
             effect() {
             return new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
@@ -194,7 +194,7 @@ addLayer("s", {
             description: "Boredom now weakly boosts shenanigans gain too, apparently.",
             cost: new Decimal(15000),
             unlocked(){ 
-                return hasUpgrade([this.layer], 22);
+                return hasUpgrade(this.layer, 22);
             },
         },
     },
@@ -233,7 +233,7 @@ clickables: {
 	},// **optional** text to display on the Master Button
         showMasterButton() {
         if(inChallenge("s", 11)) return false;
-        else return hasUpgrade([this.layer], 14);
+        else return hasUpgrade(this.layer, 14);
         },
     },
     challenges: {
