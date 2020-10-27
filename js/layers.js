@@ -234,13 +234,15 @@ addLayer("s", {
                     'background-color': '#AE4242',
                     'border-color': '#AE4242',
                     'height': '150px',
-                    'width': '480px'
+                    'width': '480pz'
                     }
                     return {
+                    'background-color': '#AE4242',
                     'border-color': '#AE4242',
                     'height': '150px',
                     'width': '480px'
-		    }
+		    },
+	        },
 	    },
     },
     buyables: {
