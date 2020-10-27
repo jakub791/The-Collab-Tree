@@ -151,7 +151,8 @@ addLayer("s", {
                             'height': '200px',
                             'width': '200px'
                         }
-	          },
+		    },
+	        },
 	    },
         23: {
             title: "Another exponent...?",
