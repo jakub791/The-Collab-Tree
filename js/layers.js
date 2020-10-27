@@ -53,9 +53,10 @@ addLayer("s", {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
                 content:
                     [["display-text",
+                    ["blank", "5px"],
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
                     {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
-                    "buyables"],
+                    "infoboxes", "buyables"],
         },
     },
 
@@ -281,6 +282,11 @@ clickables: {
             currencyInternalName: "points",
             goal: new Decimal("1e420"),
 	},
+    },
+    infoboxes: {
+        infobox: {
+            display() {return "testing lmao"},
+        },
     },
 	hotkeys: [
 		{ key: "s", desc: "S: Reset for shenanigans", onPress() { doReset(this.layer); } },
