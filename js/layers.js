@@ -132,7 +132,7 @@ addLayer("s", {
         },
         22: {
             title: "Supreme Hexagonity.",
-            description: "Unlocks a bunch of things and buffs ''B.E.G,H.A.Y!'' upgrade.",
+            description: "Unlocks 4 more upgrades, 2 challenges and halves ''But enough grinding, have at you!'''s root effect.",
             cost: new Decimal(999),
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
