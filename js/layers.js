@@ -25,7 +25,7 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
-            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(1).div((1e9999999)))
+            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(0.000000000000000000000000000000000001))
             return mult;
         },
         gainExp() {
@@ -72,13 +72,15 @@ addLayer("s", {
             description: "Boosts your plot gain by unspent shenanigans.",
             cost: new Decimal(10),
             unlocked(){ 
-                return hasUpgrade(this.layer, 11);
+                if(inChallenge("s", 21)) return false;
+                else return hasUpgrade(this.layer, 11);
             },
             effect() {
                 let ret = player[this.layer].points.root(2);
                 if (hasUpgrade("s", 21)) ret = ret.pow(upgradeEffect("s", 21));
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
+                if (inChallenge("s", 21)) ret = new Decimal(1);
                 return ret;
             },
             effectDisplay() {
@@ -156,13 +158,15 @@ addLayer("s", {
             description: "Exponents most of upgrades around ''S.H.'' based on unspent points.",
             cost: new Decimal(250),
             unlocked() { 
-                return hasUpgrade(this.layer, 23);
+                if (inChallenge("s", 21)) return false;
+                else return hasUpgrade(this.layer, 23);
             },
             effect() {
                 let ret = {};
                 if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
         else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
+                if (inChallenge("s", 21)) ret = new Decimal(1)
                 return ret;
             },
         },
@@ -268,7 +272,7 @@ clickables: {
 	},
         21: {
             name: "The Endgamer",
-            challengeDescription: "Tetrates your plots and shenanigans gain by 1/1e9999999 times because I can lmao (Don't even try to complete it with hyperinflation, smartass).",
+            challengeDescription: "Tetrates your plots and shenanigans gain by undecillionth times and removes both ''Vibing.'' and ''B.E.G,H.A.Y!'' upgrades. (Don't even think about bursting through it with hyperinflation, smartass).",
             unlocked() {
                 return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
