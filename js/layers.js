@@ -98,8 +98,8 @@ addLayer("s", {
             },
             effect () {
                 let zatime = new Decimal(1)
-                if(inChallenge("s", 11))
-                else zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
+                zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
+                if(inChallenge("s", 11)) zatime = new Decimal(1)
                 if(inChallenge("s", 21) && hasUpgrade("s", 51)) zatime = zatime.pow(buyableEffect("s", 12));
                 return zatime
             },
@@ -182,8 +182,11 @@ addLayer("s", {
             description: "Exponents most of upgrades around ''S.H.'' based on unspent points.",
             cost: new Decimal(250),
             unlocked() { 
-                if (inChallenge("s", 21)) return false;
-                else return hasUpgrade(this.layer, 23);
+                let unlockable = true
+                if (inChallenge("s", 21)) unlockable = false
+                else unlockable = hasUpgrade(this.layer, 23);
+                if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) ) unlockable = true
+                return unlockable
             },
             effect() {
                 let ret = {};
@@ -191,7 +194,7 @@ addLayer("s", {
                 else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
                 if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
-                else ret = new Decimal(1);
+                else if(inChallenge("s", 21)) ret = new Decimal(1);
                 return ret;
             },
         },
@@ -208,6 +211,7 @@ addLayer("s", {
         },
             effect() {
                 let ret = new Decimal(1.42);
+                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
