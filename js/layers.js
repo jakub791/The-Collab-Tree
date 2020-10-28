@@ -47,7 +47,7 @@ addLayer("s", {
                     ["main-display",
                     "prestige-button",
                     ["blank", "5px"], // Height
-                    ["row", ["column", ["upgrades", 11]], ["column", ["upgrades", 12]], ["column", ["upgrades", 13]]], "clickables", "challenges"],
+                    ["row", [["column", [["upgrades", 11]],], ["column", [["upgrades", 12]],], ["column", [["upgrades", 13]],],] "clickables", "challenges"],
         },
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
