@@ -13,7 +13,7 @@ addLayer("s", {
         baseResource: "plots",
         baseAmount() {return player.points;},
 
-        requires() {if(inChallenge("s", 21)) new Decimal(Infinity)
+        requires() {if(inChallenge("s", 21)) new Decimal(1e999)
                     else new Decimal(1)},
         type: "normal",
         exponent: 0.5,
