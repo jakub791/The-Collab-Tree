@@ -505,7 +505,9 @@ clickables: {
         cols: 2,
         11: {
             name: "Typical Challenge",
-            challengeDescription: "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but predicted boredoms's first effect is increased to the power of 2.",
+            challengeDescription() {if(hasUpgrade(this.layer, 34)) return "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but predicted boredoms's first effect is increased to the power of 2.";
+                                   else return "Tetrates your plot gain by 0.5 and removes ''Degrading Upgrade.'' and ''Negotiator.'', but predicted boredoms's effect is increased to the power of 2."
+	    },
             unlocked() {
                 return hasUpgrade(this.layer, 22);
             },
