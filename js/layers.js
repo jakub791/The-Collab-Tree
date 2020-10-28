@@ -56,12 +56,12 @@ addLayer("s", {
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
                     {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
                     ["blank", "5px"],
-                    "buyables"],
+                    "buyables, 41"],
         },
     },
 
     upgrades: {
-        rows: 4,
+        rows: 6,
         cols: 4,
         11: {
             title: "Every 60 seconds in real life a minute passes.",
@@ -265,7 +265,8 @@ addLayer("s", {
             unlocked() { return player[this.layer].unlocked; }, 
             canAfford() { return player[this.layer].unlocked; },
             buy() {
-            player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+            if (hasChallenge("s", 12)) player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id]
+            else player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
         },
             effect() {
             let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
@@ -356,7 +357,7 @@ clickables: {
             unlocked() {
                 return hasUpgrade(this.layer, 22);
             },
-            rewardDescription: "You gain 10 predicted boredoms per second.",
+            rewardDescription: "''Predict Boredom'' becomes passive, giving 10 predicted boredoms per second.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             goal: new Decimal("50000"),
