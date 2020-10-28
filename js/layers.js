@@ -56,7 +56,7 @@ addLayer("s", {
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
                     {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
                     ["blank", "5px"],
-                    "buyables, 41"],
+                    "upgrades", 41, "upgrades", 51, "upgraeds", 61],
         },
     },
 
@@ -97,8 +97,11 @@ addLayer("s", {
                 else return hasUpgrade(this.layer, 22);                
             },
             effect () {
-                if(inChallenge("s", 11)) return new Decimal(1)
-                else return new Decimal(5).sub(player[this.layer].upgradeTime.div(15))
+                let zatime = new Decimal(1)
+                if(inChallenge("s", 11))
+                else zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
+                if(inChallenge("s", 21) && hasUpgrade("s", 51)) zatime = zatime.pow(buyableEffect("s", 12));
+                return zatime
             },
             effectDisplay() {
                 return format(this.effect()) + "x";
@@ -124,6 +127,7 @@ addLayer("s", {
                 let ret = new Decimal(1.01);
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
+                if(inChallenge("s", 21) && hasUpgrade("s", 51)) return ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
@@ -166,6 +170,7 @@ addLayer("s", {
             effect() {
                 let ret = new Decimal(1.01);
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
+                if (inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
@@ -183,9 +188,10 @@ addLayer("s", {
             effect() {
                 let ret = {};
                 if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
-        else ret = player.points.add(1).root(64);
+                else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
-                if (inChallenge("s", 21)) ret = new Decimal(1)
+                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
+                else ret = new Decimal(1);
                 return ret;
             },
         },
@@ -194,7 +200,11 @@ addLayer("s", {
             description: "Tetrates the upgrade left to it by 1.420.",
             cost: new Decimal(400),
             unlocked(){ 
-                return hasUpgrade(this.layer, 23);
+                let unlockable = true
+                if (inChallenge("s", 21)) unlockable = false
+                else unlockable = hasUpgrade(this.layer, 23);
+                if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) ) unlockable = true
+                return unlockable
         },
             effect() {
                 let ret = new Decimal(1.42);
@@ -212,7 +222,9 @@ addLayer("s", {
                 return hasUpgrade(this.layer, 22);
             },
             effect() {
-            return new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
+            let ret = new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
+            if (inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
+             return ret
             },
             effectDisplay() {
                 return format(this.effect()) + "x";
@@ -227,11 +239,71 @@ addLayer("s", {
             },
         },
         41: {
-            title: "Hatred",
-            description() {return "''Impatience Transformation'' is now getting both exponented and multiplied by ^" + format(player.points) + " * " + format(player.points) + "."},
+            title: "Hatred.",
+            description() {return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."},
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost: new Decimal(20),
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            style() {
+                if (hasUpgrade(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+                    }
+                    else if (!canAffordUpgrade(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+	       },
+          },
+        51: {
+            title: "Ascended Annoyance.",
+            description() {return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.''."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost: new Decimal(30),
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            style() {
+                if (hasUpgrade(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+                    }
+                    else if (!canAffordUpgrade(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+	       },
+          },
+        61: {
+            title: "THE GREATEST SHENANIGANS.",
+            description() {return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."},
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost: new Decimal(50),
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -364,7 +436,7 @@ clickables: {
 	},
         21: {
             name: "The Endgamer",
-            challengeDescription: "Tetrates your plots and shenanigans gain by undecillionth times and removes both ''Vibing.'' and ''B.E.G,H.A.Y!'' upgrades. (Don't even think about bursting through it with hyperinflation, smartass).",
+            challengeDescription: "Tetrates your plots and shenanigans gain by undecillionth times and removes ''Vibing.'', ''B.E.G,H.A.Y!'' and ''Tetrate-inator.'' upgrades. (Don't even think about bursting through it with hyperinflation, smartass).",
             unlocked() {
                 return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
