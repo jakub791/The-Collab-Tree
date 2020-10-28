@@ -206,7 +206,7 @@ addLayer("s", {
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
                 else unlockable = hasUpgrade(this.layer, 23);
-                if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) ) unlockable = true
+                if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
         },
             effect() {
