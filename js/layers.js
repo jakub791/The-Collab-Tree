@@ -199,6 +199,7 @@ addLayer("s", {
             effectDisplay() {
             if (this.effect.lte(2)) return "^" + format(this.effect());
             else return "^" + format(this.effect()) + " (Softcapped)";
+	    },
         },
         32: {
             title: "Tetrate-inator.",
