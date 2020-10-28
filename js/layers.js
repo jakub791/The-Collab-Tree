@@ -522,7 +522,7 @@ clickables: {
             unlocked() {
                 return hasUpgrade(this.layer, 22);
             },
-            rewardDescription: "''Predict Boredom'' becomes passive, giving 10 predicted boredoms per second.",
+            rewardDescription: "''Predict Boredom'' becomes passive, growing up at the rate of 10 clicks per second.",
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             goal: new Decimal("50000"),
