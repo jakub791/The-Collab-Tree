@@ -53,6 +53,9 @@ addLayer("s", {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
                 content:
                     [
+                    ["display-text",
+                    function() {return getPointGen().gt(1.01) ? "You've destroyed " + format(getPointGen().mul(100).sub(1)) + " out of 10 softcap levels." : ""},
+                    {"color": "blurple", "font-size": "32px",}],
                     ["blank", "5px"],
                     "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61], ["upgrade", 71]],
         },
@@ -379,7 +382,7 @@ addLayer("s", {
           },
     },
     buyables: {
-        rows: 1,
+        rows: 2,
         cols: 2,
         11: {
             title: "Predict boredom.",
@@ -437,6 +440,33 @@ addLayer("s", {
                 }
                 return {
                 'border-color': '#9D3131',
+                'height': '175px',
+                'width': '250px'
+		}
+	    },
+	},
+        21: {
+            title: "test.",
+            unlocked() { return inChallenge("s", 21) && getPointGen().gt(1.01); }, 
+            canAfford() { return player[this.layer].unlocked; },
+            buy() {
+        },
+            effect() {
+            let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
+            return eff;
+        },
+        display() { // Everything else displayed in the buyable button after the title
+            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset all of your ''Impatience'' upgrades, but in exchange, it'll decrease upgrade's cost and weakens softcaps.";
+	    },
+        style() {
+            if(player[this.layer].unlocked) return {
+                'background-color': '#808080',
+                'border-color': '#707070',
+                'height': '175px',
+                'width': '250px'
+                }
+                return {
+                'border-color': '#707070',
                 'height': '175px',
                 'width': '250px'
 		}
