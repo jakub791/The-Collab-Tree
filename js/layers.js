@@ -18,7 +18,7 @@ addLayer("s", {
         exponent: 0.5,
 
         gainMult() {
-            let mult = new Decimal(1).mul(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).max(1));
+            let mult = new Decimal(1).mul(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).max(1).root(2));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) {
@@ -54,11 +54,12 @@ addLayer("s", {
                 content:
                     [
                     ["display-text",
-                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing  plot and shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21]))) + "x and weakens softcaps's tetration by" + format(player.s.buyables[21].add(1)) + "/." : ""},
-                    {"color": "6e3978", "font-size": "32px",}],
+                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing  plot gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21]))) + "x, shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).root(2)) +  and weakens softcaps's tetration by " + format(player.s.buyables[21].add(1)) + "/." : ""},
+                    ["blank", "5px"],
+                    {"color": "dark purple", "font-size": "20px",}],
                     ["display-text",
                     function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? "You have " + format((((getPointGen().mag - 1) * 100))) + " out of 10 softcap levels currently activated." : ""},
-                    {"color": "white", "font-size": "32px",}],
+                    {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61], ["upgrade", 71]],
         },
@@ -457,11 +458,11 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && hasUpgrade("s", 71) && getPointGen().mag >= 1.01; }, 
             canAfford() { return getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) },
             buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
-            doReset("s")
+            layerDataReset("s")
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
         },
         display() { // Everything else displayed in the buyable button after the title
-            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases ''Impatience'' upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <nr> You need to generate " + new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) + " plots per second in order to reset Impatience.";
+            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases ''Impatience'' upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <br> You need to generate " + new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) + " plots per second in order to reset.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
