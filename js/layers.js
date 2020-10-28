@@ -47,7 +47,7 @@ addLayer("s", {
                     ["main-display",
                     "prestige-button",
                     ["blank", "5px"], // Height
-                    ["row", ["upgrade", 11], ["upgrade", 12], ["upgrade", 13], ["upgrade", 14]], ["row", ["upgrade", 21], ["upgrade", 22], ["upgrade", 23]], ["row", ["upgrade", 31], ["upgrade", 32], ["upgrade", 33], ["upgrade", 34], "clickables", "challenges"],
+                    ["row", ["upgrade", 11], ["upgrade", 12], ["upgrade", 13], ["upgrade", 14]], ["row", ["upgrade", 21], ["upgrade", 22], ["upgrade", 23]], ["row", ["upgrade", 31], ["upgrade", 32], ["upgrade", 33], ["upgrade", 34]], "clickables", "challenges"],
         },
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
