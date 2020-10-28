@@ -53,7 +53,7 @@ addLayer("s", {
                 content:
                     [
                     ["blank", "5px"],
-                    "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61]],
+                    "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61], ["upgrade", 71]],
         },
     },
 
