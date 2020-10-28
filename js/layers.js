@@ -264,7 +264,7 @@ addLayer("s", {
             description() {return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost: new Decimal(20),
+          cost() { new Decimal(20).sub(player[this.layer].buyables[21].mul(2)) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -295,7 +295,7 @@ addLayer("s", {
                            else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost: new Decimal(30),
+          cost() { new Decimal(30).sub(player[this.layer].buyables[21].mul(3)) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -325,7 +325,7 @@ addLayer("s", {
             description() {return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost: new Decimal(50),
+            cost() { new Decimal(50).sub(player[this.layer].buyables[21].mul(5)) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -355,7 +355,7 @@ addLayer("s", {
             description() {return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost: new Decimal(70),
+            cost() { new Decimal(70).sub(player[this.layer].buyables[21].mul(7)) },
             unlocked(){
                 return inChallenge(this.layer, 21) && hasUpgrade(this.layer, 61);
 	    },
@@ -446,15 +446,15 @@ addLayer("s", {
 	    },
 	},
         21: {
-            title: "test.",
+            title: "Softcap Warper.",
             unlocked() { return inChallenge("s", 21) && hasUpgrade("s", 71) && getPointGen().mag >= 1.01; }, 
             canAfford() { return getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) },
             buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
-            hasUpgrade(this.layer, 41)) = false
-            hasUpgrade(this.layer, 51)) = false
-            hasUpgrade(this.layer, 61)) = false
-            hasUpgrade(this.layer, 71)) = false
-            hasUpgrade(this.layer, 71)) = false
+            hasUpgrade(this.layer, 41) = false
+            hasUpgrade(this.layer, 51) = false
+            hasUpgrade(this.layer, 61) = false
+            hasUpgrade(this.layer, 71) = false
+            hasUpgrade(this.layer, 71) = false
             player[this.layer].buyables[11] = new Decimal(0)
             player[this.layer].buyables[12] = new Decimal(0)
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
