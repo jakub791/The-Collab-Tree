@@ -12,7 +12,7 @@ addLayer("s", {
 
         baseResource: "plots",
         baseAmount() {return player.points;},
-        requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal("1fffffffffffffffffffff9999999999999999999999999999999999999999999999999")
+        requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal("1e9999999")
                     else return new Decimal(1)},
         type: "normal",
         exponent: 0.5,
@@ -25,6 +25,7 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
+            if (inChallenge("s", 21)) mult = new Decimal(0)
             return mult;
         },
         gainExp() {
