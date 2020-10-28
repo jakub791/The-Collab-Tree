@@ -197,8 +197,8 @@ addLayer("s", {
                 return ret;
             },
             effectDisplay() {
-            if (this.effect.lte(2)) return "^" + format(this.effect());
-            else return "^" + format(this.effect()) + " (Softcapped)";
+            if ([this.effect].gt(2)) return "^" + format(this.effect()) + " (Softcapped)";
+            else return "^" + format(this.effect());
 	    },
         },
         32: {
