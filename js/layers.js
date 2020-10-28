@@ -19,7 +19,7 @@ addLayer("s", {
 
         gainMult() {
             let mult = new Decimal(1)
-            if (player.s.buyables[21] >= 1) mult.mul(new Decimal(2).pow(player.s.buyables[21])).root(2));
+            if (player.s.buyables[21] >= 1) mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) {
