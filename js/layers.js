@@ -10,7 +10,8 @@ addLayer("s", {
         resource: "shenanigans",
         row: 0,
 
-        baseResource: "plots",
+        baseResource() {if(inChallenge("s", 21)) return "levels of impatience"
+                        else return "plots"},
         baseAmount() {return player.points;},
         requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
                     else return new Decimal(1)},
