@@ -450,10 +450,13 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && hasUpgrade("s", 71) && getPointGen().mag >= 1.01; }, 
             canAfford() { return getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) },
             buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
-            player["s"].s41 = false
-            player["s"].s51 = false
-            player["s"].s61 = false
-            player["s"].s71 = false
+            hasUpgrade(this.layer, 41)) = false
+            hasUpgrade(this.layer, 51)) = false
+            hasUpgrade(this.layer, 61)) = false
+            hasUpgrade(this.layer, 71)) = false
+            hasUpgrade(this.layer, 71)) = false
+            player[this.layer].buyables[11] = new Decimal(0)
+            player[this.layer].buyables[12] = new Decimal(0)
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
         },
             effect() {
@@ -461,19 +464,24 @@ addLayer("s", {
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
-            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset all of your ''Impatience'' upgrades, but in exchange, it'll decrease upgrade's cost and weakens softcaps.";
+            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset all of your ''Impatience'' upgrades, but in exchange, it'll decrease upgrade's cost and weakens softcaps. <nr> You need to generate " + new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) + " plots per second in order to reset Impatience.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
-                'background-color': '#808080',
-                'border-color': '#707070',
-                'height': '175px',
-                'width': '250px'
-                }
-                return {
-                'border-color': '#707070',
-                'height': '175px',
-                'width': '250px'
+                    'background-color': '#c37fd0',
+                    'border-color': '#b26ebf',
+                    'height': '250px',
+                    'width': '250px',
+                    }
+                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    'height': '250px',
+                    'width': '250px',
+		    }
+                    return {
+                    'background-color': '#6e3978',
+                    'border-color': '#5d7867',
+                    'height': '250px',
+                    'width': '250px',
 		}
 	    },
 	},
