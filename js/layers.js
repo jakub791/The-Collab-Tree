@@ -47,7 +47,7 @@ addLayer("s", {
                     ["main-display",
                     "prestige-button",
                     ["blank", "5px"], // Height
-                    ["row", [["column", [["upgrade", 11]],], ["column", [["upgrade", 12]],], ["column", [["upgrade", 13]],],]], "clickables", "challenges"],
+                    ["row", [["column", [["upgrade", 11]],], ["column", [["upgrade", 12]],], ["column", [["upgrade", 13]],], ["column", [["upgrade", 14]],],], "row", [["column", [["upgrade", 21]],], ["column", [["upgrade", 22]],], ["column", [["upgrade", 23]],],], "row", [["column", [["upgrade", 31]],], ["column", [["upgrade", 32]],], ["column", [["upgrade", 33]],], ["column", [["upgrade", 34]],],]], "clickables", "challenges"],
         },
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
@@ -95,7 +95,7 @@ addLayer("s", {
                 else return hasUpgrade(this.layer, 22);                
             },
             effect () {
-                let zatime = new Decimal(1)
+                let zatime = new Decimal(5)
                 zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
                 if(inChallenge("s", 11)) zatime = new Decimal(1)
                 if(inChallenge("s", 21) && hasUpgrade("s", 51)) zatime = zatime.pow(buyableEffect("s", 12));
