@@ -47,7 +47,7 @@ addLayer("s", {
                     ["main-display",
                     "prestige-button",
                     ["blank", "5px"], // Height
-                    ["row", [["column", [["upgrade", 11]],], ["column", [["upgrade", 12]],], ["column", [["upgrade", 13]],]], ["row", [["column", [["upgrade", 21]],], ["column", [["upgrade", 22]],], ["column", [["upgrade", 23]],]], ["row", [["column", [["upgrade", 31]],], ["column", [["upgrade", 32]],], ["column", [["upgrade", 33]],], ["column", [["upgrade", 34]],]], "clickables", "challenges"],
+                    ["row", [["column", [["upgrade", 11]],], ["column", [["upgrade", 12]],], ["column", [["upgrade", 13]],], ["column", [["upgrade", 14]],]], ["row", [["column", [["upgrade", 21]],], ["column", [["upgrade", 22]],], ["column", [["upgrade", 23]],]], ["row", [["column", [["upgrade", 31]],], ["column", [["upgrade", 32]],], ["column", [["upgrade", 33]],], ["column", [["upgrade", 34]],]], "clickables", "challenges"],
         },
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
