@@ -18,7 +18,7 @@ addLayer("s", {
         exponent: 0.5,
 
         gainMult() {
-            let mult = new Decimal(1);
+            let mult = new Decimal(1).mul(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).max(1));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) {
@@ -54,7 +54,7 @@ addLayer("s", {
                 content:
                     [
                     ["display-text",
-                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' costs by " + format(player.s.buyables[21].div(10)) + "%, increasing  plot and shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21]))) + "x and weakens softcaps's tetration by" + format(player.s.buyables[21].add(1)) + "/." : ""},
+                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing  plot and shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21]))) + "x and weakens softcaps's tetration by" + format(player.s.buyables[21].add(1)) + "/." : ""},
                     {"color": "6e3978", "font-size": "32px",}],
                     ["display-text",
                     function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? "You have " + format((((getPointGen().mag - 1) * 100))) + " out of 10 softcap levels currently activated." : ""},
@@ -267,7 +267,8 @@ addLayer("s", {
             description() {return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-          cost() { new Decimal(20).sub(player.s.buyables[21].mul(2).max(1)) },
+            cost() { if (player.s.buyables[21] >= 1) return new Decimal(20).sub(player.s.buyables[21].mul(2))
+                     else return new Decimal(20) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -298,7 +299,8 @@ addLayer("s", {
                            else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-          cost() { new Decimal(30).sub(player.s.buyables[21].mul(3).max(1)) },
+            cost() { if (player.s.buyables[21] >= 1) return new Decimal(30).sub(player.s.buyables[21].mul(3))
+                     else return new Decimal(30) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -359,7 +361,8 @@ addLayer("s", {
             description() {return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { new Decimal(70).sub(player.s.buyables[21].mul(7).max(1)) },
+            cost() { if (player.s.buyables[21] >= 1) return new Decimal(70).sub(player.s.buyables[21].mul(7))
+                     else return new Decimal(70) },
             unlocked(){
                 return inChallenge(this.layer, 21) && hasUpgrade(this.layer, 61);
 	    },
@@ -421,7 +424,7 @@ addLayer("s", {
 	    },
 	},
         12: {
-            title: "Impatience Transformation",
+            title: "Impatient Transformation.",
             unlocked() { return inChallenge("s", 21); }, 
             canAfford() { return player[this.layer].unlocked; },
             buy() {;
@@ -458,7 +461,7 @@ addLayer("s", {
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
         },
         display() { // Everything else displayed in the buyable button after the title
-            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <nr> You need to generate " + new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) + " plots per second in order to reset Impatience.";
+            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases ''Impatience'' upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <nr> You need to generate " + new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) + " plots per second in order to reset Impatience.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
