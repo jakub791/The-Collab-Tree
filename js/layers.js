@@ -125,7 +125,7 @@ addLayer("s", {
                 let ret = new Decimal(1.01);
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
-                if(inChallenge("s", 21) && hasUpgrade("s", 51)) return ret.pow(buyableEffect("s", 12));
+                if(inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
