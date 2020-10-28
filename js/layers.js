@@ -67,7 +67,7 @@ addLayer("s", {
     },
 
     upgrades: {
-        rows: 6,
+        rows: 7,
         cols: 4,
         11: {
             title: "Every 60 seconds in real life a minute passes.",
