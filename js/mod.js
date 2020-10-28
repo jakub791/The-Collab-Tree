@@ -40,7 +40,7 @@ function getPointGen() {
 
 	let gain = new Decimal(0.01666666666666666666666666666667)
         if (player.s.buyables[21] >= 1) gain = gain.mul(new Decimal(2).pow(player.s.buyables[21]));
-        if (inChallenge("s", 12)) gain = gain.div(buyableEffect("s", 11)))
+        if (inChallenge("s", 12)) gain = gain.div(buyableEffect("s", 11))
         else gain = gain.mul(buyableEffect("s", 11))
         if (hasUpgrade("s", 11)) gain = gain.times(new Decimal(60));
         if (hasUpgrade("s", 12)) gain = gain.times(upgradeEffect("s", 12));
