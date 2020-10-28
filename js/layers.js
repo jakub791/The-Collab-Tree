@@ -10,8 +10,7 @@ addLayer("s", {
         resource: "shenanigans",
         row: 0,
 
-        baseResource() {if(inChallenge("s", 21)) return "levels of impatience"
-                        else return "plots"},
+        baseResource: "plots",
         baseAmount() {return player.points;},
         requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
                     else return new Decimal(1)},
@@ -103,7 +102,7 @@ addLayer("s", {
                 return zatime
             },
             effectDisplay() {
-                if(inChallenge("s", 21) && hasUpgrade("s", 51)) return format(this.effect());
+                if(inChallenge("s", 21) && hasUpgrade("s", 51)) return "^" + format(this.effect());
                 else return format(this.effect()) + "x";
             },
         },
@@ -392,7 +391,7 @@ addLayer("s", {
             return eff;
         },
         display() {
-        return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience are getting transformed into anger, exponentionally boosting your plots gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
+        return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience is getting transformed into anger, exponentionally boosting your plots gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
 	},
         style() {
             if(player[this.layer].unlocked) return {
