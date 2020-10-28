@@ -267,7 +267,7 @@ addLayer("s", {
             description() {return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-          cost() { new Decimal(20).sub(player.s.buyables[21].mul(2)) },
+          cost() { new Decimal(20).sub(player.s.buyables[21].mul(2).max(1)) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -298,7 +298,7 @@ addLayer("s", {
                            else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-          cost() { new Decimal(30).sub(player.s.buyables[21].mul(3)) },
+          cost() { new Decimal(30).sub(player.s.buyables[21].mul(3).max(1)) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -328,7 +328,7 @@ addLayer("s", {
             description() {return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { new Decimal(50).sub(player.s.buyables[21].mul(5)) },
+            cost() { new Decimal(50).sub(player.s.buyables[21].mul(5).max(1)) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
@@ -358,7 +358,7 @@ addLayer("s", {
             description() {return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { new Decimal(70).sub(player.s.buyables[21].mul(7)) },
+            cost() { new Decimal(70).sub(player.s.buyables[21].mul(7).max(1)) },
             unlocked(){
                 return inChallenge(this.layer, 21) && hasUpgrade(this.layer, 61);
 	    },
