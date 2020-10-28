@@ -47,7 +47,7 @@ addLayer("s", {
                     ["main-display",
                     "prestige-button",
                     ["blank", "5px"], // Height
-                    "upgrades", "milestones", "clickables", "challenges"],
+                    ["upgrade", [11, 12, 13, 14, 21, 22, 23, 31, 32, 33, 34]], "milestones", "clickables", "challenges"],
         },
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
@@ -356,13 +356,13 @@ addLayer("s", {
             if(player[this.layer].unlocked) return {
                 'background-color': '#808080',
                 'border-color': '#707070',
-                'height': '200px',
-                'width': '300px'
+                'height': '175px',
+                'width': '250px'
                 }
                 return {
                 'border-color': '#707070',
-                'height': '200px',
-                'width': '300px'
+                'height': '175px',
+                'width': '250px'
 		}
 	    },
 	},
@@ -385,13 +385,13 @@ addLayer("s", {
             if(player[this.layer].unlocked) return {
                 'background-color': '#AE4242',
                 'border-color': '#9D3131',
-                'height': '200px',
-                'width': '300px'
+                'height': '175px',
+                'width': '250px'
                 }
                 return {
                 'border-color': '#9D3131',
-                'height': '200px',
-                'width': '300px'
+                'height': '175px',
+                'width': '250px'
 		}
 	    },
 	},
