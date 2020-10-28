@@ -328,7 +328,8 @@ addLayer("s", {
             description() {return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { new Decimal(50).sub(player.s.buyables[21].mul(5).max(1)) },
+            cost() { if (player.s.buyables[21] >= 1) return new Decimal(50).sub(player.s.buyables[21].mul(5))
+                     else return new Decimal(50) },
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
