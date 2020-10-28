@@ -56,13 +56,13 @@ addLayer("s", {
                     [
                     ["display-text",
                     function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' upgrades costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).root(2)) + " and weakens softcaps's tetration by " + format(player.s.buyables[21].add(1)) + "/." : ""},
+                    {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
-                    {"color": "white", "font-size": "20px",}],
                     ["display-text",
                     function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? "You have " + format((((getPointGen().mag - 1) * 100))) + " out of 10 softcap levels currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
-                    "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61], ["upgrade", 71]],
+                    "buyables", ["blank", "5px"], ["upgrade", 41], ["blank", "5px"], ["upgrade", 51], ["blank", "5px"], ["upgrade", 61], ["blank", "5px"], ["upgrade", 71]],
         },
     },
 
