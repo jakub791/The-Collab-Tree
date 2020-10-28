@@ -198,10 +198,12 @@ addLayer("s", {
                 if (ret.gt(4)) ret = ret.log(35448).add(3.9338336244075997599970639650263);
                 if (ret.gt(5)) ret = ret.log(new Decimal(422).pow(84)).add(4.9986349470809623178396281434317);
                 if (ret.gt(6)) ret = ret.log(new Decimal(84).pow(422)).add(5.9996292943404216313988008292711);
+                if (ret.gt(8999)) ret = new Decimal(8999.99);
                 return ret;
             },
             effectDisplay() {
-            if (this.effect().gt(2)) return "^" + format(this.effect()) + " (Softcapped)";
+            if (this.effect().gt(8999)) return "^" + format(this.effect()) + " (Hardcapped)"
+            else if (this.effect().gt(2)) return "^" + format(this.effect()) + " (Softcapped)";
             else return "^" + format(this.effect());
 	    },
         },
