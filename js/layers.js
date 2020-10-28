@@ -394,7 +394,7 @@ addLayer("s", {
         rows: 2,
         cols: 2,
         11: {
-            title: "Predict boredom.",
+            title: "Predicted boredom.",
             unlocked() { return player[this.layer].unlocked; }, 
             canAfford() { return player[this.layer].unlocked; },
             buy() {
