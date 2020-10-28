@@ -151,7 +151,7 @@ addLayer("s", {
                             'height': '200px',
                             'width':  '200px',
                         }
-                    else return {
+                    return {
                             'height': '200px',
                             'width':  '200px',
 		        }
@@ -249,7 +249,7 @@ addLayer("s", {
                     'height': '150px',
                     'width': '480px',
 		    }
-                    else return {
+                    return {
                     'background-color': '#630303',
                     'border-color': '#451212',
                     'height': '150px',
@@ -280,12 +280,12 @@ addLayer("s", {
         style() {
             if(player[this.layer].unlocked) return {
                 'background-color': '#808080',
-                'border-color': '#808080',
+                'border-color': '#707070',
                 'height': '200px',
                 'width': '300px'
                 }
                 return {
-                'border-color': '#808080',
+                'border-color': '#707070',
                 'height': '200px',
                 'width': '300px'
 		}
@@ -309,12 +309,12 @@ addLayer("s", {
         style() {
             if(player[this.layer].unlocked) return {
                 'background-color': '#AE4242',
-                'border-color': '#AE4242',
+                'border-color': '#9D3131',
                 'height': '200px',
                 'width': '300px'
                 }
                 return {
-                'border-color': '#AE4242',
+                'border-color': '#9D3131',
                 'height': '200px',
                 'width': '300px'
 		}
