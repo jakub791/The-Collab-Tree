@@ -193,6 +193,7 @@ addLayer("s", {
                 if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
                 if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
+                if (ret.gte(2)) ret = ret.log(2).add(1);
                 return ret;
             },
         },
