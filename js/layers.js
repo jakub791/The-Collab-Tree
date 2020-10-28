@@ -191,7 +191,7 @@ addLayer("s", {
                 if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
                 else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
-                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
+                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret = ret.pow(buyableEffect("s", 12));
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
                 if (ret.gt(2)) ret = ret.log(84).add(1.8435622116579284502939499524034);
                 if (ret.gt(3)) ret = ret.log(422).add(2.8853355548008346985287640482641);
@@ -218,7 +218,7 @@ addLayer("s", {
         },
             effect() {
                 let ret = new Decimal(1.42);
-                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
+                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret = ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
