@@ -22,9 +22,7 @@ addLayer("s", {
             if (player.s.buyables[21] >= 1) mult = mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
-            if (hasUpgrade("s", 34)) {
-            if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
-            else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
+            if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
             if (inChallenge("s", 21)) mult = new Decimal(0)
             return mult;
@@ -518,7 +516,7 @@ clickables: {
 	},
         12: {
             name: "The Reverser",
-            challengeDescription: "Predicted boredoms's first effect is divided by itself twice, making it weaker. In exchange, it's second effect is as powerful as first effect outside this challenge.",
+            challengeDescription: "Predicted boredoms's first effect is divided by itself twice.",
             unlocked() {
                 return hasUpgrade(this.layer, 22);
             },
