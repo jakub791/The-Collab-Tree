@@ -54,7 +54,7 @@ addLayer("s", {
                 content:
                     [
                     ["display-text",
-                    function() {return getPointGen().gt(1.01) ? "You've destroyed " + format(getPointGen().mul(100).sub(1)) + " out of 10 softcap levels." : ""},
+                    function() {return getPointGen.mag >= 1.01 ? "You've destroyed " + format(getPointGen().mul(100).sub(1)) + " out of 10 softcap levels." : ""},
                     {"color": "blurple", "font-size": "32px",}],
                     ["blank", "5px"],
                     "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61], ["upgrade", 71]],
@@ -447,7 +447,7 @@ addLayer("s", {
 	},
         21: {
             title: "test.",
-            unlocked() { return inChallenge("s", 21) && getPointGen().gt(1.01); }, 
+            unlocked() { return inChallenge("s", 21) && hasUpgrade("s", 71) && getPointGen.mag >= 1.01; }, 
             canAfford() { return player[this.layer].unlocked; },
             buy() {
         },
