@@ -13,7 +13,8 @@ addLayer("s", {
         baseResource: "plots",
         baseAmount() {return player.points;},
 
-        requires: new Decimal(1),
+        requires() {if(inChallenge("s", 21)) new Decimal(Infinity)
+                    else new Decimal(1)},
         type: "normal",
         exponent: 0.5,
 
@@ -25,7 +26,6 @@ addLayer("s", {
             if (inChallenge("s", 12)) mult = mult.mul(buyableEffect("s", 11));
             else mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
 	    }
-            if (inChallenge("s", 21)) mult = mult.tetrate(new Decimal(0.000000000000000000000000000000000001)).pow(buyableEffect("s", 12))
             return mult;
         },
         gainExp() {
@@ -449,7 +449,7 @@ clickables: {
 	},
         21: {
             name: "The Endgamer",
-            challengeDescription: "Tetrates your plots and shenanigans gain by undecillionth times and removes ''Vibing.'', ''B.E.G,H.A.Y!'' and ''Tetrate-inator.'' upgrades. (Don't even think about bursting through it with hyperinflation, smartass).",
+            challengeDescription: "Tetrates your plots gain by undecillionth times and removes ''Vibing.'', ''B.E.G,H.A.Y!'' and ''Tetrate-inator.'' upgrades. (Don't even think about bursting through it with hyperinflation, smartass).",
             unlocked() {
                 return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
