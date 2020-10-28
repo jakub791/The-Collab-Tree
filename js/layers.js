@@ -56,7 +56,7 @@ addLayer("s", {
                     function() {return 'You have ' + format(player.s.buyables[11]) + ' predicted boredoms.'},
                     {"color": "gray", "font-size": "32px", "font-family": "Arial"}],
                     ["blank", "5px"],
-                    "upgrades", 41, "upgrades", 51, "upgraeds", 61],
+                    "upgrade", 41, "upgrade", 51, "upgrade", 61],
         },
     },
 
