@@ -12,7 +12,7 @@ addLayer("s", {
 
         baseResource: "plots",
         baseAmount() {return player.points;},
-        requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal("1eeeeeeeeee9999999999999999999999999999999999999999999999999")
+        requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal("1fffffffffffffffffffff9999999999999999999999999999999999999999999999999")
                     else return new Decimal(1)},
         type: "normal",
         exponent: 0.5,
