@@ -54,7 +54,7 @@ addLayer("s", {
                 content:
                     [
                     ["display-text",
-                    function() {return getPointGen().mag >= 1.01 ? "You've destroyed " + format((getPointGen().mag - 1) * 100) + " out of 10 softcap levels." : ""},
+                    function() {return getPointGen().mag >= 1.01 ? "You have " + format(((getPointGen().mag - 1) * 100).floor()) + " out of 10 softcap levels currently activated." : ""},
                     {"color": "blurple", "font-size": "32px",}],
                     ["blank", "5px"],
                     "buyables", ["upgrade", 41], ["upgrade", 51], ["upgrade", 61], ["upgrade", 71]],
@@ -448,11 +448,16 @@ addLayer("s", {
         21: {
             title: "test.",
             unlocked() { return inChallenge("s", 21) && hasUpgrade("s", 71) && getPointGen().mag >= 1.01; }, 
-            canAfford() { return player[this.layer].unlocked; },
-            buy() {
+            canAfford() { return getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) },
+            buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
+            player["s"].s41 = false
+            player["s"].s51 = false
+            player["s"].s61 = false
+            player["s"].s71 = false
+            player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
         },
             effect() {
-            let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
+            let eff = player[this.layer].buyables[this.id]
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
