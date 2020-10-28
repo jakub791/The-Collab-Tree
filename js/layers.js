@@ -18,7 +18,8 @@ addLayer("s", {
         exponent: 0.5,
 
         gainMult() {
-            let mult = new Decimal(1).mul(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).max(1).root(2));
+            let mult = new Decimal(1)
+            if (player.s.buyables[21] >= 1) mult.mul(new Decimal(2).pow(player.s.buyables[21])).root(2));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) {
@@ -54,7 +55,7 @@ addLayer("s", {
                 content:
                     [
                     ["display-text",
-                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing  plot gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21]))) + "x, shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).root(2)) +  and weakens softcaps's tetration by " + format(player.s.buyables[21].add(1)) + "/." : ""},
+                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the ''Impatience'' costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing  plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(player.s.buyables[21].mul(new Decimal(2).pow(player.s.buyables[21])).root(2)) + " and weakens softcaps's tetration by " + format(player.s.buyables[21].add(1)) + "/." : ""},
                     ["blank", "5px"],
                     {"color": "dark purple", "font-size": "20px",}],
                     ["display-text",
