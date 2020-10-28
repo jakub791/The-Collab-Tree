@@ -70,15 +70,19 @@ addLayer("s", {
             description: "Boosts your plot gain by unspent shenanigans.",
             cost: new Decimal(10),
             unlocked(){ 
-                if(inChallenge("s", 21)) return false;
-                else return hasUpgrade(this.layer, 11);
+                let unlockable = true
+                if (inChallenge("s", 21)) unlockable = false
+                else unlockable = hasUpgrade(this.layer, 11);
+                if (inChallenge("s", 21) && hasUpgrade("s", 71) && hasUpgrade("s", 11)) unlockable = true
+                return unlockable
             },
             effect() {
                 let ret = player[this.layer].points.add(1).root(2);
                 if (hasUpgrade("s", 21)) ret = ret.pow(upgradeEffect("s", 21));
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
-                if (inChallenge("s", 21)) ret = new Decimal(1);
+                if (inChallenge("s", 21) && hasUpgrade("s", 71)) ret = ret.mul(100).pow(buyableEffect("s", 12));
+                else if(inChallenge("s", 21)) ret = new Decimal(1);
                 return ret;
             },
             effectDisplay() {
@@ -320,6 +324,36 @@ addLayer("s", {
             cost: new Decimal(50),
             unlocked(){
                 return inChallenge(this.layer, 21);
+	    },
+            style() {
+                if (hasUpgrade(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+                    }
+                    else if (!canAffordUpgrade(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+	       },
+          },
+        71: {
+            title: "DUCK IT, I'M 100X MORE BUFFED NOW.",
+            description() {return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."},
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost: new Decimal(70),
+            unlocked(){
+                return inChallenge(this.layer, 21) && hasUpgrade(this.layer, 61);
 	    },
             style() {
                 if (hasUpgrade(this.layer, this.id)) return {  
