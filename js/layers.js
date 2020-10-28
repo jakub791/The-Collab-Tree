@@ -194,10 +194,10 @@ addLayer("s", {
                 if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret.pow(buyableEffect("s", 12));
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
                 if (ret.gt(2)) ret = ret.log(84).add(1.8435622116579284502939499524034);
-                if (ret.gt(3)) ret = ret.log(428).add(2.8186846094383428395036836657693);
-                if (ret.gt(4)) ret = ret.log(35952).add(3.8678453487954518130286147094999);
-                if (ret.gt(5)) ret = ret.log(new Decimal(428).pow(84)).add(4.9986381276823121558102418260573);
-                if (ret.gt(6)) ret = ret.log(new Decimal(84).pow(428)).add(5,9996344911487334776876026868047);
+                if (ret.gt(3)) ret = ret.log(422).add(2.8853355548008346985287640482641);
+                if (ret.gt(4)) ret = ret.log(35448).add(3.9338336244075997599970639650263);
+                if (ret.gt(5)) ret = ret.log(new Decimal(422).pow(84)).add(4.9986349470809623178396281434317);
+                if (ret.gt(6)) ret = ret.log(new Decimal(84).pow(422)).add(5.9996292943404216313988008292711);
                 return ret;
             },
             effectDisplay() {
