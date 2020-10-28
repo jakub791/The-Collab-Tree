@@ -282,7 +282,8 @@ addLayer("s", {
           },
         51: {
             title: "Ascended Annoyance.",
-            description() {return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.''."},
+            description() {if (hasUpgrade("s", 61)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'')."
+                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and ''Tetrate-inator'')."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost: new Decimal(30),
