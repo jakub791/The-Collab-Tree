@@ -87,7 +87,9 @@ addLayer("s", {
         },
         13: {
             title: "Degrading Upgrade.",
-            description: "Boosts your plot gain by 5x initally and decreases over time.",
+            description() {if(inChallenge("s", 21) & hasUpgrade("s", 51)) return "Boosts your plot gain by ^5 initally and decreases over time."
+                    else return "Boosts your plot gain by 5x initally and decreases over time."
+	    },
             cost: new Decimal(1200),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
@@ -97,11 +99,11 @@ addLayer("s", {
                 let zatime = new Decimal(5)
                 zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
                 if(inChallenge("s", 11)) zatime = new Decimal(1)
-                if(inChallenge("s", 21) && hasUpgrade("s", 51)) zatime = zatime.pow(buyableEffect("s", 12));
                 return zatime
             },
             effectDisplay() {
-                return format(this.effect()) + "x";
+                if(inChallenge("s", 21) && hasUpgrade("s", 51)) return format(this.effect());
+                else return format(this.effect()) + "x";
             },
         },
         14: {
@@ -281,8 +283,8 @@ addLayer("s", {
           },
         51: {
             title: "Ascended Annoyance.",
-            description() {if (hasUpgrade("s", 61)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and ''Tetrate-inator'')."
-                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'')."},
+            description() {if (hasUpgrade("s", 61)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."
+                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost: new Decimal(30),
