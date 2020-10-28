@@ -389,7 +389,7 @@ addLayer("s", {
             return eff;
         },
         display() {
-        return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience are getting transformed into anger, exponentionally boosting your plot and shenanigans gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
+        return "''Really? No, seriously, this game is a buggy mess.'' You said. ''How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL break this game, even if that means I'll have to destroy this layer forever.'' Your impatience are getting transformed into anger, exponentionally boosting your plots gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
 	},
         style() {
             if(player[this.layer].unlocked) return {
