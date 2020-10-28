@@ -23,7 +23,6 @@ addLayer("s", {
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
-	    }
             if (inChallenge("s", 21)) mult = new Decimal(0)
             return mult;
         },
