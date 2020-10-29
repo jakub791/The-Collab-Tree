@@ -387,13 +387,19 @@ addLayer("s", {
                 return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ")."
                 },
             style() {
-                if (!canAffordBuyable(this.layer, this.id)) return {  
+                if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
+                    }
+                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
 		    }
-                    else return {
+                    return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
@@ -418,13 +424,19 @@ addLayer("s", {
             display() {if (player[this.layer].buyables[61] >= 1) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."
                            else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
             style() {
-                if (!canAffordBuyable(this.layer, this.id)) return {  
+                if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
+                    }
+                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
 		    }
-                    else return {
+                    return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
@@ -450,13 +462,19 @@ addLayer("s", {
                 return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."
             },
             style() {
-                if (!canAffordBuyable(this.layer, this.id)) return {  
+                if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
+                    }
+                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
 		    }
-                    else return {
+                    return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
@@ -482,13 +500,19 @@ addLayer("s", {
                 return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."
             },
             style() {
-                if (!canAffordBuyable(this.layer, this.id)) return {  
+                if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
+                    }
+                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
 		    }
-                    else return {
+                    return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
