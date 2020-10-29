@@ -360,7 +360,7 @@ addLayer("s", {
             title: "Predict unpredicted boredoms.",
             unlocked() { if (hasChallenge("s", 12)) return false; 
                          else return player[this.layer].unlocked;}, 
-            canAfford() { player[this.layer].unlocked },
+            canAfford() { return true },
             buy() {
             player[this.layer].buyables[11] = player[this.layer].buyables[11].add(1);
             },
