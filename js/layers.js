@@ -220,7 +220,7 @@ addLayer("s", {
         },
         32: {
             title: "Tetrate-inator.",
-            description: "Exponents the upgrade left to it by 1.420. Twice",
+            description: "Exponents the upgrade left to it by 1.420. Twice.\n\Currently: ^1.42^1.42",
             cost: new Decimal(400),
             unlocked(){ 
                 let unlockable = true
@@ -228,10 +228,6 @@ addLayer("s", {
                 else unlockable = hasUpgrade(this.layer, 31);
                 if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1 && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
-            },
-            effectDisplay() {
-                return "^1.42^1.42";
-            },
         },
         33: {
             title: "haha shenanigans go brrrr.",
@@ -375,17 +371,19 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost() { 
-                return new Decimal(1)
+                return new Decimal(10).mul(new Decimal(2).pow(player[this.layer].buyables[this.id].max(1)))
             },
             buy() {
+                let data = tmp[this.layer].buyables[this.id]
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+                player.points = player.points.sub(data.cost)
             },
             effect() {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
 	    },
             display() {
                 let data = tmp[this.layer].buyables[this.id]
-                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(data.cost) + " plots."
+                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ").\n\Cost: " + format(data.cost) + " plots."
                 },
             style() {
                 if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
