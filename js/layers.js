@@ -452,7 +452,7 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
-            canAfford() { return player.points.gte(layers["s"].buyables[61].cost()) && !player[this.layer].buyables[this.id] = 1 },
+            canAfford() { return player.points.gte(layers["s"].buyables[61].cost()) && !player[this.layer].buyables[this.id] == 1 },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
