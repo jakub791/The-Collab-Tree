@@ -364,6 +364,10 @@ addLayer("s", {
             buy() {
             player[this.layer].buyables[11] = player[this.layer].buyables[11].add(1);
             },
+            style() {
+            'height': '250px',
+            'width': '250px',
+	    }
 	},
         41: {
             title: "Hatred.",
