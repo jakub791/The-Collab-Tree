@@ -399,7 +399,7 @@ addLayer("s", {
             effect() {
             let eff = player.points.div(100).add(1)
             eff = eff.pow(player.points.max(1)).pow(player.points.max(1))
-            if (hasUpgrade(this.layer, 41)) eff = eff.pow(player.points.mul(player.points).max(1))
+            if (player.s.buyables[41] >= 1) eff = eff.pow(buyableEffect("s", 41))
             return eff;
         },
         display() {
@@ -470,12 +470,15 @@ addLayer("s", {
             currencyInternalName: "points",
             cost() { 
                 return new Decimal(10).mul(new Decimal(2).pow(player[this.layer].buyables[this.id]))
-                },
+            },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
-        },
+            },
+            effect() {
+            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
+	    },
             display() {
-                return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."
+                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ")."
                 },
             style() {
                 if (hasUpgrade(this.layer, this.id)) return {  
