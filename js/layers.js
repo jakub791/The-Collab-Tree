@@ -371,12 +371,11 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost() { 
-                return new Decimal(10).mul(new Decimal(2).pow(new Decimal(player.s.buyables[41]).max(1)))
+                return new Decimal(10).mul(new Decimal(2).pow(getBuyableAmount("s", 41)).max(1)))
             },
             buy() {
-                let data = tmp[this.layer].buyables[this.id]
-                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
-                player.points = player.points.sub(data.cost)
+                getBuyableAmount("s", 41) = getBuyableAmount("s", 41).add(1);
+                player.points = player.points.sub(tmp[this.layer].buyables[this.id].cost)
             },
             effect() {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
