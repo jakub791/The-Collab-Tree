@@ -371,7 +371,7 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
-            canAfford() { return player.points.gt(layers["s"].buyables[41].cost()) },
+            canAfford() { return player.points.gte(layers["s"].buyables[41].cost()) },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
@@ -380,6 +380,7 @@ addLayer("s", {
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+                player.points = player.points.sub(layers["s"].buyables[41].cost())
             },
             effect() {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
