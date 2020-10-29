@@ -127,13 +127,13 @@ addLayer("s", {
         },
         21: {
             title: "Tiny desk exponent.",
-            description: "Adds ^1.01 to the previous upgrade.",
+            description: "Adds ^1.1 to the previous upgrade.",
             cost: new Decimal(20),
             unlocked(){ 
                 return hasUpgrade(this.layer, 12);
             },
             effect() {
-                let ret = new Decimal(1.01);
+                let ret = new Decimal(1.1);
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
                 if(inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
@@ -171,13 +171,13 @@ addLayer("s", {
 	    },
         23: {
             title: "Another exponent...?",
-            description: "Adds another ^1.01 to both ''T.D.E.'' and ''Exponent'' upgrades.",
+            description: "Adds another ^1.1 to both ''T.D.E.'' and ''Exponent'' upgrades.",
             cost: new Decimal(100),
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
             },
             effect() {
-                let ret = new Decimal(1.01);
+                let ret = new Decimal(1.1);
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
                 if (inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
                 return ret;
@@ -201,7 +201,7 @@ addLayer("s", {
                 let ret = {};
                 if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
                 else ret = player.points.add(1).root(64);
-                if (hasUpgrade("s", 32)) ret = ret.tetrate(upgradeEffect("s", 32));
+                if (hasUpgrade("s", 32)) ret = ret.tetrate(1.42);
                 if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret = ret.pow(buyableEffect("s", 12));
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
                 if (ret.gt(2)) ret = ret.log(84).add(1.8435622116579284502939499524034);
@@ -228,10 +228,6 @@ addLayer("s", {
                 else unlockable = hasUpgrade(this.layer, 23);
                 if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
-        },
-            effect() {
-                let ret = new Decimal(1.42);
-                return ret;
             },
             effectDisplay() {
                 return "^^1.42";
