@@ -358,7 +358,7 @@ addLayer("s", {
         11: {
             title: "Predicted boredom.",
             unlocked() { return player[this.layer].unlocked; }, 
-            canAfford() { return player[this.layer].unlocked; },
+            canAfford() { return false; },
             buy() {
             if (hasChallenge("s", 12)) player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id]
             else player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
@@ -393,7 +393,7 @@ addLayer("s", {
         12: {
             title: "Impatient Transformation.",
             unlocked() { return inChallenge("s", 21); }, 
-            canAfford() { return player[this.layer].unlocked; },
+            canAfford() { return false; },
             buy() {;
         },
             effect() {
@@ -413,6 +413,7 @@ addLayer("s", {
                 'width': '250px'
                 }
                 return {
+                'background-color': '#AE4242',
                 'border-color': '#9D3131',
                 'height': '175px',
                 'width': '250px'
@@ -449,11 +450,22 @@ addLayer("s", {
 		}
 	    },
 	},
-        31: {
+        11: {
+            title: "Predict unpredicted boredoms.",
+            unlocked() { return player[this.layer].unlocked; }, 
+            canAfford() { if (hasChallenge("s", 12)) return false;
+                          else return player[this.layer].unlocked;
+            },
+            buy() {
+            player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+            },
+	},
+        41: {
             title: "Hatred.",
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
+            canAfford() { return player[this.layer].unlocked },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost() { 
