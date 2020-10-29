@@ -220,7 +220,7 @@ addLayer("s", {
         },
         32: {
             title: "Tetrate-inator.",
-            description: "Tetrates the upgrade left to it by 1.420.",
+            description: "Exponents the upgrade left to it by 1.420. Twice",
             cost: new Decimal(400),
             unlocked(){ 
                 let unlockable = true
@@ -230,7 +230,7 @@ addLayer("s", {
                 return unlockable
             },
             effectDisplay() {
-                return "^^1.42";
+                return "^1.42^1.42";
             },
         },
         33: {
@@ -375,7 +375,7 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x) { 
-                return new Decimal(10).mul(new Decimal(2).pow(x.sub(1)))
+                return new Decimal(x)
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
@@ -384,7 +384,7 @@ addLayer("s", {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
 	    },
             display() {
-                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(player[this.layer].buyables[this.id].cost)
+                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(player[this.layer].buyables[this.id].cost) + " plots."
                 },
             style() {
                 if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
