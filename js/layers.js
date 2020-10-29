@@ -364,10 +364,10 @@ addLayer("s", {
             buy() {
             player[this.layer].buyables[11] = player[this.layer].buyables[11].add(1);
             },
-            style() {
+            style() { return
             'height': '54px',
             'width': '200px',
-	    }
+	    },
 	},
         41: {
             title: "Hatred.",
