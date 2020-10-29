@@ -67,7 +67,7 @@ addLayer("s", {
         rows: 7,
         cols: 4,
         11: {
-            title: "Every 60 seconds in real life a minute passes.",
+            title: "Every 60 seconds, a minute passes in real life.",
             description: "Boosts your plot gain by ALOT.",
             cost: new Decimal(1),
         },
@@ -358,10 +358,9 @@ addLayer("s", {
 	},
         31: {
             title: "Predict unpredicted boredoms.",
-            unlocked() { return player[this.layer].unlocked; }, 
-            canAfford() { if (hasChallenge("s", 12)) return false;
-                          else return player[this.layer].unlocked;
-            },
+            unlocked() { if (hasChallenge("s", 12)) return false; 
+                         else return player[this.layer].unlocked;}, 
+            canAfford() { player[this.layer].unlocked },
             buy() {
             player[this.layer].buyables[11] = player[this.layer].buyables[11].add(1);
             },
@@ -414,25 +413,27 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
-            canAfford() { return player[this.layer].unlocked },
+            canAfford() { return player.points.gte(layers["s"].buyables[51].cost()) },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { 
-                return new Decimal(10).mul(new Decimal(3).pow(player[this.layer].buyables[this.id]))
+            cost(x=player[this.layer].buyables[this.id]) { 
+                let cost = new Decimal(10).mul(new Decimal(3).pow(x))
+                return cost
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+                player.points = player.points.sub(layers["s"].buyables[51].cost())
             },
-            display() {if (player[this.layer].buyables[61] >= 1) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."
-                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
+            display() {if (player[this.layer].buyables[61] >= 1) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."},
             style() {
-                    if (player.points.gte(layers["s"].buyables[41].cost())) return {  
+                    if (player.points.gte(layers["s"].buyables[51].cost())) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
                     }
-                    else if (player.points.lt(layers["s"].buyables[41].cost())) return {
+                    else if (player.points.lt(layers["s"].buyables[51].cost())) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
                     'height': '150px',
@@ -451,26 +452,28 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
-            canAfford() { return player[this.layer].buyables[this.id] < 1},
+            canAfford() { return player.points.gte(layers["s"].buyables[61].cost() && !player[this.layer].buyables[this.id] = 1) },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { 
-                return new Decimal(60)
+            cost(x=player[this.layer].buyables[this.id]) { 
+                let cost = new Decimal(10).mul(new Decimal(5).pow(x))
+                return cost
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+                player.points = player.points.sub(layers["s"].buyables[61].cost())
             },
             display() {
-                return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."
+                return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
             },
             style() {
-                    if (player.points.gte(layers["s"].buyables[41].cost())) return {  
+                    if (player.points.gte(layers["s"].buyables[61].cost())) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
                     }
-                    else if (player.points.lt(layers["s"].buyables[41].cost())) return {
+                    else if (player.points.lt(layers["s"].buyables[61].cost())) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
                     'height': '150px',
@@ -485,30 +488,37 @@ addLayer("s", {
 	       },
           },
         71: {
-            title: "DUCK IT, I'M 100X MORE BUFFED NOW.",
-            unlocked(){
-                return inChallenge(this.layer, 21) && player[this.layer].buyables[61] >= 1;
+            title() {
+                return "DUCK IT, I'M " + new Decimal(100).mul(buyableEffect(this.layer, 71)) + "X MORE BUFFED NOW."
 	    },
-            canAfford() { return inChallenge(this.layer, 21)},
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            canAfford() { return player.points.gte(layers["s"].buyables[71].cost()) },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { 
-                return new Decimal(10).mul(new Decimal(7).pow(player[this.layer].buyables[this.id]))
+            cost(x=player[this.layer].buyables[this.id]) { 
+                let cost = new Decimal(10).mul(new Decimal(7).pow(x))
+                return cost
             },
+            effect() {
+            return new Decimal(100).pow(player[this.layer].buyables[this.id]).max(1)
+	    },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+                player.points = player.points.sub(layers["s"].buyables[71].cost())
             },
             display() {
-                return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."
+                return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by " + format(buyableEffect(this.layer, 71)) + "100x as bonus. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
             },
             style() {
-                if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
+                    if (player.points.gte(layers["s"].buyables[71].cost())) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
                     }
-                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    else if (player.points.lt(layers["s"].buyables[7].cost())) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
                     'height': '150px',
