@@ -450,14 +450,14 @@ addLayer("s", {
 		}
 	    },
 	},
-        11: {
+        31: {
             title: "Predict unpredicted boredoms.",
             unlocked() { return player[this.layer].unlocked; }, 
             canAfford() { if (hasChallenge("s", 12)) return false;
                           else return player[this.layer].unlocked;
             },
             buy() {
-            player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+            player[this.layer].buyables[11] = player[this.layer].buyables[11].add(1);
             },
 	},
         41: {
