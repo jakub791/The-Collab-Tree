@@ -509,7 +509,7 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);)
             },
             display() {
-                return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by " + format(buyableEffect(this.layer, 71)) + "100x as bonus. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by " + format(buyableEffect(this.layer, 71)) + "x as bonus. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
             },
             style() {
                     if (player.points.gte(layers["s"].buyables[71].cost())) return {  
@@ -518,7 +518,7 @@ addLayer("s", {
                     'height': '150px',
                     'width': '480px',
                     }
-                    else if (player.points.lt(layers["s"].buyables[7].cost())) return {
+                    else if (player.points.lt(layers["s"].buyables[71].cost())) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
                     'height': '150px',
