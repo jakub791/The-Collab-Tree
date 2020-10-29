@@ -456,9 +456,12 @@ addLayer("s", {
 	    },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost(x) { 
-                return new Decimal(20).pow(x)
+            cost() { 
+                return new Decimal(10).mul(new Decimal(2).pow(player[this.layer].buyables[this.id]))
                 },
+            buy() {
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+        },
             display() {
                 return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."
                 },
