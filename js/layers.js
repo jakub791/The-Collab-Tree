@@ -122,7 +122,7 @@ addLayer("s", {
             cost: new Decimal(1800),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
-                else return hasUpgrade(this.layer, 22); 
+                else return hasUpgrade(this.layer, 13); 
             },
         },
         21: {
@@ -145,7 +145,7 @@ addLayer("s", {
         },
         22: {
             title: "Supreme Hexagonity.",
-            description: "Unlocks 4 more upgrades, 2 challenges and halves ''But enough grinding, have at you!'''s root effect.",
+            description: "Unlocks 3 more upgrades, 2 challenges and halves ''But enough grinding, have at you!'''s root effect.",
             cost: new Decimal(999),
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
@@ -225,7 +225,7 @@ addLayer("s", {
             unlocked(){ 
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
-                else unlockable = hasUpgrade(this.layer, 23);
+                else unlockable = hasUpgrade(this.layer, 31);
                 if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
             },
@@ -400,7 +400,10 @@ addLayer("s", {
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
-            if (inChallenge("s", 12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id).div(buyableEffect(this.layer, this.id).pow(2))) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
+            if (inChallenge("s", 12) && hasUpgrade("s", 34) && player[this.layer].buyables[this.id] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10))) "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+            else if (inChallenge("s", 12) && hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+            else if (inChallenge("s", 12) && player[this.layer].buyables[this.id] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10))) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+            else if (inChallenge("s", 12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x.";
             else if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
 	    },
@@ -511,7 +514,7 @@ clickables: {
 	},
         12: {
             name: "The Reverser",
-            challengeDescription: "Predicted boredoms's first effect is divided by itself twice.",
+            challengeDescription: "Predicted boredoms's first effect is divided by ten and then some (depending on your amount of predicted boredom).",
             unlocked() {
                 return hasUpgrade(this.layer, 22);
             },
