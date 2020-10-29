@@ -390,8 +390,8 @@ addLayer("s", {
                 },
             style() {
                 if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
                     }
@@ -402,8 +402,8 @@ addLayer("s", {
                     'width': '480px',
 		    }
                     return {
-                    'background-color': '#CC2112',
-                    'border-color': '#BB1001',
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px',
 		    }
