@@ -374,8 +374,8 @@ addLayer("s", {
             canAfford() { return player[this.layer].unlocked },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { 
-                return new Decimal(10).mul(new Decimal(2).pow(player[this.layer].buyables[this.id]))
+            cost(x) { 
+                return new Decimal(10).mul(new Decimal(2).pow(x.sub(1)))
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
