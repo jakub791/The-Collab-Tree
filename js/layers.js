@@ -371,7 +371,7 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
-            canAfford() { return player[this.layer].unlocked },
+            canAfford() { return player.points.gt(layers["s"].buyables[41].cost()) },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
