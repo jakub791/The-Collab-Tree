@@ -389,19 +389,13 @@ addLayer("s", {
                 return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
-                if (player.points.lt(layers["s"].buyables[41].cost())) return {  
-                    'background-color': '#CC2112',
-                    'border-color': '#BB1001',
-                    'height': '150px',
-                    'width': '480px',
-                    }
-                    else if (!canAffordBuyable(this.layer, this.id)) return {
+                    if (!canAffordBuyable(this.layer, this.id)) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
                     'height': '150px',
                     'width': '480px',
 		    }
-                    return {
+                    else return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
