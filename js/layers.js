@@ -59,7 +59,7 @@ addLayer("s", {
                     function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? format((getPointGen().mag - 1) * 100) + " out of 10 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
-                    "buyables", ["blank", "5px"], ["upgrade", 41], ["blank", "5px"], ["upgrade", 51], ["blank", "5px"], ["upgrade", 61], ["blank", "5px"], ["upgrade", 71]],
+                    "buyables", ["blank", "5px"], ["upgrade", 51], ["blank", "5px"], ["upgrade", 61], ["blank", "5px"], ["upgrade", 71]],
         },
     },
 
@@ -257,37 +257,6 @@ addLayer("s", {
                 return hasUpgrade(this.layer, 22);
             },
         },
-        41: {
-            title: "Hatred.",
-            description() {return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."},
-            currencyDisplayName: "plots",
-            currencyInternalName: "points",
-            cost() { if (player.s.buyables[21] >= 1) return new Decimal(20).sub(player.s.buyables[21].mul(2))
-                     else return new Decimal(20) },
-            unlocked(){
-                return inChallenge(this.layer, 21);
-	    },
-            style() {
-                if (hasUpgrade(this.layer, this.id)) return {  
-                    'background-color': '#CC2112',
-                    'border-color': '#BB1001',
-                    'height': '150px',
-                    'width': '480px',
-                    }
-                    else if (!canAffordUpgrade(this.layer, this.id)) return {
-                    'background-color': '#630303',
-                    'border-color': '#451212',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-                    return {
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-	       },
-          },
         51: {
             title: "Ascended Annoyance.",
             description() {if (hasUpgrade("s", 61)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."
@@ -384,7 +353,7 @@ addLayer("s", {
           },
     },
     buyables: {
-        rows: 2,
+        rows: 5,
         cols: 2,
         11: {
             title: "Predicted boredom.",
@@ -480,6 +449,40 @@ addLayer("s", {
 		}
 	    },
 	},
+        31: {
+            title: "Hatred.",
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost(x) { 
+                return new Decimal(20).pow(x)
+                },
+            display() {
+                return "''Impatience Transformation'' is now getting both exponented by ^" + format(player.points) + " and multiplied by " + format(player.points) + "x."
+                },
+            style() {
+                if (hasUpgrade(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+                    }
+                    else if (!canAffordUpgrade(this.layer, this.id)) return {
+                    'background-color': '#630303',
+                    'border-color': '#451212',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+	       },
+          },
     },
 clickables: {
         rows: 1,
@@ -514,7 +517,9 @@ clickables: {
 	},
         12: {
             name: "The Reverser",
-            challengeDescription: "Predicted boredoms's first effect is divided by ten and then some (depending on your amount of predicted boredom).",
+            challengeDescription() {if(hasUpgrade(this.layer, 34)) return "Predicted boredoms's first effect is divided by ten and then some (scales up once predicted boredom's first effect reaches 10.01x)."
+                                    else return "Predicted boredoms's first effect is divided by ten and then some (scales up once predicted boredom's effect reaches 10.01x)."
+	    },
             unlocked() {
                 return hasUpgrade(this.layer, 22);
             },
