@@ -366,22 +366,21 @@ addLayer("s", {
             title: "Hatred.",
             unlocked(){
                 return inChallenge(this.layer, 21);
-	    },
+            },
             canAfford() { return player[this.layer].unlocked },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost() { 
-                return Decimal.times(10).times(Decimal.times(2)).pow([this.layer].buyables[this.id])
+                new Decimal(10).mul(new Decimal(2).pow(player[this.layer].buyables[this.id]))
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
-                player.points = player.points.sub(layers.s.buyables[41].cost())
             },
             effect() {
-            return player.points.max(1).pow(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))))
-	    },
+            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
+            },
             display() {
-                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ").\n\Cost: " + format(layers.s.buyables[41].cost()) + " plots."
+                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(player[this.layer].buyables[this.id].cost())
                 },
             style() {
                 if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
@@ -395,14 +394,14 @@ addLayer("s", {
                     'border-color': '#451212',
                     'height': '150px',
                     'width': '480px',
-		    }
+            }
                     return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px',
-		    }
-	       },
+            }
+           },
           },
         51: {
             title: "Ascended Annoyance.",
