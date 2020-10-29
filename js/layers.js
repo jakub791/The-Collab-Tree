@@ -365,8 +365,8 @@ addLayer("s", {
             player[this.layer].buyables[11] = player[this.layer].buyables[11].add(1);
             },
             style() {
-            'height': '250px',
-            'width': '250px',
+            'height': '54px',
+            'width': '200px',
 	    }
 	},
         41: {
