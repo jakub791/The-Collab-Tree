@@ -56,7 +56,7 @@ addLayer("s", {
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? format((getPointGen().mag - 1) * 100) + " out of 10 softcap levels are currently activated." : ""},
+                    function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? ((getPointGen().mag - 1) * 100).floor() + " out of 10 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     "buyables"],
@@ -374,8 +374,8 @@ addLayer("s", {
             canAfford() { return player[this.layer].unlocked },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost(x) { 
-                return new Decimal(x)
+            cost(x=player[this.layer].buyables[this.id]) { 
+                return new Decimal(10).mul(new Decimal(2).pow(x))
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
