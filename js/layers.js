@@ -45,7 +45,7 @@ addLayer("s", {
                     ["main-display",
                     "prestige-button",
                     ["blank", "5px"], // Height
-                    ["row", [["column", [["upgrade", 11]],], ["column", [["upgrade", 12]],], ["column", [["upgrade", 13]],], ["column", [["upgrade", 14]],]]], ["row", [["column", [["upgrade", 21]],], ["column", [["upgrade", 22]],], ["column", [["upgrade", 23]],]]], ["row", [["column", [["upgrade", 31]],], ["column", [["upgrade", 32]],], ["column", [["upgrade", 33]],], ["column", [["upgrade", 34]],]]], "clickables", "challenges"],
+                    "upgrades", "clickables", "challenges"],
         },
             "Impatience": {
                 buttonStyle() {return  {'border-color': 'red', 'color': 'red'};},
@@ -59,7 +59,7 @@ addLayer("s", {
                     function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? format((getPointGen().mag - 1) * 100) + " out of 10 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
-                    "buyables", ["blank", "5px"], ["upgrade", 51], ["blank", "5px"], ["upgrade", 61], ["blank", "5px"], ["upgrade", 71]],
+                    "buyables"],
         },
     },
 
@@ -79,7 +79,7 @@ addLayer("s", {
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
                 else unlockable = hasUpgrade(this.layer, 11);
-                if (inChallenge("s", 21) && hasUpgrade("s", 71) && hasUpgrade("s", 11)) unlockable = true
+                if (inChallenge("s", 21) && player[this.layer].buyables[71] >= 1 && hasUpgrade("s", 11)) unlockable = true
                 return unlockable
             },
             effect() {
@@ -87,7 +87,7 @@ addLayer("s", {
                 if (hasUpgrade("s", 21)) ret = ret.pow(upgradeEffect("s", 21));
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
-                if (inChallenge("s", 21) && hasUpgrade("s", 71)) ret = ret.mul(100).pow(buyableEffect("s", 12));
+                if (inChallenge("s", 21) && player[this.layer].buyables[71] >= 1) ret = ret.mul(100).pow(buyableEffect("s", 12));
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
                 return ret;
             },
@@ -97,7 +97,7 @@ addLayer("s", {
         },
         13: {
             title: "Degrading Upgrade.",
-            description() {if(inChallenge("s", 21) & hasUpgrade("s", 51)) return "Boosts your plot gain by ^5 initally and decreases over time."
+            description() {if(inChallenge("s", 21) & player[this.layer].buyables[51] >= 1) return "Boosts your plot gain by ^5 initally and decreases over time."
                     else return "Boosts your plot gain by 5x initally and decreases over time."
 	    },
             cost: new Decimal(1200),
@@ -112,7 +112,7 @@ addLayer("s", {
                 return zatime
             },
             effectDisplay() {
-                if(inChallenge("s", 21) && hasUpgrade("s", 51)) return "^" + format(this.effect());
+                if(inChallenge("s", 21) && player[this.layer].buyables[51] >= 1) return "^" + format(this.effect());
                 else return format(this.effect()) + "x";
             },
         },
@@ -136,7 +136,7 @@ addLayer("s", {
                 let ret = new Decimal(1.05);
                 if (hasUpgrade("s", 23)) ret = ret.pow(upgradeEffect("s", 23));
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
-                if(inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
+                if(inChallenge("s", 21) && player[this.layer].buyables[51] >= 1) ret = ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
@@ -179,7 +179,7 @@ addLayer("s", {
             effect() {
                 let ret = new Decimal(1.05);
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
-                if (inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
+                if (inChallenge("s", 21) && player[this.layer].buyables[51] >= 1) ret = ret.pow(buyableEffect("s", 12));
                 return ret;
             },
             effectDisplay() {
@@ -194,7 +194,7 @@ addLayer("s", {
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
                 else unlockable = hasUpgrade(this.layer, 23);
-                if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) unlockable = true
+                if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1 && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
             },
             effect() {
@@ -202,7 +202,7 @@ addLayer("s", {
                 if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
                 else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.pow(1.42).pow(1.42);
-                if (inChallenge("s", 21) && hasUpgrade("s", 61)) ret = ret.pow(buyableEffect("s", 12));
+                if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1) ret = ret.pow(buyableEffect("s", 12));
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
                 if (ret.gt(2)) ret = ret.log(84).add(1.8435622116579284502939499524034);
                 if (ret.gt(3)) ret = ret.log(422).add(2.8853355548008346985287640482641);
@@ -226,7 +226,7 @@ addLayer("s", {
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
                 else unlockable = hasUpgrade(this.layer, 31);
-                if (inChallenge("s", 21) && hasUpgrade("s", 61) && hasUpgrade("s", 23)) unlockable = true
+                if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1 && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
             },
             effectDisplay() {
@@ -242,7 +242,7 @@ addLayer("s", {
             },
             effect() {
             let ret = new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
-            if (inChallenge("s", 21) && hasUpgrade("s", 51)) ret = ret.pow(buyableEffect("s", 12));
+            if (inChallenge("s", 21) && player[this.layer].buyables[51] >= 1) ret = ret.pow(buyableEffect("s", 12));
              return ret
             },
             effectDisplay() {
@@ -257,103 +257,9 @@ addLayer("s", {
                 return hasUpgrade(this.layer, 22);
             },
         },
-        51: {
-            title: "Ascended Annoyance.",
-            description() {if (hasUpgrade("s", 61)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."
-                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
-            currencyDisplayName: "plots",
-            currencyInternalName: "points",
-            cost() { if (player.s.buyables[21] >= 1) return new Decimal(30).sub(player.s.buyables[21].mul(3))
-                     else return new Decimal(30) },
-            unlocked(){
-                return inChallenge(this.layer, 21);
-	    },
-            style() {
-                if (hasUpgrade(this.layer, this.id)) return {  
-                    'background-color': '#CC2112',
-                    'border-color': '#BB1001',
-                    'height': '150px',
-                    'width': '480px',
-                    }
-                    else if (!canAffordUpgrade(this.layer, this.id)) return {
-                    'background-color': '#630303',
-                    'border-color': '#451212',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-                    return {
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-	       },
-          },
-        61: {
-            title: "THE GREATEST SHENANIGANS.",
-            description() {return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."},
-            currencyDisplayName: "plots",
-            currencyInternalName: "points",
-            cost() { if (player.s.buyables[21] >= 1) return new Decimal(50).sub(player.s.buyables[21].mul(5))
-                     else return new Decimal(50) },
-            unlocked(){
-                return inChallenge(this.layer, 21);
-	    },
-            style() {
-                if (hasUpgrade(this.layer, this.id)) return {  
-                    'background-color': '#CC2112',
-                    'border-color': '#BB1001',
-                    'height': '150px',
-                    'width': '480px',
-                    }
-                    else if (!canAffordUpgrade(this.layer, this.id)) return {
-                    'background-color': '#630303',
-                    'border-color': '#451212',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-                    return {
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-	       },
-          },
-        71: {
-            title: "DUCK IT, I'M 100X MORE BUFFED NOW.",
-            description() {return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."},
-            currencyDisplayName: "plots",
-            currencyInternalName: "points",
-            cost() { if (player.s.buyables[21] >= 1) return new Decimal(70).sub(player.s.buyables[21].mul(7))
-                     else return new Decimal(70) },
-            unlocked(){
-                return inChallenge(this.layer, 21) && hasUpgrade(this.layer, 61);
-	    },
-            style() {
-                if (hasUpgrade(this.layer, this.id)) return {  
-                    'background-color': '#CC2112',
-                    'border-color': '#BB1001',
-                    'height': '150px',
-                    'width': '480px',
-                    }
-                    else if (!canAffordUpgrade(this.layer, this.id)) return {
-                    'background-color': '#630303',
-                    'border-color': '#451212',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-                    return {
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-	       },
-          },
     },
     buyables: {
-        rows: 5,
+        rows: 7,
         cols: 2,
         11: {
             title: "Predicted boredom.",
@@ -422,7 +328,7 @@ addLayer("s", {
 	},
         21: {
             title: "Softcap Warper.",
-            unlocked() { return inChallenge("s", 21) && hasUpgrade("s", 71) && getPointGen().mag >= 1.01; }, 
+            unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 1.01; }, 
             canAfford() { return getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) },
             buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
             layerDataReset("s")
@@ -481,19 +387,108 @@ addLayer("s", {
                 return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ")."
                 },
             style() {
-                if (hasUpgrade(this.layer, this.id)) return {  
+                if (!canAffordBuyable(this.layer, this.id)) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
                     'width': '480px',
-                    }
-                    else if (!canAffordUpgrade(this.layer, this.id)) return {
-                    'background-color': '#630303',
-                    'border-color': '#451212',
+		    }
+                    else return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px',
 		    }
-                    return {
+	       },
+          },
+        51: {
+            title: "Ascended Annoyance.",
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            canAfford() { return player[this.layer].unlocked },
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost() { 
+                return new Decimal(10).mul(new Decimal(3).pow(player[this.layer].buyables[this.id]))
+            },
+            buy() {
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+            },
+            display() {if (player[this.layer].buyables[61] >= 1) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."
+                           else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^.)."},
+            style() {
+                if (!canAffordBuyable(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    else return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+	       },
+          },
+        61: {
+            title: "THE GREATEST SHENANIGANS.",
+            unlocked(){
+                return inChallenge(this.layer, 21);
+	    },
+            canAfford() { return player[this.layer].buyables[this.id] < 1},
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost() { 
+                return new Decimal(60)
+            },
+            buy() {
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+            },
+            display() {
+                return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades."
+            },
+            style() {
+                if (!canAffordBuyable(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    else return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+	       },
+          },
+        71: {
+            title: "DUCK IT, I'M 100X MORE BUFFED NOW.",
+            unlocked(){
+                return inChallenge(this.layer, 21) && player[this.layer].buyables[61] >= 1;
+	    },
+            canAfford() { return inChallenge(this.layer, 21)},
+            currencyDisplayName: "plots",
+            currencyInternalName: "points",
+            cost() { 
+                return new Decimal(10).mul(new Decimal(7).pow(player[this.layer].buyables[this.id]))
+            },
+            buy() {
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
+            },
+            display() {
+                return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by 100x as bonus."
+            },
+            style() {
+                if (!canAffordBuyable(this.layer, this.id)) return {  
+                    'background-color': '#CC2112',
+                    'border-color': '#BB1001',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    else return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
