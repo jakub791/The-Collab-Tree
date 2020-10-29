@@ -371,19 +371,17 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost() { 
-                return Decimal.times(10).times(Decimal.mul(2)).pow([this.layer].buyables[this.id])
+                return Decimal.times(10).times(Decimal.times(2)).pow([this.layer].buyables[this.id])
             },
             buy() {
-                let data = tmp[this.layer].buyables[this.id]
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
-                player.points = player.points.sub(tmp.s.buyables[41].cost)
+                player.points = player.points.sub(layers.s.buyables[41].cost())
             },
             effect() {
-            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
+            return player.points.max(1).pow(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))))
 	    },
             display() {
-                let data = tmp[this.layer].buyables[this.id]
-                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ").\n\Cost: " + format(tmp.s.buyables[41].cost) + " plots."
+                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + ").\n\Cost: " + format(layers.s.buyables[41].cost()) + " plots."
                 },
             style() {
                 if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
