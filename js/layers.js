@@ -220,7 +220,7 @@ addLayer("s", {
         },
         32: {
             title: "Tetrate-inator.",
-            description: "Exponents the upgrade left to it by 1.420. Twice.\n\Currently: ^1.42^1.42",
+            description: "Exponents the upgrade left to it by 1.420. Twice",
             cost: new Decimal(400),
             unlocked(){ 
                 let unlockable = true
@@ -228,6 +228,10 @@ addLayer("s", {
                 else unlockable = hasUpgrade(this.layer, 31);
                 if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1 && hasUpgrade("s", 23)) unlockable = true
                 return unlockable
+            },
+            effectDisplay() {
+                return "^1.42^1.42";
+            },
         },
         33: {
             title: "haha shenanigans go brrrr.",
@@ -366,21 +370,22 @@ addLayer("s", {
             title: "Hatred.",
             unlocked(){
                 return inChallenge(this.layer, 21);
-            },
+	    },
             canAfford() { return player[this.layer].unlocked },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost() { 
-                new Decimal(10).mul(new Decimal(2).pow(player[this.layer].buyables[this.id]))
+            cost(x=player[this.layer].buyables[this.id]) { 
+                let cost = new Decimal(10).mul(new Decimal(2).pow(x))
+                return cost
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             effect() {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
-            },
+	    },
             display() {
-                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(player[this.layer].buyables[this.id].cost())
+                return "''Impatience Transformation'' is now getting both exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1))) + "). <nr> Cost: " + format(player[this.layer].buyables[this.id].cost) + " plots."
                 },
             style() {
                 if (player[this.layer].buyables[this.layer] = 684360934543543) return {  
@@ -394,14 +399,14 @@ addLayer("s", {
                     'border-color': '#451212',
                     'height': '150px',
                     'width': '480px',
-            }
+		    }
                     return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px',
-            }
-           },
+		    }
+	       },
           },
         51: {
             title: "Ascended Annoyance.",
