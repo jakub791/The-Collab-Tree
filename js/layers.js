@@ -506,7 +506,7 @@ addLayer("s", {
 	    },
             buy() {
                 player.points = player.points.sub(layers["s"].buyables[71].cost())
-                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);)
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             display() {
                 return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by " + format(buyableEffect(this.layer, 71)) + "x as bonus. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
