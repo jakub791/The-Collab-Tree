@@ -378,8 +378,8 @@ addLayer("s", {
                 return cost
             },
             buy() {
-                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
                 player.points = player.points.sub(layers["s"].buyables[41].cost())
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             effect() {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
@@ -421,8 +421,8 @@ addLayer("s", {
                 return cost
             },
             buy() {
-                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
                 player.points = player.points.sub(layers["s"].buyables[51].cost())
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             display() {if (player[this.layer].buyables[61] >= 1) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                            else return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."},
@@ -460,8 +460,8 @@ addLayer("s", {
                 return cost
             },
             buy() {
-                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
                 player.points = player.points.sub(layers["s"].buyables[61].cost())
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             display() {
                 return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
@@ -505,8 +505,8 @@ addLayer("s", {
             return new Decimal(100).pow(player[this.layer].buyables[this.id]).max(1)
 	    },
             buy() {
-                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
                 player.points = player.points.sub(layers["s"].buyables[71].cost())
+                player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);)
             },
             display() {
                 return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing'' and boosting it by " + format(buyableEffect(this.layer, 71)) + "100x as bonus. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
