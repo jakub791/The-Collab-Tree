@@ -39,9 +39,9 @@ function getPointGen() {
 	}
 
 	let gain = new Decimal(0.01666666666666666666666666666667)
-        if (player.s.buyables[21] >= 1) gain = gain.mul(new Decimal(2).pow(player.s.buyables[21]));
+        if (player.s.buyables[21] > 0.999) gain = gain.mul(new Decimal(2).pow(player.s.buyables[21]));
         if (inChallenge("s", 12)) {
-            if (player.s.buyables[21] > 900) gain = gain.div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))
+            if (player.s.buyables[11] > 900) gain = gain.div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))
             else gain = gain.div(new Decimal(10))
 	}
         else gain = gain.mul(buyableEffect("s", 11))
