@@ -374,9 +374,8 @@ addLayer("s", {
             canAfford() { return player[this.layer].unlocked },
             currencyDisplayName: "plots",
             currencyInternalName: "points",
-            cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
-                let cost = new Decimal(10).mul(new Decimal(2).pow(x))
-                return cost.floor()
+            cost() { 
+                return new Decimal(1)
             },
             buy() {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
