@@ -130,7 +130,7 @@ addLayer("s", {
         },
         21: {
             title: "Tiny desk exponent.",
-            description: "Adds ^1.05 to the previous upgrade.",
+            description: "Adds ^1.05 to ''Vibing.'' upgrade.",
             cost: new Decimal(20),
             unlocked(){ 
                 return hasUpgrade(this.layer, 12);
