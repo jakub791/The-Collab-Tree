@@ -582,8 +582,8 @@ clickables: {
 	},
         12: {
             name: "The Reverser",
-            challengeDescription() {if(hasUpgrade(this.layer, 34)) return "\"Predicted boredom.\"'s first effect is divided by ten and then some (scales up once predicted boredom's first effect reaches 10.01x)."
-                                    else return "\"Predicted boredom.\"'s effect is divided by ten and then some (scales up once predicted boredom's effect reaches 10.01x)."
+            challengeDescription() {if(hasUpgrade(this.layer, 34)) return "\"Predicted boredom.\"'s first effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s first effect reaches 10.01x)."
+                                    else return "\"Predicted boredom.\"'s effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s effect reaches 10.01x)."
 	    },
             unlocked() {
                 return hasUpgrade(this.layer, 22);
