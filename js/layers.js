@@ -392,8 +392,8 @@ addLayer("s", {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
 	    },
             display() {
-                if (player[this.layer].buyables[41].gte(1)) return "''Impatience Transformation'' will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "''Impatience Transformation'' will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + ") instead. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if (player[this.layer].buyables[41].gte(1)) return "''Impatience Transformation'''s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + ") instead. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "''Impatience Transformation'''s effect will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
                     if (player.points.gte(layers["s"].buyables[41].cost())) return {  
