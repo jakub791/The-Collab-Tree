@@ -220,7 +220,7 @@ addLayer("s", {
         },
         32: {
             title: "Tetrate-inator.",
-            description: "Exponents the upgrade left to it by 1.420. Twice",
+            description: "Exponents the upgrade left to it by 1.420. Twice.",
             cost: new Decimal(400),
             unlocked(){ 
                 let unlockable = true
@@ -457,7 +457,7 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21);
 	    },
-            canAfford() { return player.points.gte(layers["s"].buyables[61].cost()) && !player[this.layer].buyables[this.id] == 1 },
+            canAfford() { return player.points.gte(layers["s"].buyables[61].cost()) && player[this.layer].buyables[this.id].lt(2)},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
@@ -497,7 +497,7 @@ addLayer("s", {
                 return "DUCK IT, I'M " + new Decimal(100).mul(buyableEffect(this.layer, 71)) + "X MORE BUFFED NOW."
 	    },
             unlocked(){
-                return inChallenge(this.layer, 21);
+                return inChallenge(this.layer, 21) && player[this.layer].buyables[61].gte(1);
 	    },
             canAfford() { return player.points.gte(layers["s"].buyables[71].cost()) },
             currencyDisplayName: "plots",
