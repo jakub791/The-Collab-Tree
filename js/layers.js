@@ -517,7 +517,11 @@ addLayer("s", {
                 return cost
             },
             effect() {
-            return new Decimal(100).pow(player[this.layer].buyables[this.id]).max(1)
+            if (player[this.layer].buyables[71].eq(5)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))
+            else if (player[this.layer].buyables[71].eq(4)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))
+            else if (player[this.layer].buyables[71].eq(3)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100))
+            else if (player[this.layer].buyables[71].eq(2)) return new Decimal(100).pow(100)
+            else if (player[this.layer].buyables[71].eq(1)) return new Decimal(100)
 	    },
             buy() {
                 player.points = player.points.sub(layers["s"].buyables[71].cost())
@@ -525,7 +529,9 @@ addLayer("s", {
             },
             display() {
                 if (player[this.layer].buyables[71].eq(0)) return "You know what? Let's just crank the #%@& up and boost \"Vibing.\" upgrade by 100 times. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "Boost \"Vibing.\" upgrade by 100 times again. NOW THAT'S A LOT OF MULTIPLIER. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else if (player[this.layer].buyables[71].eq(1)) return "Exponents \"Vibing.\" upgrade by itself (NOW THAT'S A LOT OF MULTIPLIER). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "Exponents \"Vibing.\" upgrade by itself, again. (HOW ABOUT A LITTLE MORE?). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+
             },
             style() {
                     if (player.points.gte(layers["s"].buyables[71].cost())) return {  
