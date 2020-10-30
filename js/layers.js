@@ -18,12 +18,12 @@ addLayer("s", {
         exponent: 0.5,
 
         gainMult() {
-            let mult = new Decimal(1)
+            let mult = new Decimal(1).mul(layers.c.effect)
             if (player.s.buyables[21] >= 1) mult = mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
-            if (inChallenge("s", 21)) mult = new Decimal(0)
+            if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) mult = new Decimal(0)
             return mult;
         },
         gainExp() {
@@ -391,10 +391,10 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             effect() {
-            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
+            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(layers.c.effect).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1).mul(layers.c.effect)))
 	    },
             display() {
-                if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect)) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect)) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
@@ -563,10 +563,11 @@ clickables: {
         rows: 1,
         cols: 1,
         masterButtonPress() {
-        if (player[this.layer].upgradeTime.eq(60)) return player[this.layer].upgradeTime = new Decimal(0);
+        if (player[this.layer].upgradeTime.eq(60) || hasMilestone("c", 0)) return player[this.layer].upgradeTime = new Decimal(0);
         },
         masterButtonText() {
-        if (player[this.layer].upgradeTime.lt(60)) return "Wait for " + Math.round(new Decimal(60).sub(player[this.layer].upgradeTime)) + " more second(s).";
+        if (player[this.layer].upgradeTime.lt(60) && hasMilestone("c", 0)) return "Reset 3rd upgrade's effect.";
+        else if (player[this.layer].upgradeTime.lt(60)) return "Wait for " + Math.round(new Decimal(60).sub(player[this.layer].upgradeTime)) + " more second(s).";
         if (player[this.layer].upgradeTime.eq(60)) return "Reset 3rd upgrade's effect.";
 	},// **optional** text to display on the Master Button
         showMasterButton() {
@@ -624,8 +625,16 @@ addLayer("c", {
         startData() { return {                  // startData is a function that returns default data for a layer. 
             unlocked: false,                    // You can add more variables here to add them to your layer.
             points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+            best: new Decimal(0),
             total: new Decimal(0),
         }},
+        effect() {
+            eff = player[this.layer].points.max(1).pow(player[this.layer].points.max(1))
+            return eff
+        },
+        effectDescription() {
+            return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "."
+        },
 
         name: "Chaos",
         color: "#FE0102",                       // The color for this layer, which affects many elements
@@ -653,5 +662,12 @@ addLayer("c", {
         },
 
         layerShown() {return true},             // Returns a bool for if this layer's node should be visible in the tree.
-    },
-})
+
+        milestones: {
+            0: {
+                requirementDescription: "1 Condensed Chaos",
+                effectDescription: "Allows you to reset \"Degrading Upgrade.\"'s effect whenever you want.",
+                done: function() {return player.c.best.gte(1)}
+               },
+	},
+    });
