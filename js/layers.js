@@ -12,7 +12,7 @@ addLayer("s", {
         resetDesc: "Obliterate your plots for ",
         baseResource: "plots",
         baseAmount() {return player.points},
-        requires() {return new Decimal(1)},
+        requires: new Decimal(1),
         type: "normal",
         exponent: 0.5,
 
@@ -22,7 +22,7 @@ addLayer("s", {
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
-            if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) mult = new Decimal(0)
+            if (inChallenge("s", 21)) mult = new Decimal(0)
             return mult;
         },
         gainExp() {
@@ -626,6 +626,7 @@ addLayer("c", {
             points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
             best: new Decimal(0),
             total: new Decimal(0),
+            chaoticEnergy: new Decimal(0),
         }},
         effect() {
             eff = player[this.layer].points.max(1).pow(player[this.layer].points.max(1))
@@ -634,6 +635,9 @@ addLayer("c", {
         effectDescription() {
             return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "."
         },
+    midsection: [
+        ["display-text", function() {return "You have " format(player["c"].chaoticEnergy()) " shards."}],
+    ],
 
         name: "Chaos",
         color: "#FE0102",                       // The color for this layer, which affects many elements
@@ -656,6 +660,11 @@ addLayer("c", {
         gainMult() {                            // Returns your multiplier to your gain of the prestige resource
             return new Decimal(1)               // Factor in any bonuses multiplying gain here
         },
+
+        update(diff) {
+            if(hasUpgrade(this.layer, 11)) player[this.layer].chaoticEnergy = player[this.layer].chaoticEnergy.add(diff)
+	},
+
         gainExp() {                             // Returns your exponent to your gain of the prestige resource
             return new Decimal(1)
         },
@@ -666,9 +675,19 @@ addLayer("c", {
 
         milestones: {
             0: {
-                requirementDescription: "1 Condensed Chaos",
-                effectDescription: "Allows you to reset \"Degrading Upgrade.\"'s effect whenever you want.",
-                done: function() {return player.c.best.gte(1)}
+               requirementDescription: "1 Condensed Chaos",
+               effectDescription: "Allows you to reset \"Degrading Upgrade.\"'s effect whenever you want.",
+               done: function() {return player.c.best.gte(1)}
                },
 	},
+
+    upgrades: {
+        rows: 1,
+        cols: 1,
+        11: {
+            title: "Endless Possibilities.",
+            description: "Generates one chaotic energy per second.",
+            cost: new Decimal(1),
+            },
+        },
     });
