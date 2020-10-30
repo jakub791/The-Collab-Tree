@@ -438,7 +438,13 @@ addLayer("s", {
                        if (player[this.layer].buyables[this.id].eq(2)) return "[LOCKED]"
 		       },
             style() {
-                    if (player.points.gte(layers["s"].buyables[51].cost())) return {  
+                    if (player[this.layer].buyables[this.id].gte(2)) return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    else if (player.points.gte(layers["s"].buyables[51].cost())) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
@@ -447,12 +453,6 @@ addLayer("s", {
                     else if (player.points.lt(layers["s"].buyables[51].cost())) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-                    else if (tmp[this.layer].buyables[51].canAfford == false) return {
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px',
 		    }
@@ -480,7 +480,13 @@ addLayer("s", {
                 if(player[this.layer].buyables[this.id].eq(2)) return "''I've upgraded enough. I'm satisfied.''"
             },
             style() {
-                    if (player.points.gte(layers["s"].buyables[61].cost())) return {  
+                    if (player[this.layer].buyables[this.id].gte(2)) return {
+                    'background-color': '#AE4242',
+                    'border-color': '#9D3131',
+                    'height': '150px',
+                    'width': '480px',
+		    }
+                    else if (player.points.gte(layers["s"].buyables[61].cost())) return {  
                     'background-color': '#CC2112',
                     'border-color': '#BB1001',
                     'height': '150px',
@@ -489,12 +495,6 @@ addLayer("s", {
                     else if (player.points.lt(layers["s"].buyables[61].cost())) return {
                     'background-color': '#630303',
                     'border-color': '#451212',
-                    'height': '150px',
-                    'width': '480px',
-		    }
-                    else if (tmp[this.layer].buyables[61].canAfford == false) return {
-                    'background-color': '#AE4242',
-                    'border-color': '#9D3131',
                     'height': '150px',
                     'width': '480px',
 		    }
