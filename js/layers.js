@@ -5,11 +5,11 @@ addLayer("s", {
             upgradeTime: new Decimal(0),
         };},
 
-        name: "shenanigans",
+        name: "Shenanigans",
         color: "#420420",
         resource: "shenanigans",
         row: 0,
-
+        resetDesc: "Obliterate your plots for ",
         baseResource: "plots",
         baseAmount() {return player.points;},
         requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
@@ -334,12 +334,12 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { if(getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]))
+            layerDataReset("s", ["buyables", 21])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
-            layerDataReset("s", ["buyable", 21])
             player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
-            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + new Decimal(2).add(player[this.layer].buyables[this.id]) + " plots per second in order to reset.";
+            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + new Decimal(2).add(player[this.layer].buyables[this.id]) + " plots per second in order to reset.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
@@ -619,3 +619,39 @@ clickables: {
 		{ key: "s", desc: "S: Reset for shenanigans", onPress() { doReset(this.layer); } },
 	],
 });
+
+addLayer("c", {
+        startData() { return {                  // startData is a function that returns default data for a layer. 
+            unlocked: false,                    // You can add more variables here to add them to your layer.
+            points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+            total: new Decimal(0),
+        }},
+
+        name: "Chaos",
+        color: "#FE0102",                       // The color for this layer, which affects many elements
+        resource: "condensed chaoses",            // The name of this layer's main prestige resource
+        row: 1,                                 // The row this layer is on (0 is the first row)
+        resetDesc() {if (player.s.buyables[21] >= 1 || player[this.layer].total >= 1) return "YEET all of your softcap warpers into the void for "
+                     else return "You haven't progressed enough yet."
+		    },
+        baseResource() {if (player.s.buyables[21] >= 1 || player[this.layer].total >= 1) return "softcap warpers"
+                        else return "???"
+		       },                 // The name of the resource your prestige gain is based on
+        baseAmount() {return player.s.buyables[21]},    // A function to return the current value of that resource
+
+        requires: new Decimal(4),            // The amount of the base needed to  gain 1 of the prestige currency.
+                                                // Also the amount required to unlock the layer.
+        
+        type: "normal",                         // Determines the formula used for calculating prestige currency.
+        exponent: 0.8,                          // "normal" prestige gain is (currency^exponent)
+
+        gainMult() {                            // Returns your multiplier to your gain of the prestige resource
+            return new Decimal(1)               // Factor in any bonuses multiplying gain here
+        },
+        gainExp() {                             // Returns your exponent to your gain of the prestige resource
+            return new Decimal(1)
+        },
+
+        layerShown() {return true},             // Returns a bool for if this layer's node should be visible in the tree.
+    },
+})
