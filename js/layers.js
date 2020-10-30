@@ -636,9 +636,9 @@ addLayer("c", {
             return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "."
         },
     midsection: [
-        ["display-text", function() {return "You have " format(player["c"].chaoticEnergy()) " chaotic energies."}],
+        ["display-text", function() {return "You have " format(player["c"].chaoticEnergy()) " chaotic energies."},
+        {"color": "purple", "font-size": "32px",}],
     ],
-
         name: "Chaos",
         color: "#FE0102",                       // The color for this layer, which affects many elements
         resource: "condensed chaoses",            // The name of this layer's main prestige resource
