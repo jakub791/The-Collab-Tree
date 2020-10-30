@@ -433,6 +433,7 @@ addLayer("s", {
                        else if (player[this.layer].buyables[this.id].eq(0)) return return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                        if (player[this.layer].buyables[this.id].eq(1)) return "''Degrading Upgrade'''s exponent is replaced with tetration. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                        if (player[this.layer].buyables[this.id].eq(2)) return "[LOCKED]"
+		       },
             style() {
                     if (player.points.gte(layers["s"].buyables[51].cost())) return {  
                     'background-color': '#CC2112',
