@@ -11,9 +11,8 @@ addLayer("s", {
         row: 0,
         resetDesc: "Obliterate your plots for ",
         baseResource: "plots",
-        baseAmount() {return player.points;},
-        requires() {if(inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
-                    else return new Decimal(1)},
+        baseAmount() {return player.points},
+        requires() {return new Decimal(1)},
         type: "normal",
         exponent: 0.5,
 
@@ -662,6 +661,8 @@ addLayer("c", {
         },
 
         layerShown() {return true},             // Returns a bool for if this layer's node should be visible in the tree.
+
+        branches: [["c", "s"]],
 
         milestones: {
             0: {
