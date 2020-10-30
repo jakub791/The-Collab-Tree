@@ -98,7 +98,7 @@ addLayer("s", {
         13: {
             title: "Degrading Upgrade.",
             description() {if(inChallenge("s", 21) && player[this.layer].buyables[51].eq(2)) return "Boosts your plot gain by ^^5 initally and decreases over time."
-                    else ifif(inChallenge("s", 21) && player[this.layer].buyables[51].eq(1)) return "Boosts your plot gain by ^5 initally and decreases over time."
+                    else if(inChallenge("s", 21) && player[this.layer].buyables[51].eq(1)) return "Boosts your plot gain by ^5 initally and decreases over time."
                     else return "Boosts your plot gain by 5x initally and decreases over time."
 	    },
             cost: new Decimal(1200),
@@ -521,8 +521,8 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             display() {
-                return "You know what? Let's just crank the #%@& up and boost ''Vibing.'' upgrade by 100 times. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                return "Boost ''Vibing.'' upgrade by 100 times again. NOW THAT'S A LOT OF MULTIPLIER. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if (player[this.layer].buyables[71].eq(0)) return "You know what? Let's just crank the #%@& up and boost ''Vibing.'' upgrade by 100 times. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "Boost ''Vibing.'' upgrade by 100 times again. NOW THAT'S A LOT OF MULTIPLIER. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
             },
             style() {
                     if (player.points.gte(layers["s"].buyables[71].cost())) return {  
