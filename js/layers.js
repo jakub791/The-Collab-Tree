@@ -636,7 +636,7 @@ addLayer("c", {
             return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "."
         },
     midsection: [
-        ["display-text", function() {return "You have " format(player["c"].chaoticEnergy()) " chaotic energies."},
+        ["display-text", function() {return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies."},
         {"color": "purple", "font-size": "32px",}],
     ],
         name: "Chaos",
