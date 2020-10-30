@@ -339,7 +339,7 @@ addLayer("s", {
             player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
-            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases ''Impatience'' upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <br> You need to generate " + new Decimal(2).add(player[this.layer].buyables[this.id]) + " plots per second in order to reset.";
+            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases ''Impatience'' upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <br> You need to generate " + new Decimal(2).add(player[this.layer].buyables[this.id]) + " plots per second in order to reset.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
@@ -394,8 +394,8 @@ addLayer("s", {
             return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)))
 	    },
             display() {
-                if (player[this.layer].buyables[41].gte(1)) return "''Impatience Transformation'''s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + ") instead. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "''Impatience Transformation'''s effect will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if (player[this.layer].buyables[41].gte(1)) return "''Impatience Transformation'''s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + ") instead. <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "''Impatience Transformation'''s effect will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
                     if (player.points.gte(layers["s"].buyables[41].cost())) return {  
@@ -434,8 +434,8 @@ addLayer("s", {
                 player.points = player.points.sub(layers["s"].buyables[51].cost())
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
-            display() {if (player[this.layer].buyables[61].gte(1) && player[this.layer].buyables[this.id].eq(0)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                       else if (player[this.layer].buyables[this.id].eq(0)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+            display() {if (player[this.layer].buyables[61].gte(1) && player[this.layer].buyables[this.id].eq(0)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'', ''Tetrate-inator'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                       else if (player[this.layer].buyables[this.id].eq(0)) return "''Impatience Transformation'' boosts all the upgrades (excluding ''Every 60 seconds in real life a minute passes.'' and instead of boosting ''Degrading Upgrade'' like the rest of upgrades, it's multiplier is replaced by ^). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                        if (player[this.layer].buyables[this.id].eq(1)) return "''Degrading Upgrade'''s exponent is replaced with tetration. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                        if (player[this.layer].buyables[this.id].eq(2)) return "[LOCKED]"
 		       },
@@ -477,9 +477,9 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             display() {
-                if(player[this.layer].buyables[this.id].eq(0)) return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                if(player[this.layer].buyables[this.id].eq(1)) return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing.'' upgrade. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                if(player[this.layer].buyables[this.id].eq(2)) return "''I've upgraded enough. I'm satisfied.''"
+                if(player[this.layer].buyables[this.id].eq(0)) return "Nullifies some of second part of ''The Endgamer'', bringing you back two out of three previously removed upgrades. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if(player[this.layer].buyables[this.id].eq(1)) return "Nullifies second part of ''The Endgamer'' completely, bringing you back ''Vibing.'' upgrade. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if(player[this.layer].buyables[this.id].eq(2)) return "\"I've upgraded enough. I'm satisfied.\""
             },
             style() {
                     if (player[this.layer].buyables[this.id].gte(2)) return {
@@ -524,8 +524,8 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             display() {
-                if (player[this.layer].buyables[71].eq(0)) return "You know what? Let's just crank the #%@& up and boost ''Vibing.'' upgrade by 100 times. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "Boost ''Vibing.'' upgrade by 100 times again. NOW THAT'S A LOT OF MULTIPLIER. <nr> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if (player[this.layer].buyables[71].eq(0)) return "You know what? Let's just crank the #%@& up and boost ''Vibing.'' upgrade by 100 times. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "Boost ''Vibing.'' upgrade by 100 times again. NOW THAT'S A LOT OF MULTIPLIER. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
             },
             style() {
                     if (player.points.gte(layers["s"].buyables[71].cost())) return {  
