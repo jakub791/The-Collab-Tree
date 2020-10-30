@@ -504,7 +504,11 @@ addLayer("s", {
           },
         71: {
             title() {
-                return "DUCK IT, I'M " + new Decimal(100).mul(buyableEffect(this.layer, 71)) + "X MORE BUFFED NOW."
+                if (player[this.layer].buyables[71].eq(4)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))) + " TIMES MORE BUFFED NOW."
+                if (player[this.layer].buyables[71].eq(3)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))) + " TIMES MORE BUFFED NOW."
+                if (player[this.layer].buyables[71].eq(2)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))) + " TIMES MORE BUFFED NOW."
+                if (player[this.layer].buyables[71].eq(1)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100)) + " TIMES MORE BUFFED NOW."
+                else return "DUCK IT, I'M 100 TIMES MORE BUFFED NOW."
 	    },
             unlocked(){
                 return inChallenge(this.layer, 21) && player[this.layer].buyables[61].gte(2);
