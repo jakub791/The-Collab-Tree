@@ -56,7 +56,7 @@ addLayer("s", {
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? format((getPointGen().mag - 1) * 100) + " out of 10 softcap levels are currently activated." : ""},
+                    function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 10 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     ["row", [["column", [["buyable", 11]]], ["blank", "14px"], ["column", [["buyable", 12]]]]], ["blank", "14px"], ["buyable", 21], ["blank", "14px"], ["buyable", 31], ["blank", "14px"], ["buyable", 41], ["blank", "14px"], ["buyable", 51], ["blank", "14px"], ["buyable", 61], ["blank", "14px"], ["buyable", 71]],
