@@ -450,7 +450,7 @@ addLayer("s", {
                     'height': '150px',
                     'width': '480px',
 		    }
-                    return {
+                    else if (tmp[this.layer].buyables[51].canAfford == false) return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
@@ -492,7 +492,7 @@ addLayer("s", {
                     'height': '150px',
                     'width': '480px',
 		    }
-                    return {
+                    else if (tmp[this.layer].buyables[61].canAfford == false) return {
                     'background-color': '#AE4242',
                     'border-color': '#9D3131',
                     'height': '150px',
