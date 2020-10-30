@@ -52,7 +52,7 @@ function getPointGen() {
         else if (hasUpgrade("s", 13)) gain = gain.times(upgradeEffect("s", 13));
         if (inChallenge("s", 11)) gain = gain.tetrate(new Decimal(0.5));
         if (inChallenge("s", 21)) gain = gain.tetrate(new Decimal(0.000000000000000000000000000000000001)).pow(buyableEffect("s", 12))
-        let hahaSoftcapGoBrrrrrrrr = new Decimal(10).div(player.s.buyables[21])
+        let hahaSoftcapGoBrrrrrrrr = new Decimal(11).div(player.s.buyables[21].add(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(2))) gain = new Decimal(1).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(2).max(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(3))) gain = new Decimal(2).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(3).max(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(4))) gain = new Decimal(3).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(4).max(1))
