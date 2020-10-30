@@ -335,6 +335,7 @@ addLayer("s", {
             buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
             layerDataReset("s")
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+            player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
             return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this button. Pressing it will reset your progress. In exchange, you'll be granted with a single Softcap Warper, which decreases ''Impatience'' upgrade's cost, boosts your plot and shenanigans gain and weakens ''The Endgamer'' softcaps. <br> You need to generate " + new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) + " plots per second in order to reset.";
