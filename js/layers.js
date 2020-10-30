@@ -331,9 +331,9 @@ addLayer("s", {
 	},
         21: {
             title: "Softcap Warper.",
-            unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 1.01; }, 
-            canAfford() { return getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)) },
-            buy() { if(getPointGen().mag >= new Decimal(1.01).add(player[this.layer].buyables[this.id].div(100)))
+            unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
+            canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
+            buy() {
             layerDataReset("s")
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
             player.points = new Decimal(0)
