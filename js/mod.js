@@ -53,16 +53,16 @@ function getPointGen() {
         if (inChallenge("s", 11)) gain = gain.tetrate(new Decimal(0.5));
         if (inChallenge("s", 21)) gain = gain.tetrate(new Decimal(0.000000000000000000000000000000000001)).pow(buyableEffect("s", 12))
         let hahaSoftcapGoBrrrrrrrr = new Decimal(420).div(player.s.buyables[21].add(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(2))) gain = new Decimal(1).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(4).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(3))) gain = new Decimal(2).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(27).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(4))) gain = new Decimal(3).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(256).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(5))) gain = new Decimal(4).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(3125).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(6))) gain = new Decimal(5).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(46656).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(7))) gain = new Decimal(6).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(823543).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(8))) gain = new Decimal(7).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(16777216).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(9))) gain = new Decimal(8).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(387420489).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(10))) gain = new Decimal(9).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(10000000000).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(11))) gain = new Decimal(10).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(285311670611).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(2))) gain = new Decimal(1).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(3))) gain = new Decimal(2).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(2).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(4))) gain = new Decimal(3).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(3).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(5))) gain = new Decimal(4).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(4).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(6))) gain = new Decimal(5).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(5).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(7))) gain = new Decimal(6).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(6).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(8))) gain = new Decimal(7).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(7).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(9))) gain = new Decimal(8).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(8).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(10))) gain = new Decimal(9).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(9).max(1))
+        if (inChallenge("s", 21) && gain.gt(new Decimal(11))) gain = new Decimal(10).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(10).max(1))
 	return gain
 }
 
