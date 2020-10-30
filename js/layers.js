@@ -335,7 +335,7 @@ addLayer("s", {
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { if(getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]))
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
-            resetLayerData("s", ["buyable", 21])
+            layerDataReset("s", ["buyable", 21])
             player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
