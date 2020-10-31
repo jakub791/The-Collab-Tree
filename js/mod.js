@@ -76,7 +76,7 @@ function getPointGen() {
         if (inChallenge("s", 21) && gain.gt(new Decimal(23))) gain = new Decimal(22).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(10195541015550738298024918413.363).max(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(24))) gain = new Decimal(23).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(325619086145088897570576531456).max(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(25))) gain = new Decimal(24).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(10842021724855044340074528008699).max(1))
-        if (inChallenge("s", 21) && gain.gt(new Decimal(26))) gain = new Decimal(25).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(375739720471628253832804827172860).max(1))
+        if (inChallenge("s", 21) && gain.gte(new Decimal(26))) gain = new Decimal(25).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(375739720471628253832804827172860).max(1))
         if (inChallenge("s", 21) && gain.gte(new Decimal(100))) gain = new Decimal(100)
 	return gain
 }
