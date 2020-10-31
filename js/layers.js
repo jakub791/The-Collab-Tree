@@ -335,8 +335,13 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { 
-            layerDataReset("s", [buyables[21]])
+            layerDataReset("s", ["buyables", 21])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+            player[this.layer].buyables[11] = new Decimal(1)
+            player[this.layer].buyables[41] = new Decimal(1)
+            player[this.layer].buyables[51] = new Decimal(1)
+            player[this.layer].buyables[61] = new Decimal(1)
+            player[this.layer].buyables[71] = new Decimal(1)
             player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
@@ -638,7 +643,7 @@ addLayer("c", {
             return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "."
         },
     midsection: [
-        ["display-text", function() {return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies."},
+        ["display-text", function() {return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies, which boosts your softcap warpers's last effect by " + format(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)) + "x."},
         {"color": "purple", "font-size": "17.6px",}],
     ],
         name: "Chaos",
