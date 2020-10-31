@@ -11,9 +11,10 @@ addLayer("s", {
         row: 0,
         resetDescription: "Obliterate your plots for ",
         baseResource: "plots",
-        baseAmount() {if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
-                      else return player.points},
-        requires: new Decimal(1),
+        baseAmount() {return player.points},
+        requires() { if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
+                     else return new Decimal(1)
+                   },
         type: "normal",
         exponent: 0.5,
 
