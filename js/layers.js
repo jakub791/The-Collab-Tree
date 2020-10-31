@@ -337,11 +337,11 @@ addLayer("s", {
             buy() { 
             layerDataReset("s", ["buyables", 21])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
-            player[this.layer].buyables[11] = new Decimal(1)
-            player[this.layer].buyables[41] = new Decimal(1)
-            player[this.layer].buyables[51] = new Decimal(1)
-            player[this.layer].buyables[61] = new Decimal(1)
-            player[this.layer].buyables[71] = new Decimal(1)
+            player[this.layer].buyables[11] = new Decimal(0)
+            player[this.layer].buyables[41] = new Decimal(0)
+            player[this.layer].buyables[51] = new Decimal(0)
+            player[this.layer].buyables[61] = new Decimal(0)
+            player[this.layer].buyables[71] = new Decimal(0)
             player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
