@@ -11,18 +11,19 @@ addLayer("s", {
         row: 0,
         resetDesc: "Obliterate your plots for ",
         baseResource: "plots",
-        baseAmount() {return player.points},
+        baseAmount() {if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
+                      else return player.points},
         requires: new Decimal(1),
         type: "normal",
         exponent: 0.5,
 
         gainMult() {
-            let mult = new Decimal(1).mul(layers.c.effect)
+            let mult = new Decimal(1).mul(layers.c.effect())
             if (player.s.buyables[21] >= 1) mult = mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
             if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
-            if (inChallenge("s", 21)) mult = new Decimal(0)
+            if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) mult = new Decimal(0)
             return mult;
         },
         gainExp() {
