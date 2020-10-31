@@ -629,7 +629,7 @@ addLayer("c", {
             chaoticEnergy: new Decimal(0),
         }},
         effect() {
-            eff = player[this.layer].points.max(1).pow(player[this.layer].points.max(1))
+            eff = player.c.points.add(1).pow(player.c.points.add(1))
             return eff
         },
         effectDescription() {
@@ -637,7 +637,7 @@ addLayer("c", {
         },
     midsection: [
         ["display-text", function() {return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies."},
-        {"color": "purple", "font-size": "32px",}],
+        {"color": "purple", "font-size": "17.6px",}],
     ],
         name: "Chaos",
         color: "#FE0102",                       // The color for this layer, which affects many elements
