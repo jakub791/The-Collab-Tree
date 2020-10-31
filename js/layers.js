@@ -392,10 +392,10 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             effect() {
-            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(layers.c.effect).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1).mul(layers.c.effect)))
+            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(layers.c.effect()).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1).mul(layers.c.effect())))
 	    },
             display() {
-                if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect)) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect)) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
