@@ -308,12 +308,12 @@ addLayer("s", {
         },
             effect() {
             let eff = player.points.div(100).add(1)
-            eff = eff.pow(player.points.max(1)).pow(player.points.max(1))
+            eff = eff.pow(player.points.max(1))
             if (player.s.buyables[41] >= 1) eff = eff.pow(buyableEffect("s", 41))
             return eff;
         },
         display() {
-        return "\"Really? No, seriously, this game is a buggy mess.\" You said. \"How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL bend this game to my will, even if that means I'll have to break the game.\" Your impatience is getting transformed into anger, exponentionally boosting your plots gain, it's effect and growth by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
+        return "\"Really? No, seriously, this game is a buggy mess.\" You said. \"How does that dude think I'm gonna reach such a goal without these two ever-expanding upgrades? I swear to god, I WILL bend this game to my will, even if that means I'll have to break the game.\" Your impatience is getting transformed into anger, exponentionally boosting your plots gain and it's own effect by ^"  + format(buyableEffect(this.layer, this.id)) + "."; 
 	},
         style() {
             if(player[this.layer].unlocked) return {
