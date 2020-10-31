@@ -9,7 +9,7 @@ addLayer("s", {
         color: "#420420",
         resource: "shenanigans",
         row: 0,
-        resetDesc: "Obliterate your plots for ",
+        resetDescription: "Obliterate your plots for ",
         baseResource: "plots",
         baseAmount() {if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
                       else return player.points},
@@ -644,9 +644,7 @@ addLayer("c", {
         color: "#FE0102",                       // The color for this layer, which affects many elements
         resource: "condensed chaoses",            // The name of this layer's main prestige resource
         row: 1,                                 // The row this layer is on (0 is the first row)
-        resetDesc() {if (player.s.buyables[21] >= 1 || player[this.layer].total >= 1) return "YEET all of your softcap warpers into the void for "
-                     else return "You haven't progressed enough yet."
-		    },
+        resetDescription: "YEET all of your softcap warpers into the void for ",
         baseResource() {if (player.s.buyables[21] >= 1 || player[this.layer].total >= 1) return "softcap warpers"
                         else return "???"
 		       },                 // The name of the resource your prestige gain is based on
