@@ -676,7 +676,7 @@ addLayer("c", {
 
         layerShown() {return true},             // Returns a bool for if this layer's node should be visible in the tree.
 
-        branches: [["c", "s"]],
+        branches: [["s", "c"]],
 
         milestones: {
             0: {
