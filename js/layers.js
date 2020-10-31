@@ -53,7 +53,13 @@ addLayer("s", {
                 content:
                     [
                     ["display-text",
-                    function() {return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(player.s.buyables[21].mul(10)) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""},
+                    function() {
+                                let absolutecost = new Decimal(100)
+                                let absoluteoof
+                                for (absoluteoof = 0; absoluteoof < player[this.layer].buyables[21]; absoluteoof++) {
+                                absolutecost = absolutecost.sub(absolutecost.div(10))
+                                }
+                                return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(new Decimal(100).sub(absolutecost))) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""},
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
@@ -393,7 +399,12 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
-                let cost = new Decimal(10).sub(player[this.layer].buyables[21]).mul(new Decimal(1.1).pow(x))
+                let cost1 = new Decimal(10)
+                let oof1
+                for (oof1 = 0; oof1 < player[this.layer].buyables[21]; oof1++) {
+                cost1 = cost1.sub(cost1.div(10))
+                }
+                let cost = new Decimal(10).sub(new Decimal(10).sub(cost1)).mul(new Decimal(1.1).pow(x))
                 return cost
             },
             buy() {
@@ -437,7 +448,12 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
-                let cost = new Decimal(150).sub(player[this.layer].buyables[21].mul(15)).mul(new Decimal(4).pow(x))
+                let cost2 = new Decimal(150)
+                let oof2
+                for (oof2 = 0; oof2 < player[this.layer].buyables[21]; oof2++) {
+                cost2 = cost2.sub(cost2.div(10))
+                }
+                let cost = new Decimal(150).sub(new Decimal(150).sub(cost2)).mul(new Decimal(4).pow(x))
                 return cost
             },
             buy() {
@@ -479,7 +495,12 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
-                let cost = new Decimal(10).sub(player[this.layer].buyables[21]).mul(new Decimal(1.5).pow(x))
+                let cost3 = new Decimal(10)
+                let oof3
+                for (oof3 = 0; oof3 < player[this.layer].buyables[21]; oof3++) {
+                cost3 = cost3.sub(cost3.div(10))
+                }
+                let cost = new Decimal(10).sub(new Decimal(10).sub(cost3)).mul(new Decimal(1.5).pow(x))
                 return cost
             },
             buy() {
@@ -529,7 +550,12 @@ addLayer("s", {
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
-                let cost = new Decimal(10).sub(player[this.layer].buyables[21]).mul(new Decimal(2.5).pow(x))
+                let cost4 = new Decimal(10)
+                let oof4
+                for (oof4 = 0; oof4 < player[this.layer].buyables[21]; oof4++) {
+                cost4 = cost4.sub(cost4.div(10))
+                }
+                let cost = new Decimal(10).sub(new Decimal(10).sub(cost4)).mul(new Decimal(2.5).pow(x))
                 return cost
             },
             effect() {
