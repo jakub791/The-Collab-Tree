@@ -39,6 +39,7 @@ function getPointGen() {
 	}
 
 	let gain = new Decimal(0.01666666666666666666666666666667).mul(new Decimal(2).pow(player.s.buyables[21]));
+        let hahaSoftcapGoBrrrrrrrr = new Decimal(1024).div(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)))
         if (inChallenge("s", 12)) {
             if (player.s.buyables[11] > 900) gain = gain.div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))
             else gain = gain.div(new Decimal(10))
@@ -51,8 +52,6 @@ function getPointGen() {
         else if (hasUpgrade("s", 13)) gain = gain.times(upgradeEffect("s", 13));
         if (inChallenge("s", 11)) gain = gain.tetrate(new Decimal(0.5));
         if (inChallenge("s", 21)) gain = gain.tetrate(new Decimal(0.000000000000000000000000000000000001)).pow(buyableEffect("s", 12))
-        if (player.c.chaoticEnergy.eq(0)) let hahaSoftcapGoBrrrrrrrr = new Decimal(1024).div(player.s.buyables[21].add(1))
-        else let hahaSoftcapGoBrrrrrrrr = new Decimal(1024).div(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)))
         if (inChallenge("s", 21) && gain.gt(new Decimal(2))) gain = new Decimal(1).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(4096).max(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(3))) gain = new Decimal(2).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(13824).max(1))
         if (inChallenge("s", 21) && gain.gt(new Decimal(4))) gain = new Decimal(3).add(gain.log(new Decimal(2).pow(hahaSoftcapGoBrrrrrrrr)).root(65536).max(1))
