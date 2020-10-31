@@ -57,8 +57,12 @@ addLayer("s", {
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {return getPointGen().mag >= 1.01 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 10 softcap levels are currently activated." : ""},
+                    function() {return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1).floor(25)) + " out of 25 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
+                    ["blank", "5px"],
+                    ["display-text",
+                    function() {return getPointGen().mag >= 100 && inChallenge("s", 21) ? "get hardcapped lmao." : ""},
+                    {"color": "white", "font-size": "10px", "font-family": "Comic Sans MS",}],
                     ["blank", "5px"],
                     ["row", [["column", [["buyable", 11]]], ["blank", "14px"], ["column", [["buyable", 12]]]]], ["blank", "14px"], ["buyable", 21], ["blank", "14px"], ["buyable", 31], ["blank", "14px"], ["buyable", 41], ["blank", "14px"], ["buyable", 51], ["blank", "14px"], ["buyable", 61], ["blank", "14px"], ["buyable", 71]],
         },
@@ -401,7 +405,7 @@ addLayer("s", {
 	    },
             display() {
                 if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1))) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).mul(layers.c.effect())) + " x " + format(player.points.max(1).mul(layers.c.effect())) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
                     if (player.points.gte(layers["s"].buyables[41].cost())) return {  
@@ -510,6 +514,8 @@ addLayer("s", {
           },
         71: {
             title() {
+                if (player[this.layer].buyables[71].eq(6)) return "It isn't funny anymore."
+                if (player[this.layer].buyables[71].eq(5)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))))) + " TIMES MORE BUFFED NOW."
                 if (player[this.layer].buyables[71].eq(4)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))) + " TIMES MORE BUFFED NOW."
                 if (player[this.layer].buyables[71].eq(3)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))) + " TIMES MORE BUFFED NOW."
                 if (player[this.layer].buyables[71].eq(2)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))) + " TIMES MORE BUFFED NOW."
@@ -519,7 +525,7 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21) && player[this.layer].buyables[61].gte(2);
 	    },
-            canAfford() { return player.points.gte(layers["s"].buyables[71].cost()) },
+            canAfford() { return player.points.gte(layers["s"].buyables[71].cost()) && player[this.layer].buyables[this.id].lt(7)},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
@@ -527,7 +533,8 @@ addLayer("s", {
                 return cost
             },
             effect() {
-            if (player[this.layer].buyables[71].eq(5)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))
+            else if (player[this.layer].buyables[71].eq(6)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))))
+            else if (player[this.layer].buyables[71].eq(5)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))
             else if (player[this.layer].buyables[71].eq(4)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))
             else if (player[this.layer].buyables[71].eq(3)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100))
             else if (player[this.layer].buyables[71].eq(2)) return new Decimal(100).pow(100)
@@ -540,8 +547,8 @@ addLayer("s", {
             display() {
                 if (player[this.layer].buyables[71].eq(0)) return "You know what? Let's just crank the #%@& up and boost \"Vibing.\" upgrade by 100 times. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 else if (player[this.layer].buyables[71].eq(1)) return "Exponents \"Vibing.\" upgrade by itself (NOW THAT'S A LOT OF MULTIPLIER). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "Exponents \"Vibing.\" upgrade by itself, again. (HOW ABOUT A LITTLE MORE?). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-
+                else if (player[this.layer].buyables[71].lt(6)) return "Exponents \"Vibing.\" upgrade by itself, again (HOW ABOUT A LITTLE MORE?). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "No. <br> <br> Enough is enough."
             },
             style() {
                     if (player.points.gte(layers["s"].buyables[71].cost())) return {  
@@ -640,14 +647,14 @@ addLayer("c", {
             return eff
         },
         effectDescription() {
-            return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "."
+            return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "x."
         },
     midsection: [
         ["display-text", function() {return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies, which boosts your softcap warpers's last effect by " + format(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)) + "x."},
-        {"color": "purple", "font-size": "17.6px",}],
+        {"color": "white", "font-size": "17.6px",}],
     ],
         name: "Chaos",
-        color: "#FE0102",                       // The color for this layer, which affects many elements
+        color: "#6d6dc0",                       // The color for this layer, which affects many elements
         resource: "condensed chaoses",            // The name of this layer's main prestige resource
         row: 1,                                 // The row this layer is on (0 is the first row)
         resetDescription: "YEET all of your softcap warpers into the void for ",
