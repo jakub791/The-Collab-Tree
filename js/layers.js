@@ -623,7 +623,7 @@ clickables: {
 	},
     },
 	hotkeys: [
-		{ key: "s", desc: "S: Reset for shenanigans", onPress() { doReset(this.layer); } },
+		{ key: "s", desc: "S: Reset for shenanigans.", onPress() { doReset(this.layer); } },
 	],
 });
 
@@ -659,8 +659,10 @@ addLayer("c", {
         requires: new Decimal(2),            // The amount of the base needed to  gain 1 of the prestige currency.
                                                 // Also the amount required to unlock the layer.
         
-        type: "normal",                         // Determines the formula used for calculating prestige currency.
-        exponent: 0.63092975357145743709952711434277,                          // "normal" prestige gain is (currency^exponent)
+        type: "static",                         // Determines the formula used for calculating prestige currency.
+        base: 1.5,
+        exponent: 1.18,                          // "normal" prestige gain is (currency^exponent)
+        roundUpCost: true,
 
         gainMult() {                            // Returns your multiplier to your gain of the prestige resource
             return new Decimal(1)               // Factor in any bonuses multiplying gain here
@@ -695,4 +697,7 @@ addLayer("c", {
             cost: new Decimal(1),
             },
         },
+	hotkeys: [
+		{ key: "c", desc: "C: Reset for condensed chaoses.", onPress() { doReset(this.layer); } },
+	],
     });
