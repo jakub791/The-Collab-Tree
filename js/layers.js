@@ -735,7 +735,7 @@ addLayer("c", {
                },
             3: {
                requirementDescription: "4 Condensed Chaoses",
-               effectDescription: "You'll start with both \"Typical Challenge\" and \"The Reverser\" challenges completed. You also gain 1% of shenanigans gain per second",
+               effectDescription: "You'll start with both \"Typical Challenge\" and \"The Reverser\" challenges completed. You also gain 1% of shenanigans gain per second.",
                done: function() {return player.c.best.gte(3)}
                },
 	},
