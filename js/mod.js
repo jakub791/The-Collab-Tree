@@ -12,8 +12,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.3",
-	name: "Expect for the next layer in 5 hours.",
+	num: "0.333",
+	name: "Rework Update.",
 }
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
