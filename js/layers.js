@@ -346,14 +346,14 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { 
-            if (layer.c.points >= 3 || hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
+            if (hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
             else layerDataReset("s", ["buyables"])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
             player[this.layer].buyables[11] = new Decimal(0)
             player[this.layer].buyables[41] = new Decimal(0)
             player[this.layer].buyables[51] = new Decimal(0)
             player[this.layer].buyables[61] = new Decimal(0)
-            if (player.c.points >= 1 || hasMilestone("c", 1)) player[this.layer].buyables[71] = player[this.layer].buyables[71]
+            if (hasMilestone("c", 1)) player[this.layer].buyables[71] = player[this.layer].buyables[71]
             else player[this.layer].buyables[71] = new Decimal(0)
             player.points = new Decimal(0)
         },
