@@ -736,7 +736,7 @@ addLayer("c", {
                },
             3: {
                requirementDescription: "4 Condensed Chaoses",
-               effectDescription: "You keep both \"Typical Challenge\" and \"The Reverser\" challenges completion. You also gain 1% of shenanigans gain per second.",
+               effectDescription: "You keep both \"Typical Challenge\" and \"The Reverser\" challenges completion on \"Warp of Nonsense.\" reset. You also gain 1% of shenanigans gain per second.",
                done: function() {return player.c.best.gte(4)}
                },
 	},
