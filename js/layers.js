@@ -64,7 +64,7 @@ addLayer("s", {
                     ["blank", "5px"],
                     ["display-text",
                     function() {if (getPointGen().mag < 26) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 25 softcap levels are currently activated." : ""
-                                else return getPointGen().mag >= 2 && inChallenge("s", 21) ? "25 out of 25 softcap levels are currently activated." : ""},},
+                                else return getPointGen().mag >= 2 && inChallenge("s", 21) ? "25 out of 25 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     ["display-text",
