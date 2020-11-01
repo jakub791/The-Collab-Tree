@@ -706,6 +706,7 @@ addLayer("c", {
 
         update(diff) {
             if(hasUpgrade(this.layer, 11)) player[this.layer].chaoticEnergy = player[this.layer].chaoticEnergy.add(diff)
+            if(hasMilestone("c", 3)) generatePoints("s", diff / 100)
 	},
 
         gainExp() {                             // Returns your exponent to your gain of the prestige resource
@@ -734,7 +735,7 @@ addLayer("c", {
                },
             3: {
                requirementDescription: "4 Condensed Chaoses",
-               effectDescription: "You'll start with both \"Typical Challenge\" and \"The Reverser\" challenges completed.",
+               effectDescription: "You'll start with both \"Typical Challenge\" and \"The Reverser\" challenges completed. You also gain 1% of shenanigans gain per second",
                done: function() {return player.c.best.gte(3)}
                },
 	},
