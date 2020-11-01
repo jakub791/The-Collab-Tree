@@ -56,7 +56,7 @@ addLayer("s", {
                     function() {
                                 let absolutecost = new Decimal(100)
                                 let absoluteoof
-                                for (absoluteoof = 0; absoluteoof.gte(player.s.buyables[21]); absoluteoof++) {
+                                for (absoluteoof = 0; absoluteoof <= player.s.buyables[21]; absoluteoof++) {
                                 absolutecost = absolutecost.sub(absolutecost.div(10))
                                 }
                                 return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(new Decimal(100).sub(absolutecost))) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""},
