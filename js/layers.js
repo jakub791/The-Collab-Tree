@@ -626,7 +626,7 @@ clickables: {
                                    else return "Tetrates your plot gain by 0.5 and removes \"Degrading Upgrade.\" and \"Negotiator.\", but \"Predicted boredom.\"'s effect is increased to the power of 2."
 	    },
             unlocked() {
-                return hasUpgrade(this.layer, 22);
+                return hasUpgrade(this.layer, 22) || hasMilestone("c", 3) && hasChallenge("s", 11);
             },
             rewardDescription: "Triples your shenanigans gain because you were a good boy.",
             currencyDisplayName: "plots",
@@ -639,7 +639,7 @@ clickables: {
                                     else return "\"Predicted boredom.\"'s effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s effect reaches 10.01x)."
 	    },
             unlocked() {
-                return hasUpgrade(this.layer, 22);
+                return hasUpgrade(this.layer, 22) || hasMilestone("c", 3) && hasChallenge("s", 12);
             },
             rewardDescription: "You lose the ability to gain \"Predict boredom.\" by yourself and \"Predict boredom.\" becomes passive, growing up at the rate of 10 clicks per second.",
             currencyDisplayName: "plots",
