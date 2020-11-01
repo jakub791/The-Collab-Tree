@@ -343,7 +343,7 @@ addLayer("s", {
 	    },
 	},
         21: {
-            title: "Softcap Warper.",
+            title: "Warp of Nonsense.",
             unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { 
@@ -662,6 +662,12 @@ clickables: {
 	hotkeys: [
 		{ key: "s", desc: "S: Reset for shenanigans.", onPress() { doReset(this.layer); } },
 	],
+        doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
+            if(layers[resettingLayer].row > this.row) {
+            layerDataReset(this.layer)
+            if(hasMilestone("c", 3)) player.s.challenges.push("11", "12")
+            }
+        },
 });
 
 addLayer("c", {
@@ -726,7 +732,7 @@ addLayer("c", {
                },
             1: {
                requirementDescription: "2 Condensed Chaoses",
-               effectDescription: "You keep your \"DUCK IT, I'M (insert a number here) TIMES MORE BUFFED.\" upgrades.",
+               effectDescription: "You keep your \"DUCK IT, I'M (insert the current number here) TIMES MORE BUFFED.\" upgrades on \"Warp of Nonsense.\" reset.",
                done: function() {return player.c.best.gte(2)}
                },
             2: {
