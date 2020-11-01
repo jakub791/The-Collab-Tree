@@ -536,7 +536,7 @@ addLayer("s", {
           },
         71: {
             title() {
-                let seventeenone2 = new Decimal(100).pow(100)
+                let seventeenone2 = new Decimal(100)
                 let seventeenonesvalue2
                 for (seventeenonesvalue2 = 0; seventeenonesvalue2 < player.s.buyables[71]; seventeenonesvalue2++) {
                 seventeenone2 = seventeenone2.pow(seventeenone2)
@@ -547,7 +547,7 @@ addLayer("s", {
             unlocked(){
                 return inChallenge(this.layer, 21) && player[this.layer].buyables[61].gte(2);
 	    },
-            canAfford() { return player.points.gte(layers["s"].buyables[71].cost()) && player[this.layer].buyables[this.id].lt(7)},
+            canAfford() { return player.points.gte(layers["s"].buyables[71].cost())},
             currencyDisplayName: "plots",
             currencyInternalName: "points",
             cost(x=player[this.layer].buyables[this.id]) { 
@@ -562,7 +562,7 @@ addLayer("s", {
             effect() {
             let seventeenone = new Decimal(100)
             let seventeenonesvalue
-            for (seventeenonesvalue = 0; seventeenonesvalue < player.s.buyables[71]; seventeenonesvalue++) {
+            for (seventeenonesvalue = 1; seventeenonesvalue < player.s.buyables[71]; seventeenonesvalue++) {
             seventeenone = seventeenone.pow(seventeenone)
             }
             if (player[this.layer].buyables[71].gte(2)) return seventeenone
@@ -575,8 +575,7 @@ addLayer("s", {
             display() {
                 if (player[this.layer].buyables[71].eq(0)) return "You know what? Let's just crank the #%@& up and boost \"Vibing.\" upgrade by 100 times. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 else if (player[this.layer].buyables[71].eq(1)) return "Exponents \"Vibing.\" upgrade by itself (NOW THAT'S A LOT OF MULTIPLIER). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else if (player[this.layer].buyables[71].lt(6)) return "Exponents \"Vibing.\" upgrade by itself, again (HOW ABOUT A LITTLE MORE?). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "No. <br> <br> Enough is enough."
+                else if (player[this.layer].buyables[71].gte(2)) return "Exponents \"Vibing.\" upgrade by itself, again (HOW ABOUT A LITTLE MORE?). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
             },
             style() {
                     if (player.points.gte(layers["s"].buyables[71].cost())) return {  
