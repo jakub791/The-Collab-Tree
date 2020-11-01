@@ -101,7 +101,7 @@ addLayer("s", {
                 if (hasUpgrade("s", 31)) ret = ret.pow(upgradeEffect("s", 31));
                 if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 2) ret = ret
                 else if (inChallenge("s", 21)) ret = new Decimal(1);
-                if (inChallenge("s", 21) && player[this.layer].buyables[71] >= 1) ret = ret.mul(buyableEffect("s", 71));
+                if (inChallenge("s", 21) && player[this.layer].buyables[71] >= 1 && player[this.layer].buyables[61] >= 2) ret = ret.mul(buyableEffect("s", 71));
                 return ret;
             },
             effectDisplay() {
