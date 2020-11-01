@@ -665,7 +665,7 @@ clickables: {
         doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
             if(layers[resettingLayer].row > this.row) {
             layerDataReset(this.layer)
-            if(hasMilestone("c", 3)) player.s.challenges.push("11", "12")
+            if(hasMilestone("c", 3) || player.c.points >= 3) player.s.challenges.push("11", "12")
             }
         },
 });
