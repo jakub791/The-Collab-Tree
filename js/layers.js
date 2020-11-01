@@ -63,8 +63,9 @@ addLayer("s", {
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {if (getPointGen().mag < 26) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 25 softcap levels are currently activated." : ""
-                                else return getPointGen().mag >= 2 && inChallenge("s", 21) ? "25 out of 25 softcap levels are currently activated." : ""},
+                    function() {if (getPointGen().mag < 26.5 && hasMilestone("c", 2)) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1.5)) + " out of 25 softcap levels are currently activated." : ""
+                                else if (getPointGen().mag < 26) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 25 softcap levels are currently activated." : ""
+                                else return inChallenge("s", 21) ? "25 out of 25 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     ["display-text",
