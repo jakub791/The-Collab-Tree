@@ -346,13 +346,15 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { 
-            layerDataReset("s", ["buyables", 21])
+            if (hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
+            else layerDataReset("s", ["buyables"])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
             player[this.layer].buyables[11] = new Decimal(0)
             player[this.layer].buyables[41] = new Decimal(0)
             player[this.layer].buyables[51] = new Decimal(0)
             player[this.layer].buyables[61] = new Decimal(0)
-            player[this.layer].buyables[71] = new Decimal(0)
+            if (hasMilestone("c", 1))
+            else player[this.layer].buyables[71] = new Decimal(0)
             player.points = new Decimal(0)
         },
         display() { // Everything else displayed in the buyable button after the title
@@ -695,7 +697,7 @@ addLayer("c", {
         
         type: "static",                         // Determines the formula used for calculating prestige currency.
         base: 1.5,
-        exponent: 1.18,                          // "normal" prestige gain is (currency^exponent)
+        exponent: 1,                          // "normal" prestige gain is (currency^exponent)
         roundUpCost: true,
 
         gainMult() {                            // Returns your multiplier to your gain of the prestige resource
@@ -719,6 +721,21 @@ addLayer("c", {
                requirementDescription: "1 Condensed Chaos",
                effectDescription: "Allows you to reset \"Degrading Upgrade.\"'s effect whenever you want.",
                done: function() {return player.c.best.gte(1)}
+               },
+            1: {
+               requirementDescription: "2 Condensed Chaoses",
+               effectDescription: "You keep your \"DUCK IT, I'M (insert a number here) TIMES MORE BUFFED.\" upgrades.",
+               done: function() {return player.c.best.gte(2)}
+               },
+            2: {
+               requirementDescription: "3 Condensed Chaoses",
+               effectDescription: "You'll gain +0.5 plots per second (that are immune against softcaps.) in \"The Endgamer.\" challenge.",
+               done: function() {return player.c.best.gte(3)}
+               },
+            3: {
+               requirementDescription: "4 Condensed Chaoses",
+               effectDescription: "You'll start with both \"Typical Challenge\" and \"The Reverser\" challenges completed.",
+               done: function() {return player.c.best.gte(3)}
                },
 	},
 
