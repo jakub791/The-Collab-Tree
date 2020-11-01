@@ -63,7 +63,8 @@ addLayer("s", {
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1).floor(25)) + " out of 25 softcap levels are currently activated." : ""},
+                    function() {if (getPointGen().mag < 26) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 25 softcap levels are currently activated." : ""
+                                else return getPointGen().mag >= 2 && inChallenge("s", 21) ? "25 out of 25 softcap levels are currently activated." : ""},},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     ["display-text",
@@ -401,7 +402,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost1 = new Decimal(10)
                 let oof1
-                for (oof1 = 0; oof1 < player[this.layer].buyables[21]; oof1++) {
+                for (oof1 = 0; oof1 <= player.s.buyables[21]; oof1++) {
                 cost1 = cost1.sub(cost1.div(10))
                 }
                 let cost = new Decimal(10).sub(new Decimal(10).sub(cost1)).mul(new Decimal(1.1).pow(x))
@@ -450,7 +451,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost2 = new Decimal(150)
                 let oof2
-                for (oof2 = 0; oof2 < player[this.layer].buyables[21]; oof2++) {
+                for (oof2 = 0; oof2 <= player.s.buyables[21]; oof2++) {
                 cost2 = cost2.sub(cost2.div(10))
                 }
                 let cost = new Decimal(150).sub(new Decimal(150).sub(cost2)).mul(new Decimal(4).pow(x))
@@ -497,7 +498,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost3 = new Decimal(10)
                 let oof3
-                for (oof3 = 0; oof3 < player[this.layer].buyables[21]; oof3++) {
+                for (oof3 = 0; oof3 <= player.s.buyables[21]; oof3++) {
                 cost3 = cost3.sub(cost3.div(10))
                 }
                 let cost = new Decimal(10).sub(new Decimal(10).sub(cost3)).mul(new Decimal(1.5).pow(x))
@@ -552,7 +553,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost4 = new Decimal(10)
                 let oof4
-                for (oof4 = 0; oof4 < player[this.layer].buyables[21]; oof4++) {
+                for (oof4 = 0; oof4 <= player.s.buyables[21]; oof4++) {
                 cost4 = cost4.sub(cost4.div(10))
                 }
                 let cost = new Decimal(10).sub(new Decimal(10).sub(cost4)).mul(new Decimal(2.5).pow(x))
