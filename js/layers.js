@@ -59,7 +59,7 @@ addLayer("s", {
                                 for (absoluteoof = 0; absoluteoof < player.s.buyables[21]; absoluteoof++) {
                                 absolutecost = absolutecost.sub(absolutecost.div(10))
                                 }
-                                return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(new Decimal(100).sub(absolutecost))) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""},
+                                return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""},
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
@@ -536,12 +536,12 @@ addLayer("s", {
           },
         71: {
             title() {
-                if (player[this.layer].buyables[71].eq(6)) return "It isn't funny anymore."
-                if (player[this.layer].buyables[71].eq(5)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))))) + " TIMES MORE BUFFED NOW."
-                if (player[this.layer].buyables[71].eq(4)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))) + " TIMES MORE BUFFED NOW."
-                if (player[this.layer].buyables[71].eq(3)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))) + " TIMES MORE BUFFED NOW."
-                if (player[this.layer].buyables[71].eq(2)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))) + " TIMES MORE BUFFED NOW."
-                if (player[this.layer].buyables[71].eq(1)) return "DUCK IT, I'M " + format(new Decimal(100).pow(100)) + " TIMES MORE BUFFED NOW."
+                let seventeenone2 = new Decimal(100).pow(100)
+                let seventeenonesvalue2
+                for (seventeenonesvalue2 = 0; seventeenonesvalue2 < player.s.buyables[71]; seventeenonesvalue2++) {
+                seventeenone2 = seventeenone2.pow(seventeenone2)
+                }
+                if (player[this.layer].buyables[71].gte(1)) return "DUCK IT, I'M " + format(seventeenone2) + " TIMES MORE BUFFED NOW."
                 else return "DUCK IT, I'M 100 TIMES MORE BUFFED NOW."
 	    },
             unlocked(){
@@ -560,11 +560,12 @@ addLayer("s", {
                 return cost
             },
             effect() {
-            if (player[this.layer].buyables[71].eq(6)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))))
-            else if (player[this.layer].buyables[71].eq(5)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100))))
-            else if (player[this.layer].buyables[71].eq(4)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100)).pow(new Decimal(100).pow(100).pow(new Decimal(100).pow(100)))
-            else if (player[this.layer].buyables[71].eq(3)) return new Decimal(100).pow(100).pow(new Decimal(100).pow(100))
-            else if (player[this.layer].buyables[71].eq(2)) return new Decimal(100).pow(100)
+            let seventeenone = new Decimal(100)
+            let seventeenonesvalue
+            for (seventeenonesvalue = 0; seventeenonesvalue < player.s.buyables[71]; seventeenonesvalue++) {
+            seventeenone = seventeenone.pow(seventeenone)
+            }
+            if (player[this.layer].buyables[71].gte(2)) return seventeenone
             else if (player[this.layer].buyables[71].eq(1)) return new Decimal(100)
 	    },
             buy() {
