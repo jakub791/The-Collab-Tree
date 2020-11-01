@@ -346,7 +346,7 @@ addLayer("s", {
             unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
             canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { 
-            if (hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
+            if (layer.c.points >= 3 || hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
             else layerDataReset("s", ["buyables"])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
             player[this.layer].buyables[11] = new Decimal(0)
