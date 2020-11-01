@@ -662,12 +662,6 @@ clickables: {
 	hotkeys: [
 		{ key: "s", desc: "S: Reset for shenanigans.", onPress() { doReset(this.layer); } },
 	],
-        doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
-            if(layers[resettingLayer].row > this.row) {
-            layerDataReset(this.layer)
-            if(hasMilestone("c", 3) || player.c.points >= 3) player.s.challenges.push("11", "12")
-            }
-        },
 });
 
 addLayer("c", {
@@ -742,7 +736,7 @@ addLayer("c", {
                },
             3: {
                requirementDescription: "4 Condensed Chaoses",
-               effectDescription: "You'll start with both \"Typical Challenge\" and \"The Reverser\" challenges completed. You also gain 1% of shenanigans gain per second.",
+               effectDescription: "You keep both \"Typical Challenge\" and \"The Reverser\" challenges completion. You also gain 1% of shenanigans gain per second.",
                done: function() {return player.c.best.gte(4)}
                },
 	},
