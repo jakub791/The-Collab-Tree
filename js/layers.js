@@ -124,6 +124,7 @@ addLayer("s", {
                 let zatime = new Decimal(5)
                 zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
                 if(inChallenge("s", 11)) zatime = new Decimal(1)
+                if(hasMilestone("c", 5)) zatime = new Decimal(5)
                 return zatime
             },
             effectDisplay() {
