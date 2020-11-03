@@ -1,7 +1,7 @@
 let modInfo = {
 	name: "Shenanigans Tree.",
 	id: "olegat",
-	author: "Oleg (Low Poly Pichu#0530)",
+	author: "Oleg (Holy Broly#0530)",
 	pointsName: "plots",
 	discordName: "",
 	discordLink: "",
