@@ -33,7 +33,8 @@ addLayer("s", {
 
         update(diff) {
         if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1)) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(diff)
-        if(player[this.layer].upgradeTime.gt(60)) player[this.layer].upgradeTime = new Decimal(60)
+        if(player[this.layer].upgradeTime.gt(60) && !hasMilestone("c", 5)) player[this.layer].upgradeTime = new Decimal(60)
+		else player[this.layer].upgradeTime = new Decimal(0)
         if(hasChallenge(this.layer, 12)) player.s.buyables[11] = player.s.buyables[11].add(diff*10)
 	},
 
@@ -63,13 +64,13 @@ addLayer("s", {
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {if (getPointGen().mag < 26.5 && hasMilestone("c", 2)) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1.5)) + " out of 25 softcap levels are currently activated." : ""
-                                else if (getPointGen().mag < 26) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 25 softcap levels are currently activated." : ""
-                                else return inChallenge("s", 21) ? "25 out of 25 softcap levels are currently activated." : ""},
+                    function() {if (getPointGen().mag < 30 && hasMilestone("c", 2)) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1.5)) + " out of 28 softcap levels are currently activated." : ""
+                                else if (getPointGen().mag < 30) return getPointGen().mag >= 2 && inChallenge("s", 21) ? format((getPointGen().mag - 1)) + " out of 28 softcap levels are currently activated." : ""
+                                else return inChallenge("s", 21) ? "28 out of 28 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     ["display-text",
-                    function() {return getPointGen().mag >= 100 && inChallenge("s", 21) ? "get hardcapped lmao." : ""},
+                    function() {return getPointGen().mag >= 30 && inChallenge("s", 21) ? "get hardcapped lmao." : ""},
                     {"color": "white", "font-size": "10px", "font-family": "Comic Sans MS",}],
                     ["blank", "5px"],
                     ["row", [["column", [["buyable", 11]]], ["blank", "14px"], ["column", [["buyable", 12]]]]], ["blank", "14px"], ["buyable", 21], ["blank", "14px"], ["buyable", 31], ["blank", "14px"], ["buyable", 41], ["blank", "14px"], ["buyable", 51], ["blank", "14px"], ["buyable", 61], ["blank", "14px"], ["buyable", 71]],
@@ -138,7 +139,7 @@ addLayer("s", {
             cost: new Decimal(1800),
             unlocked(){ 
                 if(inChallenge("s", 11)) return false;
-                else return hasUpgrade(this.layer, 13); 
+                else return hasUpgrade(this.layer, 13) && !hasMilestone("c", 5); 
             },
         },
         21: {
@@ -259,7 +260,7 @@ addLayer("s", {
             effect() {
             let ret = new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
             if (inChallenge("s", 21) && player[this.layer].buyables[51] >= 1) ret = ret.pow(buyableEffect("s", 12));
-             return ret
+            return ret
             },
             effectDisplay() {
                 return format(this.effect()) + "x";
@@ -288,6 +289,7 @@ addLayer("s", {
             effect() {
             let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
             if (inChallenge("s", 11)) eff = eff.pow(2)
+		    if (hasUpgrade("t", 31)) eff = eff.pow(3)
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
@@ -344,9 +346,12 @@ addLayer("s", {
 	},
         21: {
             title: "Warp of Nonsense.",
-            unlocked() { return inChallenge("s", 21) && getPointGen().mag >= 2; }, 
-            canAfford() { return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
+            unlocked() { if(hasUpgrade("c", 22)) return inChallenge("s", 21) && getPointGen().mag >= new Decimal(2).mul(upgradeEffect("c", 22))
+                         else return inChallenge("s", 21) && getPointGen().mag >= 2 }, 
+            canAfford() { if(hasUpgrade("c", 22)) return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22))
+                          else return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
             buy() { 
+			if (!hasMilestone("t", 2)) {
             if (hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
             else layerDataReset("s", ["buyables"])
             player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
@@ -357,9 +362,12 @@ addLayer("s", {
             if (hasMilestone("c", 1)) player[this.layer].buyables[71] = player[this.layer].buyables[71]
             else player[this.layer].buyables[71] = new Decimal(0)
             player.points = new Decimal(0)
+			}
+			else player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
         },
         display() { // Everything else displayed in the buyable button after the title
-            return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + new Decimal(2).add(player[this.layer].buyables[this.id]) + " plots per second in order to reset.";
+            if(hasUpgrade("c", 22)) return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + format(new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22))) + " plots per second in order to reset."
+			else return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + format(new Decimal(2).add(player[this.layer].buyables[this.id])) + " plots per second in order to reset.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
@@ -615,7 +623,7 @@ clickables: {
 	},// **optional** text to display on the Master Button
         showMasterButton() {
         if(inChallenge("s", 11)) return false;
-        else return hasUpgrade(this.layer, 14);
+        else return hasUpgrade(this.layer, 14) && !hasMilestone("c", 5);
         },
     },
     challenges: {
@@ -662,6 +670,12 @@ clickables: {
 	hotkeys: [
 		{ key: "s", desc: "S: Reset for shenanigans.", onPress() { doReset(this.layer); } },
 	],
+    doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
+        if(layers[resettingLayer].row > this.row) {
+        if(hasMilestone("c", 4))  layerDataReset("s",["upgrades"])
+	    else layerDataReset("s")
+        }
+    },
 });
 
 addLayer("c", {
@@ -680,7 +694,8 @@ addLayer("c", {
             return "boosting your shenanigans gain and \"Hatred.\"'s effect by " + format(this.effect()) + "x."
         },
     midsection: [
-        ["display-text", function() {return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies, which boosts your softcap warpers's last effect by " + format(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)) + "x."},
+        ["display-text", function() {if(hasUpgrade("c", 21)) return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies, which boosts your softcap warpers's last effect and plot gain by " + format(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)) + "x."
+		                             else return "You have " + format(player["c"].chaoticEnergy) + " chaotic energies, which boosts your softcap warpers's last effect by " + format(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10)) + "x."},
         {"color": "white", "font-size": "17.6px",}],
     ],
         name: "Chaos",
@@ -700,13 +715,16 @@ addLayer("c", {
         base: 1.5,
         exponent: 1,                          // "normal" prestige gain is (currency^exponent)
         roundUpCost: true,
+	    canBuyMax() {return hasMilestone("t", 0)},
 
         gainMult() {                            // Returns your multiplier to your gain of the prestige resource
             return new Decimal(1)               // Factor in any bonuses multiplying gain here
         },
 
         update(diff) {
-            if(hasUpgrade(this.layer, 11)) player[this.layer].chaoticEnergy = player[this.layer].chaoticEnergy.add(diff)
+			let chaoticGrowth = diff
+			if(hasUpgrade(this.layer, 11)) chaoticGrowth = chaoticGrowth * upgradeEffect("c", 11)
+            if(hasUpgrade(this.layer, 12)) player[this.layer].chaoticEnergy = player[this.layer].chaoticEnergy.add(chaoticGrowth)
             if(hasMilestone("c", 3)) generatePoints("s", diff / 100)
 	},
 
@@ -716,7 +734,7 @@ addLayer("c", {
 
         layerShown() {return true},             // Returns a bool for if this layer's node should be visible in the tree.
 
-        branches: [["s", "c"]],
+        branches: [["s"]],
 
         milestones: {
             0: {
@@ -739,18 +757,243 @@ addLayer("c", {
                effectDescription: "You keep both \"Typical Challenge\" and \"The Reverser\" challenges completion on \"Warp of Nonsense.\" reset. You also gain 1% of shenanigans gain per second.",
                done: function() {return player.c.best.gte(4)}
                },
+            4: {
+               requirementDescription: "5 Condensed Chaoses",
+               effectDescription: "You keep Shenanigans upgrades on Chaos reset.",
+               done: function() {return player.c.best.gte(5)},
+			   },
+            5: {
+               requirementDescription: "7 Condensed Chaoses",
+               effectDescription: "\"Degrading Upgrade\"'s effect never decreases. Period.",
+               done: function() {return player.c.best.gte(7)},
+			   },
 	},
 
     upgrades: {
-        rows: 1,
-        cols: 1,
+        rows: 3,
+        cols: 3,
         11: {
+            title: "Warp Dilation.",
+            description: "Softcap warpers boosts your chaotic energy production.",
+            cost: new Decimal(1),
+			unlocked(){ 
+            return hasUpgrade(this.layer, 12); 
+            },
+			effect() {
+			return player.s.buyables[21].add(1).root(1.35)
+            },
+			effectDisplay() {
+            return format(this.effect()) + "x";
+            },
+		    },
+		12: {
             title: "Endless Possibilities.",
             description: "Generates one chaotic energy per second.",
             cost: new Decimal(1),
+		    },
+		13: {
+            title: "Full House.",
+            description: "You permanently keep one Impatience upgrade each on \"Warp of Nonsense.\".",
+            cost: new Decimal(1),
+			unlocked(){ 
+            return hasUpgrade(this.layer, 12); 
             },
+			effect() {
+			if (player.s.buyables[41] < 1 && hasUpgrade(this.layer, 13)) player.s.buyables[41] = new Decimal(1)
+			else player.s.buyables[41] = player.s.buyables[41]
+			if (player.s.buyables[51] < 1 && hasUpgrade(this.layer, 13)) player.s.buyables[51] = new Decimal(1)
+			else player.s.buyables[51] = player.s.buyables[51]
+			if (player.s.buyables[61] < 1 && hasUpgrade(this.layer, 13)) player.s.buyables[61] = new Decimal(1)
+			else player.s.buyables[61] = player.s.buyables[61]
+            if (hasMilestone("c", 1) && player.s.buyables[71] < 1) player.s.buyables[71] = new Decimal(1)
+            else if (hasMilestone("c", 1)) player.s.buyables[71] = player.s.buyables[71]
+			else if (player.s.buyables[71] < 1 && hasUpgrade(this.layer, 13)) player.s.buyables[71] = new Decimal(1)
+			},
+            },
+        21: {
+            title: "Live and Learn.",
+            description: "Chaotic energies boosts your plot gain too.",
+            cost: new Decimal(3),
+			unlocked(){ 
+            return hasUpgrade(this.layer, 12); 
+            },
+		    },
+        22: {
+            title: "Box of C.B.B.",
+            description: "\"Warp of Nonsense.\"'s reqirement is decreased by 10% (where the hell did this box came from anyways?).",
+            cost: new Decimal(3),
+			unlocked(){ 
+            return hasUpgrade(this.layer, 12); 
+            },
+			effect() {
+			if(hasUpgrade("t", 21)) return new Decimal(0.9).mul(upgradeEffect("t", 21))
+		    else return new Decimal(0.9)
+			},
+			effectDisplay() {
+            return format(new Decimal(100).sub(this.effect().mul(100))) + "%";
+		    },
+		    },
+        31: {
+            title: "Open Your Heart.",
+            description: "Unlocks a new layer.",
+            cost: new Decimal(10),
+            currencyLocation() {return player.s.buyables},
+            currencyDisplayName: "softcap warpers",
+            currencyInternalName: 21,
+			unlocked(){ 
+            return hasUpgrade(this.layer, 21) || hasUpgrade(this.layer, 22); 
+            },
+		    },
+        32: {
+            title: "SO CLOSE!",
+            description: "Unlocks... An another layer?",
+            cost: new Decimal(195),
+            currencyLocation() {return player.s.buyables},
+            currencyDisplayName: "softcap warpers",
+            currencyInternalName: 21,
+			unlocked(){ 
+            return getPointGen().mag >= 30 || hasUpgrade(this.layer, 32); 
+            },
+		    },
         },
 	hotkeys: [
 		{ key: "c", desc: "C: Reset for condensed chaoses.", onPress() { doReset(this.layer); } },
 	],
+    });
+	
+addLayer("t", {
+        startData() { return {                  // startData is a function that returns default data for a layer. 
+            unlocked: true,                    // You can add more variables here to add them to your layer.
+            points: new Decimal(1),             // "points" is the internal name for the main resource of the layer.
+        }},
+
+        update(diff) {
+			let TransPower = new Decimal(1)
+			if(hasMilestone("t", 1) && hasUpgrade("t", 11) && hasUpgrade("t", 32)) TransPower = TransPower.add(player.t.points.log(player.t.points.root(1.7)))
+		    else if(hasMilestone("t", 1) && hasUpgrade("t", 11)) TransPower = TransPower.add(player.t.points.log(player.t.points.root(1.8)))
+			else if(hasMilestone("t", 1)) TransPower = TransPower.add(player.t.points.log(player.t.points.root(2)))
+		    if(hasUpgrade("c", 31) && hasUpgrade("t", 32) && hasUpgrade("t", 33)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(new Decimal(4.5).mul(upgradeEffect("t", 33))))
+			else if(hasUpgrade("c", 31) && hasUpgrade("t", 32)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(4.5))
+		    else if(hasUpgrade("c", 31) && hasUpgrade("t", 33)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(new Decimal(3).mul(upgradeEffect("t", 33))))
+			else if(hasUpgrade("c", 31) && hasUpgrade("t", 22)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(3))
+		    else if(hasUpgrade("c", 31)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower))
+	},
+
+        color: "#FE0102",                       // The color for this layer, which affects many elements
+        resource: "Transcended points",            // The name of this layer's main prestige resource
+        row: 1,                                 // The row this layer is on (0 is the first row)
+
+        baseResource: "Transcended points",                 // The name of the resource your prestige gain is based on
+        baseAmount() {return player.t.points},    // A function to return the current value of that resource
+                                                // Also the amount required to unlock the layer.
+		effect() {
+            eff = player.t.points.add(1).log(3).max(1)
+            return eff
+        },
+        effectDescription() {
+            return "nerfing softcap's root effect by " + format(this.effect()) + "/."
+        },
+        type: "none",                         // Determines the formula used for calculating prestige currency.
+		
+        branches: [["s"], ["c"]],
+
+        layerShown() {return hasUpgrade("c", 31)},             // Returns a bool for if this layer's node should be visible in the tree.
+  milestones: {
+           0: {
+               requirementDescription: "Unlock transcendence layer",
+               effectDescription: "You can bulk buy condensed chaoses now.",
+               done: function() {return hasUpgrade("c", 31)}
+               },
+           1: {
+               requirementDescription: "10 Transcended points",
+               effectDescription: "Transcended points gain is now stronger based on transcended points.",
+               done: function() {return player.t.points.gte(10)}
+               },
+           2: {
+               requirementDescription: "5000 Transcended points",
+               effectDescription: "\"Warp of Nonsense.\" no longer resets anything.",
+               done: function() {return player.t.points.gte(5000)}
+               },
+	},
+	upgrades: {
+	    rows: 4,
+        cols: 3,
+		  11: {
+			   title: "Ascended Transcendence.",
+               description: "2nd milestone's effect is buffed.",
+               cost: new Decimal(75),		   
+			   },
+		  21: {
+			   title: "Transcended C.B.B.",
+               description: "\"Box of C.B.B.\"'s effect is stronger based on Transcendence upgrades.",
+               cost: new Decimal(300),
+			   unlocked(){ 
+               return hasUpgrade(this.layer, 11); 
+               },
+               effect() {
+                   let eff = new Decimal(0.9)
+                   if(hasUpgrade("t", 32)) eff = new Decimal(0.85)
+				   if(hasUpgrade("t", 21)) return new Decimal(eff).pow(player.t.upgrades.length).mul(upgradeEffect("t", 41))
+                   else return new Decimal(eff).pow(player.t.upgrades.length)	   
+			   },
+               effectDisplay() {
+                   return "+" + format(new Decimal(100).sub(upgradeEffect("c", 22).mul(100)).sub(10)) + "%";
+               },
+		       },
+		  22: {
+			   title: "M O R E .",
+               description: "Your transcendend points gain is tripled.",
+               cost: new Decimal(400),		
+			   unlocked(){ 
+               return hasUpgrade(this.layer, 11); 
+               },			   
+			   },
+		  31: {
+			   title: "AND THIS IS... TO GO... EVEN FURTHER BEYOND!",
+               description: "Predicted boredom's effect is heavily buffed.",
+               cost: new Decimal(1500),		
+			   unlocked(){ 
+               return hasUpgrade(this.layer, 21) && hasUpgrade(this.layer, 22); 
+               },			   
+			   },
+		  32: {
+			   title: "Peace and Tranquility",
+               description: "Boosts upgrades above by 1.5x.",
+               cost: new Decimal(3000),		
+			   unlocked(){ 
+               return hasUpgrade(this.layer, 21) && hasUpgrade(this.layer, 22); 
+               },			   
+			   },
+		  33: {
+			   title: "Goal is relative too.",
+               description: "\"haha shenanigans go brrrr.\" boosts transcended points gain at reduced rate.",
+               cost: new Decimal(1800),		
+			   unlocked(){ 
+               return hasUpgrade(this.layer, 21) && hasUpgrade(this.layer, 22); 
+               },			   
+			   effect() {
+               return new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1)).root(2)
+			   },
+			   effectDisplay() {
+			   return format(this.effect()) + "x"
+		       },
+		       },
+		  41: {
+			   title: "Yo dawg, I heard you liked references...",
+               description: "\"T.C.B.B.\"'s effect is stronger based on Chaos upgrades.",
+               cost: new Decimal(35),	
+               currencyLocation() {return player.s.buyables},
+               currencyDisplayName: "softcap warpers",
+               currencyInternalName: 21,			   
+			   unlocked(){ 
+               return hasUpgrade(this.layer, 31) && hasUpgrade(this.layer, 32) && hasUpgrade(this.layer, 33); 
+               },			   
+               effect() {
+                   return new Decimal(0.9).pow(player.c.upgrades.length)					   
+			   },
+               effectDisplay() {
+                   return "+???%";
+               },
+		       },
+	},
     });
