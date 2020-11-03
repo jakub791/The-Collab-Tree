@@ -900,7 +900,7 @@ addLayer("t", {
         layerShown() {return hasUpgrade("c", 31)},             // Returns a bool for if this layer's node should be visible in the tree.
   milestones: {
            0: {
-               requirementDescription: "Unlock transcendence layer",
+               requirementDescription: "Unlock Transcendence layer",
                effectDescription: "You can bulk buy condensed chaoses now.",
                done: function() {return hasUpgrade("c", 31)}
                },
