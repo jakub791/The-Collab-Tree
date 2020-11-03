@@ -879,7 +879,7 @@ addLayer("t", {
 		    else if(hasUpgrade("c", 31)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower))
 	},
 
-        color: "#FE0102",                       // The color for this layer, which affects many elements
+        color: "#fefbaa",                       // The color for this layer, which affects many elements
         resource: "Transcended points",            // The name of this layer's main prestige resource
         row: 1,                                 // The row this layer is on (0 is the first row)
 
