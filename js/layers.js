@@ -6,7 +6,7 @@ addLayer("s", {
         };},
 
         name: "Shenanigans",
-        color: "#6F2530",
+        color: "#791C29",
         resource: "shenanigans",
         row: 0,
         resetDescription: "Obliterate your plots for ",
