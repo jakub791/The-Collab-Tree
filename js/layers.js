@@ -63,11 +63,11 @@ addLayer("s", {
                     function() {
                                 let absolutecost = new Decimal(100)
                                 let absoluteoof
-                                if (player.s.buyables[21] <= -1) { for (absoluteoof = 0; absoluteoof < player.s.buyables[21]; absoluteoof++) {
+                                if (player.s.buyables[21] >= 1) { for (absoluteoof = 0; absoluteoof < player.s.buyables[21]; absoluteoof++) {
                                 absolutecost = absolutecost.sub(absolutecost.div(10))
                                 }
 								}
-                                if (!player.s.buyables[21] <= -1) return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""
+                                if (player.s.buyables[21] >= 0) return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""
 								else return player.s.buyables[21] <= -1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, increasing the Impatience upgrades's costs by 10.00%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and strengthing softcaps's tetration by " + format(new Decimal(2).div(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "x." : ""},
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
