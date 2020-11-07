@@ -433,7 +433,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost1 = new Decimal(10)
                 let oof1
-                if (!player.s.buyables[21] <= -1) { for (oof1 = 0; oof1 < player.s.buyables[21]; oof1++) {
+                if (player.s.buyables[21] >= 0) { for (oof1 = 0; oof1 < player.s.buyables[21]; oof1++) {
                 cost1 = cost1.sub(cost1.div(10))
                 }
 				}
@@ -484,7 +484,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost2 = new Decimal(150)
                 let oof2
-                if (!player.s.buyables[21] <= -1) { for (oof2 = 0; oof2 < player.s.buyables[21]; oof2++) {
+                if (player.s.buyables[21] >= 0) { for (oof2 = 0; oof2 < player.s.buyables[21]; oof2++) {
                 cost2 = cost2.sub(cost2.div(10))
                 }
 				}
@@ -533,7 +533,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost3 = new Decimal(10)
                 let oof3
-                if (!player.s.buyables[21] <= -1) { for (oof3 = 0; oof3 < player.s.buyables[21]; oof3++) {
+                if (player.s.buyables[21] >= 0) { for (oof3 = 0; oof3 < player.s.buyables[21]; oof3++) {
                 cost3 = cost3.sub(cost3.div(10))
                 }
 				}
@@ -590,7 +590,7 @@ addLayer("s", {
             cost(x=player[this.layer].buyables[this.id]) { 
                 let cost4 = new Decimal(10)
                 let oof4
-                if (!player.s.buyables[21] <= -1) { for (oof4 = 0; oof4 < player.s.buyables[21]; oof4++) {
+                if (player.s.buyables[21] >= 0) { for (oof4 = 0; oof4 < player.s.buyables[21]; oof4++) {
                 cost4 = cost4.sub(cost4.div(10))
                 }
 				}
