@@ -716,15 +716,10 @@ clickables: {
         if(hasMilestone("c", 4))  layerDataReset("s",["upgrades"])
 		if(player.ab.points >= 1) {
 		player.s.buyables[11] = new Decimal(-99)
-		player.s.upgrades = [11]
-		player.c.upgrades = [32]
 		}
 	    else layerDataReset("s")
 		if(player.ab.points >= 1) {
-		player.s.buyables[21] = new Decimal(-1)
 		player.s.buyables[11] = new Decimal(-99)
-		player.s.upgrades = [11]
-		player.c.upgrades = [32]
 		}
         }
     },
