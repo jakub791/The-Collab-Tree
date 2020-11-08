@@ -24,6 +24,7 @@ addLayer("s", {
 			if (player.ab.points >= 1) mult = new Decimal(0.5)
 			if (player.c.unlocked) mult = mult.mul(layers.c.effect())
             if (player.s.buyables[21] >= 1) mult = mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
+            else if (player.s.buyables[21] <= -1) mult = mult.mul(0.70710678118654752440084436210485)
             if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
 			if (hasChallenge("s", 11) && hasAchievement("a", 16)) mult = mult.mul(3)
             else if (hasChallenge("s", 11)) mult = mult.mul(3)
@@ -707,17 +708,19 @@ clickables: {
     doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
         if(layers[resettingLayer].row == layers.ab.row) {
         layerDataReset("s")
-        player.s.buyables[21] = new Decimal(-1)
+                player.s.buyables[21] = new Decimal(-1)
 		player.s.buyables[11] = new Decimal(-99)
 		player.s.upgrades = [11]
 		player.c.upgrades = [32]
         }
         else if(layers[resettingLayer].row > this.row) {
         if(hasMilestone("c", 4))  layerDataReset("s",["upgrades"])
+                player.s.buyables[21] = new Decimal(0)
 		if(player.ab.points >= 1) {
 		player.s.buyables[11] = new Decimal(-99)
 		}
 	    else layerDataReset("s")
+                player.s.buyables[21] = new Decimal(0)
 		if(player.ab.points >= 1) {
 		player.s.buyables[11] = new Decimal(-99)
 		}
