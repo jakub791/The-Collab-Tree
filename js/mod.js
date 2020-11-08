@@ -38,7 +38,9 @@ function getPointGen() {
 		return new Decimal(0)
 	}
 
-	let gain = new Decimal(0.01666666666666666666666666666667).mul(new Decimal(2).pow(player.s.buyables[21]));
+	let gain = new Decimal(0.01666666666666666666666666666667)
+	if(player.s.buyables[21] <= -1) gain = gain.div(2)
+		else gain = gain.mul(new Decimal(2).pow(player.s.buyables[21]));
         let hahaSoftcapGoBrrrrrrrr = new Decimal(1024)
 		if(player.s.buyables[21] <= -1) hahaSoftcapGoBrrrrrrrr = hahaSoftcapGoBrrrrrrrr.mul(2)
 		else hahaSoftcapGoBrrrrrrrr = hahaSoftcapGoBrrrrrrrr.div(player.s.buyables[21].add(1))
