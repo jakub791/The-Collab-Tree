@@ -379,7 +379,8 @@ addLayer("s", {
             player[this.layer].buyables[11] = new Decimal(0)
             player[this.layer].buyables[41] = new Decimal(0)
             player[this.layer].buyables[51] = new Decimal(0)
-            player[this.layer].buyables[61] = new Decimal(0)
+            player[this.layer].buyables[61] = new Decimal(0
+	    if (player.ab.points >= 1 && !hasMilestone("c", 3)) player.s.upgrades = [11]
             if (hasMilestone("c", 1)) player[this.layer].buyables[71] = player[this.layer].buyables[71]
             else player[this.layer].buyables[71] = new Decimal(0)
             player.points = new Decimal(0)
