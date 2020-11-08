@@ -709,22 +709,26 @@ clickables: {
     doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
         if(layers[resettingLayer].row == layers.ab.row) {
         layerDataReset("s")
-                player.s.buyables[21] = new Decimal(-1)
+        player.s.buyables[21] = new Decimal(-1)
 		player.s.buyables[11] = new Decimal(-99)
 		player.s.upgrades = [11]
 		player.c.upgrades = [32]
         }
         else if(layers[resettingLayer].row > this.row) {
         if(hasMilestone("c", 4))  layerDataReset("s",["upgrades"])
-                player.s.buyables[21] = new Decimal(0)
+        player.s.buyables[21] = new Decimal(0)
 		if(player.ab.points >= 1) {
+		if(!hasMilestone("c", 4)) {}
+		else player.s.upgrades = [11]
 		player.s.buyables[11] = new Decimal(-99)
 		}
 	    else layerDataReset("s")
-                player.s.buyables[21] = new Decimal(0)
+        player.s.buyables[21] = new Decimal(0)
 		if(player.ab.points >= 1) {
+		if(!hasMilestone("c", 4)) {}
+		else player.s.upgrades = [11]
 		player.s.buyables[11] = new Decimal(-99)
-		}
+        }
         }
     },
 });
