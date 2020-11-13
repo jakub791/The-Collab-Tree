@@ -20,16 +20,16 @@ addLayer("s", {
 
         gainMult() {
             let mult = new Decimal(1)
-			if (player.a.achievementsLol >= 6) mult = mult.mul(6)
-			if (player.ab.points >= 1) mult = new Decimal(0.5)
+			mult = mult.mul(new Decimal(6).pow(bingoSystem()))
 			if (player.c.unlocked) mult = mult.mul(layers.c.effect())
             if (player.s.buyables[21] >= 1) mult = mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
             else if (player.s.buyables[21] <= -1) mult = mult.mul(0.70710678118654752440084436210485)
-            if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
+		    if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
 			if (hasChallenge("s", 11) && hasAchievement("a", 16)) mult = mult.mul(3)
             else if (hasChallenge("s", 11)) mult = mult.mul(3)
             if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
             if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) mult = new Decimal(0)
+			if (player.ab.points >= 1) mult = mult.div(2)
             return mult;
         },
         gainExp() {
@@ -68,13 +68,13 @@ addLayer("s", {
                                 absolutecost = absolutecost.sub(absolutecost.div(10))
                                 }
 								}
-                                if (player.s.buyables[21] >= 0) return player.s.buyables[21] >= 1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""
-								else return player.s.buyables[21] <= -1 ? "You have " + format(player.s.buyables[21]) + " softcap warpers, increasing the Impatience upgrades's costs by 10.00%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + " and strengthing softcaps's tetration by " + format(new Decimal(2).div(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "x." : ""},
+                                if (player.s.buyables[21] >= 0) return player.s.buyables[21] >= 1 ? "You have " + formatWhole(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + formatWhole(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + "x and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""
+								else return player.s.buyables[21] <= -1 ? "You have " + formatWhole(player.s.buyables[21]) + " softcap warpers, increasing the Impatience upgrades's costs by 10.00%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + "x and strengthing softcaps's tetration by " + format(new Decimal(2).div(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "x." : ""},
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
                     function() {let Adapter = new Decimal(1).div(3).mul(new Decimal(3).add(player.ab.points))
-						        if (getPointGen().mag < new Decimal(29).mul(Adapter).add(0.5) && hasMilestone("c", 2)) return getPointGen().mag >= new Decimal(2).mul(Adapter) && inChallenge("s", 21) ? format(getPointGen().mag - (new Decimal(1).mul(Adapter).add(1))) + " out of 28 softcap levels are currently activated." : ""
+						        if (getPointGen().mag < new Decimal(29).mul(Adapter).add(0.5) && hasMilestone("c", 2)) return getPointGen().mag >= new Decimal(2).mul(Adapter) && inChallenge("s", 21) ? format(getPointGen().mag - (new Decimal(1).mul(Adapter).add(0.5))) + " out of 28 softcap levels are currently activated." : ""
                                 else if (getPointGen().mag < new Decimal(29).mul(Adapter)) return getPointGen().mag >= new Decimal(2).mul(Adapter) && inChallenge("s", 21) ? format(getPointGen().mag - (new Decimal(1).mul(Adapter))) + " out of 28 softcap levels are currently activated." : ""
                                 else return inChallenge("s", 21) ? "28 out of 28 softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
@@ -117,11 +117,11 @@ addLayer("s", {
                 if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 2) ret = ret
                 else if (inChallenge("s", 21)) ret = new Decimal(1);
                 if (inChallenge("s", 21) && player[this.layer].buyables[71] >= 1 && player[this.layer].buyables[61] >= 2) ret = ret.mul(buyableEffect("s", 71));
-				if (ret > 1.79e308 && !inChallenge("s", 21)) ret = 1.79e308
+				if (ret > 2048 && !inChallenge("s", 21)) ret = ret.log(1.01).add(1281.7321141706762185344390997409)
                 return ret;
             },
             effectDisplay() {
-				if (this.effect() >= 1.79e308) return format(this.effect()) + "x (Hardcapped)"
+				if (this.effect() >= 2048) return format(this.effect()) + "x (Softcapped)"
                 else return format(this.effect()) + "x";
             },
         },
@@ -240,7 +240,7 @@ addLayer("s", {
                 else if (hasUpgrade("s", 22)) ret = player.points.add(1).root(32);
                 else ret = player.points.add(1).root(64);
                 if (hasUpgrade("s", 32)) ret = ret.pow(1.42).pow(1.42);
-                if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1) ret = ret.pow(buyableEffect("s", 12));
+                if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 1) ret = ret
                 else if(inChallenge("s", 21)) ret = new Decimal(1);
                 if (ret.gt(2)) ret = ret.log(84).add(1.8435622116579284502939499524034);
                 if (ret.gt(3)) ret = ret.log(422).add(2.8853355548008346985287640482641);
@@ -314,7 +314,12 @@ addLayer("s", {
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
-            if (inChallenge("s", 12) && hasUpgrade("s", 34) && player.s.buyables[11] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+		    if (hasAchievement("a", 22)) {
+                if (inChallenge("s", 12) && hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+		        else if (inChallenge("s", 12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x.";
+	            else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
+			}
+            else if (inChallenge("s", 12) && hasUpgrade("s", 34) && player.s.buyables[11] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
             else if (inChallenge("s", 12) && hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
             else if (inChallenge("s", 12) && player[this.layer].buyables[this.id] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))) + "x.";
             else if (inChallenge("s", 12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x.";
@@ -367,11 +372,23 @@ addLayer("s", {
 	},
         21: {
             title: "Warp of Nonsense.",
-            unlocked() { if(hasUpgrade("c", 22)) return inChallenge("s", 21) && getPointGen().mag >= new Decimal(2).mul(upgradeEffect("c", 22))
-                         else return inChallenge("s", 21) && getPointGen().mag >= 2 }, 
-            canAfford() { if(hasUpgrade("c", 22)) return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22))
-                          else return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]) },
-            buy() { 
+            unlocked() { let cheapener = 1
+			             if(hasAchievement("a", 43)) cheapener = cheapener - 0.05
+			             if(hasAchievement("a", 25)) cheapener = cheapener - 0.05
+			             if(hasUpgrade("c", 22)) return inChallenge("s", 21) && getPointGen().mag >= new Decimal(2).mul(upgradeEffect("c", 22)).mul(cheapener)
+                         else return inChallenge("s", 21) && getPointGen().mag >= new Decimal(2).mul(cheapener) }, 
+            canAfford() { let cheapener = 1
+			              if(hasAchievement("a", 43)) cheapener = cheapener - 0.05
+						  if(hasAchievement("a", 25)) cheapener = cheapener - 0.05
+			              if(hasUpgrade("c", 22)) return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22)).mul(cheapener)
+                          else return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]).mul(cheapener) },
+			buy() { 
+			if (hasAchievement("a", 24)) {
+				while(layers.s.buyables[21].canAfford()) {
+			        player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+				}
+				player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].sub(1)
+		    }
 			if (!hasMilestone("t", 2)) {
             if (hasMilestone("c", 3)) layerDataReset("s", ["buyables", "challenges"])
             else layerDataReset("s", ["buyables"])
@@ -380,16 +397,19 @@ addLayer("s", {
             player[this.layer].buyables[41] = new Decimal(0)
             player[this.layer].buyables[51] = new Decimal(0)
             player[this.layer].buyables[61] = new Decimal(0)
-	    if (player.ab.points >= 1 && !hasMilestone("c", 3)) player.s.upgrades = [11]
+			if (player.ab.points >= 1 && !hasMilestone("c", 3)) player.s.upgrades = [11]
+			if (player.ab.points >= 1) player.s.buyables[11] = new Decimal(-99)
             if (hasMilestone("c", 1)) player[this.layer].buyables[71] = player[this.layer].buyables[71]
             else player[this.layer].buyables[71] = new Decimal(0)
             player.points = new Decimal(0)
 			}
 			else player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
         },
-        display() { // Everything else displayed in the buyable button after the title
-            if(hasUpgrade("c", 22)) return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + format(new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22))) + " plots per second in order to reset."
-			else return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + format(new Decimal(2).add(player[this.layer].buyables[this.id])) + " plots per second in order to reset.";
+        display() { let cheapener = 1
+			        if(hasAchievement("a", 43)) cheapener = cheapener - 0.05
+			        if(hasAchievement("a", 25)) cheapener = cheapener - 0.05
+            if(hasUpgrade("c", 22)) return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + format(new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22)).mul(cheapener)) + " plots per second in order to reset."
+			else return "As you were about to hyperinflate the hell out of this layer, your plot gain suddenly got softcapped tremendously. You've lost your hope, knowing that it's basically impossible to complete this challenge... Until you notice this mythical button. <br> Pressing it will reset your progress. In exchange, you'll be granted with a single softcap warper, which decreases Impatience upgrades's cost, boosts your plot and shenanigans gain and weakens \"The Endgamer\"'s softcaps. <br> You need to generate " + format(new Decimal(2).add(player[this.layer].buyables[this.id]).mul(cheapener)) + " plots per second in order to reset.";
 	    },
         style() {
             if(player[this.layer].unlocked) return {
@@ -448,11 +468,16 @@ addLayer("s", {
                 player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1);
             },
             effect() {
-            return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(layers.c.effect()).mul(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1).mul(layers.c.effect())))
+            if (hasAchievement("a", 23)) return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(layers.c.effect()).pow(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1).mul(layers.c.effect()))).pow(2)
+			else return player.points.max(1).pow(player[this.layer].buyables[this.id].max(1)).mul(layers.c.effect()).pow(player.points.max(1).pow(player[this.layer].buyables[this.id].max(1).mul(layers.c.effect())))
 	    },
             display() {
-                if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + " x " + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
-                else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).mul(layers.c.effect())) + " x " + format(player.points.max(1).mul(layers.c.effect())) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+				if (hasAchievement("a", 23)) {
+			        if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + "^" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + "^2) instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                    else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).mul(layers.c.effect())) + "^" + format(player.points.max(1).mul(layers.c.effect())) + "^2). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+				}
+                else if (player[this.layer].buyables[41].gte(1)) return "\"Impatience Transformation\"'s effect will be now exponented by ^(" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + "^" + format(player.points.max(1).pow(player[this.layer].buyables[this.id].add(1).max(1)).mul(layers.c.effect())) + ") instead. <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
+                else return "\"Impatience Transformation\"'s effect will be exponented by ^(" + format(player.points.max(1).mul(layers.c.effect())) + "^" + format(player.points.max(1).mul(layers.c.effect())) + "). <br> <br> Cost: " + format(layers[this.layer].buyables[this.id].cost()) + " plots."
                 },
             style() {
                     if (player.points.gte(layers["s"].buyables[41].cost())) return {  
@@ -677,7 +702,11 @@ clickables: {
 	},
         12: {
             name: "The Reverser",
-            challengeDescription() {if(hasUpgrade(this.layer, 34)) return "\"Predicted boredom.\"'s first effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s first effect reaches 10.01x)."
+            challengeDescription() {if(hasAchievement("a", 22)) {
+				                    if(hasUpgrade(this.layer, 34)) return "\"Predicted boredom.\"'s first effect is divided by ten."
+                                    else return "\"Predicted boredom.\"'s effect is divided by ten."
+			                        }
+				                    else if(hasUpgrade(this.layer, 34)) return "\"Predicted boredom.\"'s first effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s first effect reaches 10.01x)."
                                     else return "\"Predicted boredom.\"'s effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s effect reaches 10.01x)."
 	    },
             unlocked() {
@@ -714,26 +743,30 @@ clickables: {
 		player.s.upgrades = [11]
 		player.c.upgrades = [32]
 		player.s.points = new Decimal(0)
+		player.s.upgradeTime.mag = new Decimal(0)
         }
         else if(layers[resettingLayer].row > this.row) {
         if(hasMilestone("c", 4))  layerDataReset("s",["upgrades"])
+        else layerDataReset("s")
         player.s.buyables[21] = new Decimal(0)
 		if(player.ab.points >= 1) {
-		if(hasMilestone("c", 4)) {}
-		else player.s.upgrades = [11]
+		if(!hasMilestone("c", 4)) player.s.upgrades = [11]
+		player.s.buyables[21] = new Decimal(-1)
 		player.s.buyables[11] = new Decimal(-99)
-        player.s.points = new Decimal(0)
+        if(hasMilestone("a", 0)) player.s.points = new Decimal(100)
+		else player.s.points = new Decimal(0)
 		}
 	    else layerDataReset("s")
         player.s.buyables[21] = new Decimal(0)
 		if(player.ab.points >= 1) {
-		if(hasMilestone("c", 4)) {}
-		else player.s.upgrades = [11]
+		if(!hasMilestone("c", 4)) player.s.upgrades = [11]
+		player.s.buyables[21] = new Decimal(-1)
 		player.s.buyables[11] = new Decimal(-99)
-		player.s.points = new Decimal(0)
+        if(hasMilestone("a", 0)) player.s.points = new Decimal(100)
+		else player.s.points = new Decimal(0)
         }
-        }
-    },
+		}
+    }
 });
 
 addLayer("c", {
@@ -785,6 +818,7 @@ addLayer("c", {
         update(diff) {
 			let chaoticGrowth = diff
 			if(hasUpgrade(this.layer, 11)) chaoticGrowth = chaoticGrowth * upgradeEffect("c", 11)
+			if(hasAchievement("a", 35)) chaoticGrowth * player.t.points.log(3)
             if(hasUpgrade(this.layer, 12)) player[this.layer].chaoticEnergy = player[this.layer].chaoticEnergy.add(chaoticGrowth)
             if(hasMilestone("c", 3)) generatePoints("s", diff / 100)
 	},
@@ -801,21 +835,23 @@ addLayer("c", {
             0: {
                requirementDescription: "1 Condensed Chaos",
                effectDescription: "Allows you to reset \"Degrading Upgrade.\"'s effect whenever you want.",
-               done: function() {return player.c.best.gte(1)}
+               done: function() {return player.c.best.gte(1)},
                },
             1: {
                requirementDescription: "2 Condensed Chaoses",
                effectDescription: "You keep your \"DUCK IT, I'M (insert the current number here) TIMES MORE BUFFED.\" upgrades on \"Warp of Nonsense.\" reset.",
-               done: function() {return player.c.best.gte(2)}
+               done: function() {return player.c.best.gte(2)},
                },
             2: {
                requirementDescription: "3 Condensed Chaoses",
                effectDescription: "You'll gain +0.5 plots per second (that are immune against softcaps.) in \"The Endgamer.\" challenge.",
-               done: function() {return player.c.best.gte(3)}
+               done: function() {return player.c.best.gte(3)},
                },
             3: {
-               requirementDescription: "4 Condensed Chaoses",
-               effectDescription: "You keep both \"Typical Challenge\" and \"The Reverser\" challenges completion on \"Warp of Nonsense.\" reset. You also gain 1% of shenanigans gain per second.",
+               requirementDescription() {if(player.ab.points == 0) return "4 Condensed Chaoses"
+			   else return "LOCKED"},
+               effectDescription() {if(player.ab.points == 0) return "You keep both \"Typical Challenge\" and \"The Reverser\" challenges completion on \"Warp of Nonsense.\" reset. You also gain 1% of shenanigans gain per second."
+			                        else return ""},
                done: function() {return player.c.best.gte(4) && player.ab.points == 0},
                },
             4: {
@@ -916,7 +952,7 @@ addLayer("c", {
             currencyDisplayName: "softcap warpers",
             currencyInternalName: 21,
 			unlocked(){let Adapter = new Decimal(1).div(3).mul(new Decimal(3).add(player.ab.points))
-            return getPointGen().mag >= new Decimal(30).mul(Adapter) || hasUpgrade(this.layer, 32); 
+            return getPointGen().mag >= new Decimal(30).mul(Adapter) && inChallenge("s", 21) && !player.ab.points >= 1; 
             },
 		    },
         },
@@ -1015,11 +1051,11 @@ addLayer("t", {
                effect() {
                    let eff = new Decimal(0.9)
                    if(hasUpgrade("t", 32)) eff = new Decimal(0.85)
-				   if(hasUpgrade("t", 21)) return new Decimal(eff).pow(player.t.upgrades.length).mul(upgradeEffect("t", 41))
+				   if(hasUpgrade("t", 41)) return new Decimal(eff).pow(player.t.upgrades.length).mul(upgradeEffect("t", 41))
                    else return new Decimal(eff).pow(player.t.upgrades.length)	   
 			   },
                effectDisplay() {
-                   return "+" + format(new Decimal(100).sub(upgradeEffect("c", 22).mul(100)).sub(10)) + "%";
+                   return "+???%";
                },
 		       },
 		  22: {
@@ -1095,12 +1131,12 @@ addLayer("ab", {
 		return eff
 		},
 		effectDescription() {
-			return "increasins hardcap's limit by " + format(this.effect()) + " plots per second."
+			return "increasing hardcap's limit by " + format(this.effect()) + " plots per second."
 		},
 
         midsection: [
-        ["display-text", function() {if(player.ab.points.eq(0))  return "The current mod: N/A <br> <br> The next mod: NG-"
-	                                 else if(player.ab.points.eq(1)) return "Current mod: NG- <br> <br> The next mod: NG--"
+        ["display-text", function() {if(player.ab.points.eq(0))  return "Current mod: N/A <br> <br> The next mod: NG- <br> <br> The next feature: Achievements"
+	                                 else if(player.ab.points.eq(1)) return "Current mod: NG- <br> <br> The next mod: NG-- <br> <br> The next feature: idk i have no idea lol"
 		                             else if(player.ab.points.eq(2)) return "Current mod: NG-- <br> <br> The next mod: NG---"
 		                             else if(player.ab.points.eq(3)) return "Current mod: NG--- <br> <br> The next mod: NG----"
 		                             else if(player.ab.points.eq(4)) return "Current mod: NG---- <br> <br> The next mod: NG-----"
@@ -1145,11 +1181,12 @@ addLayer("ab", {
 addLayer("a", {
         startData() { return {                  // startData is a function that returns default data for a layer. 
             unlocked: true,                    // You can add more variables here to add them to your layer.
-			achievementsLol: new Decimal(0)
+			achievementsLol: new Decimal(0),
+			bingoPungo: new Decimal(0),
         }},
 
         color() {
-			if(player.a.achievementsLol == 6) return "#5AC467"
+			if(player.a.achievementsLol == 24) return "#5AC467"
             else return "A3A3A3"
 		},
 
@@ -1176,15 +1213,23 @@ addLayer("a", {
                 content:
 				    ["main-display",
                     ["display-text",
-                    function() {if (player.a.achievementsLol < 6) return player.a.achievementsLol + " out of 6 achievements are completed."
-					            else return "6 out of 6 achievements are completed. <br> You've got 1 bad Bingo Pungo, multiplying your plot and shenanigans gain by 6x."},
+                    function() {return formatWhole(player.a.achievementsLol) + " out of 24 achievements are completed."},
+                    {"color": "white", "font-size": "17px", "font-family": "Inconsolata"}],
+                    ["display-text",
+                    function() {return "You've got " + bingoSystem() + " bad Bingo Pungo, multiplying your plot and shenanigans gain by " + formatWhole(new Decimal(6).pow(bingoSystem())) + "x."},
                     {"color": "white", "font-size": "17px", "font-family": "Inconsolata"}],
                     "achievements"],
+            },
+			"Milestones": {
+                buttonStyle() {return  {'border-color': 'lime', 'color': 'white'};},
+                content:
+				    ["main-display",
+                    "milestones"],
             },
 	    },
 		
         achievements: {
-        rows: 1,
+        rows: 5,
         cols: 6,
         11: {
             name: "The Beginning of End",
@@ -1222,5 +1267,157 @@ addLayer("a", {
             tooltip: "Complete the first two Shenanigans challenges. \n Reward: Shenanigans challenges has better rewards.",
 			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
         },
+        21: {
+            name: "i want to die",
+			done() {return player.ab.points.gte(2)},
+            tooltip: "Do your second Anti-Balance reset. \n Reward: N/A",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		22: {
+            name: "Unkillable Boredom",
+			done() {return player.s.buyables[11] >= 900 && player.ab.points.gte(1)},
+            tooltip: "Exceed \"Predicted boredom.\"'s effect up to 10x. \n Reward: \"The Reversal\"'s effect no longer scales with \"Predicted boredom.\"'s effect.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+		},
+		23: {
+			name: "REEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE",
+			done() {return buyableEffect("s", 41) >= 1.79e308 && inChallenge("s", 21) && player.s.buyables[41] >= 1 && player.ab.points.gte(1)},
+			tooltip: "Exceed your \"Hatred.\"'s total effect up to 1.79e308. \n Reward: ^2 is added to the \"Hatred.\"'s formula.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		24: {
+            name: "At Last, but Finally...",
+			done() {return player.s.buyables[21] >= 0 && player.ab.points.gte(1)},
+            tooltip: "Get down to 0 softcap warpers. \n Reward: A quick relief, knowing you can finally buy max softcap warpers.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		25: {
+            name: "To Infniity... and Beyond",
+			done() {return inChallenge("s", 21) && getPointGen().mag >= 10 && player.ab.points.gte(1)},
+            tooltip: "Reach 10 plots per second or more in \"The Endgamer\" challenge. \n Reward: \"Warp of Nonsense.\"'s requirement is decreased by 5%",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		26: {
+            name: "YOU CAN GET- no",
+			done() {return player.s.buyables[21] >= 50 && player.ab.points.gte(1)},
+            tooltip: "Get 50 softcap warpers. \n Reward: You get nothing! You lose! Good day, sir!",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+        31: {
+            name: "Halfway there",
+			done() {return player.ab.points.gte(3)},
+            tooltip: "Do your third Anti-Balance reset. \n Reward: N/A",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		32: {
+            name: "I CAN DO ANYTHING",
+			done() {return hasUpgrade("c", 12) && player.ab.points.gte(1)},
+            tooltip: "Begin generating chaotic energies.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+		},
+		33: {
+			name: "Biscuitmaster",
+			done() {return hasUpgrade("c", 22) && player.ab.points.gte(1)},
+			tooltip: "Get \"Box of C.B.B.\" upgrade.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		34: {
+            name: "But I wanted 4th Chaos milestone...",
+			done() {return player.c.best >= 4 && player.ab.points.gte(1)},
+            tooltip: "Get 4 best condensed chaoses.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		35: {
+            name: "Metamorphpsis",
+			done() {return player.c.chaoticEnergy >= 2000 && player.ab.points.gte(1)},
+            tooltip: "Exceed 2000 chaotic energies. \n Reward: Chaotic energies gain is multiplied by the amount of transcended points you have at log(3) rate.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		36: {
+            name: "You mean THOSE chaoses!?",
+			done() {return hasMilestone("c", 5) && player.ab.points.gte(1)},
+            tooltip: "Get the last Chaos milestone.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+        41: {
+            name: "Holy Broly did nothing wrong",
+			done() {return player.ab.points.gte(4)},
+            tooltip: "Do your fourth Anti-Balance reset. \n Reward: N/A",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		42: {
+            name: "A s c e n d e n c e",
+			done() {return hasUpgrade("c", 31) && player.ab.points.gte(1)},
+            tooltip: "Unlock Transcendence layer.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+		},
+		43: {
+			name: "All Hail C.B.B!",
+			done() {return hasUpgrade("t", 21) && player.ab.points.gte(1)},
+			tooltip: "Get \"Transcended C.B.B.\" upgrade. \n Reward: \"Warp of Nonsense.\"'s requirement is decreased by additional 5% (10% in total)",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		44: {
+            name: "Bugs and Crashes",
+			done() {return hasUpgrade("t", 32) && player.ab.points.gte(1)},
+            tooltip: "Get \"Peace and Tranquility\" upgrade.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		45: {
+            name: "Wait, that's illegal",
+			done() {return hasUpgrade("t", 41) && player.ab.points.gte(1)},
+            tooltip: "Get \"Yo dawg, I heard you liked references...\" upgrade.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
+		46: {
+            name: "IT'S OVER 9000!... Or was it over 8000?",
+			done() {return player.t.points >= 10000 && player.ab.points.gte(1)},
+            tooltip: "Exceed 10000 transcended points.",
+			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
+        },
     },
-    })
+
+  milestones: {
+           0: {
+               requirementDescription: "1st achievement row completed.",
+               effectDescription() {
+               if(hasAchievement("a", 11) && hasAchievement("a", 12) && hasAchievement("a", 13) && hasAchievement("a", 14) && hasAchievement("a", 15) && hasAchievement("a", 16)) return "You start with 100 Shenanigans after 2nd row resets."
+			   else return "???"
+			   },
+               done: function() {return hasAchievement("a", 11) && hasAchievement("a", 12) && hasAchievement("a", 13) && hasAchievement("a", 14) && hasAchievement("a", 15) && hasAchievement("a", 16)},
+               },
+           1: {
+               requirementDescription: "2nd achievement row completed.",
+               effectDescription() {
+               if(hasAchievement("a", 21) && hasAchievement("a", 22) && hasAchievement("a", 23) && hasAchievement("a", 24) && hasAchievement("a", 25) && hasAchievement("a", 26)) return "You start with 100 Shenanigans after 2nd row resets."
+			   else return "???"
+			   },
+               done: function() {return hasAchievement("a", 21) && hasAchievement("a", 22) && hasAchievement("a", 23) && hasAchievement("a", 24) && hasAchievement("a", 25) && hasAchievement("a", 26)},
+               },
+           2: {
+               requirementDescription: "3rd achievement row completed.",
+               effectDescription() {
+               if(hasAchievement("a", 31) && hasAchievement("a", 32) && hasAchievement("a", 33) && hasAchievement("a", 34) && hasAchievement("a", 35) && hasAchievement("a", 36)) return "You start with 100 Shenanigans after 2nd row resets."
+			   else return "???"
+			   },
+               done: function() {return hasAchievement("a", 31) && hasAchievement("a", 32) && hasAchievement("a", 33) && hasAchievement("a", 34) && hasAchievement("a", 35) && hasAchievement("a", 36)},
+               },
+           3: {
+               requirementDescription: "4th achievement row completed.",
+               effectDescription() {
+               if(hasAchievement("a", 41) && hasAchievement("a", 42) && hasAchievement("a", 43) && hasAchievement("a", 44) && hasAchievement("a", 45) && hasAchievement("a", 46)) return "You start with 100 Shenanigans after 2nd row resets."
+			   else return "???"
+			   },
+               done: function() {return hasAchievement("a", 41) && hasAchievement("a", 42) && hasAchievement("a", 43) && hasAchievement("a", 44) && hasAchievement("a", 45) && hasAchievement("a", 46)},
+               },
+           4: {
+               requirementDescription: "5th achievement row completed.",
+               effectDescription() {
+               if(hasAchievement("a", 51) && hasAchievement("a", 52) && hasAchievement("a", 53) && hasAchievement("a", 54) && hasAchievement("a", 55) && hasAchievement("a", 56)) return "You start with 100 Shenanigans after 2nd row resets."
+			   else return "???"
+			   },
+               done: function() {return hasAchievement("a", 51) && hasAchievement("a", 52) && hasAchievement("a", 53) && hasAchievement("a", 54) && hasAchievement("a", 55) && hasAchievement("a", 56)},
+			   unlocked() {return player.ab.points >= 69},
+		   },
+  },			   
+})
