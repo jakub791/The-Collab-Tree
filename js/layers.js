@@ -951,9 +951,7 @@ addLayer("c", {
             currencyLocation() {return player.s.buyables},
             currencyDisplayName: "softcap warpers",
             currencyInternalName: 21,
-			unlocked(){let Adapter = new Decimal(1).div(3).mul(new Decimal(3).add(player.ab.points))
-            return getPointGen().mag >= new Decimal(30).mul(Adapter) && inChallenge("s", 21) && !player.ab.points >= 1; 
-            },
+			unlocked(){return getPointGen().mag >= new Decimal(30) && inChallenge("s", 21) && player.ab.points == 0;},
 		    },
         },
 	hotkeys: [
