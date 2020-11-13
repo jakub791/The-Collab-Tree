@@ -1279,7 +1279,7 @@ addLayer("a", {
 		},
 		23: {
 			name: "REEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE",
-			done() {return buyableEffect("s", 41) >= 1.79e308 && inChallenge("s", 21) && player.s.buyables[41] >= 1 && player.ab.points.gte(1)},
+			done() {return buyableEffect("s", 41).gte(new Decimal(2).pow(1024)) && inChallenge("s", 21) && player.s.buyables[41] >= 1 && player.ab.points.gte(1)},
 			tooltip: "Exceed your \"Hatred.\"'s total effect up to 1.79e308. \n Reward: ^2 is added to the \"Hatred.\"'s formula.",
 			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
         },
