@@ -12,7 +12,7 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.35.002-",
+	num: "0.35.002--",
 	name: "The Lazy Update.",
 }
 
