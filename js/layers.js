@@ -1566,7 +1566,7 @@ addLayer("diff", {
 			},
 			22: {
 				name: "No more hexagons.",
-			    challengeDescription() { return "\"Supreme Hexagonity\" upgrade and everything it unlocks are non-existent, Shenanigans's requirement is also increased by " + format(new Decimal(1.5).mul(new Decimal(challengeCompletions("diff", 22)).add(1).min(5)).log(1.5).add(1).pow(3)) + "x.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 21)) + "/" + formatWhole(this.completionLimit) },
+			    challengeDescription() { return "\"Supreme Hexagonity\" upgrade and everything it unlocks are non-existent, Shenanigans's requirement is also increased by " + format(new Decimal(1.5).mul(new Decimal(challengeCompletions("diff", 22)).add(1).min(5)).log(1.5).add(1).pow(3)) + "x.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 22)) + "/" + formatWhole(this.completionLimit) },
 				goal() { return new Decimal(10000000).mul(new Decimal(7.5).pow(new Decimal(challengeCompletions("diff", 22)).min(4))) },
 				completionLimit: new Decimal(5),
 				rewardDescription: "An oddly hyper realistic demonic hexagon.",
