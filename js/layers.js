@@ -1561,7 +1561,8 @@ addLayer("diff", {
 				completionLimit: new Decimal(5),
 				rewardDescription: "An early access to Shenanigans Tree's NG--- mode.",
                 currencyDisplayName: "plots",
-                currencyInternalName: "points"
+                currencyInternalName: "points",
+                unlocked() { return false }
 			},
 			22: {
 				name: "No more hexagons.",
