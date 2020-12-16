@@ -217,7 +217,10 @@ function startChallenge(layer, x) {
 	} else {
 		enter = true
 	}	
+	let yes = player.diff.points
 	doReset(layer, true)
+	player.diff.points = yes
+	if(player.ab.points >= 2) player.s.points = new Decimal(0)
 	if(enter) player[layer].activeChallenge = x
 
 	updateChallengeTemp(layer)
