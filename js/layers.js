@@ -3,17 +3,27 @@ addLayer("s", {
             unlocked: true,
             points: new Decimal(0),
             upgradeTime: new Decimal(0),
-        };},
+			bigBrainBoredom: new Decimal(0),
+			bigBoi: new Decimal(1),
+			lel: new Decimal(0),
+			lel: new Decimal(0)
+	    };},
 
         name: "Shenanigans",
         color: "#791C29",
         resource: "shenanigans",
         row: 0,
+		position: 1,
         resetDescription: "Obliterate your plots for ",
         baseResource: "plots",
         baseAmount() {return player.points},
-        requires() { if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) return new Decimal(Infinity)
-                     else return new Decimal(1)
+        requires() { let require = new Decimal(1)
+		             if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) require = new Decimal(Infinity)
+                     else require = new Decimal(1)
+					 if (player.ab.points >= 1) require = require.mul(2)
+		             if (player.s.buyables[21] >= 1) require = require.div(new Decimal(2).pow(player.s.buyables[21]).root(2));
+                     else if (player.s.buyables[21] <= -1) require = require.div(new Decimal(0.70710678118654752440084436210485).pow(new Decimal(player.s.buyables[21]).mul(-1)).root(2))
+					 return require
                    },
         type: "normal",
         exponent: 0.5,
@@ -22,14 +32,12 @@ addLayer("s", {
             let mult = new Decimal(1)
 			mult = mult.mul(new Decimal(6).pow(bingoSystem()))
 			if (player.c.unlocked) mult = mult.mul(layers.c.effect())
-            if (player.s.buyables[21] >= 1) mult = mult.mul(new Decimal(2).pow(player.s.buyables[21]).root(2));
-            else if (player.s.buyables[21] <= -1) mult = mult.mul(0.70710678118654752440084436210485)
 		    if (hasUpgrade("s", 33)) mult = mult.mul(upgradeEffect("s", 33));
-			if (hasChallenge("s", 11) && hasAchievement("a", 16)) mult = mult.mul(3)
-            else if (hasChallenge("s", 11)) mult = mult.mul(3)
-            if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
+			if (hasChallenge("s", 11) && hasAchievement("a", 16) && !inChallenge("diff", 22)) mult = mult.mul(5)
+            else if (hasChallenge("s", 11) && !inChallenge("diff", 22)) mult = mult.mul(3)
+            if(inChallenge("diff", 22)) mult = mult.mul(new Decimal(1.5).mul(new Decimal(challengeCompletions("diff", 22)).add(1).min(5)).log(1.5).add(1).pow(3))
+            else if (hasUpgrade("s", 34)) mult = mult.mul(buyableEffect("s", 11).sub(1).div(10).add(1))
             if (inChallenge("s", 11) || inChallenge("s", 12) || inChallenge("s", 21)) mult = new Decimal(0)
-			if (player.ab.points >= 1) mult = mult.div(2)
             return mult;
         },
         gainExp() {
@@ -37,12 +45,28 @@ addLayer("s", {
         },
 
         update(diff) {
-        if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1) && player.ab.points >= 1 && hasAchievement("a", 15)) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(diff * 2)
-        else if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1) && player.ab.points >= 1) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(diff * 4)
-        else if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1)) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(diff)
+        if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1) && player.ab.points >= 1 && hasAchievement("a", 15)) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(new Decimal(diff).mul(2).mul(layers.diff.effect()))
+        else if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1) && player.ab.points >= 1) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(new Decimal(diff).mul(4).mul(layers.diff.effect()))
+        else if(hasUpgrade(this.layer, 13) && upgradeEffect(this.layer, 13).gt(1)) player[this.layer].upgradeTime = player[this.layer].upgradeTime.add(new Decimal(diff).mul(layers.diff.effect()))
         if(player[this.layer].upgradeTime.gt(60)) player[this.layer].upgradeTime = new Decimal(60)
-        if(hasChallenge(this.layer, 12) && hasAchievement("a", 16)) player.s.buyables[11] = player.s.buyables[11].add(diff*15)
-        else if(hasChallenge(this.layer, 12)) player.s.buyables[11] = player.s.buyables[11].add(diff*10)
+        if(hasChallenge(this.layer, 12) && hasAchievement("a", 16)  && !inChallenge("diff", 22)) player.s.buyables[11] = player.s.buyables[11].add(new Decimal(diff).mul(15).mul(layers.diff.effect()))
+        else if(hasChallenge(this.layer, 12)  && !inChallenge("diff", 22)) player.s.buyables[11] = player.s.buyables[11].add(new Decimal(diff).mul(10).mul(layers.diff.effect()))
+		if(hasAchievement("a", 21) && hasAchievement("a", 16) && hasChallenge("s", 11) && !inChallenge("diff", 22)) player.s.points = player.s.points.add(new Decimal(getPointGen().mag).mul(new Decimal(diff).mul(layers.diff.effect())).mul(5))
+		else if(hasAchievement("a", 21) && hasChallenge("s", 11) && !inChallenge("diff", 22)) player.s.points = player.s.points.add(new Decimal(getPointGen().mag).mul(new Decimal(diff).mul(layers.diff.effect())).mul(3))
+		else if(hasAchievement("a", 21)) player.s.points = player.s.points.add(new Decimal(getPointGen().mag).mul(new Decimal(diff).mul(layers.diff.effect())))
+		if(inChallenge("diff", 12)) { player.s.buyables[11] = player.s.buyables[11].add(new Decimal(diff).mul(layers.diff.effect().pow(challengeCompletions("diff", 12) + 1)))
+		                              player.s.bigBrainBoredom = player.s.bigBrainBoredom.add(new Decimal(diff).mul(layers.diff.effect().pow(challengeCompletions("diff", 12) + 1))) }
+		else { player.s.buyables[11] = player.s.buyables[11].sub(player.s.bigBrainBoredom)
+		       player.s.bigBrainBoredom = new Decimal(0) }
+	    if(inChallenge("diff", 21)) { player.s.lel = challengeCompletions("diff", 21)
+		                              if (player.s.bigBoi == 1) {player.s.buyables[21] = new Decimal(player.s.buyables[21]).sub(new Decimal(5).mul(new Decimal(challengeCompletions("diff", 21)).add(1).min(5)))
+									                             player.s.bigBoi = player.s.bigBoi.sub(1)}
+									  if (player.s.bigBoi == 0) {player.s.bigBoi = player.s.bigBoi}
+		}
+		else {if(player.s.bigBoi == 0) player.s.buyables[21] = new Decimal(player.s.buyables[21]).add(new Decimal(5).mul(new Decimal(challengeCompletions("diff", 21)).add(1).min(5)))
+			  if(player.s.lel < challengeCompletions("diff", 21) && challengeCompletions("diff", 21) < 5 && player.s.lel2 == new Decimal(0)) { player.s.buyables[21] = new Decimal(player.s.buyables[21]).sub(5)
+			                                                        player.s.lel = challengeCompletions("diff", 21) }
+		      player.s.bigBoi = new Decimal(1)}			  
 	},
 
         layerShown() {return true;},
@@ -68,15 +92,22 @@ addLayer("s", {
                                 absolutecost = absolutecost.sub(absolutecost.div(10))
                                 }
 								}
-                                if (player.s.buyables[21] >= 0) return player.s.buyables[21] >= 1 ? "You have " + formatWhole(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + formatWhole(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + "x and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""
-								else return player.s.buyables[21] <= -1 ? "You have " + formatWhole(player.s.buyables[21]) + " softcap warpers, increasing the Impatience upgrades's costs by 10.00%, increasing plot gain by " + format(new Decimal(2).pow(player.s.buyables[21])) + "x, shenanigans gain by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + "x and strengthing softcaps's tetration by " + format(new Decimal(2).div(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "x." : ""},
+								let antiabsolutecost = new Decimal(0)
+								let antiabsoluteoof
+								if (player.s.buyables[21] <= -1) { for (antiabsoluteoof = 0; antiabsoluteoof > player.s.buyables[21]; antiabsoluteoof--) {
+                                antiabsolutecost = antiabsolutecost.add(new Decimal(10).mul(new Decimal(1.1).pow(player.s.buyables[21].mul(-1).sub(1))))
+                                }
+								}
+                                if (player.s.buyables[21] >= 0) return player.s.buyables[21] >= 1 ? "You have " + formatWhole(player.s.buyables[21]) + " softcap warpers, lowering the Impatience upgrades's costs by " + format(new Decimal(100).sub(absolutecost)) + "%, increasing plot gain by " + formatWhole(new Decimal(2).pow(player.s.buyables[21])) + "x, dividing shenanigans's requirement by " + format(new Decimal(2).pow(player.s.buyables[21]).root(2)) + "/ and weakening softcaps's tetration by " + format(player.s.buyables[21].add(1).mul(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "/." : ""
+								else return player.s.buyables[21] <= -1 ? "You have " + formatWhole(player.s.buyables[21]) + " softcap warpers, increasing the Impatience upgrades's costs by " + format(antiabsolutecost) + "%, increasing plot gain by " + format(new Decimal(0.5).pow(new Decimal(player.s.buyables[21]).mul(-1))) + "x, dividing shenanigans's requirement by " + format(new Decimal(0.70710678118654752440084436210485).pow(new Decimal(player.s.buyables[21]).mul(-1)).root(2)) + "/ and strengthing softcaps's tetration by " + format(player.s.buyables[21].mul(-1).add(1).div(new Decimal(1).add(player.c.chaoticEnergy.div(10)).root(10))) + "x." : ""},
                     {"color": "dark purple", "font-size": "25px",}],
                     ["blank", "5px"],
                     ["display-text",
                     function() {let Adapter = new Decimal(1).div(3).mul(new Decimal(3).add(player.ab.points))
-						        if (getPointGen().mag < new Decimal(29).mul(Adapter).add(0.5) && hasMilestone("c", 2)) return getPointGen().mag >= new Decimal(2).mul(Adapter) && inChallenge("s", 21) ? format(getPointGen().mag - (new Decimal(1).mul(Adapter).add(0.5))) + " out of 28 softcap levels are currently activated." : ""
-                                else if (getPointGen().mag < new Decimal(29).mul(Adapter)) return getPointGen().mag >= new Decimal(2).mul(Adapter) && inChallenge("s", 21) ? format(getPointGen().mag - (new Decimal(1).mul(Adapter))) + " out of 28 softcap levels are currently activated." : ""
-                                else return inChallenge("s", 21) ? "28 out of 28 softcap levels are currently activated." : ""},
+					            let Adapter2 = new Decimal(28).add(new Decimal(10).times(player.ab.points))
+						        if (getPointGen().mag < new Decimal(Adapter2).add(2).add(0.5) && hasMilestone("c", 2)) return getPointGen().mag >= new Decimal(2) && inChallenge("s", 21) ? format(new Decimal(getPointGen().mag) - (new Decimal(1).add(0.5))) + " out of " + formatWhole(Adapter2) + " softcap levels are currently activated." : ""
+                                else if (getPointGen().mag < new Decimal(Adapter2).add(2)) return getPointGen().mag >= new Decimal(2) && inChallenge("s", 21) ? format(new Decimal(getPointGen().mag) - (new Decimal(1))) + " out of " + formatWhole(Adapter2) + " softcap levels are currently activated." : ""
+                                else return inChallenge("s", 21) ? formatWhole(Adapter2) + " out of " + formatWhole(Adapter2) + " softcap levels are currently activated." : ""},
                     {"color": "white", "font-size": "15px",}],
                     ["blank", "5px"],
                     ["display-text",
@@ -99,7 +130,8 @@ addLayer("s", {
         12: {
             title: "Vibing.",
             description: "Boosts your plot gain by unspent shenanigans.",
-            cost: new Decimal(10),
+            cost() { if(player.ab.points >= 2) return new Decimal(10).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(10) },
             unlocked(){ 
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
@@ -117,7 +149,8 @@ addLayer("s", {
                 if (inChallenge("s", 21) && player[this.layer].buyables[61] >= 2) ret = ret
                 else if (inChallenge("s", 21)) ret = new Decimal(1);
                 if (inChallenge("s", 21) && player[this.layer].buyables[71] >= 1 && player[this.layer].buyables[61] >= 2) ret = ret.mul(buyableEffect("s", 71));
-				if (ret > 2048 && !inChallenge("s", 21)) ret = ret.log(1.01).add(1281.7321141706762185344390997409)
+				if (ret > 28672 && !inChallenge("s", 21) && hasUpgrade("n", 15)) ret = ret.log(1.01).add(27640.509040831862570450875580445)
+				else if (ret > 2048 && !inChallenge("s", 21)) ret = ret.log(1.01).add(1281.7321141706762185344390997409)
                 return ret;
             },
             effectDisplay() {
@@ -131,17 +164,19 @@ addLayer("s", {
                     else if(inChallenge("s", 21) && player[this.layer].buyables[51].eq(1)) return "Boosts your plot gain by ^5 initally and decreases over time."
                     else return "Boosts your plot gain by 5x initally and decreases over time."
 	    },
-            cost: new Decimal(1200),
+            cost() { if(player.ab.points >= 2) return new Decimal(1200).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(1200) },
             unlocked(){ 
-                if(inChallenge("s", 11)) return false;
-                else return hasUpgrade(this.layer, 22);                
+                if(inChallenge("s", 11) || inChallenge("diff", 22)) return false;
+				else return hasUpgrade(this.layer, 22);                
             },
             effect () {
                 let zatime = new Decimal(5)
                 zatime = zatime.sub(player[this.layer].upgradeTime.div(15))
                 if(inChallenge("s", 11)) zatime = new Decimal(1)
                 if(hasMilestone("c", 5)) zatime = new Decimal(5)
-                return zatime
+                if(inChallenge("diff", 22)) return new Decimal (1)
+				else return zatime
             },
             effectDisplay() {
                 if(inChallenge("s", 21) && player[this.layer].buyables[51].eq(2)) return "^^" + format(this.effect());
@@ -152,9 +187,10 @@ addLayer("s", {
         14: {
             title: "Negotiator.",
             description: "Unlocks a button, which resets \"Degrading Upgrade.\"'s effect.",
-            cost: new Decimal(1800),
+            cost() { if(player.ab.points >= 2) return new Decimal(1800).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(1800) },
             unlocked(){ 
-                if(inChallenge("s", 11)) return false;
+                if(inChallenge("s", 11) || inChallenge("diff", 22)) return false;
                 else return hasUpgrade(this.layer, 13) && !hasMilestone("c", 5); 
             },
         },
@@ -164,7 +200,8 @@ addLayer("s", {
                 if (hasAchievement("a", 13)) return "Adds ^1.05 to \"Vibing.\" upgrade and boosts \"A.E...?\" by 1.05x."
 			    else return "Adds ^1.05 to \"Vibing.\" upgrade."
 			},
-            cost: new Decimal(20),
+            cost() { if(player.ab.points >= 2) return new Decimal(20).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(20) },
             unlocked(){ 
                 return hasUpgrade(this.layer, 12);
             },
@@ -181,10 +218,13 @@ addLayer("s", {
         },
         22: {
             title: "Supreme Hexagonity.",
-            description: "Unlocks 3 more upgrades, 2 challenges and halves \"But enough grinding, have at you!\"'s root effect.",
-            cost: new Decimal(999),
+            description() {if(hasAchievement("a", 21)) return "Unlocks 3 more upgrades, 2 challenges, halves \"But enough grinding, have at you!\"'s root effect and diff's effect boosts point gain."
+			               else return "Unlocks 3 more upgrades, 2 challenges and halves \"But enough grinding, have at you!\"'s root effect."},
+            cost() { if(player.ab.points >= 2) return new Decimal(999).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(999) },
             unlocked(){ 
-                return hasUpgrade(this.layer, 21);
+                if(inChallenge("diff", 22)) return false;
+                else return hasUpgrade(this.layer, 21);
             },
             style() {
                 if (hasUpgrade(this.layer, this.id)) return {
@@ -208,7 +248,8 @@ addLayer("s", {
         23: {
             title: "Another exponent...?",
             description: "Adds another ^1.05 to both \"T.D.E.\" and \"Vibing.\" upgrades.",
-            cost: new Decimal(100),
+            cost() { if(player.ab.points >= 2) return new Decimal(100).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(100) },
             unlocked(){ 
                 return hasUpgrade(this.layer, 21);
             },
@@ -226,7 +267,8 @@ addLayer("s", {
         31: {
             title: "But enough grinding, have at you!",
             description: "Exponents most of upgrades around \"S.H.\" based on unspent points.",
-            cost: new Decimal(250),
+            cost() { if(player.ab.points >= 2) return new Decimal(250).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(250) },
             unlocked() { 
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
@@ -259,7 +301,8 @@ addLayer("s", {
         32: {
             title: "Tetrate-inator.",
             description: "Exponents the upgrade left to it by 1.420. Twice.",
-            cost: new Decimal(400),
+            cost() { if(player.ab.points >= 2) return new Decimal(400).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(400) },
             unlocked(){ 
                 let unlockable = true
                 if (inChallenge("s", 21)) unlockable = false
@@ -274,14 +317,17 @@ addLayer("s", {
         33: {
             title: "haha shenanigans go brrrr.",
             description: "Boosts shenanigans gain by the passed time at reduced rate.",
-            cost: new Decimal(2500),
+            cost() { if(player.ab.points >= 2) return new Decimal(2500).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(2500) },
             unlocked(){ 
-                return hasUpgrade(this.layer, 22);
+                if(inChallenge("diff", 22)) return false;
+                else return hasUpgrade(this.layer, 22);
             },
             effect() {
             let ret = new Decimal(1).mul((new Decimal(player.timePlayed)).max(1).log(60).add(1));
             if (inChallenge("s", 21) && player[this.layer].buyables[51] >= 1) ret = ret.pow(buyableEffect("s", 12));
-            return ret
+            if(inChallenge("diff", 22)) return new Decimal(1);
+            else return ret
             },
             effectDisplay() {
                 return format(this.effect()) + "x";
@@ -290,9 +336,11 @@ addLayer("s", {
         34: {
             title: "Ughh...",
             description: "\"Predicted boredom.\" now weakly boosts shenanigans gain too, apparently.",
-            cost: new Decimal(15000),
+            cost() { if(player.ab.points >= 2) return new Decimal(15000).pow(new Decimal(player.ab.points).root(2))
+                     else return new Decimal(15000) },
             unlocked(){ 
-                return hasUpgrade(this.layer, 22);
+                if(inChallenge("diff", 22)) return false;
+                else return hasUpgrade(this.layer, 22);
             },
         },
     },
@@ -311,19 +359,21 @@ addLayer("s", {
             let eff = player[this.layer].buyables[this.id].mul(0.01).add(1)
             if (inChallenge("s", 11)) eff = eff.pow(2)
 		    if (hasUpgrade("t", 31)) eff = eff.pow(3)
+			if (inChallenge("diff", 12)) eff = eff.div(eff.pow(2))
             return eff;
         },
         display() { // Everything else displayed in the buyable button after the title
 		    if (hasAchievement("a", 22)) {
                 if (inChallenge("s", 12) && hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+	            else if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
 		        else if (inChallenge("s", 12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x.";
 	            else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
 			}
-            else if (inChallenge("s", 12) && hasUpgrade("s", 34) && player.s.buyables[11] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
-            else if (inChallenge("s", 12) && hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+            else if (inChallenge("s", 12) && hasUpgrade("s", 34) && !inChallenge("diff", 22) && player.s.buyables[11] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+            else if (inChallenge("s", 12) && hasUpgrade("s", 34) && !inChallenge("diff", 22)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
             else if (inChallenge("s", 12) && player[this.layer].buyables[this.id] > 900) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(new Decimal(1).div(new Decimal(10).add(buyableEffect("s", 11).sub(10)))) + "x.";
             else if (inChallenge("s", 12)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by 0.1x.";
-            else if (hasUpgrade("s", 34)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
+            else if (hasUpgrade("s", 34) && !inChallenge("diff", 22)) return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x and shenanigans gain by " + format(buyableEffect(this.layer, this.id).sub(1).div(10).add(1)) + "x.";
             else return "Knowing that you're being forced to grind the plots to death, you're getting more bored and it somehow magically boosts your plot gain by " + format(buyableEffect(this.layer, this.id)) + "x.";
 	    },
         style() {
@@ -383,6 +433,7 @@ addLayer("s", {
 			              if(hasUpgrade("c", 22)) return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]).mul(upgradeEffect("c", 22)).mul(cheapener)
                           else return getPointGen().mag >= new Decimal(2).add(player[this.layer].buyables[this.id]).mul(cheapener) },
 			buy() { 
+			player.s.lel2 == new Decimal(1)
 			if (hasAchievement("a", 24)) {
 				while(layers.s.buyables[21].canAfford()) {
 			        player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
@@ -404,6 +455,7 @@ addLayer("s", {
             player.points = new Decimal(0)
 			}
 			else player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].add(1)
+			player.s.lel2 == new Decimal(0)
         },
         display() { let cheapener = 1
 			        if(hasAchievement("a", 43)) cheapener = cheapener - 0.05
@@ -673,11 +725,11 @@ clickables: {
         },
         masterButtonText() {
         if (player[this.layer].upgradeTime.lt(60) && hasMilestone("c", 0)) return "Reset 3rd upgrade's effect.";
-        else if (player[this.layer].upgradeTime.lt(60)) return "Wait for " + Math.round(new Decimal(60).sub(player[this.layer].upgradeTime)) + " more second(s).";
+        else if (player[this.layer].upgradeTime.lt(60)) return "Wait for " + Math.round(new Decimal(60).sub(player[this.layer].upgradeTime).div(layers.diff.effect())) + " more second(s).";
         if (player[this.layer].upgradeTime.eq(60)) return "Reset 3rd upgrade's effect.";
 	},// **optional** text to display on the Master Button
         showMasterButton() {
-        if(inChallenge("s", 11)) return false;
+        if(inChallenge("s", 11) || inChallenge("diff", 22)) return false;
         else return hasUpgrade(this.layer, 14) && !hasMilestone("c", 5);
         },
     },
@@ -690,7 +742,8 @@ clickables: {
                                    else return "Tetrates your plot gain by 0.5 and removes \"Degrading Upgrade.\" and \"Negotiator.\", but \"Predicted boredom.\"'s effect is increased to the power of 2."
 	    },
             unlocked() {
-                return hasUpgrade(this.layer, 22) || hasMilestone("c", 3) && hasChallenge("s", 11);
+                if(inChallenge("diff", 22)) return false;
+                else return hasUpgrade(this.layer, 22) || hasMilestone("c", 3) && hasChallenge("s", 11);
             },
             rewardDescription() {
                 if(hasAchievement("a", 16)) return "Quintuples your shenanigans gain because you were a good boy."
@@ -710,7 +763,8 @@ clickables: {
                                     else return "\"Predicted boredom.\"'s effect is divided by ten and then some (scales up once \"Predicted boredom.\"'s effect reaches 10.01x)."
 	    },
             unlocked() {
-                return hasUpgrade(this.layer, 22) || hasMilestone("c", 3) && hasChallenge("s", 12);
+                if(inChallenge("diff", 22)) return false;
+                else return hasUpgrade(this.layer, 22) || hasMilestone("c", 3) && hasChallenge("s", 12);
             },
             rewardDescription() {
                 if(hasAchievement("a", 16)) return "You lose the ability to gain \"Predict boredom.\" by yourself and \"Predict boredom.\" becomes passive, growing up at the rate of 15 clicks per second."
@@ -724,7 +778,8 @@ clickables: {
             name: "The Endgamer",
             challengeDescription: "Tetrates your plots gain by undecillionth times and removes \"Vibing.\", \"B.E.G,H.A.Y!\" and \"Tetrate-inator.\" upgrades. (Don't even think about bursting through it with hyperinflation, smartass).",
             unlocked() {
-                return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
+                if(inChallenge("diff", 22)) return false;
+                else return hasChallenge(this.layer, 11) && hasChallenge(this.layer, 12);
             },
             rewardDescription: "no.",
             currencyDisplayName: "plots",
@@ -816,7 +871,7 @@ addLayer("c", {
         },
 
         update(diff) {
-			let chaoticGrowth = diff
+			let chaoticGrowth = new Decimal(diff).mul(layers.diff.effect())
 			if(hasUpgrade(this.layer, 11)) chaoticGrowth = chaoticGrowth * upgradeEffect("c", 11)
 			if(hasAchievement("a", 35)) chaoticGrowth * player.t.points.log(3)
             if(hasUpgrade(this.layer, 12)) player[this.layer].chaoticEnergy = player[this.layer].chaoticEnergy.add(chaoticGrowth)
@@ -829,7 +884,7 @@ addLayer("c", {
 
         layerShown() {return true},             // Returns a bool for if this layer's node should be visible in the tree.
 
-        branches: [["s"]],
+        branches: ["s"],
 
         milestones: {
             0: {
@@ -951,7 +1006,9 @@ addLayer("c", {
             currencyLocation() {return player.s.buyables},
             currencyDisplayName: "softcap warpers",
             currencyInternalName: 21,
-			unlocked(){return getPointGen().mag >= new Decimal(30) && inChallenge("s", 21) && player.ab.points == 0;},
+			unlocked(){let Adapter = new Decimal(1).div(3).mul(new Decimal(3).add(player.ab.points))
+            return getPointGen().mag >= new Decimal(30).mul(Adapter) && inChallenge("s", 21) && player.ab.points == 0; 
+            },
 		    },
         },
 	hotkeys: [
@@ -979,11 +1036,11 @@ addLayer("t", {
 			if(hasMilestone("t", 1) && hasUpgrade("t", 11) && hasUpgrade("t", 32)) TransPower = TransPower.add(player.t.points.log(player.t.points.root(1.7)))
 		    else if(hasMilestone("t", 1) && hasUpgrade("t", 11)) TransPower = TransPower.add(player.t.points.log(player.t.points.root(1.8)))
 			else if(hasMilestone("t", 1)) TransPower = TransPower.add(player.t.points.log(player.t.points.root(2)))
-		    if(hasUpgrade("c", 31) && hasUpgrade("t", 32) && hasUpgrade("t", 33)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(new Decimal(4.5).mul(upgradeEffect("t", 33))))
-			else if(hasUpgrade("c", 31) && hasUpgrade("t", 32)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(4.5))
-		    else if(hasUpgrade("c", 31) && hasUpgrade("t", 33)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(new Decimal(3).mul(upgradeEffect("t", 33))))
-			else if(hasUpgrade("c", 31) && hasUpgrade("t", 22)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower).mul(3))
-		    else if(hasUpgrade("c", 31)) player.t.points = player.t.points.add(new Decimal(diff).mul(TransPower))
+		    if(hasUpgrade("c", 31) && hasUpgrade("t", 32) && hasUpgrade("t", 33)) player.t.points = player.t.points.add(new Decimal(diff).mul(layers.diff.effect()).mul(TransPower).mul(new Decimal(4.5).mul(upgradeEffect("t", 33))))
+			else if(hasUpgrade("c", 31) && hasUpgrade("t", 32)) player.t.points = player.t.points.add(new Decimal(diff).mul(layers.diff.effect()).mul(TransPower).mul(4.5))
+		    else if(hasUpgrade("c", 31) && hasUpgrade("t", 33)) player.t.points = player.t.points.add(new Decimal(diff).mul(layers.diff.effect()).mul(TransPower).mul(new Decimal(3).mul(upgradeEffect("t", 33))))
+			else if(hasUpgrade("c", 31) && hasUpgrade("t", 22)) player.t.points = player.t.points.add(new Decimal(diff).mul(layers.diff.effect()).mul(TransPower).mul(3))
+		    else if(hasUpgrade("c", 31)) player.t.points = player.t.points.add(new Decimal(diff).mul(layers.diff.effect()).mul(TransPower))
 	},
 
         color: "#fefbaa",                       // The color for this layer, which affects many elements
@@ -1003,7 +1060,7 @@ addLayer("t", {
         },
         type: "none",                         // Determines the formula used for calculating prestige currency.
 		
-        branches: [["s"], ["c"]],
+        branches: ["s", "c"],
 
         layerShown() {return hasUpgrade("c", 31)},             // Returns a bool for if this layer's node should be visible in the tree.
   milestones: {
@@ -1133,9 +1190,11 @@ addLayer("ab", {
 		},
 
         midsection: [
+		["display-text", function() {if(!inChallenge("s", 21)) return "To be able to prestige, enter the \"The Endgamer\" challenge."}],
+		"blank",
         ["display-text", function() {if(player.ab.points.eq(0))  return "Current mod: N/A <br> <br> The next mod: NG- <br> <br> The next feature: Achievements"
-	                                 else if(player.ab.points.eq(1)) return "Current mod: NG- <br> <br> The next mod: NG-- <br> <br> The next feature: idk i have no idea lol"
-		                             else if(player.ab.points.eq(2)) return "Current mod: NG-- <br> <br> The next mod: NG---"
+	                                 else if(player.ab.points.eq(1)) return "Current mod: NG- <br> <br> The next mod: NG-- <br> <br> The next feature: Three new layers"
+		                             else if(player.ab.points.eq(2)) return "Current mod: NG-- [The current endgame] <br> <br> The next mod: NG---"
 		                             else if(player.ab.points.eq(3)) return "Current mod: NG--- <br> <br> The next mod: NG----"
 		                             else if(player.ab.points.eq(4)) return "Current mod: NG---- <br> <br> The next mod: NG-----"
 		                             else if(player.ab.points.eq(5)) return "Current mod: NG----- <br> <br> The next mod: NG+... wait."
@@ -1149,7 +1208,7 @@ addLayer("ab", {
         requires(){
 		if(inChallenge("s", 21)){
         if(player.ab.points.eq(0)) return new Decimal(30)
-	    else if(player.ab.points.eq(1)) return new Decimal(41)
+	    else if(player.ab.points.eq(1)) return new Decimal(40)
 		else if(player.ab.points.eq(2)) return new Decimal(50)
 		else if(player.ab.points.eq(3)) return new Decimal(60)
 		else if(player.ab.points.eq(4)) return new Decimal(70)
@@ -1173,7 +1232,7 @@ addLayer("ab", {
 
         layerShown() {return inChallenge("s", 21) && hasUpgrade("c", 32) || player.ab.points >= 1},             // Returns a bool for if this layer's node should be visible in the tree.
 
-        branches: [["s"]],
+        branches: ["s"],
     });
 
 addLayer("a", {
@@ -1268,7 +1327,8 @@ addLayer("a", {
         21: {
             name: "i want to die",
 			done() {return player.ab.points.gte(2)},
-            tooltip: "Do your second Anti-Balance reset. \n Reward: N/A",
+            tooltip() {if(player.ab.points >= 2) return "Do your second Anti-Balance reset. \n Reward: You passively gain shenanigans based on plot gain and diff's effect and \"Supreme Hexagonity\" gets one more effect."
+			           else return "Do your second Anti-Balance reset. \n Reward: You passively gain shenanigans based on plot gain and ███'s effect and \"Supreme Hexagonity\" gets one more effect."},
 			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
         },
 		22: {
@@ -1279,7 +1339,7 @@ addLayer("a", {
 		},
 		23: {
 			name: "REEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE \n" + "EEEEEEEEEEEE",
-			done() {return buyableEffect("s", 41).gte(new Decimal(2).pow(1024)) && inChallenge("s", 21) && player.s.buyables[41] >= 1 && player.ab.points.gte(1)},
+			done() {return buyableEffect("s", 41) >= 1.79e308 && inChallenge("s", 21) && player.s.buyables[41] >= 1 && player.ab.points.gte(1)},
 			tooltip: "Exceed your \"Hatred.\"'s total effect up to 1.79e308. \n Reward: ^2 is added to the \"Hatred.\"'s formula.",
 			onComplete() {return player.a.achievementsLol = player.a.achievementsLol.add(1)},
         },
@@ -1387,7 +1447,7 @@ addLayer("a", {
            1: {
                requirementDescription: "2nd achievement row completed.",
                effectDescription() {
-               if(hasAchievement("a", 21) && hasAchievement("a", 22) && hasAchievement("a", 23) && hasAchievement("a", 24) && hasAchievement("a", 25) && hasAchievement("a", 26)) return "You start with 100 Shenanigans after 2nd row resets."
+               if(hasAchievement("a", 21) && hasAchievement("a", 22) && hasAchievement("a", 23) && hasAchievement("a", 24) && hasAchievement("a", 25) && hasAchievement("a", 26)) return "You lose only half of your diff upon layer reset."
 			   else return "???"
 			   },
                done: function() {return hasAchievement("a", 21) && hasAchievement("a", 22) && hasAchievement("a", 23) && hasAchievement("a", 24) && hasAchievement("a", 25) && hasAchievement("a", 26)},
@@ -1417,5 +1477,349 @@ addLayer("a", {
                done: function() {return hasAchievement("a", 51) && hasAchievement("a", 52) && hasAchievement("a", 53) && hasAchievement("a", 54) && hasAchievement("a", 55) && hasAchievement("a", 56)},
 			   unlocked() {return player.ab.points >= 69},
 		   },
-  },			   
+  },
+    doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
+        if(layers[resettingLayer].row == layers.ab.row) {
+	    player.a.achievementsLol = new Decimal(0)
+		player.a.milestones = []
+        player.a.achievements = []
+        }
+    } 
+})
+
+addLayer("diff", {
+        startData() { return {                  // startData is a function that returns default data for a layer. 
+            unlocked: true,                    // You can add more variables here to add them to your layer.
+			points: new Decimal(1)
+        }},
+
+        color() {
+			return "#C0C0C0"
+		},
+
+        update(diff) {
+			if(player.ab.points >= 2) player.diff.points = player.diff.points.add(new Decimal(diff).mul(layers.diff.effect()))
+		},
+
+        tabFormat: ["main-display",
+                   ["display-text", function() {return hasUpgrade("n", 14) ? "You have " + formatWhole(challengesCompleted()) + " diff challenges completed, multiplying diff base in diff's effect by " + format(new Decimal(16.6666).add(player.n.total.div(50)).pow(challengesCompleted())) + "x.<br/><br/>Note: Doing any layer reset will reset diff points back to 1.<br/><br/>You have been warned." : "You have " + formatWhole(challengesCompleted()) + " diff challenges completed, multiplying diff base in diff's effect by " + format(new Decimal(16.6666).pow(challengesCompleted())) + "x.<br/><br/>Note: Doing any layer reset will reset diff points back to 1.<br/><br/>You have been warned."}],
+				   "challenges"],
+
+        row: 0,                                 // The row this layer is on (0 is the first row)
+	    symbol: "D",
+		position: 2,
+        resource: "diff points",
+		effect() { let effyes = new Decimal(16.6666)
+		           if(hasUpgrade("n", 14)) effyes = effyes.add(player.n.total.div(50))
+		           let eff = player.diff.points.mul(player.diff.points).mul(new Decimal(effyes).pow(challengesCompleted())).log(2).add(1)
+		           if(inChallenge("diff", 11)) eff = eff.root(new Decimal(challengeCompletions("diff", 11)).add(2).min(6))
+				   if(player.n.total >= 1) eff = eff.mul(layers.n.effect())
+				   return eff},
+		effectDescription() { return "multiplying diff gain in all functions by " + format(this.effect()) + "." },
+        baseAmount() {return player.diff.points},    // A function to return the current value of that resource
+
+        gainMult() {                            // Returns your multiplier to your gain of the prestige resource
+            return new Decimal(1)               // Factor in any bonuses multiplying gain here
+        },
+        gainExp() {                             // Returns your exponent to your gain of the prestige resource
+            return new Decimal(1)
+        },
+
+        layerShown() {return player.ab.points >= 2},             // Returns a bool for if this layer's node should be visible in the tree. 
+		
+		challenges: {
+			rows: 3,
+			cols: 2,
+			11: {
+				name() { if(challengeCompletions("diff", 11) == 0) return "diff's squared root"
+				         if(challengeCompletions("diff", 11) == 1) return "diff's cubed root"
+						 if(challengeCompletions("diff", 11) == 2) return "diff's tesseracted root"
+						 if(challengeCompletions("diff", 11) == 3) return "diff's pentaractedroot"
+						 if(challengeCompletions("diff", 11) >= 4) return "diff's hexeracted root"
+				},
+			    challengeDescription() { return "Roots the diff's effect by whatever the title says.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 11)) + "/" + formatWhole(this.completionLimit) },
+				goal: new Decimal(48000),
+				completionLimit: new Decimal(5),
+				rewardDescription: "nope.avi",
+                currencyDisplayName: "plots",
+                currencyInternalName: "points"
+			},
+			12: {
+				name: "Dear god no...",
+			    challengeDescription() { if(challengeCompletions("diff", 12) >= 1) return "Predicted boredom is passively generated by diff's effect to the power of " + formatWhole(challengeCompletions("diff", 12) + 1) + ", but it's effects are divided by themselves twice.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 12)) + "/" + formatWhole(this.completionLimit)
+				                         else return "Predicted boredom is passively generated by diff, but it's effects are divided by themselves twice.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 12)) + "/" + formatWhole(this.completionLimit) },
+				goal() { return new Decimal(4050).mul(new Decimal(challengeCompletions("diff", 12)).add(1).min(5).pow(1.1)) },
+				completionLimit: new Decimal(5),
+				rewardDescription: "A ticket to the \"TMT Kindergarten\".",
+                currencyDisplayName: "plots",
+                currencyInternalName: "points"
+			},
+			21: {
+			    challengeDescription() { return "You get " + formatWhole(new Decimal(5).mul(-1).mul(new Decimal(challengeCompletions("diff", 21)).add(1).min(5))) + " softcap warpers in this challenge.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 21)) + "/" + formatWhole(this.completionLimit) },
+				name: "Anti-Motivation",
+				goal: new Decimal(11400),
+				completionLimit: new Decimal(5),
+				rewardDescription: "An early access to Shenanigans Tree's NG--- mode.",
+                currencyDisplayName: "plots",
+                currencyInternalName: "points"
+			},
+			22: {
+				name: "No more hexagons.",
+			    challengeDescription() { return "\"Supreme Hexagonity\" upgrade and everything it unlocks are non-existent, Shenanigans's requirement is also increased by " + format(new Decimal(1.5).mul(new Decimal(challengeCompletions("diff", 22)).add(1).min(5)).log(1.5).add(1).pow(3)) + "x.<br/>Challenge completed: " + formatWhole(challengeCompletions("diff", 21)) + "/" + formatWhole(this.completionLimit) },
+				goal() { return new Decimal(10000000).mul(new Decimal(7.5).pow(new Decimal(challengeCompletions("diff", 22)).min(4))) },
+				completionLimit: new Decimal(5),
+				rewardDescription: "An oddly hyper realistic demonic hexagon.",
+                currencyDisplayName: "shenanigans",
+                currencyInternalName: "points",
+                currencyLayer: "s"
+			},
+			31: {
+				name: "NG--: HD Edition",
+			    challengeDescription() { return "The NG--'s effect (dividing point gain) is 60x more powerful and achievements are non-existent in this challenge.<br/>Good luck beating it. >:]" },
+				goal: new Decimal(96000),
+				completionLimit: new Decimal(1),
+				rewardDescription: "get w.i.p.'d lmao",
+                currencyDisplayName: "plots",
+                currencyInternalName: "points",
+				unlocked() { return challengesCompleted() >= 20 }
+			},
+		},
+
+    doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
+        if(layers[resettingLayer].row >= layers[this.layer].row) {
+		if(layers[resettingLayer] == layers.n && hasUpgrade("n", 12)) player.diff.points = player.diff.points
+        else if(hasMilestone("a", 1)) player.diff.points = player.diff.points.div(2).max(1)
+		else player.diff.points = new Decimal(1)
+        }
+    } 
+})
+
+addLayer("n", {
+    startData() { return {                  // startData is a function that returns default data for a layer. 
+        unlocked: true,                     // You can add more variables here to add them to your layer.
+        points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+		total: new Decimal(0),
+		yes: new Decimal(0),
+    }},
+
+    color: "#8A7983",                       // The color for this layer, which affects many elements.
+    resource: "symbols",            // The name of this layer's main prestige resource.
+    row: 0,                                 // The row this layer is on (0 is the first row).
+	position: 0,
+
+    baseResource: "shenanigans",                 // The name of the resource your prestige gain is based on.
+    baseAmount() { return player.s.points },  // A function to return the current amount of baseResource.
+	
+	effect() { return player.n.total.div(100).add(1) },
+	
+	update(diff) {
+		if(hasUpgrade("n", 25)) player.k.yes = new Decimal(2)
+		else if(hasUpgrade("n", 15)) player.k.yes = new Decimal(1)
+		else player.k.yes = new Decimal(0)
+	},
+	
+	midsection: ["blank",
+	            ["display-text", function() { return "Your total symbols boosts diff's effect by " + format(layers.n.effect()) + "x."} ],
+				"blank",
+	            ["display-text", function() { return "Each completed row of upgrades increases symbol's exponent cost by +^0.5. The current cost exponent is ^" + format(new Decimal(2).add(new Decimal(0.5).mul(player.k.yes))) + "."} ],
+	],
+
+    requires() { if(hasUpgrade("k", 22)) return new Decimal(81611021.7).mul(0.9)
+	             else return new Decimal(81611021.7)},              // The amount of the base needed to  gain 1 of the prestige currency.
+	canBuyMax() { return false },
+
+    type: "static",                         // Determines the formula used for calculating prestige currency.
+	base: 1.16,
+    exponent() { return new Decimal(2).add(new Decimal(0.5).times(player.k.yes)) },                          // "normal" prestige gain is (currency^exponent).
+
+    gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
+        return new Decimal(1)               // Factor in any bonuses multiplying gain here.
+    },
+    gainExp() {                             // Returns your exponent to your gain of the prestige resource.
+        return new Decimal(1)
+    },
+	
+	branches: ["s"],
+
+    layerShown() { return challengeCompletions("diff", 11) >= 1 && challengeCompletions("diff", 12) >= 1 && challengeCompletions("diff", 21) >= 1 && challengeCompletions("diff", 22) >= 1},            // Returns a bool for if this layer's node should be visible in the tree.
+	
+	upgrades: {
+        rows: 3,
+        cols: 5,
+        11: {
+            title: "We're",
+            description: "Boosts plot gain based on Neverup upgrades bought.",
+            cost: new Decimal(5),
+			effect() { return new Decimal(1.5).pow(player.n.upgrades.length) },
+			effectDisplay() { return format(this.effect()) + "x" }
+        },
+        12: {
+            title: "no",
+            description: "Neverup reset doesn't reset diff points.",
+            cost: new Decimal(2),
+			unlocked() { return hasUpgrade("n", 11) }
+        },
+        13: {
+            title: "strangers",
+            description: "Fulfill 2nd diff challenge's reward yourself.",
+            cost: new Decimal(9),
+			unlocked() { return hasUpgrade("n", 12) }
+        },
+        14: {
+            title: "to",
+            description() { return "Your total symbols adds up to diff challenge completions's base effect by +" + format(player.n.total.div(50)) + "." },
+            cost: new Decimal(2),
+			unlocked() { return hasUpgrade("n", 13) }
+        },
+        15: {
+            title: "love",
+            description: "With the power of love, \"Vibing.\"'s softcap starts later.<br/>(2,048x => 28,672x)",
+            cost: new Decimal(4),
+			unlocked() { return hasUpgrade("n", 14) }
+        },
+        21: {
+            title: "You",
+            description: "Total symbols's effect affects experience gain",
+            cost: new Decimal(3),
+			unlocked() { return hasUpgrade("n", 15) }
+        },
+        22: {
+            title: "know",
+            description: "Total symbols's effect affects knowledge gain",
+            cost: new Decimal(4),
+			unlocked() { return hasUpgrade("n", 21) }
+        },
+        23: {
+            title: "the rules",
+            description: "Experience DO give some benefits outside Knowledge layer.<br/>(note: you'll find out anyways).",
+            cost: new Decimal(8),
+			unlocked() { return hasUpgrade("n", 22) }
+        },
+        24: {
+            title: "and",
+            description: "Neverup reset doesn't reset shenanigans.",
+            cost: new Decimal(3),
+			unlocked() { return hasUpgrade("n", 25) }
+        },
+        25: {
+            title: "so do I",
+            description: "With the power of love, \"Vibing.\"'s softcap starts later.<br/>(2,048x => 28,672x)",
+            cost: new Decimal(5),
+			unlocked() { return hasUpgrade("n", 24) }
+        },
+        31: {
+            title: "A full",
+            description: "With the power of love, \"Vibing.\"'s softcap starts later.<br/>(2,048x => 28,672x)",
+            cost: new Decimal(5),
+			unlocked() { return hasUpgrade("n", 25) }
+        },
+        32: {
+            title: "commitment's",
+            description: "With the power of love, \"Vibing.\"'s softcap starts later.<br/>(2,048x => 28,672x)",
+            cost: new Decimal(11),
+			unlocked() { return hasUpgrade("n", 31) }
+        },
+	},
+    doReset(resettingLayer){ // Triggers when this layer is being reset, along with the layer doing the resetting. Not triggered by lower layers resetting, but is by layers on the same row.
+        if(layers[resettingLayer] == layers.n) {
+        if(!hasUpgrade("n", 24)) player.s.points = new Decimal(0)
+        }
+    },
+})
+
+addLayer("k", {
+    startData() { return {                  // startData is a function that returns default data for a layer. 
+        unlocked: true,                     // You can add more variables here to add them to your layer.
+        points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
+		experiences: new Decimal(0),
+    }},
+
+    color: "#4BDC13",                       // The color for this layer, which affects many elements.
+    resource: "knowledge",            // The name of this layer's main prestige resource.
+    row: 1,                                 // The row this layer is on (0 is the first row).
+	position: 0,
+
+    update(diff){
+		if (layers.k.layerShown() == true) {
+	    hasUpgrade("n", 21) ? player.k.experiences = player.k.experiences.add(new Decimal(diff).div(100).mul(layers.n.effect())) : player.k.experiences = player.k.experiences.add(diff / 100)
+		if(hasUpgrade("k", 11)) hasUpgrade("n", 21) ? player.k.experiences = player.k.experiences.add(new Decimal(diff).div(100).mul(layers.n.effect())) : player.k.experiences = player.k.experiences.add(diff / 100)
+		if(hasUpgrade("k", 12)) hasUpgrade("n", 21) ? player.k.experiences = player.k.experiences.add(new Decimal(diff).div(50).mul(layers.n.effect())) : player.k.experiences = player.k.experiences.add(diff / 50)
+		if(hasUpgrade("k", 13)) hasUpgrade("n", 21) ? player.k.experiences = player.k.experiences.add(new Decimal(diff).div(20).mul(layers.n.effect())) : player.k.experiences = player.k.experiences.add(diff / 20)
+		if(hasUpgrade("k", 21)) hasUpgrade("n", 21) ? player.k.experiences = player.k.experiences.add(new Decimal(diff / 100).mul(upgradeEffect("k", 21).mul(100).mul(layers.n.effect()))) : player.k.experiences = player.k.experiences.add(new Decimal(diff / 100).mul(upgradeEffect("k", 21).mul(100)));
+		if(player.k.experiences >= 1) hasUpgrade("k", 23) ? player.k.points = player.k.points.add(player.k.experiences.div(69).mul(diff)) : player.k.points = player.k.points.add(player.k.experiences.div(100).mul(diff));
+		}
+	},
+
+	tabFormat: [["display-text", function() { return "Welcome to the TMT Kindergarten, you little tiny babies. <br/> Today we're going to learn how to make your first mod, in which you'll throw all of your common senses into the trash and go crazy with your creativity. Cool, isn't it?<br/>Now where was I?.. Oh yeah, do your homework or some @$@! yourself, I'm not your personal teacher." }],
+	            "blank",
+	            "main-display",
+	           ["display-text", function() { return hasUpgrade("n", 23) ? "You have " + format(player.k.experiences) + " experiences, boosting point gain in any challenges by " + format(player.k.experiences.log(10)) + "x" : "You have " + format(player.k.experiences) + " experiences. Not like you'll need it anyways, unless..." }],
+			   "blank",
+               ["display-text", function() { return player.k.experiences >= 1 && hasUpgrade("k", 23) ? "You're generating " + format(player.k.experiences.div(69)) + " knowledges per second." : player.k.experiences >= 1 ? "You're generating " + format(player.k.experiences.div(100)) + " knowledges per second." : "" }],
+			   "upgrades"],			   
+
+    type: "none",                         // Determines the formula used for calculating prestige currency.
+
+    gainMult() {                            // Returns your multiplier to your gain of the prestige resource.
+        return new Decimal(1)               // Factor in any bonuses multiplying gain here.
+    },
+    gainExp() {                             // Returns your exponent to your gain of the prestige resource.
+        return new Decimal(1)
+    },
+
+    layerShown() { return hasUpgrade("n", 13) },            // Returns a bool for if this layer's node should be visible in the tree.
+	
+	upgrades: {
+		rows: 2,
+		cols: 5,
+		11: {
+			title: "Read Acamaeda's tutorial",
+			description: "You gain 0.01 more experience per second.",
+			cost: new Decimal(1)
+		},
+		12: {
+			title: "Download Github Desktop",
+			description: "You gain 0.02 more experience per second.",
+			cost: new Decimal(1),
+			unlocked() { return hasUpgrade("k", 11) }
+		},
+		13: {
+			title: "Read Acamaeda's documentation and experiment",
+			description: "You gain 0.05 more experience per second.",
+			cost: new Decimal(1),
+			unlocked() { return hasUpgrade("k", 12) }
+		},
+		14: {
+			title: "Programm your first upgrade",
+			description: "Creates a single upgrade nearby.",
+			cost: new Decimal(5),
+			unlocked() { return hasUpgrade("k", 13) }
+		},
+		15: {
+			title: "Accept row's existence",
+			description: "Creates three upgrades on the 2nd row.",
+			cost: new Decimal(17),
+			unlocked() { return hasUpgrade("k", 14) }
+		},
+		21: {
+			title: "\"Apes together strong\"",
+			description: "You gain 0.01 more experience per second for each Kindergarten upgrade bought.",
+			cost: new Decimal(1),
+			effect() { return new Decimal(player.k.upgrades.length).div(100) },
+			effectDisplay() { return "+" + format(this.effect()) },
+			unlocked() { return hasUpgrade("k", 15) }
+		},
+		22: {
+			title: "The less the better",
+			description: "Lowers Symbol's initial cost.<br/>(100% => 90%)",
+			cost: new Decimal(2),
+			unlocked() { return hasUpgrade("k", 15) }
+		},
+		23: {
+			title: "Optimization",
+			description: "You learn how to use ?, : and !, buffing your knowledge gain. It also creates two more upgrades on 2nd row. [W.I.P.]",
+			cost: new Decimal(1),
+			unlocked() { return hasUpgrade("k", 15) }
+		},
+	}
 })
