@@ -1642,7 +1642,7 @@ addLayer("n", {
 	
 	branches: ["s"],
 
-    layerShown() { return challengeCompletions("diff", 11) >= 1 && challengeCompletions("diff", 12) >= 1 && challengeCompletions("diff", 21) >= 1 && challengeCompletions("diff", 22) >= 1},            // Returns a bool for if this layer's node should be visible in the tree.
+    layerShown() { return challengeCompletions("diff", 11) >= 1 && challengeCompletions("diff", 12) >= 1 && challengeCompletions("diff", 22) >= 1},            // Returns a bool for if this layer's node should be visible in the tree.
 	
 	upgrades: {
         rows: 3,
