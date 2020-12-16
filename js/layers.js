@@ -1209,7 +1209,7 @@ addLayer("ab", {
 		if(inChallenge("s", 21)){
         if(player.ab.points.eq(0)) return new Decimal(30)
 	    else if(player.ab.points.eq(1)) return new Decimal(40)
-		else if(player.ab.points.eq(2)) return new Decimal(50)
+		else if(player.ab.points.eq(2)) return new Decimal(51)
 		else if(player.ab.points.eq(3)) return new Decimal(60)
 		else if(player.ab.points.eq(4)) return new Decimal(70)
 		else if(player.ab.points.eq(5)) return new Decimal(80)
