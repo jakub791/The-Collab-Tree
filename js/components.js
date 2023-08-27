@@ -660,9 +660,9 @@ function loadVue() {
     Vue.component("overlay-head", systemComponents["overlay-head"]);
     Vue.component("info-tab", systemComponents["info-tab"]);
     Vue.component("options-tab", systemComponents["options-tab"]);
-    Vue.component("tooltip", systemComponents["tooltip"]);
-    Vue.component("particle", systemComponents["particle"]);
-    Vue.component("bg", systemComponents["bg"]);
+    Vue.component("tooltip", systemComponents.tooltip);
+    Vue.component("particle", systemComponents.particle);
+    Vue.component("bg", systemComponents.bg);
 
     app = new Vue({
         el: "#app",
@@ -670,48 +670,10 @@ function loadVue() {
             player,
             tmp,
             options,
-            Decimal,
-            format,
-            formatWhole,
-            formatTime,
-            formatSmall,
-            focused,
-            getThemeName,
-            layerunlocked,
-            doReset,
-            buyUpg,
-            buyUpgrade,
-            startChallenge,
-            milestoneShown,
-            keepGoing,
-            hasUpgrade,
-            hasMilestone,
-            hasAchievement,
-            hasChallenge,
-            maxedChallenge,
-            getBuyableAmount,
-            getClickableState,
-            inChallenge,
-            canAffordUpgrade,
-            canBuyBuyable,
-            canCompleteChallenge,
-            subtabShouldNotify,
-            subtabResetNotify,
-            challengeStyle,
-            challengeButtonText,
-            constructBarStyle,
-            constructParticleStyle,
-            VERSION,
             LAYERS,
             hotkeys,
             activePopups,
-            particles,
-            mouseX,
-            mouseY,
-            shiftDown,
-            ctrlDown,
-            run,
-            gridRun
+            particles
         }
     });
 }

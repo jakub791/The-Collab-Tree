@@ -1,11 +1,10 @@
-var canvas;
-var ctx;
+let canvas;
+let ctx;
 
 window.addEventListener("resize", _ => resizeCanvas());
 
 function retrieveCanvasData() {
     let treeCanv = document.getElementById("treeCanvas");
-    let treeTab = document.getElementById("treeTab");
     if (treeCanv === undefined || treeCanv === null) return false;
     canvas = treeCanv;
     ctx = canvas.getContext("2d");
@@ -26,9 +25,9 @@ var colors_theme;
 function drawTree() {
     if (!retrieveCanvasData()) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (layer in layers) {
+    for (const layer in layers) {
         if (tmp[layer].layerShown == true && tmp[layer].branches) {
-            for (branch in tmp[layer].branches) {
+            for (const branch in tmp[layer].branches) {
                 drawTreeBranch(layer, tmp[layer].branches[branch]);
             }
         }
@@ -39,9 +38,9 @@ function drawTree() {
 }
 
 function drawComponentBranches(layer, data, prefix) {
-    for (id in data) {
+    for (const id in data) {
         if (data[id].branches) {
-            for (branch in data[id].branches) {
+            for (const branch in data[id].branches) {
                 drawTreeBranch(
                     id,
                     data[id].branches[branch],

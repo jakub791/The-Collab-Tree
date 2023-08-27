@@ -1,27 +1,11 @@
-var layoutInfo = {
+const layoutInfo = {
     startTab: "none",
     startNavTab: "tree-tab",
-    showTree: true,
-
-    treeLayout: ""
+    showTree: true
 };
 
-// A "ghost" layer which offsets other layers in the tree
-addNode("blank", {
-    layerShown: "ghost"
-});
-
 addLayer("tree-tab", {
-    tabFormat: [
-        [
-            "tree",
-            function () {
-                return layoutInfo.treeLayout
-                    ? layoutInfo.treeLayout
-                    : TREE_LAYERS;
-            }
-        ]
-    ],
+    tabFormat: [["tree", () => TREE_LAYERS]],
     previousTab: "",
     leftTab: true
 });

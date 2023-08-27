@@ -3,7 +3,7 @@ const modInfo = {
     id: "mymod",
     author: "nobody",
     pointsName: "points",
-    modFiles: ["layers.js", "tree.js"],
+    modFiles: ["cheese.js", "tree.js"],
     discordName: "",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players
@@ -21,7 +21,7 @@ const changelog = `<h1>Changelog:</h1><br>
 		- Added things.<br>
 		- Added stuff.`;
 
-let winText =
+const winText =
     "Congratulations! You have reached the end and beaten this game, but for now...";
 
 const doNotCallTheseFunctionsEveryTick = [];
@@ -35,9 +35,10 @@ function canGenPoints() {
 }
 
 function getPointGen() {
-    if (!canGenPoints()) return new Decimal(0);
+    if (!canGenPoints()) return Decimal.dZero;
 
-    let gain = new Decimal(1);
+    let gain = Decimal.dOne;
+    if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);
     return gain;
 }
 

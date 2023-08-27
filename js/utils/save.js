@@ -245,13 +245,13 @@ function loadOptions() {
 
 function setupModInfo() {
     modInfo.changelog = changelog;
-    modInfo.winText = winText
-        ? winText
-        : `Congratulations! You have reached the end and beaten this game, but for now...`;
+    modInfo.winText = winText;
 }
+
 function fixNaNs() {
     NaNcheck(player);
 }
+
 function NaNcheck(data) {
     for (item in data) {
         if (data[item] == null) {

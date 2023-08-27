@@ -1,5 +1,3 @@
-// ************ Big Feature related ************
-
 function respecBuyables(layer) {
     if (!layers[layer].buyables) return;
     if (!layers[layer].buyables.respec) return;
@@ -13,23 +11,22 @@ function respecBuyables(layer) {
         )
     )
         return;
-    run(layers[layer].buyables.respec, layers[layer].buyables);
+    layers[layer].buyables.respec();
     updateBuyableTemp(layer);
     document.activeElement.blur();
 }
 
 function canAffordUpgrade(layer, id) {
-    let upg = tmp[layer].upgrades[id];
+    const upg = tmp[layer].upgrades[id];
     if (tmp[layer].deactivated) return false;
     if (tmp[layer].upgrades[id].canAfford === false) return false;
     let cost = tmp[layer].upgrades[id].cost;
     if (cost !== undefined) return canAffordPurchase(layer, upg, cost);
-
     return true;
 }
 
 function canBuyBuyable(layer, id) {
-    let b = temp[layer].buyables[id];
+    const b = temp[layer].buyables[id];
     return (
         b.unlocked &&
         run(b.canAfford, b) &&
@@ -40,11 +37,11 @@ function canBuyBuyable(layer, id) {
 
 function canAffordPurchase(layer, thing, cost) {
     if (thing.currencyInternalName) {
-        let name = thing.currencyInternalName;
+        const name = thing.currencyInternalName;
         if (thing.currencyLocation) {
             return !thing.currencyLocation[name].lt(cost);
         } else if (thing.currencyLayer) {
-            let lr = thing.currencyLayer;
+            const lr = thing.currencyLayer;
             return !player[lr][name].lt(cost);
         } else {
             return !player[name].lt(cost);
@@ -52,10 +49,6 @@ function canAffordPurchase(layer, thing, cost) {
     } else {
         return !player[layer].points.lt(cost);
     }
-}
-
-function buyUpgrade(layer, id) {
-    buyUpg(layer, id);
 }
 
 function buyUpg(layer, id) {
@@ -94,13 +87,14 @@ function buyUpg(layer, id) {
     needCanvasUpdate = true;
 }
 
+const buyUpgrade = buyUpg;
+
 function buyMaxBuyable(layer, id) {
     if (!player[layer].unlocked) return;
     if (!tmp[layer].buyables[id].unlocked) return;
     if (!tmp[layer].buyables[id].canBuy) return;
     if (!layers[layer].buyables[id].buyMax) return;
-
-    run(layers[layer].buyables[id].buyMax, layers[layer].buyables[id]);
+    layers[layer].buyables[id].buyMax();
     updateBuyableTemp(layer);
 }
 
@@ -108,8 +102,7 @@ function buyBuyable(layer, id) {
     if (!player[layer].unlocked) return;
     if (!tmp[layer].buyables[id].unlocked) return;
     if (!tmp[layer].buyables[id].canBuy) return;
-
-    run(layers[layer].buyables[id].buy, layers[layer].buyables[id]);
+    layers[layer].buyables[id].buy();
     updateBuyableTemp(layer);
 }
 
@@ -117,8 +110,7 @@ function clickClickable(layer, id) {
     if (!player[layer].unlocked || tmp[layer].deactivated) return;
     if (!tmp[layer].clickables[id].unlocked) return;
     if (!tmp[layer].clickables[id].canClick) return;
-
-    run(layers[layer].clickables[id].onClick, layers[layer].clickables[id]);
+    layers[layer].clickables[id].onClick();
     updateClickableTemp(layer);
 }
 
@@ -126,32 +118,21 @@ function clickGrid(layer, id) {
     if (!player[layer].unlocked || tmp[layer].deactivated) return;
     if (!run(layers[layer].grid.getUnlocked, layers[layer].grid, id)) return;
     if (!gridRun(layer, "getCanClick", player[layer].grid[id], id)) return;
-
     gridRun(layer, "onClick", player[layer].grid[id], id);
 }
 
-// Function to determine if the player is in a challenge
 function inChallenge(layer, id) {
-    let challenge = player[layer].activeChallenge;
-    if (!challenge) return false;
-    id = toNumber(id);
+    const challenge = player[layer].activeChallenge;
     if (challenge == id) return true;
 
-    if (layers[layer].challenges[challenge].countsAs)
-        return tmp[layer].challenges[challenge].countsAs.includes(id) || false;
-    return false;
+    return tmp[layer].challenges[challenge].countsAs?.includes(id) ?? false;
 }
 
-// ************ Misc ************
-
-var onTreeTab = true;
+let onTreeTab = true;
 
 function showTab(name, prev) {
     if (LAYERS.includes(name) && !layerunlocked(name)) return;
-    if (player.tab !== name)
-        clearParticles(function (p) {
-            return p.layer === player.tab;
-        });
+    if (player.tab !== name) clearParticles(p => p.layer === player.tab);
     if (
         tmp[name] &&
         player.tab === name &&
@@ -159,7 +140,6 @@ function showTab(name, prev) {
     ) {
         player.subtabs[name].mainTabs = Object.keys(layers[name].tabFormat)[0];
     }
-    var toTreeTab = name == "none";
     player.tab = name;
     if (tmp[name] && tmp[name].row !== "side" && tmp[name].row !== "otherside")
         player.lastSafeTab = name;
@@ -169,16 +149,10 @@ function showTab(name, prev) {
 }
 
 function showNavTab(name, prev) {
-    console.log(prev);
     if (LAYERS.includes(name) && !layerunlocked(name)) return;
-    if (player.navTab !== name)
-        clearParticles(function (p) {
-            return p.layer === player.navTab;
-        });
+    if (player.navTab !== name) clearParticles(p => p.layer === player.navTab);
     if (tmp[name] && tmp[name].previousTab !== undefined)
         prev = tmp[name].previousTab;
-    var toTreeTab = name == "tree-tab";
-    console.log(name + prev);
     if (name !== "none" && prev && !tmp[prev]?.leftTab == !tmp[name]?.leftTab)
         player[name].prevTab = prev;
     else if (player[name]) player[name].prevTab = "";
@@ -189,7 +163,6 @@ function showNavTab(name, prev) {
 
 function goBack(layer) {
     let nextTab = "none";
-
     if (player[layer].prevTab) nextTab = player[layer].prevTab;
     if (
         player.navTab === "none" &&
@@ -202,7 +175,7 @@ function goBack(layer) {
 }
 
 function layOver(obj1, obj2) {
-    for (let x in obj2) {
+    for (const x in obj2) {
         if (obj2[x] instanceof Decimal) obj1[x] = new Decimal(obj2[x]);
         else if (obj2[x] instanceof Object) layOver(obj1[x], obj2[x]);
         else obj1[x] = obj2[x];
@@ -213,12 +186,12 @@ function prestigeNotify(layer) {
     if (layers[layer].prestigeNotify) return layers[layer].prestigeNotify();
 
     if (isPlainObject(tmp[layer].tabFormat)) {
-        for (subtab in tmp[layer].tabFormat) {
+        for (const subtab in tmp[layer].tabFormat) {
             if (subtabResetNotify(layer, "mainTabs", subtab)) return true;
         }
     }
-    for (family in tmp[layer].microtabs) {
-        for (subtab in tmp[layer].microtabs[family]) {
+    for (const family in tmp[layer].microtabs) {
+        for (const subtab in tmp[layer].microtabs[family]) {
             if (subtabResetNotify(layer, family, subtab)) return true;
         }
     }
@@ -233,13 +206,13 @@ function prestigeNotify(layer) {
 }
 
 function notifyLayer(name) {
-    if (player.tab == name || !layerunlocked(name)) return;
+    if (player.tab === name || !layerunlocked(name)) return;
     player.notify[name] = 1;
 }
 
 function subtabShouldNotify(layer, family, id) {
     let subtab = {};
-    if (family == "mainTabs") subtab = tmp[layer].tabFormat[id];
+    if (family === "mainTabs") subtab = tmp[layer].tabFormat[id];
     else subtab = tmp[layer].microtabs[family][id];
     if (!subtab.unlocked) return false;
     if (subtab.embedLayer) return tmp[subtab.embedLayer].notify;
@@ -272,15 +245,11 @@ function keepGoing() {
     needCanvasUpdate = true;
 }
 
-function toNumber(x) {
-    if (x.mag !== undefined) return x.toNumber();
-    if (x + 0 !== x) return parseFloat(x);
-    return x;
-}
+const toNumber = Number;
 
 function updateMilestones(layer) {
     if (tmp[layer].deactivated) return;
-    for (id in layers[layer].milestones) {
+    for (const id in layers[layer].milestones) {
         if (!hasMilestone(layer, id) && layers[layer].milestones[id].done()) {
             player[layer].milestones.push(id);
             if (layers[layer].milestones[id].onComplete)
@@ -303,7 +272,7 @@ function updateMilestones(layer) {
 
 function updateAchievements(layer) {
     if (tmp[layer].deactivated) return;
-    for (id in layers[layer].achievements) {
+    for (const id in layers[layer].achievements) {
         if (
             isPlainObject(layers[layer].achievements[id]) &&
             !hasAchievement(layer, id) &&
@@ -334,27 +303,14 @@ function addTime(diff, layer) {
         data = data[layer];
         time = data.time;
     }
-
-    //I am not that good to perfectly fix that leak. ~ DB Aarex
-    if (time + 0 !== time) {
-        console.log("Memory leak detected. Trying to fix...");
-        time = toNumber(time);
-        if (isNaN(time) || time == 0) {
-            console.log("Couldn't fix! Resetting...");
-            time = layer ? player.timePlayed : 0;
-            if (!layer) player.timePlayedReset = true;
-        }
-    }
-    time += toNumber(diff);
-
     if (layer) data.time = time;
     else data.timePlayed = time;
 }
 
-shiftDown = false;
-ctrlDown = false;
+let shiftDown = false;
+let ctrlDown = false;
 
-document.onkeydown = function (e) {
+document.addEventListener("keydown", e => {
     if (player === undefined) return;
     shiftDown = e.shiftKey;
     ctrlDown = e.ctrlKey;
@@ -364,28 +320,29 @@ document.onkeydown = function (e) {
     if (onFocused) return;
     if (ctrlDown && hotkeys[key]) e.preventDefault();
     if (hotkeys[key]) {
-        let k = hotkeys[key];
+        const k = hotkeys[key];
         if (player[k.layer].unlocked && tmp[k.layer].hotkeys[k.id].unlocked)
             k.onPress();
     }
-};
+});
 
-document.onkeyup = function (e) {
+document.addEventListener("keyup", e => {
     shiftDown = e.shiftKey;
     ctrlDown = e.ctrlKey;
-};
+});
 
-var onFocused = false;
+let onFocused = false;
+
 function focused(x) {
     onFocused = x;
 }
 
 function isFunction(obj) {
-    return !!(obj && obj.constructor && obj.call && obj.apply);
+    return typeof obj === "function";
 }
 
 function isPlainObject(obj) {
-    return !!obj && obj.constructor === Object;
+    return obj != null && obj.constructor === Object;
 }
 
 document.title = modInfo.name;
@@ -397,22 +354,18 @@ function toValue(value, oldValue) {
         if (checkDecimalNaN(value)) return decimalZero;
         return value;
     }
-    if (!isNaN(oldValue)) return parseFloat(value) || 0;
+    if (!isNaN(oldValue)) return Number(value);
     return value;
 }
 
 // Variables that must be defined to display popups
-var activePopups = [];
-var popupID = 0;
+const activePopups = [];
+let popupID = 0;
 
 // Function to show popups
-function doPopup(
-    type = "none",
-    text = "This is a test popup.",
-    title = "",
-    timer = 3,
-    color = ""
-) {
+function doPopup(type, text, title, timer, color) {
+    let popupTitle = "";
+    let popupType = "";
     switch (type) {
         case "achievement":
             popupTitle = "Achievement Unlocked!";
@@ -428,8 +381,8 @@ function doPopup(
             break;
     }
     if (title != "") popupTitle = title;
-    popupMessage = text;
-    popupTimer = timer;
+    let popupMessage = text;
+    let popupTimer = timer;
 
     activePopups.push({
         time: popupTimer,
@@ -444,24 +397,21 @@ function doPopup(
 
 //Function to reduce time on active popups
 function adjustPopupTime(diff) {
-    for (popup in activePopups) {
+    for (const popup in activePopups) {
         activePopups[popup].time -= diff;
-        if (activePopups[popup]["time"] < 0) {
+        if (activePopups[popup].time < 0) {
             activePopups.splice(popup, 1); // Remove popup when time hits 0
         }
     }
 }
 
-function run(func, target, args = null) {
-    if (isFunction(func)) {
-        let bound = func.bind(target);
-        return bound(args);
-    } else return func;
+function run(func, target, ...args) {
+    return typeof func === "function" ? func.call(target, ...args) : func;
 }
 
 function gridRun(layer, func, data, id) {
     if (isFunction(layers[layer].grid[func])) {
-        let bound = layers[layer].grid[func].bind(layers[layer].grid);
-        return bound(data, id);
-    } else return layers[layer].grid[func];
+        return layers[layer].grid[func].call(layers[layer].grid, id);
+    }
+    return layers[layer].grid[func];
 }

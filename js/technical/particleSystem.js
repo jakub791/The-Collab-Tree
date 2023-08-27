@@ -1,12 +1,12 @@
-var particles = {};
-var particleID = 0;
-var mouseX = 0;
-var mouseY = 0;
+const particles = {};
+let particleID = 0;
+let mouseX = 0;
+let mouseY = 0;
 
 function makeParticles(data, amount = 1, type = "normal") {
     for (let x = 0; x < amount; x++) {
-        let particle = newParticles[type]();
-        for (thing in data) {
+        const particle = newParticles[type]();
+        for (const thing in data) {
             switch (thing) {
                 case "onClick": // Functions that should be copied over
                 case "onMouseEnter":
@@ -41,8 +41,8 @@ function makeShinies(data, amount = 1) {
 }
 
 function updateParticles(diff) {
-    for (p in particles) {
-        let particle = particles[p];
+    for (const p in particles) {
+        const particle = particles[p];
         particle.time -= diff;
         particle.fadeInTimer -= diff;
         if (particle["time"] < 0) {
@@ -138,26 +138,24 @@ function getOpacity(particle) {
 
 function constructParticleStyle(particle) {
     let style = {
-        left: particle.x - particle.height / 2 + "px",
-        top: particle.y - particle.height / 2 + "px",
-        width: particle.width + "px",
-        height: particle.height + "px",
-        transform: "rotate(" + particle.angle + "deg)",
+        left: `${particle.x - particle.height / 2}px`,
+        top: `${particle.y - particle.height / 2}px`,
+        width: `${particle.width}px`,
+        height: `${particle.height}px`,
+        transform: `rotate(${particle.angle}deg)`,
         opacity: getOpacity(particle),
-        "pointer-events": particle.onClick || particle.onHover ? "auto" : "none"
+        pointerEvents: particle.onClick || particle.onHover ? "auto" : "none"
     };
     if (particle.color) {
-        style["background-color"] = particle.color;
-        style.mask = "url(#pmask" + particle.id + ")";
-        style["-webkit-mask-box-image"] = "url(" + particle.image + ")";
-    } else style["background-image"] = "url(" + particle.image + ")";
+        style.backgroundColor = particle.color;
+        style.mask = `url(#pmask${particle.id})`;
+        style.maskBoxImage = `url(${particle.image})`;
+    } else style.backgroundImage = `url(${particle.image})`;
     return style;
 }
 
-function clearParticles(check) {
-    if (!check) check = true;
-
-    for (p in particles) {
+function clearParticles(check = true) {
+    for (const p in particles) {
         if (run(check, particles[p], particles[p])) {
             Vue.delete(particles, p);
         }
