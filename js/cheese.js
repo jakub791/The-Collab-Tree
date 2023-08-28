@@ -88,8 +88,9 @@ addLayer("cheese", {
                 : 0;
             player.cheese.activity = new Decimal(0);
             player.cheese.bruh = new Decimal(0);
-            if (new Decimal(Math.random() * 60).ceil().eq(21))
+            if (Math.ceil(Math.random() * 60) === 21) {
                 tmp.cheese.currentState = 7;
+            }
         }
     },
     cheeseGain() {
