@@ -95,8 +95,8 @@ addLayer("t", {
                 return new Decimal.pow(10, x);
             },
             display() {
-                var S = tmp[this.layer].buyables[this.id];
-                var SV = player[this.layer].buyables[this.id];
+                let S = tmp[this.layer].buyables[this.id];
+                let SV = player[this.layer].buyables[this.id];
                 return `Times Bought: ${format(SV, 0)}
                     ${format(S.effect)}x smaller Time Softcap I<br>
                     Cost: ${format(S.cost)} Time`;
