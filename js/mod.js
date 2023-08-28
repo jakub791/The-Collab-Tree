@@ -1,10 +1,10 @@
 const modInfo = {
     name: "The Collab Tree",
     id: "sedkjewheb",
-    author: "nobody",
+    author: "jakub, niko, incremental_gamer, thenonymous, :;:, and downvoid",
     pointsName: "points",
     modFiles: ["cheese.js", "tree.js", "h.js"],
-    discordName: "",
+    discordName: "The Collab Tree Discord",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players
     offlineLimit: 1 // In hours
@@ -13,13 +13,12 @@ const modInfo = {
 // Set your version in num and name
 let VERSION = {
     num: "0.0",
-    name: "Literally nothing"
+    name: "Nearly Nothing"
 };
 
 const changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`;
+		- The beginning.`;
 
 const winText =
     "Congratulations! You have reached the end and beaten this game, but for now...";
