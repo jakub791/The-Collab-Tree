@@ -1,6 +1,6 @@
 const modInfo = {
-    name: "The ??? Tree",
-    id: "mymod",
+    name: "The Collab Tree",
+    id: "sedkjewheb",
     author: "nobody",
     pointsName: "points",
     modFiles: ["cheese.js", "tree.js", "h.js"],
