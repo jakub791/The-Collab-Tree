@@ -52,8 +52,6 @@ class Decimal {
     static neg(value: DecimalSource): Decimal;
     static negate(value: DecimalSource): Decimal;
     static negated(value: DecimalSource): Decimal;
-    static sign(value: DecimalSource): number;
-    static sgn(value: DecimalSource): number;
     static round(value: DecimalSource): Decimal;
     static floor(value: DecimalSource): Decimal;
     static ceil(value: DecimalSource): Decimal;
