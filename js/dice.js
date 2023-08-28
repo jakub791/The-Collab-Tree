@@ -11,36 +11,50 @@ addLayer("tdr", {
         cooldown: 0,
     }},
     color: "#4BDC13",
-    effectDescription(){return "each having "+formatWhole(this.effect())+" sides."},
-    effect(){
-        let faces = new Decimal(2)
-        return faces
+    effectDescription() {
+        return "each having " + formatWhole(this.effect()) + " sides.";
+    },
+    effect() {
+        let faces = new Decimal(2);
+        return faces;
     },
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "dice", // Name of prestige currency
     baseResource: "points", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
+    baseAmount() {
+        return player.points;
+    }, // Get the current amount of baseResource
     type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     base: 10,
-    exponent(){
-        return 1
+    exponent() {
+        return 1;
     }, // Prestige currency exponent
-    gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
-        return mult
+    gainMult() {
+        // Calculate the multiplier for main currency from bonuses
+        mult = new Decimal(1);
+        return mult;
     },
-    gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
+    gainExp() {
+        // Calculate the exponent on main currency from bonuses
+        return new Decimal(1);
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "d", description: "D: Obtain some dice", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {
+            key: "d",
+            description: "D: Obtain some dice",
+            onPress() {
+                if (canReset(this.layer)) doReset(this.layer);
+            }
+        }
     ],
-    layerShown(){return true},
-    rollSumEffect(){
-        let eff = player.tdr.totalroll.add(1)
-        let exp = new Decimal(1)
-        return eff.pow(exp)
+    layerShown() {
+        return true;
+    },
+    rollSumEffect() {
+        let eff = player.tdr.totalroll.add(1);
+        let exp = new Decimal(1);
+        return eff.pow(exp);
     },
     roll(){
         let rolls = []
@@ -77,8 +91,10 @@ addLayer("tdr", {
 
     },
     tabFormat: {
-        "Dice": {
-            unlocked(){return true},
+        Dice: {
+            unlocked() {
+                return true;
+            },
             content: [
                 "main-display",
                 "prestige-button",
@@ -90,4 +106,4 @@ addLayer("tdr", {
             ]
         }
     }
-})
+});
