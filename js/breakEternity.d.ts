@@ -20,15 +20,9 @@ class Decimal {
     layer: number;
     constructor(value?: DecimalSource);
     get m(): number;
-    set m(value: number);
     get e(): number;
-    set e(value: number);
-    get s(): number;
-    set s(value: number);
     get mantissa(): number;
-    set mantissa(value: number);
     get exponent(): number;
-    set exponent(value: number);
     static fromComponents(sign: number, layer: number, mag: number): Decimal;
     static fromComponents_noNormalize(
         sign: number,
