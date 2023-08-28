@@ -9,7 +9,7 @@ addLayer("t", {
             time: new Decimal(1),
         };
     },
-    color: "#4BDC13",
+    color: "",
     row: 0,
     layerShown: true,
     
