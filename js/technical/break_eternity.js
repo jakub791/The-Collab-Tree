@@ -363,12 +363,6 @@ class Decimal {
     static negated(value) {
         return Decimal.fromValue_noAlloc(value).neg();
     }
-    static sign(value) {
-        return Decimal.fromValue_noAlloc(value).sign;
-    }
-    static sgn(value) {
-        return Decimal.fromValue_noAlloc(value).sign;
-    }
     static round(value) {
         return Decimal.fromValue_noAlloc(value).round();
     }
