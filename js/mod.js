@@ -23,7 +23,7 @@ const changelog = `<h1>Changelog:</h1><br>
 const winText =
     "Congratulations! You have reached the end and beaten this game, but for now...";
 
-const doNotCallTheseFunctionsEveryTick = [];
+const doNotCallTheseFunctionsEveryTick = ["roll"];
 
 function getStartPoints() {
     return modInfo.initialStartPoints;
