@@ -3,7 +3,7 @@ const modInfo = {
     id: "sedkjewheb",
     author: "jakub, niko, incremental_gamer, thenonymous, :;:, and downvoid",
     pointsName: "points",
-    modFiles: ["cheese.js", "tree.js", "h.js", "dice.js"],
+    modFiles: ["cheese.js", "tree.js", "time.js", "dice.js"],
     discordName: "The Collab Tree Discord",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players

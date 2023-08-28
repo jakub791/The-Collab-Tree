@@ -1,6 +1,6 @@
 addLayer("tdr", {
     name: "The Daily Roll", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "T", // This appears on the layer's node. Default is the id with the first letter capitalized
+    symbol: "D", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
@@ -10,7 +10,7 @@ addLayer("tdr", {
         rollType: "additive",
         cooldown: 0,
     }},
-    color: "#4BDC13",
+    color: "#fafafa",
     effectDescription() {
         return "each having " + formatWhole(this.effect()) + " sides.";
     },
@@ -38,7 +38,8 @@ addLayer("tdr", {
         // Calculate the exponent on main currency from bonuses
         return new Decimal(1);
     },
-    row: 0, // Row the layer is in on the tree (0 is the first row)
+    row: 1, // Row the layer is in on the tree (0 is the first row)
+    branches: ["t"],
     hotkeys: [
         {
             key: "d",

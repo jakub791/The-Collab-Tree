@@ -526,7 +526,7 @@ addLayer("cheese", {
         // Calculate the exponent on main currency from bonuses
         return new Decimal(1);
     },
-    row: 0, // Row the layer is in on the tree (0 is the first row)
+    row: "side", // Row the layer is in on the tree (0 is the first row)
     nodeStyle() {
         return {
             color: "rgb(244,144,12)",

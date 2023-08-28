@@ -9,8 +9,10 @@ addLayer("t", {
             time: new Decimal(1)
         };
     },
-    color: "#4BDC13",
-    row: 0,
+    color: "#006609",
+    row: "side",
+    tooltip: "Time",
+    displayRow: 0,
     layerShown: true,
 
     // ACTUAL CODE HERE ONWARDS
