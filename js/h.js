@@ -45,7 +45,7 @@ addLayer("t", {
       
       return base
     },
-    timeSCDisplay() {
+   /* timeSCDisplay() {
      let threshold = new Decimal(1e3)
      threshold = threshold.mul(buyableEffect("t", "MoreTimeI"))
      
@@ -60,7 +60,7 @@ addLayer("t", {
        power = power.mul(log)
      }
      return [threshold, power]
-    },
+    },*/
     buyables: {
      "FasterTimeI" : {
        title: `Time Fowarding`,
