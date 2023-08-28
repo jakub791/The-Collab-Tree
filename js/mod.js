@@ -3,7 +3,7 @@ const modInfo = {
     id: "sedkjewheb",
     author: "jakub, niko, incremental_gamer, thenonymous, :;:, and downvoid",
     pointsName: "points",
-    modFiles: ["cheese.js", "tree.js", "h.js"],
+    modFiles: ["cheese.js", "tree.js", "h.js", "dice.js"],
     discordName: "The Collab Tree Discord",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players
@@ -38,6 +38,7 @@ function getPointGen() {
 
     let gain = Decimal.dOne;
     if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);
+    gain=gain.mul(tmp.tdr.rollSumEffect);
     return gain;
 }
 
