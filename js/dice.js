@@ -6,6 +6,9 @@ addLayer("tdr", {
         unlocked: true,
 		points: new Decimal(0),
         totalroll: new Decimal(0),
+        lastRoll: "",
+        rollType: "additive",
+        cooldown: 0,
     }},
     color: "#4BDC13",
     effectDescription(){return "each having "+formatWhole(this.effect())+" sides."},
@@ -39,13 +42,51 @@ addLayer("tdr", {
         let exp = new Decimal(1)
         return eff.pow(exp)
     },
+    roll(){
+        let rolls = []
+        for(let i=0; i<player.tdr.points.toNumber(); i++){
+            rolls.push(new Decimal(Math.random()).mul(tmp.tdr.effect).floor().add(1).toNumber())
+        }
+        player.tdr.lastRoll = rolls.join(", ")
+        let score = new Decimal(0)
+        if (player.tdr.rollType == "additive"){
+            for (let m of rolls){score=score.add(m)}
+        } else {
+            score = new Decimal(1)
+            for (let m of rolls){score=score.mul(m)}
+
+        }
+        player.tdr.totalroll = player.tdr.totalroll.add(score)
+        return
+    },
+    clickables: {
+        11: {
+            canClick(){return player.tdr.cooldown<=0},
+            onClick(){
+                layers.tdr.roll()
+                player.tdr.cooldown=60
+            },
+            display(){return "Roll your dice.\nCooldown: "+formatTime(player.tdr.cooldown)}
+        }
+    },
+    update(diff){
+        if (player.tdr.cooldown > 0){
+            player.tdr.cooldown -= diff
+        }
+        player.tdr.cooldown=Math.max(player.tdr.cooldown,0)
+
+    },
     tabFormat: {
         "Dice": {
             unlocked(){return true},
             content: [
                 "main-display",
                 "prestige-button",
-                ["display-text", function(){return "Your rolls have added up to "+formatWhole(player.tdr.totalroll)+", multiplying point gain by "+format(tmp.tdr.rollSumEffect)}]
+                ["display-text", function(){return "Your rolls have added up to "+formatWhole(player.tdr.totalroll)+", multiplying point gain by "+format(tmp.tdr.rollSumEffect)}],
+                "blank",
+                "clickables",
+                "blank",
+                ["display-text", function(){return "Latest roll: "+player.tdr.lastRoll}]
             ]
         }
     }
