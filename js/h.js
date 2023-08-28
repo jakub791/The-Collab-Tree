@@ -30,7 +30,7 @@ addLayer("t", {
         let log = new Decimal.log(player.t.time, 10).add(1);
         if (player.t.time.gte(threshold)) {
             log = log.sub(3);
-            let powerlog = new Decimal.pow(log, 3);
+            let powerlog = Decimal.pow(log, 3);
             power = power.mul(powerlog);
             power = power.pow(1.25);
             base = base.div(power);
