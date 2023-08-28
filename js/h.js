@@ -27,7 +27,7 @@ addLayer("t", {
 
         let power = new Decimal(1);
         power = power.div(buyableEffect("t", "MoreTimeI"));
-        let log = new Decimal.log(player.t.time, 10).add(1);
+        let log = Decimal.log(player.t.time, 10).add(1);
         if (player.t.time.gte(threshold)) {
             log = log.sub(3);
             let powerlog = Decimal.pow(log, 3);
@@ -44,10 +44,10 @@ addLayer("t", {
 
         let power = new Decimal(1);
         power = power.div(buyableEffect("t", "MoreTimeI"));
-        let log = new Decimal.log(player.t.time, 10).add(1);
+        let log = Decimal.log(player.t.time, 10).add(1);
         if (player.t.time.gte(threshold)) {
             log = log.sub(3);
-            let powerlog = new Decimal.pow(log, 3);
+            let powerlog = Decimal.pow(log, 3);
             power = power.mul(powerlog);
             power = power.pow(1.25);
             power = power.mul(log);
@@ -59,10 +59,10 @@ addLayer("t", {
             title: `Time Fowarding`,
             description: `1.25x Time Speed`,
             cost(x) {
-                return new Decimal.pow(2, x).pow(2, x);
+                return Decimal.pow(2, x).pow(2, x);
             },
             effect(x) {
-                return new Decimal.pow(1.1, x);
+                return Decimal.pow(1.1, x);
             },
             display() {
                 var S = tmp[this.layer].buyables[this.id];
@@ -89,10 +89,10 @@ addLayer("t", {
             title: `Bigger Universe`,
             description: `10x Time Softcap I`,
             cost(x) {
-                return new Decimal.pow(3, x).pow(3.5, x).mul(1e3);
+                return Decimal.pow(3, x).pow(3.5, x).mul(1e3);
             },
             effect(x) {
-                return new Decimal.pow(10, x);
+                return Decimal.pow(10, x);
             },
             display() {
                 let S = tmp[this.layer].buyables[this.id];
