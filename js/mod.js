@@ -3,7 +3,7 @@ const modInfo = {
     id: "mymod",
     author: "nobody",
     pointsName: "points",
-    modFiles: ["cheese.js", "tree.js"],
+    modFiles: ["cheese.js", "h.js", "tree.js"],
     discordName: "",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players

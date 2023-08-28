@@ -16,9 +16,9 @@ addLayer("t", {
     
     // ACTUAL CODE HERE ONWARDS
     update(delta) {
-    player.t.time = player.t.time.mul((tmp.t.timeCalculation).pow(delta))
+    player.t.time = player.t.time.add((tmp.t.timeCalculation).mul(delta))
     },
-    timeCalculation() {
+    /*timeCalculation() {
       let base = new Decimal(1.1)
       base = base.mul(buyableEffect("t", "FasterTimeI"))
       
@@ -30,13 +30,19 @@ addLayer("t", {
       power = power.div(buyableEffect("t", "MoreTimeI"))
       let log = new Decimal.log(player.t.time, 10).add(1)
       if (player.t.time.gte(threshold)) {
-        log = log.sub(3)
-        let powerlog = new Decimal.pow(log, 3)
+        log = log.sub(4)
+        let powerlog = new Decimal.pow(3, log)
         power = power.mul(powerlog)
         power = power.pow(1.25)
         base = base.div(power)
         }
         // f(x) = ( ( log10( time + 1 ) ) ^ 3 ) ^ 1.25
+      return base
+    },*/
+    timeCalculation() {
+      let base = new Decimal(1)
+      base = base.mul(buyableEffect("t", "FasterTimeI"))
+      
       return base
     },
     timeSCDisplay() {
@@ -47,8 +53,8 @@ addLayer("t", {
      power = power.div(buyableEffect("t", "MoreTimeI"))
      let log = new Decimal.log(player.t.time, 10).add(1)
      if (player.t.time.gte(threshold)) {
-       log = log.sub(3)
-       let powerlog = new Decimal.pow(log, 3)
+       log = log.sub(4)
+       let powerlog = new Decimal.pow(3, log)
        power = power.mul(powerlog)
        power = power.pow(1.25)
        power = power.mul(log)

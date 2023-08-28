@@ -16,7 +16,10 @@ function getStartOptions() {
         tooltipForcing: true
     };
 }
-
+let notations = ['Standard' , 'Scientific' , 'Mixed Scientific', 'Engineering' , "Mixed Engineering" , "Hyper-E" , "Letters" , "Hexa" , "Binary" , "Genetic" , "Chemistry", "Blind", "Cancer"]
+function changeNotation() {
+	player.notation = notations[(notations.indexOf(player.notation) + 1) % notations.length]
+}
 function toggleOpt(name) {
     if (name === "oldStyle" && styleCooldown > 0) return;
     options[name] = !options[name];
