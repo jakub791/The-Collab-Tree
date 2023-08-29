@@ -16,7 +16,7 @@ function getStartOptions() {
         tooltipForcing: true
     };
 }
-let notations = ['Standard' , 'Scientific' , 'Mixed Scientific', 'Engineering' , "Mixed Engineering" , "Hyper-E" , "Letters" , "Hexa" , "Binary" , "Genetic" , "Chemistry", "Blind", "Cancer"]
+let notations = ['Standard' , 'Scientific' , 'Mixed Scientific', 'Engineering' , "Mixed Engineering" , "Hyper-E" , "Letters" , "Hexa" , "Binary" , "Genetic" , "Chemistry", "Blind", "Cancer", "Secret"]
 function changeNotation() {
 	player.notation = notations[(notations.indexOf(player.notation) + 1) % notations.length]
 }
