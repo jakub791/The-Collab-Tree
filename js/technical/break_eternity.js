@@ -805,6 +805,12 @@ class Decimal {
         return this;
     }
     fromNumber(value) {
+        if (!Number.isFinite(value)) {
+            this.sign = Math.sign(value);
+            this.mag = value;
+            this.layer = value;
+            return this;
+        }
         this.mag = Math.abs(value);
         this.sign = Math.sign(value);
         this.layer = 0;
