@@ -113,7 +113,7 @@ function t3format(x,mult=false,y,z) {
 	let t3to = ["k","k","c","c","c","k","k","c","k","c"]
 	if (mult && y>0 && x<10) t3ones = ["","","D","Tr","T","P","Ex","Z","Y","N"]
 	let t3tens = ["","","I","Tr","Te","P","E","Z","Y","N"]
-	let t3hunds = ["","Ho","Do","Tro","To","Po","Exo","Zo","Yo","No"]
+	let t3hunds = ["","Ho","Bo","Tro","To","Po","Exo","Zo","Yo","No"]
 	let t3f = t3ills[x]
 	if ((mult && y>0) || z>=1e3) t3f = t3ones[x]
 	let t3t = t3tens[Math.floor(x/10)%10]
@@ -127,17 +127,17 @@ function t3format(x,mult=false,y,z) {
 }
 
 function t4format(x,m) {
-	let t4ills = ["","aL","eJ","iJ","AsT","uN","rM","oV","oL","eT","O","aX","uP","rS","lT"]
-	let t4m = ["","K","M","G","","L","F","J","S","B","Gl","G","S","V","M"]
-	let t4f = t4ills[x]
-	if (m<2) t4f = t4m[x]+t4f
-	return t4f
+    let t4ills = ["","aL","eJ","iJ","AsT","uN","rM","oV","oL","eT","O","aX","uP","rS","lT","eT","eN","yP","rC","lR","mN","rA","uC","olT","rieV","esoN","emP","esT","entI","otaE","ameL","eglE","hI","obA","akU","auR","ikU","enkI","atA","amI","uzU","aG"] //eT is the start of the extending, beginning at 10^10^10^45. Currently at 10^10^10^123 (Lagillion). Previous extensions: 10^10^10^120 (Suzumillion), 10^10^10^117 (Namillion), 10^10^10^114 (Matatabillion), 10^10^10^111 (Genkillion) 10^10^10^108 (Mikuillion), 10^10^10^105 (Laurillion), 10^10^10^102 (Sakuzillion), 10^10^10^99 (Kobarillion), 10^10^10^96 (Phigrillion), 10^10^10^93 (Aeglesillion), 10^10^10^90 (Camellillion), 10^10^10^87 (Rotaenillion), 10^10^10^84 (Pentimentillion), 10^10^10^81 (Testifillion) 10^10^10^78 (Tempestillion), 10^10^10^75 (Resonillion) 10^10^10^72 (Grievillion), 10^10^10^69 (nice)(Voltillion), 10^10^10^66 (Yucillion), 10^10^10^63 (Fractillion), 10^10^10^60 (Omnillion), Ultrillion (10^10^10^57), Archillion (10^10^10^54), Hyperillion (10^10^10^51), Xenoillion (10^10^10^48), Metaillion (10^10^10^45)
+    let t4m = ["","K","M","G","","L","F","J","S","B","Gl","G","S","V","M","M","X","H","A","U","O","F","Y","V","G","R","T","T","P","R","C","A","P","K","S","L","M","G","M","N","S","L"]
+    let t4f = t4ills[x]
+    if (m<2) t4f = t4m[x]+t4f
+    return t4f
 }
 
 function standard(decimal, precision){
 	decimal = new Decimal(decimal)
 	if (decimal.sign < 0) return "-"+standard(decimal.neg(), precision)
-	if (decimal.layer > 4 && decimal.mag>=0 || (decimal.mag >= Math.log10(3e45) && decimal.layer == 4)) {
+	if (decimal.layer > 4 && decimal.mag>=0 || (decimal.mag >= Math.log10(3e123) && decimal.layer == 4)) {
 		var slog = decimal.slog()
 		if (slog.gte(1e9)) return "F" + formatWhole(slog.floor())
 		if (slog.gte(100)) return Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) + "F" + commaFormat(slog.floor(), 0)
@@ -269,6 +269,68 @@ function format(decimal, precision=3) {
 	}
 	else if (player.notation == 'Blind') {
 		return letter(decimal, precision, ' ')
+	}
+	else if (player.notation == 'Secret') {
+		return letter(decimal, precision, ["We're", "no", "strangers", "to", "love",
+	"You", "know", "the", "rules,", "and", "so", "do", "I",
+"A", "full", "commitment's", "what", "I'm", "thinking", "of",
+"You", "wouldn't", "get", "this", "from", "any", "other", "guy",
+"I", "just", "wanna", "tell", "you", "how", "I'm", "feeling",
+"Gotta", "make", "you", "understand",
+"Never", "gonna", "give", "you", "up",
+"Never", "gonna", "let", "you", "down",
+"Never", "gonna", "run", "around", "and", "desert", "you",
+"Never", "gonna", "make", "you", "cry",
+"Never", "gonna", "say", "goodbye",
+"Never", "gonna", "tell", "a", "lie", "and", "hurt", "you",
+"We've", "known", "each", "other", "for", "so", "long",
+"Your", "heart's", "been", "aching,", "but", "you're", "too", "shy", "to", "say", "it",
+"Inside,", "we", "both", "know", "what's", "been", "going", "on",
+"We", "know", "the", "game", "and", "we're", "gonna", "play", "it",
+"And", "if", "you", "ask", "me", "how", "I'm", "feeling",
+"Don't", "tell", "me", "you're", "too", "blind", "to", "see",
+"Never(2)", "gonna(2)", "give(2)", "you(2)", "up(2)",
+"Never(2)", "gonna(2)", "let(2)", "you(2)", "down(2)",
+"Never(2)", "gonna(2)", "run(2)", "around(2)", "and(2)", "desert(2)", "you(2)",
+"Never(2)", "gonna(2)", "make(2)", "you(2)", "cry(2)",
+"Never(2)", "gonna(2)", "say(2)", "goodbye(2)",
+"Never(2)", "gonna(2)", "tell(2)", "a(2)", "lie(2)", "and(2)", "hurt(2)", "you(2)",
+"Never(3)", "gonna(3)", "give(3)", "you(3)", "up(3)",
+"Never(3)", "gonna(3)", "let(3)", "you(3)", "down(3)",
+"Never(3)", "gonna(3)", "run(3)", "around(3)", "and(3)", "desert(3)", "you(3)",
+"Never(3)", "gonna(3)", "make(3)", "you(3)", "cry(3)",
+"Never(3)", "gonna(3)", "say(3)", "goodbye(3)",
+"Never(3)", "gonna(3)", "tell(3)", "a(3)", "lie(3)", "and(3)", "hurt(3)", "you(3)",
+"We've(2)", "known(2)", "each(2)", "other(2)", "for(2)", "so(2)", "long(2)",
+"Your(2)", "heart's(2)", "been(2)", "aching,(2)", "but(2)", "you're(2)", "too(2)", "shy(2)", "to(2)", "say(2)", "it(2)",
+"Inside,(2)", "we(2)", "both(2)", "know(2)", "what's(2)", "been(2)", "going(2)", "on(2)",
+"We(2)", "know(2)", "the(2)", "game(2)", "and(2)", "we're(2)", "gonna(2)", "play(2)", "it(2)",
+"I(2)", "just(2)", "wanna(2)", "tell(2)", "you(2)", "how(2)", "I'm(2)", "feeling(2)",
+"Gotta(2)", "make(2)", "you(2)", "understand(2)",
+"Never(4)", "gonna(4)", "give(4)", "you(4)", "up(4)",
+"Never(4)", "gonna(4)", "let(4)", "you(4)", "down(4)",
+"Never(4)", "gonna(4)", "run(4)", "around(4)", "and(4)", "desert(2)", "you(2)",
+"Never(4)", "gonna(4)", "make(4)", "you(4)", "cry(4)",
+"Never(4)", "gonna(4)", "say(4)", "goodbye(4)",
+"Never(4)", "gonna(4)", "tell(4)", "a(4)", "lie(4)", "and(5)", "hurt(5)", "you(5)",
+"Never(5)", "gonna(5)", "give(5)", "you(5)", "up(5)",
+"Never(5)", "gonna(5)", "let(5)", "you(5)", "down(5)",
+"Never(5)", "gonna(5)", "run(5)", "around(5)", "and(5)", "desert(5)", "you(5)",
+"Never(5)", "gonna(5)", "make(5)", "you(5)", "cry(5)",
+"Never(5)", "gonna(5)", "say(5)", "goodbye(5)",
+"Never(5)", "gonna(5)", "tell(5)", "a(5)", "lie(5)", "and(5)", "hurt(5)", "you(5)",
+"Never(6)", "gonna(6)", "give(5)", "you(5)", "up(5)",
+"Never(6)", "gonna(6)", "let(6)", "you(6)", "down(6)",
+"Never(6)", "gonna(6)", "run(6)", "around(6)", "and(6)", "desert(6)", "you(6)",
+"Never(6)", "gonna(6)", "make(6)", "you(6)", "cry(6)",
+"Never(6)", "gonna(6)", "say(6)", "goodbye(6)",
+"Never(6)", "gonna(6)", "tell(6)", "a(6)", "lie(6)", "and(6)", "hurt(6)", "you(6)",
+"Never(7)", "gonna(7)", "give(7)", "you(7)", "up(7)",
+"Never(7)", "gonna(7)", "let(7)", "you(7)", "down(7)",
+"Never(7)", "gonna(7)", "run(7)", "around(7)", "and(7)", "desert(7)", "you(7)",
+"Never(7)", "gonna(7)", "make(7)", "you(7)", "cry(7)",
+"Never(7)", "gonna(7)", "say(7)", "goodbye(7)",
+"Never(7)", "gonna(7)", "tell(7)", "a(7)", "lie(7)", "and(7)", "hurt(7)", "you(7)",])
 	}
 	else return formatSciEng(decimal, precision)
 }
