@@ -326,7 +326,6 @@ function standard(decimal, precision) {
     if (decimal.log10().lt(1e9))
         m = m.toStringWithDecimalPlaces(precision) + " ";
     else m = "";
-    console.log(illion.log10(), "\n", illion.log10().div(3));
     let t2illion = illion.max(1).log10().div(3).floor();
     let t3illion = t2illion.max(1).log10().div(3).floor();
     let t4illion = t3illion.max(1).log10().div(3).floor();
