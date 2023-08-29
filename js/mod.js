@@ -3,7 +3,7 @@ const modInfo = {
     id: "mymod",
     author: "nobody",
     pointsName: "points",
-    modFiles: ["cheese.js", "h.js", "tree.js", "dice.js",";:;.js",],
+    modFiles: ["cheese.js", "h.js", "tree.js", "dice.js","reipist.js",],
     discordName: "",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players
@@ -24,7 +24,7 @@ const changelog = `<h1>Changelog:</h1><br>
 const winText =
     "Congratulations! You have reached the end and beaten this game, but for now...";
 
-const doNotCallTheseFunctionsEveryTick = [];
+const doNotCallTheseFunctionsEveryTick = ["roll"];
 
 function getStartPoints() {
     return modInfo.initialStartPoints;
