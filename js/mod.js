@@ -38,6 +38,7 @@ function getPointGen() {
 
     let gain = Decimal.dOne;
     if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);
+    gain = gain.mul(tmp.tdr.rollSumEffect)
     return gain;
 }
 
