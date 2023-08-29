@@ -7,41 +7,6 @@
 })(this, function () {
     "use strict";
 
-    var padEnd = function (string, maxLength, fillString) {
-        if (string === null || maxLength === null) {
-            return string;
-        }
-
-        var result = String(string);
-        var targetLen =
-            typeof maxLength === "number" ? maxLength : parseInt(maxLength, 10);
-
-        if (isNaN(targetLen) || !isFinite(targetLen)) {
-            return result;
-        }
-
-        var length = result.length;
-        if (length >= targetLen) {
-            return result;
-        }
-
-        var filled = fillString === null ? "" : String(fillString);
-        if (filled === "") {
-            filled = " ";
-        }
-
-        var fillLen = targetLen - length;
-
-        while (filled.length < fillLen) {
-            filled += filled;
-        }
-
-        var truncated =
-            filled.length > fillLen ? filled.substr(0, fillLen) : filled;
-
-        return result + truncated;
-    };
-
     var MAX_SIGNIFICANT_DIGITS = 17; //Maximum number of digits of precision to assume in Number
 
     var EXP_LIMIT = 9e15; //If we're ABOVE this value, increase a layer. (9e15 is close to the largest integer that can fit in a Number.)
@@ -83,14 +48,6 @@
 
     var FC_NN = function FC_NN(sign, layer, mag) {
         return Decimal.fromComponents_noNormalize(sign, layer, mag);
-    };
-
-    var ME = function ME(mantissa, exponent) {
-        return Decimal.fromMantissaExponent(mantissa, exponent);
-    };
-
-    var ME_NN = function ME_NN(mantissa, exponent) {
-        return Decimal.fromMantissaExponent_noNormalize(mantissa, exponent);
     };
 
     var decimalPlaces = function decimalPlaces(value, places) {
@@ -149,8 +106,6 @@
         return Math.exp(l) / scal1;
     };
 
-    var twopi = 6.2831853071795864769252842; // 2*pi
-    var EXPN1 = 0.36787944117144232159553; // exp(-1)
     var OMEGA = 0.56714329040978387299997; // W(1, 0)
     //from https://math.stackexchange.com/a/465183
     // The evaluation can become inaccurate very close to the branch point
@@ -597,15 +552,15 @@
                 return D(value).root(other);
             };
 
-            Decimal.factorial = function (value, other) {
+            Decimal.factorial = function (value) {
                 return D(value).factorial();
             };
 
-            Decimal.gamma = function (value, other) {
+            Decimal.gamma = function (value) {
                 return D(value).gamma();
             };
 
-            Decimal.lngamma = function (value, other) {
+            Decimal.lngamma = function (value) {
                 return D(value).lngamma();
             };
 
@@ -1748,7 +1703,6 @@
             };
 
             Decimal.prototype.lt = function (value) {
-                var decimal = D(value);
                 return this.cmp(value) === -1;
             };
 
@@ -1757,7 +1711,6 @@
             };
 
             Decimal.prototype.gt = function (value) {
-                var decimal = D(value);
                 return this.cmp(value) === 1;
             };
 
@@ -2536,7 +2489,7 @@
             // fail to converge, or can end up on the wrong branch.
             var d_lambertw = function (z, tol = 1e-10) {
                 var w;
-                var ew, wew, wewz, wn;
+                var ew, wewz, wn;
 
                 if (!Number.isFinite(z.mag)) {
                     return z;
@@ -2549,7 +2502,6 @@
                     return OMEGA;
                 }
 
-                var absz = Decimal.abs(z);
                 //Get an initial guess for Halley's method
                 w = Decimal.ln(z);
 
