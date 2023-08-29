@@ -6,17 +6,16 @@ addLayer("t", {
         return {
             unlocked: true,
             points: new Decimal(0),
-            time: new Decimal(1),
+            time: new Decimal(1)
         };
     },
     color: "",
     row: 0,
     layerShown: true,
-    
-    
+
     // ACTUAL CODE HERE ONWARDS
     update(delta) {
-    player.t.time = player.t.time.add((tmp.t.timeCalculation).mul(delta))
+        player.t.time = player.t.time.add(tmp.t.timeCalculation.mul(delta));
     },
     /*timeCalculation() {
       let base = new Decimal(1.1)
@@ -40,12 +39,12 @@ addLayer("t", {
       return base
     },*/
     timeCalculation() {
-      let base = new Decimal(1)
-      base = base.mul(buyableEffect("t", "FasterTimeI"))
-      
-      return base
+        let base = new Decimal(1);
+        base = base.mul(buyableEffect("t", "FasterTimeI"));
+
+        return base;
     },
-   /* timeSCDisplay() {
+    /* timeSCDisplay() {
      let threshold = new Decimal(1e3)
      threshold = threshold.mul(buyableEffect("t", "MoreTimeI"))
      
@@ -62,65 +61,111 @@ addLayer("t", {
      return [threshold, power]
     },*/
     buyables: {
-     "FasterTimeI" : {
-       title: `Time Fowarding`,
-       description: `1.25x Time Speed`,
-       cost(x) { return new Decimal.pow(2, x).pow(2, x) },
-       effect(x) { return new Decimal.pow(1.1, x) },
-       display() {
-       var S = tmp[this.layer].buyables[this.id]
-       var SV = player[this.layer].buyables[this.id]
-       return `Times Bought: ${format(SV, 0)}
+        FasterTimeI: {
+            title: `Time Fowarding`,
+            description: `1.25x Time Speed`,
+            cost(x) {
+                return new Decimal.pow(2, x).pow(2, x);
+            },
+            effect(x) {
+                return new Decimal.pow(1.1, x);
+            },
+            display() {
+                var S = tmp[this.layer].buyables[this.id];
+                var SV = player[this.layer].buyables[this.id];
+                return `Times Bought: ${format(SV, 0)}
                ${format(S.effect)}x Time Speed<br>
-               Cost: ${format(S.cost)} Time`
-       },
-       buy() {
-         player[this.layer].time = player[this.layer].time.sub(this.cost())
-         setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
-       },
-       canAfford() {
-         return player[this.layer].time.gte(this.cost())
-       }
-     },
-    "MoreTimeI": {
-        title: `Bigger Universe`,
-        description: `10x Time Softcap I`,
-        cost(x) { return new Decimal.pow(3, x).pow(3.5, x).mul(1e3) },
-        effect(x) { return new Decimal.pow(10, x) },
-        display() {
-          var S = tmp[this.layer].buyables[this.id]
-          var SV = player[this.layer].buyables[this.id]
-          return `Times Bought: ${format(SV, 0)}
+               Cost: ${format(S.cost)} Time`;
+            },
+            buy() {
+                player[this.layer].time = player[this.layer].time.sub(
+                    this.cost()
+                );
+                setBuyableAmount(
+                    this.layer,
+                    this.id,
+                    getBuyableAmount(this.layer, this.id).add(1)
+                );
+            },
+            canAfford() {
+                return player[this.layer].time.gte(this.cost());
+            }
+        },
+        MoreTimeI: {
+            title: `Bigger Universe`,
+            description: `10x Time Softcap I`,
+            cost(x) {
+                return new Decimal.pow(3, x).pow(3.5, x).mul(1e3);
+            },
+            effect(x) {
+                return new Decimal.pow(10, x);
+            },
+            display() {
+                var S = tmp[this.layer].buyables[this.id];
+                var SV = player[this.layer].buyables[this.id];
+                return `Times Bought: ${format(SV, 0)}
                     ${format(S.effect)}x smaller Time Softcap I<br>
-                    Cost: ${format(S.cost)} Time`
-        },
-        buy() {
-          player[this.layer].time = player[this.layer].time.sub(this.cost())
-          setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
-        },
-        canAfford() {
-          return player[this.layer].time.gte(this.cost())
-        },
-        unlocked() {
-          return player[this.layer].buyables["FasterTimeI"].gte(5)
+                    Cost: ${format(S.cost)} Time`;
+            },
+            buy() {
+                player[this.layer].time = player[this.layer].time.sub(
+                    this.cost()
+                );
+                setBuyableAmount(
+                    this.layer,
+                    this.id,
+                    getBuyableAmount(this.layer, this.id).add(1)
+                );
+            },
+            canAfford() {
+                return player[this.layer].time.gte(this.cost());
+            },
+            unlocked() {
+                return player[this.layer].buyables["FasterTimeI"].gte(5);
+            }
         }
-      }
-    }, 
+    },
     tabFormat: {
-    "Main": {
-      content: [
-      ['raw-html', () => {return `Time is at ${format(player.t.time)} μs`}],
-      ['raw-html', () => {return `Time moves at speed of ${formatSmall(tmp.t.timeCalculation)}x / sec`}],
-       ['raw-html', () => {
-         const [threshold, power] = tmp.t.timeSCDisplay
-         if (player.t.time.gte(threshold)) {
-           return `SOFTCAP I: After ${format(threshold)} worth of Time, it gets a debuff of /${format(power)} gain`
-         }
-         return ``}],
-      "blank",
-      "blank",
-      ["row", [["buyable", "FasterTimeI"], ["buyable", "MoreTimeI"]]]
-      ]
-    }
+        Main: {
+            content: [
+                [
+                    "raw-html",
+                    () => {
+                        return `Time is at ${format(player.t.time)} μs`;
+                    }
+                ],
+                [
+                    "raw-html",
+                    () => {
+                        return `Time moves at speed of ${formatSmall(
+                            tmp.t.timeCalculation
+                        )}x / sec`;
+                    }
+                ],
+                [
+                    "raw-html",
+                    () => {
+                        const [threshold, power] = tmp.t.timeSCDisplay;
+                        if (player.t.time.gte(threshold)) {
+                            return `SOFTCAP I: After ${format(
+                                threshold
+                            )} worth of Time, it gets a debuff of /${format(
+                                power
+                            )} gain`;
+                        }
+                        return ``;
+                    }
+                ],
+                "blank",
+                "blank",
+                [
+                    "row",
+                    [
+                        ["buyable", "FasterTimeI"],
+                        ["buyable", "MoreTimeI"]
+                    ]
+                ]
+            ]
+        }
     }
 });
