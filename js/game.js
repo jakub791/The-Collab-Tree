@@ -1,13 +1,12 @@
 let player;
 let needCanvasUpdate = true;
 
-// Don't change this
 const TMT_VERSION = {
     tmtNum: "2.6.6.2",
     tmtName: "Fixed Reality"
 };
 
-function getResetGain(layer, useType = null) {
+function getResetGain(layer, useType) {
     let type = useType;
     if (!useType) {
         type = tmp[layer].type;
@@ -16,7 +15,7 @@ function getResetGain(layer, useType = null) {
     }
     if (tmp[layer].type == "none") return Decimal.dZero;
     if (tmp[layer].gainExp.eq(Decimal.dZero)) return decimalZero;
-    if (type == "static") {
+    if (type === "static") {
         if (
             !tmp[layer].canBuyMax ||
             tmp[layer].baseAmount.lt(tmp[layer].requires)
@@ -35,7 +34,7 @@ function getResetGain(layer, useType = null) {
             .sub(player[layer].points)
             .add(Decimal.dOne)
             .max(Decimal.dOne);
-    } else if (type == "normal") {
+    } else if (type === "normal") {
         if (tmp[layer].baseAmount.lt(tmp[layer].requires)) return Decimal.dZero;
         let gain = tmp[layer].baseAmount
             .div(tmp[layer].requires)
@@ -52,7 +51,7 @@ function getResetGain(layer, useType = null) {
                 );
         gain = gain.times(tmp[layer].directMult);
         return gain.floor().max(Decimal.dZero);
-    } else if (type == "custom") {
+    } else if (type === "custom") {
         return layers[layer].getResetGain();
     } else {
         return decimalZero;
@@ -66,12 +65,12 @@ function getNextAt(layer, canMax = false, useType) {
         if (layers[layer].getNextAt !== undefined)
             return layers[layer].getNextAt(canMax);
     }
-    if (tmp[layer].type == "none") return new Decimal(Infinity);
+    if (tmp[layer].type === "none") return new Decimal(Infinity);
 
     if (tmp[layer].gainMult.lte(Decimal.dZero)) return new Decimal(Infinity);
     if (tmp[layer].gainExp.lte(Decimal.dZero)) return new Decimal(Infinity);
 
-    if (type == "static") {
+    if (type === "static") {
         if (!tmp[layer].canBuyMax) canMax = false;
         let amt = player[layer].points
             .plus(
@@ -89,7 +88,7 @@ function getNextAt(layer, canMax = false, useType) {
             .max(tmp[layer].requires);
         if (tmp[layer].roundUpCost) cost = cost.ceil();
         return cost;
-    } else if (type == "normal") {
+    } else if (type === "normal") {
         let next = tmp[layer].resetGain.add(1).div(tmp[layer].directMult);
         if (next.gte(tmp[layer].softcap))
             next = next
@@ -107,7 +106,7 @@ function getNextAt(layer, canMax = false, useType) {
             .max(tmp[layer].requires);
         if (tmp[layer].roundUpCost) next = next.ceil();
         return next;
-    } else if (type == "custom") {
+    } else if (type === "custom") {
         return layers[layer].getNextAt(canMax);
     } else {
         return decimalZero;
@@ -119,7 +118,6 @@ function softcap(value, cap, power = 0.5) {
     else return value.pow(power).times(cap.pow(decimalOne.sub(power)));
 }
 
-// Return true if the layer should be highlighted. By default checks for upgrades only.
 function shouldNotify(layer) {
     for (const id in tmp[layer].upgrades) {
         if (isPlainObject(layers[layer].upgrades[id])) {
@@ -168,9 +166,9 @@ function shouldNotify(layer) {
 function canReset(layer) {
     if (layers[layer].canReset !== undefined)
         return run(layers[layer].canReset, layers[layer]);
-    else if (tmp[layer].type == "normal")
+    else if (tmp[layer].type === "normal")
         return tmp[layer].baseAmount.gte(tmp[layer].requires);
-    else if (tmp[layer].type == "static")
+    else if (tmp[layer].type === "static")
         return tmp[layer].baseAmount.gte(tmp[layer].nextAt);
     else return false;
 }
@@ -191,7 +189,7 @@ function layerDataReset(layer, keep = []) {
         forceTooltip: player[layer].forceTooltip,
         noRespecConfirm: player[layer].noRespecConfirm,
         prevTab: player[layer].prevTab
-    }; // Always keep these
+    };
 
     for (const thing in keep) {
         if (player[layer][keep[thing]] !== undefined)
@@ -224,16 +222,16 @@ function generatePoints(layer, diff) {
 }
 
 function doReset(layer, force = false) {
-    if (tmp[layer].type == "none") return;
-    let row = tmp[layer].row;
+    if (tmp[layer].type === "none") return;
+    const row = tmp[layer].row;
     if (!force) {
         if (tmp[layer].canReset === false) return;
 
         if (tmp[layer].baseAmount.lt(tmp[layer].requires)) return;
         let gain = tmp[layer].resetGain;
-        if (tmp[layer].type == "static") {
+        if (tmp[layer].type === "static") {
             if (tmp[layer].baseAmount.lt(tmp[layer].nextAt)) return;
-            gain = tmp[layer].canBuyMax ? gain : 1;
+            gain = tmp[layer].canBuyMax ? gain : Decimal.dOne;
         }
 
         layers[layer].onPrestige?.(gain);
@@ -255,8 +253,8 @@ function doReset(layer, force = false) {
         }
     }
 
-    if (run(layers[layer].resetsNothing, layers[layer])) return;
-    tmp[layer].baseAmount = decimalZero; // quick fix
+    if (tmp[layer].resetsNothing) return;
+    tmp[layer].baseAmount = Decimal.dZero;
 
     for (const layerResetting in layers) {
         if (
@@ -266,7 +264,7 @@ function doReset(layer, force = false) {
             completeChallenge(layerResetting);
     }
 
-    player.points = row == 0 ? decimalZero : getStartPoints();
+    player.points = row == 0 ? Decimal.dZero : getStartPoints();
 
     for (let x = row; x >= 0; x--) rowReset(x, layer);
     for (const r in OTHER_LAYERS) {
@@ -283,7 +281,7 @@ function resetRow(row) {
     if (
         prompt(
             'Are you sure you want to reset this row? It is highly recommended that you wait until the end of your current run before doing this! Type "I WANT TO RESET THIS" to confirm'
-        ) != "I WANT TO RESET THIS"
+        ) !== "I WANT TO RESET THIS"
     )
         return;
     const preLayers = ROW_LAYERS[row - 1];
@@ -342,11 +340,7 @@ function completeChallenge(layer) {
             player[layer].challenges[id],
             tmp[layer].challenges[id].completionLimit
         );
-        if (layers[layer].challenges[id].onComplete)
-            run(
-                layers[layer].challenges[id].onComplete,
-                layers[layer].challenges[id]
-            );
+        layers[layer].challenges[id].onComplete?.();
     }
     Vue.set(player[layer], "activeChallenge", null);
     layers[layer].challenges[id].onExit?.();

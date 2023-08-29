@@ -5,8 +5,8 @@ addLayer("t", {
     startData() {
         return {
             unlocked: true,
-            points: new Decimal(0),
-            time: new Decimal(1)
+            points: Decimal.dZero,
+            time: Decimal.dOne
         };
     },
     color: "",
@@ -25,68 +25,67 @@ addLayer("t", {
     },
     buyables: {
         FasterTimeI: {
-            title: `<t class='CTextS'>Time Fowarding</t>`,
-            description: `1.25x Time Speed`,
+            title: `<span class="CTextS">Time Fowarding</span>`,
+            description: "1.25x Time Speed",
             cost(x) {
                 return Decimal.pow(2, x).pow(2, x);
             },
             effect(x) {
-                let pow = new Decimal(1.75);
-                pow = pow.add(buyableEffect(this.layer, "BetterBaseI"));
-                return Decimal.pow(pow, x);
+                const power = new Decimal(1.75).add(
+                    buyableEffect(this.layer, "BetterBaseI")
+                );
+                return power.pow(x);
             },
             display() {
-                var S = tmp[this.layer].buyables[this.id];
-                var SV = player[this.layer].buyables[this.id];
-                return `<t class='CTextXS'>Times Bought: ${format(SV, 0)}
-               ${format(S.effect)}x Time Speed<br>
-               Cost: ${formatTime(S.cost)} Time</t>`;
+                return `<span class="CTextXS">Times Bought: ${formatWhole(
+                    getBuyableAmount("t", "FasterTimeI")
+                )}
+               ${format(tmp.t.buyables.FasterTimeI.effect)}x Time Speed<br>
+               Cost: ${formatTime(
+                   tmp.t.buyables.FasterTimeI.cost
+               )} Time</span>`;
             },
             buy() {
-                player[this.layer].time = player[this.layer].time.sub(
-                    this.cost()
+                player.t.time = player.t.time.sub(
+                    tmp.t.buyables.FasterTimeI.cost
                 );
-                setBuyableAmount(
-                    this.layer,
-                    this.id,
-                    getBuyableAmount(this.layer, this.id).add(1)
-                );
+                addBuyables("t", "FasterTimeI", Decimal.dOne);
             },
             canAfford() {
-                return player[this.layer].time.gte(this.cost());
+                return player.t.time.gte(tmp.t.buyables.FasterTimeI.cost);
             }
         },
         BetterBaseI: {
-            title: `<t class='CTextS'>Time Streching</t>`,
+            title: `<span class="CTextS">Time Streching</span>`,
             description: ``,
             cost(x) {
                 return Decimal.pow(3, x).pow(2, x).mul(500);
             },
             effect(x) {
-                return Decimal.mul(0.125, x);
+                return x.div(8);
             },
             display() {
-                var S = tmp[this.layer].buyables[this.id];
-                var SV = player[this.layer].buyables[this.id];
-                return `<t class='CTextXS'>Times Bought: ${format(SV, 0)}
-                    +${format(S.effect)} Time Forwarding base<br>
-                    Cost: ${formatTime(S.cost)} Time</t>`;
+                return `<span class="CTextXS">Times Bought: ${formatWhole(
+                    getBuyableAmount("t", "BetterBaseI")
+                )}
+                    +${format(
+                        buyableEffect("t", "BetterBaseI")
+                    )} Time Forwarding base<br>
+                    Cost: ${formatTime(
+                        tmp.t.buyables.BetterBaseI.cost
+                    )} Time</span>`;
             },
             buy() {
-                player[this.layer].time = player[this.layer].time.sub(
-                    this.cost()
+                player.t.time = player.t.time.sub(
+                    tmp.t.buyables.BetterBaseI.cost
                 );
-                setBuyableAmount(
-                    this.layer,
-                    this.id,
-                    getBuyableAmount(this.layer, this.id).add(1)
-                );
+                addBuyables("t", "BetterBaseI", Decimal.dOne);
             },
             canAfford() {
-                return player[this.layer].time.gte(this.cost());
+                return player.t.time.gte(tmp.t.buyables.BetterBaseI.cost);
             },
             unlocked() {
-                return player[this.layer].buyables["FasterTimeI"].gte(5);
+                return player.t.buyables.FasterTimeI.gte(5);
             }
         }
     },
@@ -96,17 +95,17 @@ addLayer("t", {
                 [
                     "raw-html",
                     () => {
-                        return `<t class="CText">Time is at <t class="W-Highlighter">${formatTime(
+                        return `<span class="CText">Time is at <span class="W-Highlighter">${formatTime(
                             player.t.time
-                        )}</t></t>`;
+                        )}</span></span>`;
                     }
                 ],
                 [
                     "raw-html",
                     () => {
-                        return `<t class="CTextS">Time moves at speed of  <t class="W-Highlighter">${formatTime(
+                        return `<span class="CTextS">Time moves at speed of  <span class="W-Highlighter">${formatTime(
                             tmp.t.timeCalculation
-                        )}</t> / sec</t>`;
+                        )}</span> / sec</span>`;
                     }
                 ],
                 "blank",
