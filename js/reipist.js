@@ -8,6 +8,7 @@ addLayer("P", {
     color: "#FFFFFF",
     resource: "Points",
     row: 0,
+    position: 0,
     baseResource: "points",
     baseAmount() {
         return player.points;
