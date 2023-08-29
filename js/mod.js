@@ -1,7 +1,7 @@
 const modInfo = {
-    name: "The ??? Tree",
+    name: "The Collab Tree",
     id: "mymod",
-    author: "nobody",
+    author: "incremental_gamer, :;:, niko, thenonymous, downvoid, and jakub",
     pointsName: "points",
     modFiles: ["cheese.js", "h.js", "tree.js", "dice.js","reipist.js",],
     discordName: "",
@@ -13,13 +13,12 @@ const modInfo = {
 // Set your version in num and name
 let VERSION = {
     num: "0.0",
-    name: "Literally nothing"
+    name: "The beginning"
 };
 
 const changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`;
+		- Add content...`;
 
 const winText =
     "Congratulations! You have reached the end and beaten this game, but for now...";
