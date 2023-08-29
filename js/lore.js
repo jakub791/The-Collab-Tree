@@ -5,14 +5,6 @@ addLayer("lore", {
             points: Decimal.dZero
         };
     },
-<<<<<<< Updated upstream
-    color: "#123456",
-    type: "none",
-    row: "side",
-    symbol: "L",
-    layerShown: true,
-    tabFormat: []
-=======
     color: "#567890", // The color for this layer, which affects many elements.
     row: "side", // The row this layer is on (0 is the first row).
     symbol: "L", // The row this layer is on (0 is the first row).
@@ -28,5 +20,4 @@ addLayer("lore", {
     tabFormat: [
 
     ],
->>>>>>> Stashed changes
 });
