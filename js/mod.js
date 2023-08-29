@@ -9,7 +9,8 @@ const modInfo = {
         "tree.js",
         "dice.js",
         "reipist.js",
-        "lore.js"
+        "lore.js",
+        "covidtube.js"
     ],
     discordName: "",
     discordLink: "",
