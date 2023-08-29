@@ -1,7 +1,7 @@
 const modInfo = {
     name: "The Collab Tree",
     id: "mymod",
-    author: "incremental_gamer, :;:, niko, thenonymous, downvoid, and jakub",
+    author: "incremental_gamer, :;:, niko, thenonymous, downvoid, icecreamdude, and jakub",
     pointsName: "points",
     modFiles: [
         "cheese.js",
