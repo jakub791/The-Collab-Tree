@@ -5,7 +5,7 @@ const modInfo = {
     pointsName: "points",
     modFiles: [
         "cheese.js",
-        "h.js",
+        "time.js",
         "tree.js",
         "dice.js",
         "reipist.js",
