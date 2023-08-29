@@ -1,6 +1,6 @@
-addLayer("c", {
+addLayer("cv", {
     name: "Coronavirus", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "C", // This appears on the layer's node. Default is the id with the first letter capitalized
+    symbol: "CV", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
@@ -15,9 +15,9 @@ addLayer("c", {
     exponent: 0.42069, // why did you do this to us
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
-      if (hasUpgrade("t",12))mult=mult.mul(upgradeEffect("t",12));
-      if (hasUpgrade("c",12))mult=mult.mul(2);
-      if (hasUpgrade("c",13))mult=mult.mul(3);
+      if (hasUpgrade("tb",12))mult=mult.mul(upgradeEffect("tb",12));
+      if (hasUpgrade("cv",12))mult=mult.mul(2);
+      if (hasUpgrade("cv",13))mult=mult.mul(3);
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -51,9 +51,9 @@ addLayer("c", {
       }
     }
 })
-addLayer("t", {
+addLayer("tb", {
     name: "Tuberculosis", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "T", // This appears on the layer's node. Default is the id with the first letter capitalized
+    symbol: "TB", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
@@ -68,7 +68,7 @@ addLayer("t", {
     exponent: 0.69420, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
-      if (hasUpgrade("t",12))mult=mult.mul(upgradeEffect("t",12));
+      if (hasUpgrade("tb",12))mult=mult.mul(upgradeEffect("tb",12));
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -76,7 +76,7 @@ addLayer("t", {
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
-        {key: "t", description: "T: Contract Tuberculosis", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+        {key: "tb", description: "T: Contract Tuberculosis", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
     upgrades: {
@@ -84,19 +84,19 @@ addLayer("t", {
         title: "Bacterial Infection",
         description(){return "Total diseases increase your sickness gain. Currently: +"+format(this.effect())},
         cost: new Decimal(1),
-        effect(){return player.t.points.add(player.c.points).pow(0.25)}
+        effect(){return player.tb.points.add(player.cv.points).pow(0.25)}
       },
       12: {
         title: "Lung Damage",
         description(){return "Tuberculosis and coronavirus boost each other's gain slightly. Currently: *"+format(this.effect())},
         cost: new Decimal(5),
-        effect(){return player.t.points.add(player.c.points).pow(0.25).add(1)}
+        effect(){return player.tb.points.add(player.cv.points).pow(0.25).add(1)}
       },
       13: {
         title: "Double Disease",
         description(){return "Tuberculosis multiplies points. Currently: *"+format(this.effect())},
         cost: new Decimal(25),
-        effect(){return player.t.points.add(1).ln().add(2)}
+        effect(){return player.tb.points.add(1).ln().add(2)}
       },
     }
 })
