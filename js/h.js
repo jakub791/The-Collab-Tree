@@ -202,7 +202,7 @@ addLayer("t", {
           'background-size': "180%"
         }
       },
-      tooltip: `you got super-scaled lmafo`
+      tooltip: `you just got super-scaled lmafo`
     }
   },
   tabFormat: {
