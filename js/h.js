@@ -71,11 +71,11 @@ addLayer("t", {
         powI = powI.mul(1.275)
         powII = powII.mul(1.275)
       }
-      return new Decimal.pow(powI, x).pow(powII, x) },
+      return Decimal.pow(powI, x).pow(powII, x) },
       effect(x) {
         let pow = new Decimal(2)
         pow = pow.add(buyableEffect(this.layer, "BetterBaseI"))
-        return new Decimal.pow(pow, x)
+        return Decimal.pow(pow, x)
       },
       display() {
         var S = tmp[this.layer].buyables[this.id]
@@ -114,8 +114,8 @@ addLayer("t", {
           powI = powI.mul(1.275)
           powII = powII.mul(1.275)
         }
-        return new Decimal.pow(powI, x).pow(powII, x).mul(500) },
-      effect(x) { return new Decimal.mul(0.15, x) },
+        return Decimal.pow(powI, x).pow(powII, x).mul(500) },
+      effect(x) { return Decimal.mul(0.15, x) },
       display() {
         var S = tmp[this.layer].buyables[this.id]
         var SV = player[this.layer].buyables[this.id]
@@ -156,10 +156,10 @@ addLayer("t", {
           powI = powI.mul(1.275)
           powII = powII.mul(1.275)
         }
-        return new Decimal.pow(powI, x).pow(powII, x).mul(1e6) },
+        return Decimal.pow(powI, x).pow(powII, x).mul(1e6) },
       effect(x) {
         let pow = new Decimal(3)
-        return new Decimal.pow(pow, x)
+        return Decimal.pow(pow, x)
       },
       display() {
         var S = tmp[this.layer].buyables[this.id]
