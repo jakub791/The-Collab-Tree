@@ -3,7 +3,7 @@ const modInfo = {
     id: "mymod",
     author: "nobody",
     pointsName: "points",
-    modFiles: ["cheese.js", "h.js", "tree.js", "dice.js",";:;.js",],
+    modFiles: ["cheese.js", "h.js", "tree.js", "dice.js","reipist.js",],
     discordName: "",
     discordLink: "",
     initialStartPoints: Decimal.dTen, // Used for hard resets and new players
@@ -35,7 +35,7 @@ function canGenPoints() {
 }
 
 function getPointGen() {
-    if (!canGenPoints()) return Decimal.dZero;
+
 
     let gain = Decimal.dOne;
     if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);

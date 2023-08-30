@@ -1,6 +1,6 @@
 function prestigeButtonText(layer) {
     if (layers[layer].prestigeButtonText !== undefined)
-        return run(layers[layer].prestigeButtonText(), layers[layer]);
+        return tmp[layer].prestigeButtonText;
     if (tmp[layer].type == "normal")
         return `${
             player[layer].points.lt(1e3)
@@ -44,18 +44,17 @@ function prestigeButtonText(layer) {
 }
 
 function constructNodeStyle(layer) {
-    let style = [];
+    const style = [];
     if (
         (tmp[layer].isLayer && layerunlocked(layer)) ||
         (!tmp[layer].isLayer && tmp[layer].canClick)
     )
-        style.push({ "background-color": tmp[layer].color });
+        style.push({ backgroundColor: tmp[layer].color });
     if (tmp[layer].image !== undefined)
-        style.push({ "background-image": 'url("' + tmp[layer].image + '")' });
+        style.push({ backgroundImage: `url("${tmp[layer].image}")` });
     if (tmp[layer].notify && player[layer].unlocked)
         style.push({
-            "box-shadow":
-                "var(--hqProperty2a), 0 0 20px " + tmp[layer].trueGlowColor
+            "box-shadow": `var(--hqProperty2a), 0 0 20px ${tmp[layer].trueGlowColor}`
         });
     style.push(tmp[layer].nodeStyle);
     return style;
@@ -79,24 +78,23 @@ function challengeButtonText(layer, id) {
 }
 
 function achievementStyle(layer, id) {
-    ach = tmp[layer].achievements[id];
+    const achievement = tmp[layer].achievements[id];
     let style = [];
-    if (ach.image) {
-        style.push({ "background-image": 'url("' + ach.image + '")' });
+    if (achievement.image) {
+        style.push({ backgroundImage: `url("${achievement.image}")` });
     }
-    if (!ach.unlocked) style.push({ visibility: "hidden" });
-    style.push(ach.style);
+    if (!achievement.unlocked) style.push({ visibility: "hidden" });
+    style.push(achievement.style);
     return style;
 }
 
 function updateWidth() {
     let screenWidth = window.innerWidth;
-    let splitScreen = screenWidth >= 1024;
-    if (options.forceOneTab) splitScreen = false;
-    if (player.navTab == "none") splitScreen = true;
+    let splitScreen =
+        screenWidth >= 1024 ||
+        (!options.forceOneTab && player.navTab === "none");
     tmp.other.screenWidth = screenWidth;
     tmp.other.screenHeight = window.innerHeight;
-
     tmp.other.splitScreen = splitScreen;
     tmp.other.lastPoints = player.points;
 }
@@ -105,8 +103,8 @@ function updateOomps(diff) {
     tmp.other.oompsMag = 0;
     if (player.points.lte(new Decimal(1e100)) || diff == 0) return;
 
-    var pp = new Decimal(player.points);
-    var lp = tmp.other.lastPoints || new Decimal(0);
+    const pp = new Decimal(player.points);
+    const lp = tmp.other.lastPoints || new Decimal(0);
     if (pp.gt(lp)) {
         if (pp.gte("10^^8")) {
             pp = pp.slog(1e10);
@@ -115,12 +113,12 @@ function updateOomps(diff) {
             tmp.other.oompsMag = -1;
         } else {
             while (
-                pp.div(lp).log(10).div(diff).gte("100") &&
+                pp.div(lp).log10().div(diff).gte("100") &&
                 tmp.other.oompsMag <= 5 &&
                 lp.gt(0)
             ) {
-                pp = pp.log(10);
-                lp = lp.log(10);
+                pp = pp.log10();
+                lp = lp.log10();
                 tmp.other.oomps = pp.sub(lp).div(diff);
                 tmp.other.oompsMag++;
             }
@@ -129,45 +127,41 @@ function updateOomps(diff) {
 }
 
 function constructBarStyle(layer, id) {
-    let bar = tmp[layer].bars[id];
-    let style = {};
+    const bar = tmp[layer].bars[id];
+    const style = {};
     if (bar.progress instanceof Decimal) bar.progress = bar.progress.toNumber();
     bar.progress = (1 - Math.min(Math.max(bar.progress, 0), 1)) * 100;
 
-    style.dims = { width: bar.width + "px", height: bar.height + "px" };
-    let dir = bar.direction;
+    style.dims = {
+        width: `${bar.width}px`,
+        height: `${bar.height}px`
+    };
     style.fillDims = {
-        width: bar.width + 0.5 + "px",
-        height: bar.height + 0.5 + "px"
+        width: `${bar.width + 0.5}px`,
+        height: `${bar.height + 0.5}px`
     };
 
     switch (bar.direction) {
         case UP:
-            style.fillDims["clip-path"] =
-                "inset(" + bar.progress + "% 0% 0% 0%)";
+            style.fillDims.clipPath = `inset(${bar.progress}% 0% 0% 0%)`;
             style.fillDims.width = bar.width + 1 + "px";
             break;
         case DOWN:
-            style.fillDims["clip-path"] =
-                "inset(0% 0% " + bar.progress + "% 0%)";
+            style.fillDims.clipPath = `inset(0% 0% ${bar.progress}% 0%)`;
             style.fillDims.width = bar.width + 1 + "px";
 
             break;
         case RIGHT:
-            style.fillDims["clip-path"] =
-                "inset(0% " + bar.progress + "% 0% 0%)";
+            style.fillDims.clipPath = `inset(0% ${bar.progress}% 0% 0%)`;
             break;
         case LEFT:
-            style.fillDims["clip-path"] =
-                "inset(0% 0% 0% " + bar.progress + "%)";
+            style.fillDims.clipPath = `inset(0% 0% 0% ${bar.progress}%)`;
             break;
         case DEFAULT:
-            style.fillDims["clip-path"] = "inset(0% 50% 0% 0%)";
+            style.fillDims.clipPath = "inset(0% 50% 0% 0%)";
     }
 
-    if (bar.instant) {
-        style.fillDims["transition-duration"] = "0s";
-    }
+    if (bar.instant) style.fillDims.transitionDuration = "0s";
     return style;
 }
 
@@ -192,7 +186,7 @@ function constructTabFormat(layer, id, family) {
         location = tmp[layer].microtabs[family][id];
         key = "tabFormat";
     }
-    if (isFunction(tabLayer)) {
+    if (typeof tabLayer === "function") {
         return tabLayer.bind(location)();
     }
     updateTempData(tabLayer, tabTemp, tabFunc, { layer, id, family });
@@ -208,7 +202,7 @@ function updateTabFormat(layer) {
     if (layers[layer]?.tabFormat === undefined) return;
 
     let tab = player.subtabs[layer]?.mainTabs;
-    if (isFunction(layers[layer].tabFormat)) {
+    if (typeof layers[layer].tabFormat === "function") {
         Vue.set(temp[layer], "tabFormat", layers[layer].tabFormat());
     } else if (Array.isArray(layers[layer].tabFormat)) {
         Vue.set(temp[layer], "tabFormat", constructTabFormat(layer));
@@ -221,7 +215,6 @@ function updateTabFormat(layer) {
             );
     }
 
-    // Check for embedded layer
     if (
         isPlainObject(tmp[layer].tabFormat) &&
         tmp[layer].tabFormat[tab].embedLayer !== undefined
@@ -229,8 +222,7 @@ function updateTabFormat(layer) {
         updateTabFormat(tmp[layer].tabFormat[tab].embedLayer);
     }
 
-    // Update microtabs
-    for (family in layers[layer].microtabs) {
+    for (const family in layers[layer].microtabs) {
         tab = player.subtabs[layer][family];
 
         if (tmp[layer].microtabs[family][tab]) {
