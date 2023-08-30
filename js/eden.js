@@ -7,7 +7,7 @@ addLayer("e", {
     },
     color: "#E0E1CC",
     resource: "prestige points",
-    row: 1,
+    row: 2,
 
     baseResource: "points",
     baseAmount() {

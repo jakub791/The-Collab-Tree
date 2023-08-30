@@ -2,7 +2,7 @@ const modInfo = {
     name: "The Collab Tree",
     id: "thecollabtree-9978665485",
     author: "incremental_gamer, :;:, niko, thenonymous, downvoid, icecreamdude, and jakub",
-    pointsName: "points",
+    pointsName: "sickness",
     modFiles: [
         "cheese.js",
         "time.js",
@@ -12,7 +12,8 @@ const modInfo = {
         "lore.js",
         "covidtube.js",
         "h.js",
-        "eden.js"
+        "eden.js",
+        "side-layers.js"
     ],
     discordName: "",
     discordLink: "",

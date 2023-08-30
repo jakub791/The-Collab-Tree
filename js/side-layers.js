@@ -2,7 +2,7 @@ addLayer("a", {
     name: "achievements", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "a", // This appears on the layer's node. Default is the id with the first letter capitalized
     color: "#F5754E",
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
@@ -25,7 +25,7 @@ achievements: {
     12:{
   name: "Dice?",
   done() {return player.tdr.points.gte(1)},
-  tooltip:"Get PU11."
+  tooltip:"Unlock dice."
   },
 },
 })
