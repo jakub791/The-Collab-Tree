@@ -1,38 +1,30 @@
 const modInfo = {
-    name: "The Collab Tree",
+    name: "The ??? Tree",
     id: "mymod",
-    author: "incremental_gamer, :;:, niko, thenonymous, downvoid, icecreamdude, and jakub",
+    author: "nobody",
     pointsName: "points",
-    modFiles: [
-        "cheese.js",
-        "time.js",
-        "tree.js",
-        "dice.js",
-        "reipist.js",
-        "lore.js",
-        "covidtube.js",
-        "h.js",
-        "eden.js"
-    ],
+    modFiles: ["cheese.js", "h.js", "tree.js", "dice.js","reipist.js",],
     discordName: "",
     discordLink: "",
-    initialStartPoints: Decimal.dTen,
-    offlineLimit: 1
+    initialStartPoints: Decimal.dTen, // Used for hard resets and new players
+    offlineLimit: 1 // In hours
 };
 
-const VERSION = {
+// Set your version in num and name
+let VERSION = {
     num: "0.0",
-    name: "The beginning"
+    name: "Literally nothing"
 };
 
 const changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Add content...`;
+		- Added things.<br>
+		- Added stuff.`;
 
 const winText =
     "Congratulations! You have reached the end and beaten this game, but for now...";
 
-const doNotCallTheseFunctionsEveryTick = ["roll"];
+const doNotCallTheseFunctionsEveryTick = [];
 
 function getStartPoints() {
     return modInfo.initialStartPoints;
@@ -43,33 +35,36 @@ function canGenPoints() {
 }
 
 function getPointGen() {
-    if (!canGenPoints()) return Decimal.dZero;
+
 
     let gain = Decimal.dOne;
     if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);
-    if (hasUpgrade("tb", 11)) gain = gain.add(upgradeEffect("tb",11))
-  if (hasUpgrade("cv", 11)) gain = gain.mul(2)
-  if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb",13))
-  gain = gain.mul(tmp.tdr.rollSumEffect);
-  if (hasUpgrade("cv",14)) gain=gain.pow(1.25)
-
     return gain;
 }
 
+// You can add non-layer related variables that should to into "player" and be saved here, along with default values
 function addedPlayerData() {
     return {};
 }
 
+// Display extra things at the top of the page
 const displayThings = [];
 
+// Determines when the game "ends"
 function isEndgame() {
     return player.points.gte("e280000000");
 }
 
+// Less important things beyond this point!
+
+// Style for the background, can be a function
 const backgroundStyle = {};
 
+// You can change this if you have things that can be messed up by long tick lengths
 function maxTickLength() {
-    return 3600;
+    return 3600; // Default is 1 hour which is just arbitrarily large
 }
 
+// Use this if you need to undo inflation from an older version. If the version is older than the version that fixed the issue,
+// you can cap their current resources with this.
 function fixOldSave(oldVersion) {}
