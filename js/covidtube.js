@@ -101,12 +101,14 @@ addLayer("tb", {
       14: {
         title: "Test Tubes",
         description(){return "Dice get 1 more side."},
-        cost: new Decimal(625)
+        cost: new Decimal(625),
+        unlocked(){return player.tdr.unlocked}
       },
       15: {
         title: "Tube Boost",
         description(){return "Time speed affects roll cooldown at a reduced rate. Currently sped up by: x"+format(tmp.t.timeCalculation.add(10).log10())},
-        cost: new Decimal(390625)
+        cost: new Decimal(390625),
+        unlocked(){return player.tdr.unlocked}
       },
     }
 })

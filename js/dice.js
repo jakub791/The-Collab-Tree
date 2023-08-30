@@ -92,6 +92,25 @@ addLayer("tdr", {
             }
         }
     },
+    buyables: {
+        11: {
+            cost(x=getBuyableAmount(this.layer,this.id)) { return new Decimal(100).pow(x.pow(2)) },
+            display() { return "Add 1 side to all dice.<br>Cost: "+format(this.cost())+"<br>Currently: +"+formatWhole(getBuyableAmount(this.layer,this.id)) },
+            canAfford() { return player.cv.points.gte(this.cost()) },
+            buy() {
+                player.cv.points = player.cv.points.sub(this.cost())
+                setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
+            },
+            unlocked(){return hasMilestone(this.layer,1)}
+        },
+    },
+    milestones: {
+        1: {
+            requirementDescription: "10 dice",
+            effectDescription: "Unlock a buyable",
+            done() { return player.tdr.points.gte(10) }
+        }
+    },
     update(diff) {
         if (player.tdr.cooldown > 0) {
             player.tdr.cooldown -= diff * (hasUpgrade("tb",15)?tmp.t.timeCalculation.add(10).log10().toNumber():1);
@@ -116,7 +135,14 @@ addLayer("tdr", {
                 "blank",
                 "clickables",
                 "blank",
-                ["display-text", () => `Latest roll: ${player.tdr.lastRoll}`]
+                ["display-text", () => `Latest roll: ${player.tdr.lastRoll}`],
+                "blank","buyables"
+            ]
+        },
+        Milestones: {
+            unlocked(){return player.tdr.points.gte(5)},
+            content: [
+                "milestones"
             ]
         }
     }
