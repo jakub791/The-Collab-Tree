@@ -7,7 +7,7 @@ addLayer("poi", {
     },
     color: "#FFFFFF",
     resource: "Points",
-    row: 0,
+    row: "side",
     position: 0,
     baseResource: "points",
     baseAmount() {

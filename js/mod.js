@@ -12,7 +12,8 @@ const modInfo = {
         "lore.js",
         "covidtube.js",
         "h.js",
-        "eden.js"
+        "eden.js",
+        "side-layers.js"
     ],
     discordName: "",
     discordLink: "",
