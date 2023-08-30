@@ -16,6 +16,7 @@ addLayer("lore", {
         // Look in the upgrades docs to see what goes here!
     },
     type: "none",                         // Determines the formula used for calculating prestige currency.
+    tooltip: "Lore",                         // Determines the formula used for calculating prestige currency.
     infoboxes: {
         collabtree1: {
             unlocked() { return true },
