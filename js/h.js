@@ -12,6 +12,7 @@ addLayer("t", {
     };
   },
   color: "",
+  tooltip: "",
   confusion() {
     var texts = [
       "times obtained existance",
