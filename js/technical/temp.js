@@ -42,8 +42,6 @@ var activeFunctions = [
     ...doNotCallTheseFunctionsEveryTick
 ];
 
-const traversableClasses = [];
-
 function setupTemp() {
     tmp.pointGen = {};
     tmp.backgroundStyle = {};
@@ -94,13 +92,6 @@ function setupTempData(layerData, tmpData, funcsData) {
             funcsData[item] = [];
             setupTempData(layerData[item], tmpData[item], funcsData[item]);
         } else if (
-            !!layerData[item] &&
-            typeof layerData[item] === "object" &&
-            traversableClasses.includes(layerData[item].constructor.name)
-        ) {
-            tmpData[item] = new layerData[item].constructor();
-            funcsData[item] = new layerData[item].constructor();
-        } else if (
             isFunction(layerData[item]) &&
             !activeFunctions.includes(item)
         ) {
@@ -148,9 +139,8 @@ function updateTempData(layerData, tmpData, funcsData, useThis) {
                     useThis
                 );
         } else if (
-            (!!layerData[item] && layerData[item].constructor === Object) ||
-            (typeof layerData[item] === "object" &&
-                traversableClasses.includes(layerData[item].constructor.name))
+            !!layerData[item] &&
+            layerData[item].constructor === Object
         ) {
             updateTempData(
                 layerData[item],
@@ -159,10 +149,10 @@ function updateTempData(layerData, tmpData, funcsData, useThis) {
                 useThis
             );
         } else if (isFunction(layerData[item]) && !isFunction(tmpData[item])) {
-            let value;
-
-            if (useThis !== undefined) value = layerData[item].bind(useThis)();
-            else value = layerData[item]();
+            const value =
+                useThis === undefined
+                    ? layerData[item]()
+                    : layerData[item].call(useThis);
             Vue.set(tmpData, item, value);
         }
     }
@@ -195,15 +185,17 @@ function updateClickableTemp(layer) {
 function setupBuyables(layer) {
     for (const id in layers[layer].buyables) {
         if (isPlainObject(layers[layer].buyables[id])) {
-            let b = layers[layer].buyables[id];
-            b.actualCostFunction = b.cost;
-            b.cost = function (x = player[this.layer].buyables[this.id]) {
+            const buyable = layers[layer].buyables[id];
+            buyable.actualCostFunction = buyable.cost;
+            buyable.cost = function (x = player[this.layer].buyables[this.id]) {
                 return layers[this.layer].buyables[this.id].actualCostFunction(
                     x
                 );
             };
-            b.actualEffectFunction = b.effect;
-            b.effect = function (x = player[this.layer].buyables[this.id]) {
+            buyable.actualEffectFunction = buyable.effect;
+            buyable.effect = function (
+                x = player[this.layer].buyables[this.id]
+            ) {
                 return layers[this.layer].buyables[
                     this.id
                 ].actualEffectFunction(x);
