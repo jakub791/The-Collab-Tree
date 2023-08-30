@@ -94,7 +94,7 @@ addLayer("tdr", {
     },
     update(diff) {
         if (player.tdr.cooldown > 0) {
-            player.tdr.cooldown -= diff * (hasUpgrade("tb",15)?Decimal.pow(1.1,getBuyableAmount("t","FasterTimeI")).toNumber():1);
+            player.tdr.cooldown -= diff * (hasUpgrade("tb",15)?tmp.t.timeCalculation.add(10).log10().toNumber():1);
         }
         player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
     },
