@@ -6,7 +6,7 @@ addLayer("tdr", {
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() {
         return {
-            unlocked: true,
+            unlocked: false,
             points: Decimal.dZero,
             totalroll: Decimal.dZero,
             lastRoll: "",
@@ -18,10 +18,14 @@ addLayer("tdr", {
     effectDescription() {
         return `each having ${formatWhole(tmp.tdr.effect)} sides.`;
     },
-    effect: Decimal.dTwo,
+    effect(){
+        let sides = new Decimal(2)
+        if (hasUpgrade("tb",14)) sides=sides.add(1)
+        return sides
+    },
     requires: Decimal.dTen,
     resource: "dice",
-    baseResource: "points",
+    baseResource: "sickness",
     baseAmount() {
         return player.points;
     },
@@ -40,7 +44,7 @@ addLayer("tdr", {
             }
         }
     ],
-    layerShown: true,
+    layerShown(){return player.tdr.unlocked || hasUpgrade("cv",14)},
     rollSumEffect() {
         const effect = player.tdr.totalroll.add(Decimal.dOne);
         const eponent = Decimal.dOne;
@@ -90,7 +94,7 @@ addLayer("tdr", {
     },
     update(diff) {
         if (player.tdr.cooldown > 0) {
-            player.tdr.cooldown -= diff;
+            player.tdr.cooldown -= diff * (hasUpgrade("tb",15)?Decimal.pow(1.1,getBuyableAmount("t","FasterTimeI")).toNumber():1);
         }
         player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
     },

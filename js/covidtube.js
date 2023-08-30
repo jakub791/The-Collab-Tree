@@ -94,9 +94,19 @@ addLayer("tb", {
       },
       13: {
         title: "Double Disease",
-        description(){return "Tuberculosis multiplies points. Currently: *"+format(this.effect())},
+        description(){return "Tuberculosis multiplies sickness. Currently: *"+format(this.effect())},
         cost: new Decimal(25),
         effect(){return player.tb.points.add(1).ln().add(2)}
+      },
+      14: {
+        title: "Test Tubes",
+        description(){return "Dice get 1 more side."},
+        cost: new Decimal(625)
+      },
+      15: {
+        title: "Tube Boost",
+        description(){return "Time speed affects roll cooldown at a reduced rate."},
+        cost: new Decimal(390625)
       },
     }
 })

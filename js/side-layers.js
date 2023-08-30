@@ -25,7 +25,7 @@ achievements: {
     12:{
   name: "Dice?",
   done() {return player.tdr.points.gte(1)},
-  tooltip:"Get PU11."
+  tooltip:"Unlock dice."
   },
 },
 })
