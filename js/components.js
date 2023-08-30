@@ -140,7 +140,7 @@ function loadVue() {
     Vue.component("upgrade", {
         props: ["layer", "data"],
         template: `
-		<button v-if="tmp[layer].upgrades[data].unlocked" :id='"upgrade-" + layer + "-" + data' v-on:click="buyUpg(layer, data)" v-bind:class="{ [layer]: true, tooltipBox: true, upg: true, bought: hasUpgrade(layer, data), locked: (!(canAffordUpgrade(layer, data))&&!hasUpgrade(layer, data)), can: (canAffordUpgrade(layer, data)&&!hasUpgrade(layer, data))}"
+		<button v-if="tmp[layer].upgrades[data].unlocked" :id='"upgrade-" + layer + "-" + data' @click="buyUpg(layer, data)" :class="{ [layer]: true, tooltipBox: true, upg: true, bought: hasUpgrade(layer, data), locked: (!(canAffordUpgrade(layer, data))&&!hasUpgrade(layer, data)), can: (canAffordUpgrade(layer, data)&&!hasUpgrade(layer, data))}"
 			:style="[((!hasUpgrade(layer, data) && canAffordUpgrade(layer, data)) ? {backgroundColor: tmp[layer].color} : {}), tmp[layer].upgrades[data].style]">
 			<span v-if="layers[layer].upgrades[data].fullDisplay" v-html="run(layers[layer].upgrades[data].fullDisplay, layers[layer].upgrades[data])"></span>
 			<span v-else>

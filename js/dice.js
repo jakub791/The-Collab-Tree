@@ -3,10 +3,10 @@ addLayer("tdr", {
     symbol() {
         return `${player.tdr.points.toNumber()}d${tmp.tdr.effect}`;
     }, // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() {
         return {
-            unlocked: true,
+            unlocked: false,
             points: Decimal.dZero,
             totalroll: Decimal.dZero,
             lastRoll: "",
@@ -18,10 +18,14 @@ addLayer("tdr", {
     effectDescription() {
         return `each having ${formatWhole(tmp.tdr.effect)} sides.`;
     },
-    effect: Decimal.dTwo,
+    effect(){
+        let sides = new Decimal(2)
+        if (hasUpgrade("tb",14)) sides=sides.add(1)
+        return sides
+    },
     requires: Decimal.dTen,
     resource: "dice",
-    baseResource: "points",
+    baseResource: "sickness",
     baseAmount() {
         return player.points;
     },
@@ -30,7 +34,7 @@ addLayer("tdr", {
     exponent: Decimal.dOne,
     gainMult: Decimal.dOne,
     gainExp: Decimal.dOne,
-    row: 0,
+    row: 1,
     hotkeys: [
         {
             key: "d",
@@ -40,7 +44,7 @@ addLayer("tdr", {
             }
         }
     ],
-    layerShown: true,
+    layerShown(){return player.tdr.unlocked || hasUpgrade("cv",14)},
     rollSumEffect() {
         const effect = player.tdr.totalroll.add(Decimal.dOne);
         const eponent = Decimal.dOne;
@@ -90,7 +94,7 @@ addLayer("tdr", {
     },
     update(diff) {
         if (player.tdr.cooldown > 0) {
-            player.tdr.cooldown -= diff;
+            player.tdr.cooldown -= diff * (hasUpgrade("tb",15)?tmp.t.timeCalculation.add(10).log10().toNumber():1);
         }
         player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
     },

@@ -8,9 +8,10 @@ addLayer("e", {
         };
     },
     color: "#E0E1CC",
-    resource: "Lycoris Flowers",
-    row: 1,
-    baseResource: "Dice Roll Points",
+    resource: "prestige points",
+    row: 2,
+
+    baseResource: "points",
     baseAmount() {
         return player.tdr.totalRoll;
     },

@@ -1,7 +1,7 @@
 addLayer("cv", {
     name: "Coronavirus", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "CV", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 3, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
@@ -54,7 +54,7 @@ addLayer("cv", {
 addLayer("tb", {
     name: "Tuberculosis", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "TB", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 4, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+    position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
 		points: new Decimal(0),
@@ -94,9 +94,19 @@ addLayer("tb", {
       },
       13: {
         title: "Double Disease",
-        description(){return "Tuberculosis multiplies points. Currently: *"+format(this.effect())},
+        description(){return "Tuberculosis multiplies sickness. Currently: *"+format(this.effect())},
         cost: new Decimal(25),
         effect(){return player.tb.points.add(1).ln().add(2)}
+      },
+      14: {
+        title: "Test Tubes",
+        description(){return "Dice get 1 more side."},
+        cost: new Decimal(625)
+      },
+      15: {
+        title: "Tube Boost",
+        description(){return "Time speed affects roll cooldown at a reduced rate. Currently sped up by: x"+format(tmp.t.timeCalculation.add(10).log10())},
+        cost: new Decimal(390625)
       },
     }
 })
