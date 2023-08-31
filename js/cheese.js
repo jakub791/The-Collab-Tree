@@ -842,15 +842,15 @@ addLayer("cheese", {
                 [
                     "row",
                     [
-                        ["buyable", 11],
+                        ["buyable", [11]],
                         "blank",
-                        ["buyable", 12],
+                        ["buyable", [12]],
                         "blank",
-                        ["buyable", 13]
+                        ["buyable", [13]]
                     ]
                 ],
                 "blank",
-                ["row", [["buyable", 14], "blank", ["buyable", 15]]],
+                ["row", [["buyable", [14]], "blank", ["buyable", [15]]]],
                 "blank",
                 ["buyable", [21]]
             ],
@@ -933,8 +933,8 @@ addLayer("cheese", {
     },
     row: "side",
     nodeStyle: {
-        color: "rgb(244, 144, 12)",
-        borderColor: "rgb(255, 172, 51)",
+        color: "rgb(244,144,12)",
+        borderColor: "rgb(255,172,51)",
         fontFamily: "Bahnschrift SemiBold;"
     },
     layerShown: true
