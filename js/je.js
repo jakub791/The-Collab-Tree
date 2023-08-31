@@ -19,7 +19,7 @@ addLayer("je", {
   resource: "Jacorbian Energy", // Name of prestige currency
   baseResource: "tuberculosis", // Name of resource prestige is based on
   baseAmount() {
-    return player.points;
+    return player.tb.points;
   }, // Get the current amount of baseResource
   type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
   branches: ["cv", "tb"],
