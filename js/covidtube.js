@@ -177,7 +177,7 @@ addLayer("tb", {
       description() {
         return "Unlock jacorbian energy.";
       },
-      cost: new Decimal(6103515625),
+      cost: new Decimal(152587890625),
       unlocked() {
         return hasMilestone("tdr", 1);
       },
