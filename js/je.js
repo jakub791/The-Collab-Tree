@@ -348,6 +348,6 @@ addLayer("je", {
     ],
   ],
   layerShown() {
-    return player.je.unlocked || hasUpgrade("tb", 16);
+    return hasUpgrade("tb", 16);
   },
 });
