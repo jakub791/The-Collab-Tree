@@ -90,6 +90,7 @@ addLayer("tb", {
     // Calculate the multiplier for main currency from bonuses
     mult = new Decimal(1);
     if (hasUpgrade("tb", 12)) mult = mult.mul(upgradeEffect("tb", 12));
+    mult = mult.mul(tmp.je.effect);
     return mult;
   },
   gainExp() {
