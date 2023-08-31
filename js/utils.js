@@ -121,7 +121,7 @@ function clickGrid(layer, id) {
 }
 
 function inChallenge(layer, id) {
-  const challenge = player[layer].activeChallenge;
+  const challenge = player[layer].activeChallenge ?? 0;
   if (challenge == id) return true;
 
   return tmp[layer].challenges[challenge].countsAs?.includes(id) ?? false;
