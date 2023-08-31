@@ -53,7 +53,7 @@ function getPointGen() {
     if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb", 13));
     gain = gain.mul(tmp.tdr.rollSumEffect);
     if (hasMilestone("e",0)) gain=gain.mul(5)
-    if (hasUpgrade("cv", 14)) gain = gain.pow(1.25);
+    if (hasUpgrade("cv", 13)) gain = gain.pow(1.25);
     return gain;
 }
 
