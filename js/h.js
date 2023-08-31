@@ -1,7 +1,7 @@
 addLayer("t", {
   name: "Time",
   symbol: "T",
-  position: 0,
+  position: 3,
   startData() {
     return {
       unlocked: true,
@@ -21,7 +21,7 @@ addLayer("t", {
     ];
   },
   funnyThing: `yeah`,
-  row: 0,
+  row: "side",
   layerShown: true,
   // Little trolling snippets
 

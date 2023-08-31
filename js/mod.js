@@ -6,7 +6,6 @@ const modInfo = {
   pointsName: "sickness",
   modFiles: [
     "cheese.js",
-    "time.js",
     "tree.js",
     "dice.js",
     "reipist.js",

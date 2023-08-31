@@ -66,6 +66,11 @@ addLayer("tdr", {
     }
     player.tdr.lastRoll = rolls.join(", ");
     let score = Decimal.dZero;
+    let sixes = 0;
+    for (let i of rolls){
+      if (i == 6)sixes++
+    }
+    if (sixes >= 6 && !hasMilestone("tdr", 2))player.tdr.milestones.push(2)
     if (player.tdr.rollType === "additive") {
       score = rolls.reduce(
         (accumulated, current) => accumulated.add(current),
@@ -88,7 +93,7 @@ addLayer("tdr", {
       },
       onClick() {
         layers.tdr.roll();
-        player.tdr.cooldown = 60;
+        player.tdr.cooldown = 86400;
       },
       display() {
         return `Roll your dice.
@@ -135,6 +140,13 @@ addLayer("tdr", {
       effectDescription: "Unlock a buyable",
       done() {
         return player.tdr.points.gte(10);
+      },
+    },
+    2: {
+      requirementDescription: "6 6s rolled",
+      effectDescription: "Gain 666x coronavirus",
+      done() {
+        return false;
       },
     },
   },
