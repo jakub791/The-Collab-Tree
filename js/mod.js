@@ -49,9 +49,9 @@ function getPointGen() {
 
   let gain = Decimal.dOne;
   let treNerf = player.e.bpm.div(3).div(100);
-  if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);
+  if (tmp.cheese.currentState === 6) gain = gain.div(2);
   if (hasUpgrade("tb", 11)) gain = gain.add(upgradeEffect("tb", 11));
-  if (hasUpgrade("cv", 11)) gain = gain.mul(Decimal.dTwo);
+  if (hasUpgrade("cv", 11)) gain = gain.mul(2);
   if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb", 13));
   if (hasUpgrade("poi", 11)) gain = gain.mul(2);
   if (hasUpgrade("poi", 12))

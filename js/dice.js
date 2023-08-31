@@ -50,9 +50,9 @@ addLayer("tdr", {
     return player.tdr.unlocked || hasUpgrade("cv", 14);
   },
   rollSumEffect() {
-    const effect = player.tdr.totalroll.add(Decimal.dOne);
-    const eponent = Decimal.dOne;
-    return effect.pow(eponent);
+    const effect = player.tdr.totalroll.add(1);
+    const exponent = Decimal.dOne;
+    return effect.pow(exponent);
   },
   roll() {
     const rolls = [];
