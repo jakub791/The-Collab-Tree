@@ -12,6 +12,7 @@ addLayer("e", {
   color: "#E0E1CC",
   resource: "Lycoris Flowers",
   row: 2,
+  branches: ["tdr"],
 
   baseResource: "Dice Roll Points",
   baseAmount() {
