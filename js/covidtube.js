@@ -174,13 +174,11 @@ addLayer("tb", {
     16: {
       title: "Enter the Balancing Zone",
       description() {
-        return (
-          "Unlock jacorbian energy."
-        );
+        return "Unlock jacorbian energy.";
       },
       cost: new Decimal(6103515625),
       unlocked() {
-        return hasMilestone("tdr", 1)
+        return hasMilestone("tdr", 1);
       },
     },
   },

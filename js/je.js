@@ -44,8 +44,13 @@ addLayer("je", {
   ],
 
   tabFormat: [
-        "main-display",
-        "prestige-button",
-        ["raw-html", function () { return "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>"  }],
-      ],
+    "main-display",
+    "prestige-button",
+    [
+      "raw-html",
+      function () {
+        return "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>";
+      },
+    ],
+  ],
 });
