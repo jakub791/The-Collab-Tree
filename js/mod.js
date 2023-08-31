@@ -83,7 +83,9 @@ const displayThings = [
 function isEndgame() {
   return player.points.gte("e280000000");
 }
-function colored(layer, text, tag='h2') { return `<${tag} style='color:${temp[layer].color};text-shadow:${temp[layer].color} 0px 0px 10px;'>${text}</${tag}>` }
+function colored(layer, text, tag = "h2") {
+  return `<${tag} style='color:${temp[layer].color};text-shadow:${temp[layer].color} 0px 0px 10px;'>${text}</${tag}>`;
+}
 const backgroundStyle = {};
 
 function maxTickLength() {
