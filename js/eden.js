@@ -13,7 +13,7 @@ addLayer("e", {
 
     baseResource: "Dice Roll Points",
     baseAmount() {
-        return player.tdr.totalRoll;
+        return player.tdr.totalroll;
     },
     requires: new Decimal(222),
     type: "static",
