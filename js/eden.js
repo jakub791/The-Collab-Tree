@@ -27,8 +27,21 @@ addLayer("e", {
     return player.tdr.totalroll.gte(100) || player.e.unlocked;
   },
   tabFormat: {
-    milestones: {
+    "Milestones of Lycoris": {
       unlocked: true,
+      content: [
+        [
+          "display-text",
+          () =>
+            `You have planted ${format(player.e.points)} Lycoris Flowers, in the Amnehilesie of Eden.`,
+        ],
+        "prestige-button",
+        "blank",
+        "milestones",
+      ],
+    },
+   "Challenges of Eden": {
+      unlocked() {return hasMilestone('e', 4)},
       content: [
         [
           "display-text",
@@ -37,7 +50,7 @@ addLayer("e", {
         ],
         "prestige-button",
         "blank",
-        "milestones",
+        "challenges",
       ],
     },
   },
