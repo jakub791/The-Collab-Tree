@@ -61,7 +61,10 @@ function getPointGen() {
 }
 
 function addedPlayerData() {
-  return {};
+  return {
+    jacorbcutscene: new Decimal(1),
+    jacorbscene: new Decimal(0),
+  };
 }
 
 const displayThings = [];
