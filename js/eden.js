@@ -20,7 +20,7 @@ addLayer("e", {
     exponent: 0.5,
     gainMult: Decimal.dOne,
     gainExp: Decimal.dOne,
-    layerShown() { return player.tdr.totalRoll.gte(100) || player.e.unlocked},
+    layerShown() { return player.tdr.totalroll.gte(100) || player.e.unlocked},
     tabFormat: {
         milestones: {
             unlocked: true,
