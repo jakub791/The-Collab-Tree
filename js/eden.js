@@ -20,7 +20,7 @@ addLayer("e", {
     exponent: 0.5,
     gainMult: Decimal.dOne,
     gainExp: Decimal.dOne,
-    layerShown() { return player.tdr.points.gte(5) || player.e.unlocked},
+    layerShown() { return player.tdr.totalRoll.gte(100) || player.e.unlocked},
     tabFormat: {
         milestones: {
             unlocked: true,
@@ -43,5 +43,18 @@ addLayer("e", {
             effectDescription: "Maybe you'll need some more help. Don't worry, we will support you with upgrades and passive gain to your previous endenavors, although, passive gain will have to be at a minimum since this is still experimental for us. Only 1%!",
             done() { return player.e.total.gte(2)}
         },
+        2: {
+            requirementDescription: "You're starting to get the hang of it, congrats. (5 Total Lycoris Flowers planted)",
+            effectDescription: "I think you will need another boost from our butlers. The Gambles you make in total are now boosted by 2x.",
+            done() { return player.e.total.gte(5)}
+        },
+        3: {
+            requirementDescription: "You planted a potful of Lycoris Flowers. (10 Total Lycoris Flowers planted)",
+            effectDescription: "You are really helping us out, however, we are starting to run out of things to give you... Boost Tuber and COVID gain by 3x.",
+            done() { return player.e.total.gte(10)}
+        },
+        4: {
+            
+        }
     },
 });
