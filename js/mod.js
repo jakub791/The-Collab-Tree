@@ -67,7 +67,14 @@ function addedPlayerData() {
   };
 }
 
-const displayThings = [() => `${inChallenge('e', 11) ? `TremENDouS BPM is currently ${format(player.e.bpm)}` : ''}`];
+const displayThings = [
+  () =>
+    `${
+      inChallenge("e", 11)
+        ? `TremENDouS BPM is currently ${format(player.e.bpm)}`
+        : ""
+    }`,
+];
 
 function isEndgame() {
   return player.points.gte("e280000000");
