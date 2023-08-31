@@ -203,6 +203,6 @@ addLayer("e", {
     if (player.e.tre.gte(383.904) && player.e.tre.lt(385.619))
       player.e.bpm = new Decimal(280);
     if (player.e.tre.gte(385.619)) player.e.bpm = new Decimal(285);
-    if (player.e.tre.gte(445.433)) player.e.tre = new Decimal(0);
+    if (player.e.tre.gte(445.433)) player.e.tre = new Decimal(0)
   },
 });
