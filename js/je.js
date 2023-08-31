@@ -22,11 +22,11 @@ addLayer("je", {
     return player.tb.points;
   }, // Get the current amount of baseResource
   effectDescription() {
-    return `boosting tuberculosis gain by x${format(tmp.je.effect)}.`;
+    return `boosting sickness gain by x${format(tmp.je.effect)}.`;
   },
   effect() {
     let effect = new Decimal(1);
-    effect = player.je.points.pow(0.6).add(1);
+    effect = player.je.points.pow(0.8).add(1);
     return effect;
   },
   type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have

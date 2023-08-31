@@ -60,6 +60,7 @@ function getPointGen() {
   if (hasMilestone("e", 0)) gain = gain.mul(5);
   if (hasUpgrade("cv", 13)) gain = gain.pow(1.25);
   if (inChallenge("e", 11)) gain = gain.pow(treNerf);
+  gain = gain.mul(tmp.je.effect);
   return gain;
 }
 
