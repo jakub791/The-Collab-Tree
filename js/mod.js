@@ -75,7 +75,10 @@ const displayThings = [
   () =>
     `${
       inChallenge("e", 11)
-        ? `TremENDouS BPM is currently ${format(player.e.bpm)}`
+        ? `TremENDouS BPM is currently ${colored(
+            "e",
+            format(player.e.bpm),
+          )}<br> TremENDouS is currently at ${format(player.e.tre)}`
         : ""
     }`,
 ];
@@ -83,7 +86,9 @@ const displayThings = [
 function isEndgame() {
   return player.points.gte("e280000000");
 }
-
+function colored(layer, text, tag = "h2") {
+  return `<${tag} style='color:${temp[layer].color};text-shadow:${temp[layer].color} 0px 0px 10px;'>${text}</${tag}>`;
+}
 const backgroundStyle = {};
 
 function maxTickLength() {
