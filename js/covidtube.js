@@ -23,6 +23,7 @@ addLayer("cv", {
     if (hasUpgrade("tb", 12)) mult = mult.mul(upgradeEffect("tb", 12));
     if (hasUpgrade("cv", 12)) mult = mult.mul(2);
     if (hasUpgrade("cv", 13)) mult = mult.mul(3);
+    if (hasUpgrade("je", 11)) mult = mult.mul(upgradeEffect("je", 11));
     return mult;
   },
   gainExp() {
