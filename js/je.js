@@ -147,7 +147,7 @@ addLayer("je", {
       cost: new Decimal(250),
       currencyLocation() {
         return player.je;
-      },// Add formatting to the effect
+      }, // Add formatting to the effect
       currencyDisplayName: "Jacorbian Energy",
       currencyInternalName: "points",
     },
@@ -331,7 +331,13 @@ addLayer("je", {
         ["clickable", 11],
       ],
     ],
-    ["row", [["upgrade", 11], ["upgrade", 12]]],
+    [
+      "row",
+      [
+        ["upgrade", 11],
+        ["upgrade", 12],
+      ],
+    ],
     ["blank", "25px"],
     ["row", [["buyable", 11]]],
     [
