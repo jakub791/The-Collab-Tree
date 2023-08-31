@@ -348,6 +348,6 @@ addLayer("je", {
     ],
   ],
   layerShown() {
-    return hasUpgrade("tb", 16);
+    return hasUpgrade("tb", 16) || player.je.points.gt(0);
   },
 });
