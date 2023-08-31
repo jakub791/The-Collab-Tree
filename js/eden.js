@@ -17,6 +17,7 @@ addLayer("e", {
     },
     requires: new Decimal(222),
     type: "static",
+    base: 3.5,
     exponent: 0.5,
     gainMult: Decimal.dOne,
     gainExp: Decimal.dOne,
@@ -52,9 +53,6 @@ addLayer("e", {
             requirementDescription: "You planted a potful of Lycoris Flowers. (10 Total Lycoris Flowers planted)",
             effectDescription: "You are really helping us out, however, we are starting to run out of things to give you... Boost Tuber and COVID gain by 3x.",
             done() { return player.e.total.gte(10)}
-        },
-        4: {
-            
         }
     },
 });

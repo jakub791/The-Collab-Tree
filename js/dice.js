@@ -21,6 +21,7 @@ addLayer("tdr", {
     effect(){
         let sides = new Decimal(2)
         if (hasUpgrade("tb",14)) sides=sides.add(1)
+        sides = sides.add(buyableEffect("tdr",11))
         return sides
     },
     requires: Decimal.dTen,
@@ -79,6 +80,7 @@ addLayer("tdr", {
     },
     clickables: {
         11: {
+            title: "Roll",
             canClick() {
                 return player.tdr.cooldown <= 0;
             },
@@ -94,9 +96,11 @@ addLayer("tdr", {
     },
     buyables: {
         11: {
+            title: "More spherical dice",
             cost(x=getBuyableAmount(this.layer,this.id)) { return new Decimal(100).pow(x.pow(2)) },
-            display() { return "Add 1 side to all dice.<br>Cost: "+format(this.cost())+"<br>Currently: +"+formatWhole(getBuyableAmount(this.layer,this.id)) },
+            display() { return "Add 1 side to all dice.<br>Cost: "+format(this.cost())+" coronavirus<br>Currently: +"+formatWhole(getBuyableAmount(this.layer,this.id)) },
             canAfford() { return player.cv.points.gte(this.cost()) },
+            effect(){return getBuyableAmount(this.layer,this.id)},
             buy() {
                 player.cv.points = player.cv.points.sub(this.cost())
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
