@@ -67,10 +67,10 @@ addLayer("tdr", {
     player.tdr.lastRoll = rolls.join(", ");
     let score = Decimal.dZero;
     let sixes = 0;
-    for (let i of rolls){
-      if (i == 6)sixes++
+    for (let i of rolls) {
+      if (i == 6) sixes++;
     }
-    if (sixes >= 6 && !hasMilestone("tdr", 2))player.tdr.milestones.push(2)
+    if (sixes >= 6 && !hasMilestone("tdr", 2)) player.tdr.milestones.push(2);
     if (player.tdr.rollType === "additive") {
       score = rolls.reduce(
         (accumulated, current) => accumulated.add(current),
