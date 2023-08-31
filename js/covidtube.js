@@ -99,7 +99,7 @@ addLayer("tb", {
   row: 0, // Row the layer is in on the tree (0 is the first row)
   hotkeys: [
     {
-      key: "tb",
+      key: "t",
       description: "T: Contract Tuberculosis",
       onPress() {
         if (canReset(this.layer)) doReset(this.layer);
