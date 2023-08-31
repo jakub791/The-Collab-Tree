@@ -171,5 +171,17 @@ addLayer("tb", {
         return player.tdr.unlocked;
       },
     },
+    16: {
+      title: "Enter the Balancing Zone",
+      description() {
+        return (
+          "Unlock jacorbian energy."
+        );
+      },
+      cost: new Decimal(6103515625),
+      unlocked() {
+        return hasMilestone("tdr", 1)
+      },
+    },
   },
 });

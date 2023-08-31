@@ -14,6 +14,7 @@ const modInfo = {
     "h.js",
     "eden.js",
     "side-layers.js",
+    "je.js",
   ],
   discordName: "",
   discordLink: "",

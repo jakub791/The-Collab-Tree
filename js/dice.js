@@ -15,6 +15,7 @@ addLayer("tdr", {
     };
   },
   color: "#4BDC13",
+  branches: ["cv", "tb"], 
   effectDescription() {
     return `each having ${formatWhole(tmp.tdr.effect)} sides.`;
   },
