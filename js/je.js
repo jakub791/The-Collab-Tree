@@ -362,8 +362,8 @@ addLayer("je", {
     ["row", [["buyable", 11]]],
     [
       "raw-html",
-      function () {
-        return "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>";
+      function () { 
+        return !inChallenge("e", 11) ? "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>" : "";
       },
     ],
   ],
