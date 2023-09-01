@@ -213,8 +213,13 @@ addLayer("tdr", {
   update(diff) {
     if (player.tdr.cooldown > 0) {
       player.tdr.cooldown -=
-        diff * (hasUpgrade("tb", 15) ? tmp.t.timeCalculation.add(10).log10().toNumber() : 1)
-        * (hasUpgrade("je", 13) ? upgradeEffect("je",13).pow(0.5).toNumber() : 1)
+        diff *
+        (hasUpgrade("tb", 15)
+          ? tmp.t.timeCalculation.add(10).log10().toNumber()
+          : 1) *
+        (hasUpgrade("je", 13)
+          ? upgradeEffect("je", 13).pow(0.5).toNumber()
+          : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
   },
