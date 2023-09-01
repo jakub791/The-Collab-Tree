@@ -31,6 +31,7 @@ let notations = [
   "Blind",
   "Cancer",
   "Secret",
+  "Greek",
 ];
 function changeNotation() {
   player.notation =
