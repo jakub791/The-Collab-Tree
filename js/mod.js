@@ -18,7 +18,7 @@ const modInfo = {
   ],
   discordName: "",
   discordLink: "",
-  initialStartPoints: Decimal.dTen,
+  initialStartPoints: new Decimal(10),
   offlineLimit: 1,
 };
 
