@@ -1,7 +1,7 @@
 addLayer("tdr", {
   name: "The Daily Roll",
   symbol() {
-    return `${player.tdr.points.toNumber()}d${tmp.tdr.effect}`;
+    return `<h6>${player.tdr.points.toNumber()}d${formatWhole(tmp.tdr.effect)}`;
   }, // This appears on the layer's node. Default is the id with the first letter capitalized
   position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
   startData() {
@@ -216,6 +216,8 @@ addLayer("tdr", {
         diff *
         (hasUpgrade("tb", 15)
           ? tmp.t.timeCalculation.add(10).log10().toNumber()
+          : 1) * (hasUpgrade("je", 13)
+          ? upgradeEffect("je", 13)
           : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);

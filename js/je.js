@@ -151,6 +151,25 @@ addLayer("je", {
       currencyDisplayName: "Jacorbian Energy",
       currencyInternalName: "points",
     },
+    13: {
+      title: "Jacorb Upgrade III",
+      unlocked() {
+        return hasUpgrade("je", 12);
+      },
+      description: "Speeds up dice reroll cooldown based on dice.",
+      cost: new Decimal(1234),
+      currencyLocation() {
+        return player.je;
+      },
+      effect() {
+        return player.tdr.points.add(1).pow(1.3);
+      },
+      effectDisplay() {
+        return format(upgradeEffect(this.layer, this.id)) + "x";
+      }, // Add formatting to the effect
+      currencyDisplayName: "Jacorbian Energy",
+      currencyInternalName: "points",
+    },
   },
   tabFormat: [
     "main-display",
@@ -336,14 +355,15 @@ addLayer("je", {
       [
         ["upgrade", 11],
         ["upgrade", 12],
+        ["upgrade", 13],
       ],
     ],
     ["blank", "25px"],
     ["row", [["buyable", 11]]],
     [
       "raw-html",
-      function () {
-        return "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>";
+      function () { 
+        return !inChallenge("e", 11) ? "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>" : "";
       },
     ],
   ],
