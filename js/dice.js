@@ -54,6 +54,7 @@ addLayer("tdr", {
   rollSumEffect() {
     const effect = player.tdr.totalroll.add(1);
     const exponent = Decimal.dOne;
+    if (hasMilestone("tdr", 4))exponent = exponent.mul(1.5)
     return effect.pow(exponent);
   },
   roll() {
@@ -72,6 +73,7 @@ addLayer("tdr", {
     let sixes = 0;
     for (let i of rolls) {
       if (i == 6) sixes++;
+      if (i == 20 && !hasMilestone("tdr", 5)) player.tdr.milestones.push(5);
     }
     if (sixes >= 6 && !hasMilestone("tdr", 2)) player.tdr.milestones.push(2);
     if (player.tdr.rollType === "additive") {
@@ -191,6 +193,22 @@ addLayer("tdr", {
         "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
       done() {
         return player.tdr.points.gte(20);
+      },
+    },
+    4: {
+      requirementDescription: "30 dice",
+      effectDescription:
+        "Raise the dice effect to the 1.5",
+      done() {
+        return player.tdr.points.gte(30);
+      },
+    },
+    5: {
+      requirementDescription: "Roll a 20",
+      effectDescription:
+        "Gain 20x Jacorbian Energy",
+      done() {
+        return false;
       },
     },
   },
