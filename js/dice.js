@@ -139,7 +139,7 @@ addLayer("tdr", {
     12: {
       title: "Increased Luck",
       cost(x = getBuyableAmount(this.layer, this.id)) {
-        return new Decimal(1e16).mul(Decimal.pow(16,x.pow(2)));
+        return new Decimal(1e16).mul(Decimal.pow(16, x.pow(2)));
       },
       display() {
         return (
@@ -153,7 +153,9 @@ addLayer("tdr", {
         return player.tb.points.gte(this.cost());
       },
       effect() {
-        return getBuyableAmount(this.layer, this.id).sqrt().mul(player.je.points.add(10).log10().sqrt());
+        return getBuyableAmount(this.layer, this.id)
+          .sqrt()
+          .mul(player.je.points.add(10).log10().sqrt());
       },
       buy() {
         player.tb.points = player.tb.points.sub(this.cost());
@@ -185,7 +187,8 @@ addLayer("tdr", {
     },
     3: {
       requirementDescription: "20 dice",
-      effectDescription: "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
+      effectDescription:
+        "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
       done() {
         return player.tdr.points.gte(20);
       },
