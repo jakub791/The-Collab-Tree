@@ -1,11 +1,3 @@
-const decimalMap = {
-    [-1]: Decimal.dNegOne,
-    0: Decimal.dZero,
-    1: Decimal.dOne,
-    2: Decimal.dTwo,
-    10: Decimal.dTen
-};
-
 class LRUCache extends Map {
     #maximumSize;
     constructor(maximumSize) {
@@ -2440,3 +2432,11 @@ class Decimal {
         return this.cmp(other) > 0;
     }
 }
+
+const decimalMap = {
+    [-1]: Decimal.dNegOne,
+    0: Decimal.dZero,
+    1: Decimal.dOne,
+    2: Decimal.dTwo,
+    10: Decimal.dTen
+};
