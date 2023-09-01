@@ -184,7 +184,7 @@ addLayer("tb", {
     },
   },
   doReset(l) {
-    if (l.row > this.row) {
+    if (layers[l].row > this.row) {
       let keep = [];
       if (l == "tdr" && hasMilestone("tdr", 3)) keep.push("upgrades");
       layerDataReset(this.layer, keep);
