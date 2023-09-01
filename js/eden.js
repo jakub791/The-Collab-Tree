@@ -182,7 +182,7 @@ addLayer("e", {
     if (player.e.tre.gte(383.904) && player.e.tre.lt(385.619))
       player.e.bpm = new Decimal(280);
     if (player.e.tre.gte(385.619)) player.e.bpm = new Decimal(285);
-    if (inChallenge('b', 12)) {
+    if (inChallenge('b', 11)) {
       if (player.e.tre>445.433) {
           alert("Y0U F3!! 1N?0 1H3 ?23M3ND0U5 P0W32 AND 60? C0N5UM3D BY 1?. ?2Y HA2D32 N3X? ?1M3.")
           player.b.fail = 1
