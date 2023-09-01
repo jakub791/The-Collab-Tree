@@ -216,9 +216,8 @@ addLayer("tdr", {
         diff *
         (hasUpgrade("tb", 15)
           ? tmp.t.timeCalculation.add(10).log10().toNumber()
-          : 1) * (hasUpgrade("je", 13)
-          ? upgradeEffect("je", 13)
-          : 1);
+          : 1) *
+        (hasUpgrade("je", 13) ? upgradeEffect("je", 13) : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
   },
