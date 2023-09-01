@@ -19,11 +19,19 @@ addLayer("je", {
   resource: "Jacorbian Energy", // Name of prestige currency
   baseResource: "tuberculosis", // Name of resource prestige is based on
   baseAmount() {
-    return player.points;
+    return player.tb.points;
   }, // Get the current amount of baseResource
+  effectDescription() {
+    return `boosting sickness gain by x${format(tmp.je.effect)}.`;
+  },
+  effect() {
+    let effect = new Decimal(1);
+    effect = player.je.points.pow(0.8).add(1);
+    return effect;
+  },
   type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
   branches: ["cv", "tb"],
-  exponent: 0.44, // Prestige currency exponent
+  exponent: 0.25, // Prestige currency exponent
   gainMult() {
     // Calculate the multiplier for main currency from bonuses
     mult = new Decimal(1);
@@ -77,6 +85,39 @@ addLayer("je", {
       },
     },
   },
+  buyables: {
+    11: {
+      title: "More sophisticated dice",
+      cost(x = getBuyableAmount(this.layer, this.id)) {
+        return new Decimal(100).pow(x.pow(1.2));
+      },
+      display() {
+        return (
+          "Add 1 side to all dice.<br>Cost: " +
+          format(this.cost()) +
+          " jacorbian energy<br>Currently: +" +
+          formatWhole(getBuyableAmount(this.layer, this.id))
+        );
+      },
+      canAfford() {
+        return player.je.points.gte(this.cost());
+      },
+      effect() {
+        return getBuyableAmount(this.layer, this.id);
+      },
+      buy() {
+        player.je.points = player.je.points.sub(this.cost());
+        setBuyableAmount(
+          this.layer,
+          this.id,
+          getBuyableAmount(this.layer, this.id).add(1),
+        );
+      },
+      unlocked() {
+        return hasUpgrade("je", 12);
+      },
+    },
+  },
   upgrades: {
     11: {
       title: "Jacorb Upgrade I",
@@ -89,7 +130,39 @@ addLayer("je", {
         return player.je;
       },
       effect() {
-        return player[this.layer].points.add(1).pow(0.8);
+        return player[this.layer].points.add(1).pow(0.55);
+      },
+      effectDisplay() {
+        return format(upgradeEffect(this.layer, this.id)) + "x";
+      }, // Add formatting to the effect
+      currencyDisplayName: "Jacorbian Energy",
+      currencyInternalName: "points",
+    },
+    12: {
+      title: "Jacorb Upgrade II",
+      unlocked() {
+        return hasUpgrade("je", 11);
+      },
+      description: "Unlocks a buyable.",
+      cost: new Decimal(250),
+      currencyLocation() {
+        return player.je;
+      }, // Add formatting to the effect
+      currencyDisplayName: "Jacorbian Energy",
+      currencyInternalName: "points",
+    },
+    13: {
+      title: "Jacorb Upgrade III",
+      unlocked() {
+        return hasUpgrade("je", 12);
+      },
+      description: "Speeds up dice reroll cooldown based on dice.",
+      cost: new Decimal(1234),
+      currencyLocation() {
+        return player.je;
+      },
+      effect() {
+        return player.tdr.points.add(1).pow(1.3);
       },
       effectDisplay() {
         return format(upgradeEffect(this.layer, this.id)) + "x";
@@ -277,12 +350,26 @@ addLayer("je", {
         ["clickable", 11],
       ],
     ],
-    ["row", [["upgrade", 11]]],
+    [
+      "row",
+      [
+        ["upgrade", 11],
+        ["upgrade", 12],
+        ["upgrade", 13],
+      ],
+    ],
+    ["blank", "25px"],
+    ["row", [["buyable", 11]]],
     [
       "raw-html",
       function () {
-        return "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>";
+        return !inChallenge("e", 11)
+          ? "<audio controls autoplay loop hidden><source src=music/jacorbtab.mp3 type<=audio/mp3>loop=true hidden=true autostart=true</audio>"
+          : "";
       },
     ],
   ],
+  layerShown() {
+    return hasUpgrade("tb", 16) || player.je.points.gt(0);
+  },
 });
