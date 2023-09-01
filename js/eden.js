@@ -27,7 +27,7 @@ addLayer("e", {
     return player.tdr.totalroll.gte(100) || player.e.unlocked;
   },
   tabFormat: {
-    milestones: {
+    "Milestones of Amnehilesie": {
       unlocked: true,
       content: [
         [
@@ -38,6 +38,19 @@ addLayer("e", {
         "prestige-button",
         "blank",
         "milestones",
+      ],
+    },
+    "Challenges of Lycoris": {
+      unlocked() {return hasMilestone('e', 4)},
+      content: [
+        [
+          "display-text",
+          () =>
+            `You have planted ${player.e.points} Lycoris Flowers, in the Amnehilesie of Eden.`,
+        ],
+        "prestige-button",
+        "blank",
+        "challenges",
       ],
     },
   },
@@ -182,5 +195,14 @@ addLayer("e", {
     if (player.e.tre.gte(383.904) && player.e.tre.lt(385.619))
       player.e.bpm = new Decimal(280);
     if (player.e.tre.gte(385.619)) player.e.bpm = new Decimal(285);
+    if (inChallenge('e', 11)) {
+      if (player.e.tre>445.433) {
+          alert("!23M3ND0U5 P0W32 HA5 C0N5UM3D Y0U F20M W1!H1N. !2Y A6A1N N3X! !1M3.")
+          player.e.fail = 1
+          player.e.activeChallenge = null
+          doReset('e', true)
+          player.e.tre = 0
+      }
+  }
   },
 });
