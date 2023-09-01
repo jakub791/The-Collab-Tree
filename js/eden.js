@@ -33,7 +33,9 @@ addLayer("e", {
         [
           "display-text",
           () =>
-          "You have planted " + colored('e', format(player.e.points)) + " Lycoris Flowers, in the Amnehilesie of Eden.",
+            "You have planted " +
+            colored("e", format(player.e.points)) +
+            " Lycoris Flowers, in the Amnehilesie of Eden.",
         ],
         "prestige-button",
         "blank",
@@ -48,7 +50,9 @@ addLayer("e", {
         [
           "display-text",
           () =>
-            "You have planted " + colored('e', format(player.e.points)) + " Lycoris Flowers, in the Amnehilesie of Eden.",
+            "You have planted " +
+            colored("e", format(player.e.points)) +
+            " Lycoris Flowers, in the Amnehilesie of Eden.",
         ],
         "prestige-button",
         "blank",

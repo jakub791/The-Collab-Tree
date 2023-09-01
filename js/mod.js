@@ -70,12 +70,16 @@ function addedPlayerData() {
     jacorbscene: new Decimal(0),
   };
 }
-function colored(layer, text, tag='h2') { return `<${tag} style='color:${temp[layer].color};text-shadow:${temp[layer].color} 0px 0px 10px;'>${text}</${tag}>` }
+function colored(layer, text, tag = "h2") {
+  return `<${tag} style='color:${temp[layer].color};text-shadow:${temp[layer].color} 0px 0px 10px;'>${text}</${tag}>`;
+}
 const displayThings = [
   () =>
     `${
       inChallenge("e", 11)
-        ? `TremENDouS BPM is currently ${colored(format(player.e.bpm))}<br> You are currently ${colored(format(player.e.tre))}s in.`
+        ? `TremENDouS BPM is currently ${colored(
+            format(player.e.bpm),
+          )}<br> You are currently ${colored(format(player.e.tre))}s in.`
         : ""
     }`,
 ];

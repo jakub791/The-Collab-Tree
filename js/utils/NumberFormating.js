@@ -446,7 +446,11 @@ function format(decimal, precision = 3) {
   } else if (player.notation == "Letters") {
     return letter(decimal, precision, "abcdefghijklmnopqrstuvwxyz");
   } else if (player.notation == "Greek") {
-    return letter(decimal, precision, "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ");
+    return letter(
+      decimal,
+      precision,
+      "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ",
+    );
   } else if (player.notation == "Hexa") {
     return letter(decimal, precision, "0123456789ABCDEF");
   } else if (player.notation == "Binary") {
