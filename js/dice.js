@@ -23,6 +23,7 @@ addLayer("tdr", {
     let sides = new Decimal(2);
     if (hasUpgrade("tb", 14)) sides = sides.add(1);
     sides = sides.add(buyableEffect("tdr", 11));
+    sides = sides.add(buyableEffect("tdr", 12));
     sides = sides.add(buyableEffect("je", 11));
     return sides;
   },
@@ -89,7 +90,7 @@ addLayer("tdr", {
   },
   clickables: {
     11: {
-      title: "Roll",
+      title: "Daily Reminder to Roll",
       canClick() {
         return player.tdr.cooldown <= 0;
       },
@@ -135,6 +136,37 @@ addLayer("tdr", {
         return hasMilestone(this.layer, 1);
       },
     },
+    12: {
+      title: "Increased Luck",
+      cost(x = getBuyableAmount(this.layer, this.id)) {
+        return new Decimal(1e16).mul(Decimal.pow(16,x.pow(2)));
+      },
+      display() {
+        return (
+          "Jacorbian energy boosts dice sides.<br>Cost: " +
+          format(this.cost()) +
+          " Tuberculosis<br>Currently: +" +
+          formatWhole(this.effect())
+        );
+      },
+      canAfford() {
+        return player.tb.points.gte(this.cost());
+      },
+      effect() {
+        return getBuyableAmount(this.layer, this.id).sqrt().mul(player.je.points.add(10).log10().sqrt());
+      },
+      buy() {
+        player.tb.points = player.tb.points.sub(this.cost());
+        setBuyableAmount(
+          this.layer,
+          this.id,
+          getBuyableAmount(this.layer, this.id).add(1),
+        );
+      },
+      unlocked() {
+        return hasMilestone(this.layer, 3);
+      },
+    },
   },
   milestones: {
     1: {
@@ -149,6 +181,13 @@ addLayer("tdr", {
       effectDescription: "Gain 666x coronavirus",
       done() {
         return false;
+      },
+    },
+    3: {
+      requirementDescription: "20 dice",
+      effectDescription: "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
+      done() {
+        return player.tdr.points.gte(20);
       },
     },
   },

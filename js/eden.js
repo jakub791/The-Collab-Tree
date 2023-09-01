@@ -35,7 +35,7 @@ addLayer("e", {
           () =>
             "You have planted " +
             colored("e", format(player.e.points)) +
-            "Lycoris Flowers, in the Amnehilesie of Eden.",
+            " Lycoris Flowers, in the Amnehilesie of Eden.",
         ],
         "prestige-button",
         "blank",
