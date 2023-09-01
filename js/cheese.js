@@ -29,7 +29,10 @@ addLayer("cheese", {
     ["Boredom", "(x0.8 🧀 gain)"],
     ["Annoyance", "(x0.5 point and 🧀 gain)"],
     ["metal pipe", "(x0 🧀 gain)"],
-    ["Entertained...?", "(^0.85 🧀 gain and you can't sacrifice for one minute)"]
+    [
+      "Entertained...?",
+      "(^0.85 🧀 gain and you can't sacrifice for one minute)",
+    ],
   ],
   color: "rgb(255,217,131)",
   requires: Decimal.dTen,
@@ -45,9 +48,7 @@ addLayer("cheese", {
       },
       display() {
         return `<h2>Hunger Meter:
-                <br>${
-                    formatWhole(player.cheese.hunger)
-                } / 5<h2/>`;
+                <br>${formatWhole(player.cheese.hunger)} / 5<h2/>`;
       },
       fillStyle: {
         backgroundColor: "brown",
@@ -59,7 +60,8 @@ addLayer("cheese", {
       fullDisplay: `<h3>Downfall</h3>
                     <br><span>x4 🧀 gain
                     <br><br>Cost: 1 blessing`,
-      tooltip: "It's best if you do not buy this upgrade, god who knows what might happen next.",
+      tooltip:
+        "It's best if you do not buy this upgrade, god who knows what might happen next.",
       cost: Decimal.dOne,
       currencyInternalName: "blessings",
       currencyDisplayName: "blessing",
@@ -68,12 +70,11 @@ addLayer("cheese", {
     b0: {
       fullDisplay() {
         return `<h3>Self-Irony</h3>
-                <br><span>Blessings boost 🧀 gain by x${format(
-                  this.effect(),
-                )}
+                <br><span>Blessings boost 🧀 gain by x${format(this.effect())}
                 <br><br>Cost: ${formatWhole(this.cost())} blessings`;
       },
-      tooltip: "I told you to not buy this!... Oh well, might as well go full-on zaburple mode",
+      tooltip:
+        "I told you to not buy this!... Oh well, might as well go full-on zaburple mode",
       effect() {
         return player.cheese.blessings
           .add(Decimal.dOne)
@@ -95,9 +96,7 @@ addLayer("cheese", {
       fullDisplay() {
         return `<h3>Permabooster</h3>
                 <br><span>You can sacrifice your blessings for additional 🧀 gain boost
-                <br><br>Cost: ${formatWhole(
-                  this.cost(),
-                )} blessings`;
+                <br><br>Cost: ${formatWhole(this.cost())} blessings`;
       },
       tooltip: "I heard your sacrifices are pretty strong. Let me fight them.",
       cost() {
@@ -133,20 +132,22 @@ addLayer("cheese", {
       branches: [["c1", "#006080"]],
       style() {
         return {
-          "background-color": hasUpgrade("cheese", this.id) ? "#006080" : canAffordUpgrade("cheese", this.id) ? "cyan" : "",
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
           color: "black",
-          "border-color": "rgba(0,0,0,0.125)"
+          "border-color": "rgba(0,0,0,0.125)",
         };
-      }
+      },
     },
     c0: {
       fullDisplay() {
         return `<h3>God Forsaken Feedback</h3>
-                <br><span>🧀 boost blessing gain by x${
-                  format(this.effect())
-                }<br><br>Cost: ${
-                  formatWhole(this.cost())
-                } blessings`;
+                <br><span>🧀 boost blessing gain by x${format(
+                  this.effect(),
+                )}<br><br>Cost: ${formatWhole(this.cost())} blessings`;
       },
       tooltip: "why would you do this to me bruh",
       effect() {
@@ -170,7 +171,8 @@ addLayer("cheese", {
                 <h5>(Cheesy Synchronization doesn't affect these buyables)</h5>
                 <br>Cost: 2,020 blessings`;
       },
-      tooltip: "Shouldn't inflate above 1e20... or 10 Qi... or whatever cursed notation you're using.",
+      tooltip:
+        "Shouldn't inflate above 1e20... or 10 Qi... or whatever cursed notation you're using.",
       effect() {
         return player.cheese.blessings.add(1).log(777).add(1);
       },
@@ -192,9 +194,7 @@ addLayer("cheese", {
       fullDisplay() {
         return `<h3>Cheesy Synchronization</h3>
                 <br><span>Sacrificed blessings affect 🧀 buildings as well
-                <br><br>Cost: ${
-                  formatWhole(this.cost())
-                } blessings`;
+                <br><br>Cost: ${formatWhole(this.cost())} blessings`;
       },
       tooltip: "An approriate name for such silly upgrade.",
       effect() {
@@ -228,11 +228,15 @@ addLayer("cheese", {
       currencyLayer: "cheese",
       style() {
         return {
-          "background-color": hasUpgrade("cheese", this.id) ? "#006080" : canAffordUpgrade("cheese", this.id) ? "cyan" : "",
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
           color: "black",
-          "border-color": "rgba(0,0,0,0.125)"
+          "border-color": "rgba(0,0,0,0.125)",
         };
-      }
+      },
     },
     ab10: {
       fullDisplay: `<h3>Short-Lived Reproduction</h3>
@@ -253,11 +257,15 @@ addLayer("cheese", {
       branches: [["ab00", "#006080"]],
       style() {
         return {
-          "background-color": hasUpgrade("cheese", this.id) ? "#006080" : canAffordUpgrade("cheese", this.id) ? "cyan" : "",
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
           color: "black",
-          "border-color": "rgba(0,0,0,0.125)"
+          "border-color": "rgba(0,0,0,0.125)",
         };
-      }
+      },
     },
     ab20: {
       fullDisplay: `<h3>??? (wip)</h3>
@@ -276,19 +284,23 @@ addLayer("cheese", {
       branches: [["ab10", "#006080"]],
       style() {
         return {
-          "background-color": hasUpgrade("cheese", this.id) ? "#006080" : canAffordUpgrade("cheese", this.id) ? "cyan" : "",
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
           color: "black",
-          "border-color": "rgba(0,0,0,0.125)"
+          "border-color": "rgba(0,0,0,0.125)",
         };
-      }
+      },
     },
   },
   update(diff) {
     player.cheese.points = player.cheese.points.add(
-      tmp.cheese.cheeseGain.mul(diff)
+      tmp.cheese.cheeseGain.mul(diff),
     );
     player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(
-      tmp.cheese.laeceaGain.mul(diff)
+      tmp.cheese.laeceaGain.mul(diff),
     );
     if (player.offTime == undefined)
       player.cheese.cycle = player.cheese.cycle.add(diff);
@@ -298,10 +310,9 @@ addLayer("cheese", {
       player.cheese.currentState =
         Math.ceil(Math.random() * 60) == 21
           ? 7
-          : player.cheese.activity.gte(30) &&
-            player.cheese.currentState == 1 ||
-            player.cheese.currentState == 2 &&
-            player.cheese.bruh2.gte(10)
+          : (player.cheese.activity.gte(30) &&
+              player.cheese.currentState == 1) ||
+            (player.cheese.currentState == 2 && player.cheese.bruh2.gte(10))
           ? 8
           : player.cheese.bruh.gte(6)
           ? 6
@@ -330,7 +341,8 @@ addLayer("cheese", {
   cheeseGain() {
     return player.cheese.currentState == 7
       ? Decimal.dZero
-      : tmp.cheese.buyables[11].effect.mul(tmp.cheese.laeceaEffect)
+      : tmp.cheese.buyables[11].effect
+          .mul(tmp.cheese.laeceaEffect)
           .mul(tmp.cheese.buyables[12].effect)
           .mul(tmp.cheese.buyables[13].effect)
           .mul(tmp.cheese.buyables[14].effect)
@@ -365,14 +377,43 @@ addLayer("cheese", {
   laeceaGain() {
     return !hasUpgrade("cheese", "b2")
       ? Decimal.dZero
-      : player.cheese.points.max(0).add(1).log(10).div(20).pow(1.69)
-          .mul(Decimal.pow(4, player.cheese.buyables["ab11"].add(player.cheese.buyables["ab12"]).add(player.cheese.buyables["ab13"])))
-          .mul(Decimal.pow(tmp.cheese.laeceaEffect.min(4), player.cheese.buyables["ab12"].add(player.cheese.buyables["ab13"])))
-          .mul(Decimal.mul(0.05, hasAchievement("cheese", 23)
-            ? (hasUpgrade("cheese", "ab10")
-              ? new Decimal(player.cheese.achievements.length).mul(Decimal.add(1, (player.cheese.achievements.length-1)/2))
-              : player.cheese.achievements.length)
-            : 0).add(1))
+      : player.cheese.points
+          .max(0)
+          .add(1)
+          .log(10)
+          .div(20)
+          .pow(1.69)
+          .mul(
+            Decimal.pow(
+              4,
+              player.cheese.buyables["ab11"]
+                .add(player.cheese.buyables["ab12"])
+                .add(player.cheese.buyables["ab13"]),
+            ),
+          )
+          .mul(
+            Decimal.pow(
+              tmp.cheese.laeceaEffect.min(4),
+              player.cheese.buyables["ab12"].add(
+                player.cheese.buyables["ab13"],
+              ),
+            ),
+          )
+          .mul(
+            Decimal.mul(
+              0.05,
+              hasAchievement("cheese", 23)
+                ? hasUpgrade("cheese", "ab10")
+                  ? new Decimal(player.cheese.achievements.length).mul(
+                      Decimal.add(
+                        1,
+                        (player.cheese.achievements.length - 1) / 2,
+                      ),
+                    )
+                  : player.cheese.achievements.length
+                : 0,
+            ).add(1),
+          )
           .pow(tmp.cheese.buyables["ab13"].effect);
   },
   laeceaEffect() {
@@ -540,8 +581,7 @@ addLayer("cheese", {
       },
     },
     12: {
-      title:
-        "<h3>Cheddar Generalizer",
+      title: "<h3>Cheddar Generalizer",
       cost() {
         return new Decimal(400)
           .mul(Decimal.pow(1.15, player.cheese.buyables[12].pow(1.3)))
@@ -639,8 +679,7 @@ addLayer("cheese", {
       },
     },
     14: {
-      title:
-        "<h3>Classy Gargantuan-or",
+      title: "<h3>Classy Gargantuan-or",
       cost() {
         return new Decimal("1.6e12")
           .mul(Decimal.pow(1612, player.cheese.buyables[14].pow(1.6)))
@@ -736,17 +775,21 @@ addLayer("cheese", {
       },
     },
     21: {
-      title:
-        "<h3>Sacrifice all of your 🧀 to Cheese Overlord",
+      title: "<h3>Sacrifice all of your 🧀 to Cheese Overlord",
       canAfford() {
         return player.cheese.points.gt(0) && !(tmp.cheese.state == 8);
       },
       effect() {
-        return player.cheese.goodCheese.mul(hasUpgrade("cheese", "ab00") ? 4 : 1).add(1).log(7).add(1).max(1);
+        return player.cheese.goodCheese
+          .mul(hasUpgrade("cheese", "ab00") ? 4 : 1)
+          .add(1)
+          .log(7)
+          .add(1)
+          .max(1);
       },
       buy() {
         player.cheese.goodCheese = player.cheese.goodCheese.add(
-          player.cheese.points.mul(hasUpgrade("cheese", "ab00") ? 4 : 1)
+          player.cheese.points.mul(hasUpgrade("cheese", "ab00") ? 4 : 1),
         );
         player.cheese.points = Decimal.dZero;
         player.cheese.activity = player.cheese.activity.add(1);
@@ -758,7 +801,11 @@ addLayer("cheese", {
         )}<br>You'll gain +x${format(
           player.cheese.points
             .mul(hasUpgrade("cheese", "ab00") ? 16 : 1)
-            .add(player.cheese.goodCheese.mul(hasUpgrade("cheese", "ab00") ? 4 : 1))
+            .add(
+              player.cheese.goodCheese.mul(
+                hasUpgrade("cheese", "ab00") ? 4 : 1,
+              ),
+            )
             .add(1)
             .log(7)
             .add(1)
@@ -780,8 +827,7 @@ addLayer("cheese", {
       },
     },
     22: {
-      title:
-        "<h3>Sacrifice all of your blessings to Cheese Overlord",
+      title: "<h3>Sacrifice all of your blessings to Cheese Overlord",
       canAfford() {
         return (
           player.cheese.blessings.gt(Decimal.dZero) && tmp.cheese.state !== 8
@@ -797,7 +843,7 @@ addLayer("cheese", {
       },
       buy() {
         player.cheese.goodBlessings = player.cheese.goodBlessings.add(
-          player.cheese.blessings.mul(hasUpgrade("cheese", "ab00") ? 4 : 1)
+          player.cheese.blessings.mul(hasUpgrade("cheese", "ab00") ? 4 : 1),
         );
         player.cheese.blessings = Decimal.dZero;
         player.cheese.activity = player.cheese.activity.add(Decimal.dOne);
@@ -809,7 +855,11 @@ addLayer("cheese", {
         )}<br>You'll gain +x${format(
           player.cheese.blessings
             .mul(hasUpgrade("cheese", "ab00") ? 16 : 1)
-            .add(player.cheese.goodBlessings.mul(hasUpgrade("cheese", "ab00") ? 4 : 1))
+            .add(
+              player.cheese.goodBlessings.mul(
+                hasUpgrade("cheese", "ab00") ? 4 : 1,
+              ),
+            )
             .add(Decimal.dOne)
             .log(77)
             .add(Decimal.dOne)
@@ -836,26 +886,28 @@ addLayer("cheese", {
     ab11: {
       title: "<h1>G</h1>",
       display() {
-        return `<h3>
+        return (
+          `<h3>
           Boosts special point gain by x4 per purchase
-          <br>Amount: ${
-            formatWhole(player.cheese.buyables["ab11"])
-          }` +
-          (player.cheese.buyables["ab12"].gte(1) || player.cheese.buyables["ab13"].gte(1)
-            ? ` (+${formatWhole(player.cheese.buyables["ab12"].add(player.cheese.buyables["ab13"]))})`
-            : ``)
-          + `<br>Cost: ${
-            format(this.cost())
-          } special points</h3>`;
+          <br>Amount: ${formatWhole(player.cheese.buyables["ab11"])}` +
+          (player.cheese.buyables["ab12"].gte(1) ||
+          player.cheese.buyables["ab13"].gte(1)
+            ? ` (+${formatWhole(
+                player.cheese.buyables["ab12"].add(
+                  player.cheese.buyables["ab13"],
+                ),
+              )})`
+            : ``) +
+          `<br>Cost: ${format(this.cost())} special points</h3>`
+        );
       },
-      tooltip: "<span style='color: #006080;'>G is the 7th letter in english alphabet, number of which represents all kinds of godlike, religious related things with immeasurable importance or power...<br>also GIF is pronounced with G, not J.",
+      tooltip:
+        "<span style='color: #006080;'>G is the 7th letter in english alphabet, number of which represents all kinds of godlike, religious related things with immeasurable importance or power...<br>also GIF is pronounced with G, not J.",
       cost() {
         return Decimal.pow(60, player.cheese.buyables["ab11"].add(1).pow(1.15));
       },
       canAfford() {
-        return (
-          player.cheese.laeceaPoints.gte(this.cost())
-        );
+        return player.cheese.laeceaPoints.gte(this.cost());
       },
       buy() {
         player.cheese.buyables["ab11"] = player.cheese.buyables["ab11"].add(1);
@@ -863,8 +915,8 @@ addLayer("cheese", {
       },
       style() {
         return {
-          "height": "192px",
-          "width": "192px",
+          height: "192px",
+          width: "192px",
           "border-color": "rgba(0,0,0,0.125)",
           "background-color": this.canAfford() ? "#006080" : "",
         };
@@ -873,26 +925,26 @@ addLayer("cheese", {
     ab12: {
       title: "<h1>O</h1>",
       display() {
-        return `<h3>
+        return (
+          `<h3>
           Boosts special point gain by it's own effect (hardcaps at 4x) and gives 1 free "G" per purchase
-          <br>Amount: ${
-            formatWhole(player.cheese.buyables["ab12"])
-          }` +
+          <br>Amount: ${formatWhole(player.cheese.buyables["ab12"])}` +
           (player.cheese.buyables["ab13"].gte(1)
             ? ` (+${formatWhole(player.cheese.buyables["ab13"])})`
-            : ``)
-          + `<br>Cost: ${
-            format(this.cost())
-          } special points</h3>`;
+            : ``) +
+          `<br>Cost: ${format(this.cost())} special points</h3>`
+        );
       },
-      tooltip: "<span style='color: #006080;'>O... That's the first letter of my arch-nemesis. Sorta, kinda... O, as in Ouroboros, represents rebirth and afterlife. O can also be easily mistaken with 0, which is the amount of [Strength Type] I'm going to give about this layer's balancing within the next 10 minutes.",
+      tooltip:
+        "<span style='color: #006080;'>O... That's the first letter of my arch-nemesis. Sorta, kinda... O, as in Ouroboros, represents rebirth and afterlife. O can also be easily mistaken with 0, which is the amount of [Strength Type] I'm going to give about this layer's balancing within the next 10 minutes.",
       cost() {
-        return Decimal.pow(1440, player.cheese.buyables["ab12"].add(1).pow(1.3));
+        return Decimal.pow(
+          1440,
+          player.cheese.buyables["ab12"].add(1).pow(1.3),
+        );
       },
       canAfford() {
-        return (
-          player.cheese.laeceaPoints.gte(this.cost())
-        );
+        return player.cheese.laeceaPoints.gte(this.cost());
       },
       buy() {
         player.cheese.buyables["ab12"] = player.cheese.buyables["ab12"].add(1);
@@ -900,8 +952,8 @@ addLayer("cheese", {
       },
       style() {
         return {
-          "height": "192px",
-          "width": "192px",
+          height: "192px",
+          width: "192px",
           "border-color": "rgba(0,0,0,0.125)",
           "background-color": this.canAfford() ? "#006080" : "",
         };
@@ -912,32 +964,27 @@ addLayer("cheese", {
       display() {
         return `<h3>
           Boosts special points gain to the power of this buyable's effect and gives 1 free "G" and "O" per purchase
-          <br>Effect: ^${
-            format(this.effect())
-          }
-          <br>Amount: ${
-            formatWhole(player.cheese.buyables["ab13"])
-          }
-          Cost: ${
-            format(this.cost())
-          } special points</h3>`;
+          <br>Effect: ^${format(this.effect())}
+          <br>Amount: ${formatWhole(player.cheese.buyables["ab13"])}
+          Cost: ${format(this.cost())} special points</h3>`;
       },
       effect() {
-        let base = new Decimal(0.23456789)
-        let eff = Decimal.dOne
+        let base = new Decimal(0.23456789);
+        let eff = Decimal.dOne;
         for (i = 0; new Decimal(i).lt(player.cheese.buyables["ab13"]); i++) {
-          eff = eff.add(base.div(i+1))
+          eff = eff.add(base.div(i + 1));
         }
-        return eff
+        return eff;
       },
       tooltip: `<span style='color: #006080;'>dawg i have no idea what i'm supposed to make out of D... perhaps DIGMA... balls? No, no... Delusional ho- NO! Look, I'm sorry! There's no "funni religion joke!11" punchline that I can make with this stupid letter without [JACORB'D] around and-<br><h3>large devil</h3>`,
       cost() {
-        return Decimal.pow(40320, player.cheese.buyables["ab13"].add(1).pow(1.45));
+        return Decimal.pow(
+          40320,
+          player.cheese.buyables["ab13"].add(1).pow(1.45),
+        );
       },
       canAfford() {
-        return (
-          player.cheese.laeceaPoints.gte(this.cost())
-        );
+        return player.cheese.laeceaPoints.gte(this.cost());
       },
       buy() {
         player.cheese.buyables["ab13"] = player.cheese.buyables["ab13"].add(1);
@@ -945,8 +992,8 @@ addLayer("cheese", {
       },
       style() {
         return {
-          "height": "192px",
-          "width": "192px",
+          height: "192px",
+          width: "192px",
           "border-color": "rgba(0,0,0,0.125)",
           "background-color": this.canAfford() ? "#006080" : "",
         };
@@ -956,74 +1003,90 @@ addLayer("cheese", {
   achievements: {
     11: {
       name: "Now here's the 🐀",
-      done(){
-          return player.cheese.points.gte(1);
+      done() {
+        return player.cheese.points.gte(1);
       },
       tooltip: "Get your first 🧀",
     },
     12: {
       name: "Fullstack Machinery",
-      done(){
-          return player.cheese.buyables[13].gte(1);
+      done() {
+        return player.cheese.buyables[13].gte(1);
       },
       tooltip: "Buy a 3rd 🧀 buyable",
     },
     13: {
       name: "get softcapped idiot",
-      done(){
-          return player.cheese.buyables[11].gte(100) || player.cheese.buyables[12].gte(100) || player.cheese.buyables[13].gte(100) || player.cheese.buyables[14].gte(100) || player.cheese.buyables[15].gte(100)
+      done() {
+        return (
+          player.cheese.buyables[11].gte(100) ||
+          player.cheese.buyables[12].gte(100) ||
+          player.cheese.buyables[13].gte(100) ||
+          player.cheese.buyables[14].gte(100) ||
+          player.cheese.buyables[15].gte(100)
+        );
       },
       tooltip: "Get softcapped",
     },
     14: {
       name: "UNLIMITED POWER!!!!",
-      done(){
-          return player.cheese.unlocked2;
+      done() {
+        return player.cheese.unlocked2;
       },
       tooltip: "Ascend once",
     },
     15: {
       name: "Trillionarism is an old propaganda",
-      done(){
-          return player.cheese.points.gte("1e15")
+      done() {
+        return player.cheese.points.gte("1e15");
       },
       tooltip: "Reach 1 Qa 🧀",
     },
     16: {
       name: "Do not.",
-      done(){
-          return hasUpgrade("cheese", "b2")
+      done() {
+        return hasUpgrade("cheese", "b2");
       },
       tooltip: "Disappoint me. Alot.",
     },
     21: {
       name: "get super softcapped stupid bozo",
-      done(){
-          return player.cheese.buyables[11].gte(256) || player.cheese.buyables[12].gte(256) || player.cheese.buyables[13].gte(256) || player.cheese.buyables[14].gte(256) || player.cheese.buyables[15].gte(256)
+      done() {
+        return (
+          player.cheese.buyables[11].gte(256) ||
+          player.cheese.buyables[12].gte(256) ||
+          player.cheese.buyables[13].gte(256) ||
+          player.cheese.buyables[14].gte(256) ||
+          player.cheese.buyables[15].gte(256)
+        );
       },
       tooltip: "Get softcapped yet again",
     },
     22: {
       name: "Powerhouse",
-      done(){
-          return tmp.cheese.buyables[21].effect.gte(30)
+      done() {
+        return tmp.cheese.buyables[21].effect.gte(30);
       },
       tooltip: "Reach x30 🧀 sacrifice effect",
     },
     23: {
       name: "man screw that blue rat, all my homies hate him",
-      done(){
-          return player.cheese.buyables["ab11"].gte(1) || player.cheese.buyables["ab12"].gte(1) || player.cheese.buyables["ab13"].gte(1)
+      done() {
+        return (
+          player.cheese.buyables["ab11"].gte(1) ||
+          player.cheese.buyables["ab12"].gte(1) ||
+          player.cheese.buyables["ab13"].gte(1)
+        );
       },
       tooltip: `Spell out "GOD"<br>Reward: +5% special point gain per 🐀`,
     },
     24: {
       name: "funni number with funni syntax",
-      done(){
-          return tmp.cheese.cheeseGain.gte("6.9e22")
+      done() {
+        return tmp.cheese.cheeseGain.gte("6.9e22");
       },
       tooltip: `enough said`,
-    }
+    },
   },
   microtabs: {
     AB: {
@@ -1034,7 +1097,9 @@ addLayer("cheese", {
             "display-text",
             () => `
                       <h2>AB's Current State:<br> 
-                      <h3> ${tmp.cheese.state[player.cheese.currentState][0]}<br>
+                      <h3> ${
+                        tmp.cheese.state[player.cheese.currentState][0]
+                      }<br>
                       <h4>${
                         tmp.cheese.state[player.cheese.currentState][1]
                       }<br>Next cycle in ${formatWhole(
@@ -1054,27 +1119,29 @@ addLayer("cheese", {
           borderColor: "rgb(0,84,112)",
           backgroundColor: "#006080",
         },
-        unlocked(){
-          return hasUpgrade("cheese", "b2")  
-        }
+        unlocked() {
+          return hasUpgrade("cheese", "b2");
+        },
       },
       "I AM": {
         content: [
           "blank",
           [
-          "display-text",
-          () =>
-            `
+            "display-text",
+            () =>
+              `
                     <h2>You have<h2/>
                     <h2 style='color: #006080; text-shadow: #006080 0 0 5px;'>${formatWhole(
                       player.cheese.laeceaPoints,
                     )}<h2/>
-                    <h2>special points, boosting your 🧀 and blessing gain by x${format(tmp.cheese.laeceaEffect)}</h2><br>(And to further confirm the superiority of special points, you can't waste them no matter what)` +
-            (tmp.cheese.laeceaGain.gt(Decimal.dZero)
-              ? `<h4>(${format(
-                  tmp.cheese.laeceaGain,
-                )} SP/sec [(log(🧀 + 1) / 20) ^ 1.69])`
-              : ``),
+                    <h2>special points, boosting your 🧀 and blessing gain by x${format(
+                      tmp.cheese.laeceaEffect,
+                    )}</h2><br>(And to further confirm the superiority of special points, you can't waste them no matter what)` +
+              (tmp.cheese.laeceaGain.gt(Decimal.dZero)
+                ? `<h4>(${format(
+                    tmp.cheese.laeceaGain,
+                  )} SP/sec [(log(🧀 + 1) / 20) ^ 1.69])`
+                : ``),
           ],
           "blank",
           [
@@ -1094,9 +1161,9 @@ addLayer("cheese", {
           borderColor: "rgb(0,84,112)",
           backgroundColor: "#006080",
         },
-        unlocked(){
-          return hasUpgrade("cheese", "b2")  
-        }
+        unlocked() {
+          return hasUpgrade("cheese", "b2");
+        },
       },
     },
   },
@@ -1108,11 +1175,9 @@ addLayer("cheese", {
           () =>
             `
                     <h2>You have 
-                    <h2 style='color: ${
+                    <h2 style='color: ${tmp.cheese.color}; text-shadow: ${
                       tmp.cheese.color
-                    }; text-shadow: ${tmp.cheese.color} 0 0 5px;'>${formatWhole(
-                      player.cheese.points,
-                    )} 
+                    } 0 0 5px;'>${formatWhole(player.cheese.points)} 
                     <h2 style='transform: scale(2, 2)'>🧀` +
             (player.cheese.unlocked2
               ? `<h2> and 
@@ -1122,12 +1187,10 @@ addLayer("cheese", {
                     <h2> blessings`
               : ``) +
             (tmp.cheese.cheeseGain.gt(Decimal.dZero)
-              ? `<h4>You gain ${format(
-                  tmp.cheese.cheeseGain,
-                )} 🧀/sec`
+              ? `<h4>You gain ${format(tmp.cheese.cheeseGain)} 🧀/sec`
               : ``),
         ],
-        ["microtabs", "AB", {'border-color': 'rgba(0,0,0,0)'}]
+        ["microtabs", "AB", { "border-color": "rgba(0,0,0,0)" }],
       ],
       buttonStyle: {
         color: "rgb(0,48,64)",
@@ -1143,11 +1206,9 @@ addLayer("cheese", {
           () =>
             `
                     <h2>You have 
-                    <h2 style='color: ${
+                    <h2 style='color: ${tmp.cheese.color}; text-shadow: ${
                       tmp.cheese.color
-                    }; text-shadow: ${tmp.cheese.color} 0 0 5px;'>${formatWhole(
-                      player.cheese.points,
-                    )} 
+                    } 0 0 5px;'>${formatWhole(player.cheese.points)} 
                     <h2 style='transform: scale(2, 2)'>🧀` +
             (player.cheese.unlocked2
               ? `<h2> and 
@@ -1157,9 +1218,7 @@ addLayer("cheese", {
                     <h2> blessings`
               : ``) +
             (tmp.cheese.cheeseGain.gt(Decimal.dZero)
-              ? `<h4>You gain ${format(
-                  tmp.cheese.cheeseGain,
-                )} 🧀/sec`
+              ? `<h4>You gain ${format(tmp.cheese.cheeseGain)} 🧀/sec`
               : ``),
         ],
         "blank",
@@ -1190,11 +1249,9 @@ addLayer("cheese", {
           () =>
             `
                     <h2>You have 
-                    <h2 style='color: ${
+                    <h2 style='color: ${tmp.cheese.color}; text-shadow: ${
                       tmp.cheese.color
-                    }; text-shadow: ${tmp.cheese.color} 0 0 5px;'>${formatWhole(
-                      player.cheese.points,
-                    )} 
+                    } 0 0 5px;'>${formatWhole(player.cheese.points)} 
                     <h2 style='transform: scale(2, 2)'>🧀` +
             (player.cheese.unlocked2
               ? `<h2> and 
@@ -1204,9 +1261,7 @@ addLayer("cheese", {
                     <h2> blessings`
               : ``) +
             (tmp.cheese.cheeseGain.gt(Decimal.dZero)
-              ? `<h4>You gain ${format(
-                  tmp.cheese.cheeseGain,
-                )} 🧀/sec`
+              ? `<h4>You gain ${format(tmp.cheese.cheeseGain)} 🧀/sec`
               : ``),
         ],
         "blank",
@@ -1217,9 +1272,19 @@ addLayer("cheese", {
         [
           "row",
           [
-            ["blank", function(){return [hasUpgrade("cheese", "b2") ? "136px" : "0px", "0px"]}],
+            [
+              "blank",
+              function () {
+                return [hasUpgrade("cheese", "b2") ? "136px" : "0px", "0px"];
+              },
+            ],
             ["upgrade", "a0"],
-            ["blank", function(){return [hasUpgrade("cheese", "b2") ? "152px" : "0px", "0px"]}],
+            [
+              "blank",
+              function () {
+                return [hasUpgrade("cheese", "b2") ? "152px" : "0px", "0px"];
+              },
+            ],
             ["upgrade", "ab00"],
           ],
         ],
@@ -1231,9 +1296,26 @@ addLayer("cheese", {
             ["upgrade", "b0"],
             ["blank", ["16px", "0px"]],
             ["upgrade", "b2"],
-            ["blank", function(){return [hasUpgrade("cheese", "c1") ? "16px" : "0px", "0px"]}],
+            [
+              "blank",
+              function () {
+                return [hasUpgrade("cheese", "c1") ? "16px" : "0px", "0px"];
+              },
+            ],
             ["upgrade", "b1"],
-            ["blank", function(){return [hasUpgrade("cheese", "ab00") ? "16px" : hasUpgrade("cheese", "b2") ? "136px" : "0px", "0px"]}],
+            [
+              "blank",
+              function () {
+                return [
+                  hasUpgrade("cheese", "ab00")
+                    ? "16px"
+                    : hasUpgrade("cheese", "b2")
+                    ? "136px"
+                    : "0px",
+                  "0px",
+                ];
+              },
+            ],
             ["upgrade", "ab10"],
           ],
         ],
@@ -1245,9 +1327,31 @@ addLayer("cheese", {
             ["upgrade", "c0"],
             ["blank", ["16px", "0px"]],
             ["upgrade", "c1"],
-            ["blank", function(){return [hasUpgrade("cheese", "c0") && hasUpgrade("cheese", "c2") ? "16px" : "0px", "0px"]}],
+            [
+              "blank",
+              function () {
+                return [
+                  hasUpgrade("cheese", "c0") && hasUpgrade("cheese", "c2")
+                    ? "16px"
+                    : "0px",
+                  "0px",
+                ];
+              },
+            ],
             ["upgrade", "c2"],
-            ["blank", function(){return [hasUpgrade("cheese", "ab10") ? "16px" : hasUpgrade("cheese", "b2") ? "136px" : "0px", "0px"]}],
+            [
+              "blank",
+              function () {
+                return [
+                  hasUpgrade("cheese", "ab10")
+                    ? "16px"
+                    : hasUpgrade("cheese", "b2")
+                    ? "136px"
+                    : "0px",
+                  "0px",
+                ];
+              },
+            ],
             ["upgrade", "ab20"],
           ],
         ],
@@ -1262,23 +1366,29 @@ addLayer("cheese", {
     },
     Achievements: {
       content: [
-        ["display-text", function(){
-          if(!hasUpgrade("cheese", "ab10")) return "🐀".repeat(player.cheese.achievements.length)
-          let ratTriangle = ""
-          for(i=0; i<player.cheese.achievements.length; i++){
-            ratTriangle = ratTriangle+"🐀".repeat(player.cheese.achievements.length-i)+"<br>"
-          }
-          return ratTriangle
-          }
+        [
+          "display-text",
+          function () {
+            if (!hasUpgrade("cheese", "ab10"))
+              return "🐀".repeat(player.cheese.achievements.length);
+            let ratTriangle = "";
+            for (i = 0; i < player.cheese.achievements.length; i++) {
+              ratTriangle =
+                ratTriangle +
+                "🐀".repeat(player.cheese.achievements.length - i) +
+                "<br>";
+            }
+            return ratTriangle;
+          },
         ],
         "blank",
-        "achievements"
+        "achievements",
       ],
       buttonStyle: {
         color: "rgb(244,144,12)",
         borderRadius: "50px",
       },
-    }
+    },
   },
   row: "side",
   nodeStyle: {
@@ -1297,23 +1407,26 @@ addNode("ab", {
     player.cheese.bruh = player.cheese.bruh.add(1);
   },
   tooltip() {
-    return "<span style='color: #006080;'>" + (player.cheese.currentState == 8
-      ? "Thought you were slick, huh?"
-      : player.cheese.currentState == 7
-      ? "shut up bozo<br>https://tenor.com/view/metal-pipe-gif-27050590<br>metal pipe"
-      : player.cheese.currentState == 6
-      ? "bruh i ain't big cookie bro"
-      : player.cheese.currentState == 5
-      ? ". . ."
-      : player.cheese.currentState == 4
-      ? "Hell yeah, dude! Here is your reward, as promised"
-      : player.cheese.currentState == 3
-      ? "YOU.<br>🧀.<br>ME.<br>NOW."
-      : player.cheese.currentState == 2
-      ? "You're doing some pretty good progress, not gonna lie."
-      : player.cheese.currentState == 1
-      ? "Not bad..."
-      : "Oh, hey there.<br>I'm not quite sure how did I get here, but you don't have to worry about me...<br>Speaking of which. Could you get some 🧀 for me please?");
+    return (
+      "<span style='color: #006080;'>" +
+      (player.cheese.currentState == 8
+        ? "Thought you were slick, huh?"
+        : player.cheese.currentState == 7
+        ? "shut up bozo<br>https://tenor.com/view/metal-pipe-gif-27050590<br>metal pipe"
+        : player.cheese.currentState == 6
+        ? "bruh i ain't big cookie bro"
+        : player.cheese.currentState == 5
+        ? ". . ."
+        : player.cheese.currentState == 4
+        ? "Hell yeah, dude! Here is your reward, as promised"
+        : player.cheese.currentState == 3
+        ? "YOU.<br>🧀.<br>ME.<br>NOW."
+        : player.cheese.currentState == 2
+        ? "You're doing some pretty good progress, not gonna lie."
+        : player.cheese.currentState == 1
+        ? "Not bad..."
+        : "Oh, hey there.<br>I'm not quite sure how did I get here, but you don't have to worry about me...<br>Speaking of which. Could you get some 🧀 for me please?")
+    );
   },
   nodeStyle: { borderRadius: "50%" },
 });
