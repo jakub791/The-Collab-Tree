@@ -1,3 +1,11 @@
+const decimalMap = {
+  [-1]: Decimal.dNegOne,
+  0: Decimal.dZero,
+  1: Decimal.dOne,
+  2: Decimal.dTwo,
+  10: Decimal.dTen,
+};
+
 class LRUCache extends Map {
   #maximumSize;
   constructor(maximumSize) {
@@ -27,23 +35,18 @@ class LRUCache extends Map {
 const MAX_SIGNIFICANT_DIGITS = 17;
 const EXP_LIMIT = 9e15;
 const LAYER_DOWN = Math.log10(9e15);
-const FIRST_NEG_LAYER = 1 / 9e15;
-const NUMBER_EXP_MAX = 308;
-const NUMBER_EXP_MIN = -324;
+const FIRST_NEG_LAYER = 9e-15;
 const MAX_ES_IN_A_ROW = 5;
-const DEFAULT_FROM_STRING_CACHE_SIZE = (1 << 10) - 1;
+const DEFAULT_FROM_STRING_CACHE_SIZE = 2047;
 const IGNORE_COMMAS = true;
+const powersOf10 = [];
+for (let i = -324 + 1; i <= 308; i++) {
+  powersOf10.push(Number(`1e${i}`));
+}
 const COMMAS_ARE_DECIMAL_POINTS = false;
-const powerOf10 = (function () {
-  const powersOf10 = [];
-  for (let i = NUMBER_EXP_MIN + 1; i <= NUMBER_EXP_MAX; i++) {
-    powersOf10.push(Number("1e" + i));
-  }
-  const indexOf0InPowersOf10 = 323;
-  return function (power) {
-    return powersOf10[power + indexOf0InPowersOf10];
-  };
-})();
+function powerOf10(power) {
+  return powersOf10[power + 323];
+}
 const critical_headers = [2, Math.E, 3, 4, 5, 6, 7, 8, 9, 10];
 const critical_tetr_values = [
   [
@@ -344,6 +347,7 @@ class Decimal {
     return new Decimal().fromValue(value);
   }
   static fromValue_noAlloc(value) {
+    if (value in decimalMap) return decimalMap[value];
     return value instanceof Decimal ? value : new Decimal(value);
   }
   static abs(value) {

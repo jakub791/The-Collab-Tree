@@ -23,7 +23,6 @@ addLayer("tdr", {
     let sides = new Decimal(2);
     if (hasUpgrade("tb", 14)) sides = sides.add(1);
     sides = sides.add(buyableEffect("tdr", 11));
-    sides = sides.add(buyableEffect("je", 11));
     return sides;
   },
   requires: Decimal.dTen,
@@ -51,9 +50,9 @@ addLayer("tdr", {
     return player.tdr.unlocked || hasUpgrade("cv", 14);
   },
   rollSumEffect() {
-    const effect = player.tdr.totalroll.add(1);
-    const exponent = Decimal.dOne;
-    return effect.pow(exponent);
+    const effect = player.tdr.totalroll.add(Decimal.dOne);
+    const eponent = Decimal.dOne;
+    return effect.pow(eponent);
   },
   roll() {
     const rolls = [];
@@ -95,7 +94,7 @@ addLayer("tdr", {
       },
       onClick() {
         layers.tdr.roll();
-        player.tdr.cooldown = 40;
+        player.tdr.cooldown = 86400;
       },
       display() {
         return `Roll your dice.

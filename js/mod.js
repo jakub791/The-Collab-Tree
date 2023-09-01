@@ -49,18 +49,17 @@ function getPointGen() {
 
   let gain = Decimal.dOne;
   let treNerf = player.e.bpm.div(3).div(100);
-  if (tmp.cheese.currentState === 6) gain = gain.div(2);
+  if (tmp.cheese.currentState === 6) gain = gain.div(Decimal.dTwo);
   if (hasUpgrade("tb", 11)) gain = gain.add(upgradeEffect("tb", 11));
-  if (hasUpgrade("cv", 11)) gain = gain.mul(2);
+  if (hasUpgrade("cv", 11)) gain = gain.mul(Decimal.dTwo);
   if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb", 13));
   if (hasUpgrade("poi", 11)) gain = gain.mul(2);
   if (hasUpgrade("poi", 12))
-    gain = gain.times(player.poi.upgrades.length).add(1).pow(1.3);
+    gain = gain.times(player.poi.upgrades.length).add(1).pow(1.25);
   gain = gain.mul(tmp.tdr.rollSumEffect);
   if (hasMilestone("e", 0)) gain = gain.mul(5);
   if (hasUpgrade("cv", 13)) gain = gain.pow(1.25);
   if (inChallenge("e", 11)) gain = gain.pow(treNerf);
-  gain = gain.mul(tmp.je.effect);
   return gain;
 }
 
@@ -75,10 +74,7 @@ const displayThings = [
   () =>
     `${
       inChallenge("e", 11)
-        ? `TremENDouS BPM is currently ${colored(
-            "e",
-            format(player.e.bpm),
-          )}<br> TremENDouS is currently at ${format(player.e.tre)}`
+        ? `TremENDouS BPM is currently ${format(player.e.bpm)}`
         : ""
     }`,
 ];
@@ -86,9 +82,7 @@ const displayThings = [
 function isEndgame() {
   return player.points.gte("e280000000");
 }
-function colored(layer, text, tag = "h2") {
-  return `<${tag} style='color:${temp[layer].color};text-shadow:${temp[layer].color} 0px 0px 10px;'>${text}</${tag}>`;
-}
+
 const backgroundStyle = {};
 
 function maxTickLength() {
