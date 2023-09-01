@@ -120,7 +120,7 @@ addLayer("tb", {
       },
       cost: new Decimal(1),
       effect() {
-               return player.tb.points.add(player.cv.points).pow(0.25);
+        return player.tb.points.add(player.cv.points).pow(0.25);
       },
     },
     12: {
