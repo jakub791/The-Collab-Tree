@@ -58,6 +58,7 @@ function getPointGen() {
     gain = gain.times(player.poi.upgrades.length).add(1).pow(1.25);
   gain = gain.mul(tmp.tdr.rollSumEffect);
   if (hasMilestone("e", 0)) gain = gain.mul(5);
+  gain = gain.mul(tmp.je.effect);
   if (hasUpgrade("cv", 13)) gain = gain.pow(1.25);
   if (inChallenge("e", 11)) gain = gain.pow(treNerf);
   return gain;
