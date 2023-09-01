@@ -95,7 +95,7 @@ addLayer("tdr", {
       },
       onClick() {
         layers.tdr.roll();
-        player.tdr.cooldown = 40;
+        player.tdr.cooldown = 86400;
       },
       display() {
         return `Roll your dice.
