@@ -22,9 +22,9 @@ addLayer("lore", {
       unlocked() {
         return true;
       },
-      title: "The Collab Tree",
+      title: "The Collab Tree: Part I",
       body() {
-        return "I've been watching these mod creators try to make something great. I'm suprised to see how it's going. Every time these people get together and work it fails. This time they might have a chance. I won't say who I am, but I've been watching and observing for a very long time. I was sent by somebody to scout The Modding Tree's mod creators and take notes. Certainly this mix of mod-creators won't do anything special, right? We have C.V.T.C, the infectious modder, whose two layers have sprouted in your premises. If you want to find success, go through all of these mod creators' work.";
+        return "I've been watching these mod creators try make something great. Suprised to see how it's going. Everytime these people get together and work it fails. This time they might have a chance. I won't say who I am, but I've been watching and observing for a very long time. I was sent by somebody to scout the modding tree's mod creators and take notes. Certainly this mix of mod-creators won't do anything special, right? We have C.V.T.C, the infectious modder, who's two layers have sprouted in your premises. If you want to find success, get through all of these mod creator's work.";
       },
     },
   },

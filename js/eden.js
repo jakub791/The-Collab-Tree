@@ -27,36 +27,17 @@ addLayer("e", {
     return player.tdr.totalroll.gte(100) || player.e.unlocked;
   },
   tabFormat: {
-    "Milestones of Lycoris": {
+    milestones: {
       unlocked: true,
       content: [
         [
           "display-text",
           () =>
-            "You have planted " +
-            colored("e", format(player.e.points)) +
-            " Lycoris Flowers, in the Amnehilesie of Eden.",
+            `You have planted ${player.e.points} Lycoris Flowers, in the Amnehilesie of Eden.`,
         ],
         "prestige-button",
         "blank",
         "milestones",
-      ],
-    },
-    "Challenges of Eden": {
-      unlocked() {
-        return hasMilestone("e", 4);
-      },
-      content: [
-        [
-          "display-text",
-          () =>
-            "You have planted " +
-            colored("e", format(player.e.points)) +
-            "Lycoris Flowers, in the Amnehilesie of Eden.",
-        ],
-        "prestige-button",
-        "blank",
-        "challenges",
       ],
     },
   },
@@ -124,11 +105,9 @@ addLayer("e", {
         "Base Cost is reduced by .25 and gain is slightly boosted by ^1.02.",
       onEnter() {
         player.e.bpm = new Decimal(150);
-        player.e.tre = new Decimal(0);
       },
       onExit() {
         player.e.bpm = new Decimal(0);
-        player.e.tre = new Decimal(0);
       },
     },
   },
@@ -203,6 +182,5 @@ addLayer("e", {
     if (player.e.tre.gte(383.904) && player.e.tre.lt(385.619))
       player.e.bpm = new Decimal(280);
     if (player.e.tre.gte(385.619)) player.e.bpm = new Decimal(285);
-    if (player.e.tre.gte(445.433)) player.e.tre = new Decimal(0);
   },
 });

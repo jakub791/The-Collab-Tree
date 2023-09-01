@@ -1,7 +1,7 @@
 addLayer("tdr", {
   name: "The Daily Roll",
   symbol() {
-    return `<h6>${player.tdr.points.toNumber()}d${formatWhole(tmp.tdr.effect)}`;
+    return `${player.tdr.points.toNumber()}d${tmp.tdr.effect}`;
   }, // This appears on the layer's node. Default is the id with the first letter capitalized
   position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
   startData() {
@@ -23,8 +23,6 @@ addLayer("tdr", {
     let sides = new Decimal(2);
     if (hasUpgrade("tb", 14)) sides = sides.add(1);
     sides = sides.add(buyableEffect("tdr", 11));
-    sides = sides.add(buyableEffect("tdr", 12));
-    sides = sides.add(buyableEffect("je", 11));
     return sides;
   },
   requires: Decimal.dTen,
@@ -52,10 +50,9 @@ addLayer("tdr", {
     return player.tdr.unlocked || hasUpgrade("cv", 14);
   },
   rollSumEffect() {
-    const effect = player.tdr.totalroll.add(1);
-    const exponent = Decimal.dOne;
-    if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
-    return effect.pow(exponent);
+    const effect = player.tdr.totalroll.add(Decimal.dOne);
+    const eponent = Decimal.dOne;
+    return effect.pow(eponent);
   },
   roll() {
     const rolls = [];
@@ -73,7 +70,6 @@ addLayer("tdr", {
     let sixes = 0;
     for (let i of rolls) {
       if (i == 6) sixes++;
-      if (i == 20 && !hasMilestone("tdr", 5)) player.tdr.milestones.push(5);
     }
     if (sixes >= 6 && !hasMilestone("tdr", 2)) player.tdr.milestones.push(2);
     if (player.tdr.rollType === "additive") {
@@ -92,7 +88,7 @@ addLayer("tdr", {
   },
   clickables: {
     11: {
-      title: "Daily Reminder to Roll",
+      title: "Roll",
       canClick() {
         return player.tdr.cooldown <= 0;
       },
@@ -138,39 +134,6 @@ addLayer("tdr", {
         return hasMilestone(this.layer, 1);
       },
     },
-    12: {
-      title: "Increased Luck",
-      cost(x = getBuyableAmount(this.layer, this.id)) {
-        return new Decimal(1e16).mul(Decimal.pow(16, x.pow(2)));
-      },
-      display() {
-        return (
-          "Jacorbian energy boosts dice sides.<br>Cost: " +
-          format(this.cost()) +
-          " Tuberculosis<br>Currently: +" +
-          formatWhole(this.effect())
-        );
-      },
-      canAfford() {
-        return player.tb.points.gte(this.cost());
-      },
-      effect() {
-        return getBuyableAmount(this.layer, this.id)
-          .sqrt()
-          .mul(player.je.points.add(10).log10().sqrt());
-      },
-      buy() {
-        player.tb.points = player.tb.points.sub(this.cost());
-        setBuyableAmount(
-          this.layer,
-          this.id,
-          getBuyableAmount(this.layer, this.id).add(1),
-        );
-      },
-      unlocked() {
-        return hasMilestone(this.layer, 3);
-      },
-    },
   },
   milestones: {
     1: {
@@ -187,28 +150,6 @@ addLayer("tdr", {
         return false;
       },
     },
-    3: {
-      requirementDescription: "20 dice",
-      effectDescription:
-        "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
-      done() {
-        return player.tdr.points.gte(20);
-      },
-    },
-    4: {
-      requirementDescription: "30 dice",
-      effectDescription: "Raise the dice effect to the 1.5",
-      done() {
-        return player.tdr.points.gte(30);
-      },
-    },
-    5: {
-      requirementDescription: "Roll a 20",
-      effectDescription: "Gain 20x Jacorbian Energy",
-      done() {
-        return false;
-      },
-    },
   },
   update(diff) {
     if (player.tdr.cooldown > 0) {
@@ -216,8 +157,7 @@ addLayer("tdr", {
         diff *
         (hasUpgrade("tb", 15)
           ? tmp.t.timeCalculation.add(10).log10().toNumber()
-          : 1) *
-        (hasUpgrade("je", 13) ? upgradeEffect("je", 13) : 1);
+          : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
   },

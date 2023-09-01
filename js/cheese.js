@@ -834,21 +834,21 @@ addLayer("cheese", {
         "blank",
         ["buyable", "prestige"],
         "blank",
-        ["buyable", 22],
+        ["buyable", [22]],
         "blank",
-        ["upgrade", "a0"],
+        ["upgrade", ["a0"]],
         "blank",
         "blank",
         [
           "row",
           [
-            ["upgrade", "b0"],
+            ["upgrade", ["b0"]],
             "blank",
             "blank",
-            ["upgrade", "b2"],
+            ["upgrade", ["b2"]],
             "blank",
             "blank",
-            ["upgrade", "b1"],
+            ["upgrade", ["b1"]],
           ],
         ],
         "blank",
@@ -856,13 +856,13 @@ addLayer("cheese", {
         [
           "row",
           [
-            ["upgrade", "c0"],
+            ["upgrade", ["c0"]],
             "blank",
             "blank",
-            ["upgrade", "c1"],
+            ["upgrade", ["c1"]],
             "blank",
             "blank",
-            ["upgrade", "c2"],
+            ["upgrade", ["c2"]],
           ],
         ],
       ],
@@ -911,7 +911,5 @@ addNode("ab", {
       ? "Not bad..."
       : "Oh, hey there.<br>I'm not quite sure how did I get here, but you don't have to worry about me...<br>Speaking of which. Could you get some 🧀 for me please?";
   },
-  nodeStyle: {
-    borderRadius: "50%",
-  },
+  nodeStyle: { borderRadius: "50%" },
 });

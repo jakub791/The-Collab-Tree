@@ -99,7 +99,7 @@ addLayer("tb", {
   row: 0, // Row the layer is in on the tree (0 is the first row)
   hotkeys: [
     {
-      key: "t",
+      key: "tb",
       description: "T: Contract Tuberculosis",
       onPress() {
         if (canReset(this.layer)) doReset(this.layer);
@@ -120,7 +120,7 @@ addLayer("tb", {
       },
       cost: new Decimal(1),
       effect() {
-        return player.tb.points.add(player.cv.points).pow(0.25);
+               return player.tb.points.add(player.cv.points).pow(0.25);
       },
     },
     12: {
@@ -182,12 +182,5 @@ addLayer("tb", {
         return hasMilestone("tdr", 1);
       },
     },
-  },
-  doReset(l) {
-    if (layers[l].row > this.row) {
-      let keep = [];
-      if (l == "tdr" && hasMilestone("tdr", 3)) keep.push("upgrades");
-      layerDataReset(this.layer, keep);
-    }
   },
 });
