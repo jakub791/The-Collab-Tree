@@ -77,10 +77,7 @@ const displayThings = [
   () =>
     `${
       inChallenge("e", 11)
-        ? `TremENDouS BPM is currently ${colored(
-            format(player.e.bpm),
-          )}<br> You are currently ${colored(format(player.e.tre))}s in.`
-        : ""
+        ? "TremENDouS BPM is currently " + colored(format(player.e.bpm)) : ""
     }`,
 ];
 
