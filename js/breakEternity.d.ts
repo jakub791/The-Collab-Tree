@@ -157,19 +157,12 @@ declare class Decimal {
   static gamma(value: DecimalSource, _other?: never): Decimal;
   static lngamma(value: DecimalSource, _other?: never): Decimal;
   static exp(value: DecimalSource): Decimal;
-  static sqr(value: DecimalSource): Decimal;
   static sqrt(value: DecimalSource): Decimal;
-  static cube(value: DecimalSource): Decimal;
   static cbrt(value: DecimalSource): Decimal;
   static tetrate(
     value: DecimalSource,
     height?: number,
     payload?: DecimalSource,
-  ): Decimal;
-  static iteratedexp(
-    value: DecimalSource,
-    height?: number,
-    payload?: Decimal,
   ): Decimal;
   static iteratedlog(
     value: DecimalSource,
@@ -367,12 +360,9 @@ declare class Decimal {
   gamma(): Decimal;
   lngamma(): Decimal;
   exp(): Decimal;
-  sqr(): Decimal;
   sqrt(): Decimal;
-  cube(): Decimal;
   cbrt(): Decimal;
   tetrate(height?: number, payload?: DecimalSource): Decimal;
-  iteratedexp(height?: number, payload?: Decimal): Decimal;
   iteratedlog(base?: DecimalSource, times?: number): Decimal;
   slog(base?: DecimalSource, iterations?: number): Decimal;
   slog_internal(base?: DecimalSource): Decimal;

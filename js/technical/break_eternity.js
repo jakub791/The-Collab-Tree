@@ -542,14 +542,8 @@ class Decimal {
   static exp(value) {
     return Decimal.fromValue_noAlloc(value).exp();
   }
-  static sqr(value) {
-    return Decimal.fromValue_noAlloc(value).sqr();
-  }
   static sqrt(value) {
     return Decimal.fromValue_noAlloc(value).sqrt();
-  }
-  static cube(value) {
-    return Decimal.fromValue_noAlloc(value).cube();
   }
   static cbrt(value) {
     return Decimal.fromValue_noAlloc(value).cbrt();
@@ -560,13 +554,6 @@ class Decimal {
     payload = new Decimal().fromComponents_noNormalize(1, 0, 1),
   ) {
     return Decimal.fromValue_noAlloc(value).tetrate(height, payload);
-  }
-  static iteratedexp(
-    value,
-    height = 2,
-    payload = new Decimal().fromComponents_noNormalize(1, 0, 1),
-  ) {
-    return Decimal.fromValue_noAlloc(value).iteratedexp(height, payload);
   }
   static iteratedlog(value, base = 10, times = 1) {
     return Decimal.fromValue_noAlloc(value).iteratedlog(base, times);
@@ -794,6 +781,7 @@ class Decimal {
     return this;
   }
   fromNumber(value) {
+    if (value in decimalMap) return decimalMap[value];
     if (!Number.isFinite(value)) {
       this.sign = Math.sign(value);
       this.mag = value;
@@ -1791,9 +1779,6 @@ class Decimal {
       );
     }
   }
-  sqr() {
-    return this.pow(2);
-  }
   sqrt() {
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.sqrt(this.sign * this.mag));
@@ -1817,50 +1802,31 @@ class Decimal {
       return result;
     }
   }
-  cube() {
-    return this.pow(3);
-  }
   cbrt() {
     return this.pow(1 / 3);
   }
-  tetrate(
-    height = 2,
-    payload = new Decimal().fromComponents_noNormalize(1, 0, 1),
-  ) {
-    if (height === 1) {
-      return Decimal.pow(this, payload);
-    }
-    if (height === 0) {
-      return new Decimal(payload);
-    }
-    if (this.eq(Decimal.dOne)) {
-      return Decimal.dOne;
-    }
-    if (this.eq(-1)) {
-      return Decimal.pow(this, payload);
-    }
+  tetrate(height = 2, payload = Decimal.dOne) {
+    if (height === 1) return Decimal.pow(this, payload);
+    if (height === 0) return new Decimal(payload);
+    if (this.eq(Decimal.dOne)) return Decimal.dOne;
+    if (this.eq(-1)) return Decimal.pow(this, payload);
     if (height === Number.POSITIVE_INFINITY) {
-      const this_num = this.toNumber();
+      const thisNum = this.toNumber();
       if (
-        this_num <= 1.44466786100976613366 &&
-        this_num >= 0.06598803584531253708
+        thisNum <= 1.44466786100976613366 &&
+        thisNum >= 0.06598803584531253708
       ) {
-        if (this_num > 1.444667861009099) {
+        if (thisNum > 1.444667861009099) {
           return Decimal.fromNumber(Math.E);
         }
         const negln = Decimal.ln(this).neg();
         return negln.lambertw().div(negln);
-      } else if (this_num > 1.44466786100976613366) {
-        return Decimal.fromNumber(Number.POSITIVE_INFINITY);
-      } else {
-        return Decimal.dNaN;
-      }
+      } else if (thisNum > 1.44466786100976613366) return Decimal.dInf;
+      else return Decimal.dNaN;
     }
     if (this.eq(Decimal.dZero)) {
       let result = Math.abs((height + 1) % 2);
-      if (result > 1) {
-        result = 2 - result;
-      }
+      if (result > 1) result = 2 - result;
       return Decimal.fromNumber(result);
     }
     if (height < 0) {
@@ -1873,23 +1839,20 @@ class Decimal {
     if (this.gt(Decimal.dZero) && this.lte(1.44466786100976613366)) {
       height = Math.min(10000, height);
       for (let i = 0; i < height; ++i) {
-        const old_payload = payload;
+        const oldPayload = payload;
         payload = this.pow(payload);
-        if (old_payload.eq(payload)) {
-          return payload;
-        }
+        if (oldPayload.eq(payload)) return payload;
       }
-      if (fracheight != 0) {
-        const next_payload = this.pow(payload);
-        return payload.mul(1 - fracheight).add(next_payload.mul(fracheight));
+      if (fracheight !== 0) {
+        const nextPayload = this.pow(payload);
+        return payload.mul(1 - fracheight).add(nextPayload.mul(fracheight));
       }
       return payload;
     }
     if (fracheight !== 0) {
       if (payload.eq(Decimal.dOne)) {
-        if (this.gt(10)) {
-          payload = this.pow(fracheight);
-        } else {
+        if (this.gt(10)) payload = this.pow(fracheight);
+        else {
           payload = Decimal.fromNumber(
             Decimal.tetrate_critical(this.toNumber(), fracheight),
           );
@@ -1898,18 +1861,14 @@ class Decimal {
           }
         }
       } else {
-        if (this.eq(10)) {
-          payload = payload.layeradd10(fracheight);
-        } else {
-          payload = payload.layeradd(fracheight, this);
-        }
+        payload = this.eq(10)
+          ? payload.layeradd10(fracheight)
+          : payload.layeradd(fracheight, this);
       }
     }
     for (let i = 0; i < height; ++i) {
       payload = this.pow(payload);
-      if (!isFinite(payload.layer) || !isFinite(payload.mag)) {
-        return payload.normalize();
-      }
+      if (!payload.isFinite()) return payload.normalize();
       if (payload.layer - this.layer > 3) {
         return new Decimal().fromComponents_noNormalize(
           payload.sign,
@@ -1917,22 +1876,12 @@ class Decimal {
           payload.mag,
         );
       }
-      if (i > 10000) {
-        return payload;
-      }
+      if (i > 10000) return payload;
     }
     return payload;
   }
-  iteratedexp(
-    height = 2,
-    payload = new Decimal().fromComponents_noNormalize(1, 0, 1),
-  ) {
-    return this.tetrate(height, payload);
-  }
   iteratedlog(base = 10, times = 1) {
-    if (times < 0) {
-      return Decimal.tetrate(base, -times, this);
-    }
+    if (times < 0) return Decimal.tetrate(base, -times, this);
     base = Decimal.fromValue_noAlloc(base);
     let result = Decimal.fromDecimal(this);
     const fulltimes = times;
@@ -1945,12 +1894,8 @@ class Decimal {
     }
     for (let i = 0; i < times; ++i) {
       result = result.log(base);
-      if (!isFinite(result.layer) || !isFinite(result.mag)) {
-        return result.normalize();
-      }
-      if (i > 10000) {
-        return result;
-      }
+      if (!result.isFinite()) return result.normalize();
+      if (i > 10000) return result;
     }
     if (fraction > 0 && fraction < 1) {
       if (base.eq(10)) {
@@ -1962,52 +1907,38 @@ class Decimal {
     return result;
   }
   slog(base = 10, iterations = 100) {
-    let step_size = 0.001;
-    let has_changed_directions_once = false;
-    let previously_rose = false;
+    let stepSize = 0.001;
+    let hasChangedDirectionsOnce = false;
+    let previouslyRose = false;
     let result = this.slog_internal(base).toNumber();
-    for (var i = 1; i < iterations; ++i) {
-      let new_decimal = new Decimal(base).tetrate(result);
-      let currently_rose = new_decimal.gt(this);
+    for (let i = 1; i < iterations; ++i) {
+      let newDecimal = new Decimal(base).tetrate(result);
+      let currentlyRose = newDecimal.gt(this);
       if (i > 1) {
-        if (previously_rose != currently_rose) {
-          has_changed_directions_once = true;
+        if (previouslyRose !== currentlyRose) {
+          hasChangedDirectionsOnce = true;
         }
       }
-      previously_rose = currently_rose;
-      if (has_changed_directions_once) {
-        step_size /= 2;
-      } else {
-        step_size *= 2;
-      }
-      step_size = Math.abs(step_size) * (currently_rose ? -1 : 1);
-      result += step_size;
-      if (step_size === 0) {
-        break;
-      }
+      previouslyRose = currentlyRose;
+
+      if (hasChangedDirectionsOnce) stepSize /= 2;
+      else stepSize *= 2;
+      stepSize = Math.abs(stepSize) * (currentlyRose ? -1 : 1);
+      result += stepSize;
+      if (stepSize === 0) break;
     }
     return Decimal.fromNumber(result);
   }
   slog_internal(base = 10) {
     base = Decimal.fromValue_noAlloc(base);
-    if (base.lte(Decimal.dZero)) {
-      return Decimal.dNaN;
-    }
-    if (base.eq(Decimal.dOne)) {
-      return Decimal.dNaN;
-    }
+    if (base.lte(Decimal.dZero)) return Decimal.dNaN;
+    if (base.eq(Decimal.dOne)) return Decimal.dNaN;
     if (base.lt(Decimal.dOne)) {
-      if (this.eq(Decimal.dOne)) {
-        return Decimal.dZero;
-      }
-      if (this.eq(Decimal.dZero)) {
-        return Decimal.dNegOne;
-      }
+      if (this.eq(Decimal.dOne)) return Decimal.dZero;
+      if (this.eq(Decimal.dZero)) return Decimal.dNegOne;
       return Decimal.dNaN;
     }
-    if (this.mag < 0 || this.eq(Decimal.dZero)) {
-      return Decimal.dNegOne;
-    }
+    if (this.mag < 0 || this.eq(Decimal.dZero)) return Decimal.dNegOne;
     let result = 0;
     let copy = Decimal.fromDecimal(this);
     if (copy.layer - base.layer > 3) {
@@ -2031,9 +1962,7 @@ class Decimal {
     return Decimal.fromNumber(result);
   }
   static slog_critical(base, height) {
-    if (base > 10) {
-      return height - 1;
-    }
+    if (base > 10) return height - 1;
     return Decimal.critical_section(base, height, critical_slog_values);
   }
   static tetrate_critical(base, height) {
@@ -2041,18 +1970,11 @@ class Decimal {
   }
   static critical_section(base, height, grid) {
     height *= 10;
-    if (height < 0) {
-      height = 0;
-    }
-    if (height > 10) {
-      height = 10;
-    }
-    if (base < 2) {
-      base = 2;
-    }
-    if (base > 10) {
-      base = 10;
-    }
+    if (height < 0) height = 0;
+    if (height > 10) height = 10;
+    if (base < 2) base = 2;
+    if (base > 10) base = 10;
+
     let lower = 0;
     let upper = 0;
     for (let i = 0; i < critical_headers.length; ++i) {
@@ -2108,13 +2030,9 @@ class Decimal {
         for (let i = 0; i < 100; ++i) {
           result.layer++;
           result.mag = Math.log10(result.mag);
-          if (!isFinite(result.mag)) {
-            if (result.sign === 0) {
-              result.sign = 1;
-            }
-            if (result.layer < 0) {
-              result.layer = 0;
-            }
+          if (!result.mag.isFinite()) {
+            if (result.sign === 0) result.sign = 1;
+            if (result.layer < 0) result.layer = 0;
             return result.normalize();
           }
           if (result.layer >= 0) {
@@ -2135,9 +2053,7 @@ class Decimal {
       }
     }
     result.normalize();
-    if (diff !== 0) {
-      return result.layeradd(diff, 10);
-    }
+    if (diff !== 0) return result.layeradd(diff, 10);
     return result;
   }
   layeradd(diff, base) {
@@ -2161,21 +2077,20 @@ class Decimal {
       throw Error("lambertw is unimplemented for results less than -1, sorry!");
     } else if (this.mag < 0) {
       return Decimal.fromNumber(f_lambertw(this.toNumber()));
-    } else if (this.layer === 0) {
-      return Decimal.fromNumber(f_lambertw(this.sign * this.mag));
-    } else if (this.layer === 1) {
-      return d_lambertw(this);
-    } else if (this.layer === 2) {
-      return d_lambertw(this);
     }
-    if (this.layer >= 3) {
-      return new Decimal().fromComponents_noNormalize(
-        this.sign,
-        this.layer - 1,
-        this.mag,
-      );
+    switch (this.layer) {
+      case 0:
+        return new Decimal(f_lambertw(this.sign * this.mag));
+      case 1:
+      case 2:
+        d_lambertw(this);
+      default:
+        return new Decimal().fromComponents_noNormalize(
+          this.sign,
+          this.layer - 1,
+          this.mag,
+        );
     }
-    throw "Unhandled behavior in lambertw()";
   }
   ssqrt() {
     if (this.sign == 1 && this.layer >= 3) {
@@ -2198,49 +2113,37 @@ class Decimal {
     const fracheight = oldheight - height;
     if (fracheight !== 0) {
       if (payload.eq(Decimal.dOne)) {
-        ++height;
+        height++;
         payload = Decimal.fromNumber(fracheight);
       } else {
-        if (this.eq(10)) {
-          payload = payload.layeradd10(fracheight);
-        } else {
-          payload = payload.layeradd(fracheight, this);
-        }
+        payload = this.eq(10)
+          ? payload.layeradd10(fracheight)
+          : payload.layeradd(fracheight, this);
       }
     }
-    for (let i = 0; i < height; ++i) {
+    for (let i = 0; i < height; i++) {
       payload = this.tetrate(payload.toNumber());
-      if (!isFinite(payload.layer) || !isFinite(payload.mag)) {
-        return payload.normalize();
-      }
-      if (i > 10) {
-        return payload;
-      }
+      if (!payload.isFinite()) return payload.normalize();
+      if (i > 10) return payload;
     }
     return payload;
   }
   sin() {
-    if (this.mag < 0) {
-      return this;
-    }
+    if (this.mag < 0) return this;
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.sin(this.sign * this.mag));
     }
     return new Decimal().fromComponents_noNormalize(0, 0, 0);
   }
   cos() {
-    if (this.mag < 0) {
-      return Decimal.dOne;
-    }
+    if (this.mag < 0) return Decimal.dOne;
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.cos(this.sign * this.mag));
     }
     return new Decimal().fromComponents_noNormalize(0, 0, 0);
   }
   tan() {
-    if (this.mag < 0) {
-      return this;
-    }
+    if (this.mag < 0) return this;
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.tan(this.sign * this.mag));
     }
@@ -2253,11 +2156,7 @@ class Decimal {
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.asin(this.sign * this.mag));
     }
-    return new Decimal().fromComponents_noNormalize(
-      Number.NaN,
-      Number.NaN,
-      Number.NaN,
-    );
+    return Decimal.dNaN;
   }
   acos() {
     if (this.mag < 0) {
@@ -2266,16 +2165,10 @@ class Decimal {
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.acos(this.sign * this.mag));
     }
-    return new Decimal().fromComponents_noNormalize(
-      Number.NaN,
-      Number.NaN,
-      Number.NaN,
-    );
+    return Decimal.dNaN;
   }
   atan() {
-    if (this.mag < 0) {
-      return this;
-    }
+    if (this.mag < 0) return this;
     if (this.layer === 0) {
       return Decimal.fromNumber(Math.atan(this.sign * this.mag));
     }
@@ -2291,29 +2184,16 @@ class Decimal {
     return this.sinh().div(this.cosh());
   }
   asinh() {
-    return Decimal.ln(this.add(this.sqr().add(1).sqrt()));
+    return Decimal.ln(this.add(this.pow(2).add(1).sqrt()));
   }
   acosh() {
-    return Decimal.ln(this.add(this.sqr().sub(1).sqrt()));
+    return Decimal.ln(this.add(this.pow(2).sub(1).sqrt()));
   }
   atanh() {
     if (this.abs().gte(1)) {
-      return new Decimal().fromComponents_noNormalize(
-        Number.NaN,
-        Number.NaN,
-        Number.NaN,
-      );
+      return Decimal.dNaN;
     }
     return Decimal.ln(this.add(1).div(Decimal.fromNumber(1).sub(this))).div(2);
-  }
-  ascensionPenalty(ascensions) {
-    if (ascensions === 0) {
-      return this;
-    }
-    return this.root(Decimal.pow(10, ascensions));
-  }
-  egg() {
-    return this.add(9);
   }
   lessThanOrEqualTo(other) {
     return this.cmp(other) < 1;
