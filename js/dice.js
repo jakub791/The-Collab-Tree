@@ -54,7 +54,7 @@ addLayer("tdr", {
   rollSumEffect() {
     const effect = player.tdr.totalroll.add(1);
     const exponent = Decimal.dOne;
-    if (hasMilestone("tdr", 4))exponent = exponent.mul(1.5)
+    if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
     return effect.pow(exponent);
   },
   roll() {
@@ -197,16 +197,14 @@ addLayer("tdr", {
     },
     4: {
       requirementDescription: "30 dice",
-      effectDescription:
-        "Raise the dice effect to the 1.5",
+      effectDescription: "Raise the dice effect to the 1.5",
       done() {
         return player.tdr.points.gte(30);
       },
     },
     5: {
       requirementDescription: "Roll a 20",
-      effectDescription:
-        "Gain 20x Jacorbian Energy",
+      effectDescription: "Gain 20x Jacorbian Energy",
       done() {
         return false;
       },
