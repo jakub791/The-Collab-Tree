@@ -217,6 +217,7 @@ function t4format(x, m) {
     "amI",
     "uzU",
     "aG",
+    "deN",
   ]; //eT is the start of the extending, beginning at 10^10^10^45. Currently at 10^10^10^123 (Lagillion). Previous extensions: 10^10^10^120 (Suzumillion), 10^10^10^117 (Namillion), 10^10^10^114 (Matatabillion), 10^10^10^111 (Genkillion) 10^10^10^108 (Mikuillion), 10^10^10^105 (Laurillion), 10^10^10^102 (Sakuzillion), 10^10^10^99 (Kobarillion), 10^10^10^96 (Phigrillion), 10^10^10^93 (Aeglesillion), 10^10^10^90 (Camellillion), 10^10^10^87 (Rotaenillion), 10^10^10^84 (Pentimentillion), 10^10^10^81 (Testifillion) 10^10^10^78 (Tempestillion), 10^10^10^75 (Resonillion) 10^10^10^72 (Grievillion), 10^10^10^69 (nice)(Voltillion), 10^10^10^66 (Yucillion), 10^10^10^63 (Fractillion), 10^10^10^60 (Omnillion), Ultrillion (10^10^10^57), Archillion (10^10^10^54), Hyperillion (10^10^10^51), Xenoillion (10^10^10^48), Metaillion (10^10^10^45)
   let t4m = [
     "",
@@ -261,6 +262,7 @@ function t4format(x, m) {
     "N",
     "S",
     "L",
+    "E",
   ];
   let t4f = t4ills[x];
   if (m < 2) t4f = t4m[x] + t4f;
