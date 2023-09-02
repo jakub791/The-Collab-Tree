@@ -124,11 +124,11 @@ addLayer("e", {
         "Base Cost is reduced by .25 and gain is slightly boosted by ^1.02.",
       onEnter() {
         player.e.bpm = new Decimal(150);
-        player.e.tre = new Decimal(0)
+        player.e.tre = new Decimal(0);
       },
       onExit() {
         player.e.bpm = new Decimal(0);
-        player.e.tre = new Decimal(0)
+        player.e.tre = new Decimal(0);
       },
     },
   },
