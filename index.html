@@ -38,9 +38,11 @@
   <body onload="load()" onmousemove="updateMouse(event)">
     <div id="app">
       <audio v-if="inChallenge('e', 11)" controls autoplay loop hidden>
-        <source src="tremendous.mp3" type="audio/mp3" /></audio>
-        <audio v-if="inChallenge('e', 12)" controls autoplay loop hidden>
-          <source src="kowloon.mp3" type="audio/mp3" /></audio>
+        <source src="tremendous.mp3" type="audio/mp3" />
+      </audio>
+      <audio v-if="inChallenge('e', 12)" controls autoplay loop hidden>
+        <source src="kowloon.mp3" type="audio/mp3" />
+      </audio>
       <canvas
         id="treeCanvas"
         class="canvas"

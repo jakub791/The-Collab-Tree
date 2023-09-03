@@ -146,7 +146,7 @@ addLayer("e", {
       },
       rewardDescription:
         "Roll time is cut in half, and CV and TB gain are boosted by ^1.255.",
-    }
+    },
   },
   update(diff) {
     let treGain = new Decimal(0);
