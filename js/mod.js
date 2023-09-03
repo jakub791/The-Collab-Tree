@@ -59,10 +59,11 @@ function getPointGen() {
   gain = gain.mul(tmp.tdr.rollSumEffect);
   if (hasMilestone("e", 0)) gain = gain.mul(5);
   gain = gain.mul(tmp.je.effect);
-  gain=gain.mul(player.tdr.lastWeekly)
+  gain = gain.mul(player.tdr.lastWeekly);
   if (hasUpgrade("cv", 13)) gain = gain.pow(1.25);
   if (inChallenge("e", 11)) gain = gain.pow(treNerf);
   if (inChallenge("e", 12)) gain = gain.pow(0.0667185);
+  if (inChallenge("e", 13)) gain = gain.pow(Math.random());
   if (inChallenge("tdr", 12))
     gain = gain.div(player.tdr.points.mul(tmp.tdr.effect).max(1));
   return gain;
