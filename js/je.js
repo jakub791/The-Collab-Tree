@@ -12,9 +12,6 @@ addLayer("je", {
   layerShown() {
     return true;
   }, // Returns a bool for if this layer's node should be visible in the tree.
-  upgrades: {
-    // Look in the upgrades docs to see what goes here!
-  },
   requires: new Decimal(3e9), // Can be a function that takes requirement increases into account
   resource: "Jacorbian Energy", // Name of prestige currency
   baseResource: "tuberculosis", // Name of resource prestige is based on
@@ -35,6 +32,10 @@ addLayer("je", {
   gainMult() {
     // Calculate the multiplier for main currency from bonuses
     mult = new Decimal(1);
+    if (hasUpgrade("ba", 11) && player.e.points.gte(1)) mult = mult.mul(2);
+    if (hasUpgrade("ba", 11) && player.e.points.gte(4))
+      mult = mult.mul(tmp.ba.upgrades[11].effect1);
+    if (hasMilestone("tdr", 5)) mult = mult.mul(20);
     return mult;
   },
   gainExp() {
@@ -162,7 +163,7 @@ addLayer("je", {
         return player.je;
       },
       effect() {
-        return player.tdr.points.add(1).pow(1.3);
+        return player.tdr.points.add(1).pow(0.65);
       },
       effectDisplay() {
         return format(upgradeEffect(this.layer, this.id)) + "x";

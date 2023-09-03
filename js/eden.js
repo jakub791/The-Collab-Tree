@@ -15,6 +15,10 @@ addLayer("e", {
   branches: ["tdr"],
 
   baseResource: "Dice Roll Points",
+  base: 3.5,
+  canReset() {
+    return hasChallenge("tdr", 11);
+  },
   baseAmount() {
     return player.tdr.totalroll;
   },
@@ -24,7 +28,7 @@ addLayer("e", {
   gainMult: Decimal.dOne,
   gainExp: Decimal.dOne,
   layerShown() {
-    return player.tdr.totalroll.gte(100) || player.e.unlocked;
+    return player.tdr.points.gte(15) || player.e.unlocked;
   },
   tabFormat: {
     "Milestones of Amnehilesie": {

@@ -82,6 +82,12 @@ const displayThings = [
         ? `TremENDouS BPM is currently ${format(player.e.bpm)}`
         : ""
     }`,
+  () =>
+    `${
+      inChallenge("tdr", 11)
+        ? `You have ${formatTime(player.tdr.luck)} seconds left.`
+        : ""
+    }`,
 ];
 
 function isEndgame() {

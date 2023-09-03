@@ -1,7 +1,7 @@
 addLayer("cv", {
   name: "Coronavirus", // This is optional, only used in a few places, If absent it just uses the layer id.
   symbol: "CV", // This appears on the layer's node. Default is the id with the first letter capitalized
-  position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+  position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
   startData() {
     return {
       unlocked: true,
@@ -12,6 +12,9 @@ addLayer("cv", {
   requires: new Decimal(100), // Can be a function that takes requirement increases into account
   resource: "Coronavirus", // Name of prestige currency
   baseResource: "sickness", // Name of resource prestige is based on
+  passiveGeneration() {
+    return hasMilestone("e", 1) ? 0.01 : 0;
+  },
   baseAmount() {
     return player.points;
   }, // Get the current amount of baseResource
@@ -24,6 +27,7 @@ addLayer("cv", {
     if (hasUpgrade("cv", 12)) mult = mult.mul(2);
     if (hasUpgrade("cv", 13)) mult = mult.mul(3);
     if (hasUpgrade("je", 11)) mult = mult.mul(upgradeEffect("je", 11));
+    if (hasMilestone("e", 3)) mult = mult.mul(3);
     return mult;
   },
   gainExp() {
@@ -65,12 +69,51 @@ addLayer("cv", {
       description: "Unlock dice.",
       cost: new Decimal(420),
     },
+    21: {
+      title: "TBD",
+      description: "Placeholder",
+      cost: new Decimal(1e100),
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
+    },
+    22: {
+      title: "TBD",
+      description: "Placeholder",
+      cost: new Decimal(1e200),
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
+    },
+    23: {
+      title: "TBD",
+      description: "Placeholder",
+      cost: new Decimal(1e300),
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
+    },
+    24: {
+      title: "TBD",
+      description: "Placeholder",
+      cost: new Decimal(1e400),
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
+    },
+  },
+  doReset(l) {
+    if (layers[l].row > this.row) {
+      let keep = [];
+      if (l == "tdr" && hasMilestone("tdr", 2)) keep.push("upgrades");
+      layerDataReset(this.layer, keep);
+    }
   },
 });
 addLayer("tb", {
   name: "Tuberculosis", // This is optional, only used in a few places, If absent it just uses the layer id.
   symbol: "TB", // This appears on the layer's node. Default is the id with the first letter capitalized
-  position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+  position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
   startData() {
     return {
       unlocked: true,
@@ -81,6 +124,9 @@ addLayer("tb", {
   requires: new Decimal(5), // Can be a function that takes requirement increases into account
   resource: "Tuberculosis", // Name of prestige currency
   baseResource: "sickness", // Name of resource prestige is based on
+  passiveGeneration() {
+    return hasMilestone("e", 1) ? 0.01 : 0;
+  },
   baseAmount() {
     return player.points;
   }, // Get the current amount of baseResource
@@ -90,16 +136,19 @@ addLayer("tb", {
     // Calculate the multiplier for main currency from bonuses
     mult = new Decimal(1);
     if (hasUpgrade("tb", 12)) mult = mult.mul(upgradeEffect("tb", 12));
+    if (hasMilestone("e", 3)) mult = mult.mul(3);
     return mult;
   },
   gainExp() {
     // Calculate the exponent on main currency from bonuses
-    return new Decimal(1);
+    let exp = new Decimal(1);
+    if (hasUpgrade("ba", 11) && player.e.points.gte(3)) exp = exp.mul(1.05);
+    return exp;
   },
   row: 0, // Row the layer is in on the tree (0 is the first row)
   hotkeys: [
     {
-      key: "tb",
+      key: "t",
       description: "T: Contract Tuberculosis",
       onPress() {
         if (canReset(this.layer)) doReset(this.layer);
