@@ -328,7 +328,7 @@ function completeChallenge(layer) {
     layers[layer].challenges[id].onComplete?.();
   }
   Vue.set(player[layer], "activeChallenge", null);
-  layers[layer].challenges[id].onExit?.();
+  if (layer != "tdr")layers[layer].challenges[id].onExit?.();
   updateChallengeTemp(layer);
 }
 
