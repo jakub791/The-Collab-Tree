@@ -100,8 +100,8 @@ addLayer("tdr", {
       onClick() {
         layers.tdr.roll();
         let cool = 86400;
-        if (hasChallenge(this.layer,11)){
-          cool -= player.e.points.min(20).mul(3600).toNumber()
+        if (hasChallenge(this.layer, 11)) {
+          cool -= player.e.points.min(20).mul(3600).toNumber();
         }
         player.tdr.cooldown = cool;
       },
