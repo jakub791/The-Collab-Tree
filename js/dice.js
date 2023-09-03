@@ -99,7 +99,11 @@ addLayer("tdr", {
       },
       onClick() {
         layers.tdr.roll();
-        player.tdr.cooldown = 86400;
+        let cool = 86400;
+        if (hasChallenge(this.layer,11)){
+          cool -= player.e.points.min(20).mul(3600).toNumber()
+        }
+        player.tdr.cooldown = cool;
       },
       display() {
         return `Roll your dice.
@@ -216,7 +220,7 @@ addLayer("tdr", {
     11: {
       name: "Luck Testing",
       fullDisplay:
-        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness",
+        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from roll timer",
       canComplete() {
         return player.points.gte(1e16);
       },
