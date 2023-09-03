@@ -96,7 +96,7 @@ addLayer("tdr", {
   },
   clickables: {
     11: {
-      title: "Daily Reminder to Roll",
+      title: "Do the <b>Daily</b> Roll",
       canClick() {
         return player.tdr.cooldown <= 0;
       },
@@ -109,7 +109,7 @@ addLayer("tdr", {
         player.tdr.cooldown = cool;
       },
       display() {
-        return `Roll your dice.
+        return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>24</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
       },
     },
