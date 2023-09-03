@@ -109,7 +109,8 @@ addLayer("e", {
   challenges: {
     11: {
       name: "TremENDouS",
-      challengeDescription: "TremENDouS Power watches over you like leaves in a cherry blossom.",
+      challengeDescription:
+        "TremENDouS Power watches over you like leaves in a cherry blossom.",
       goalDescription() {
         return `I want you to reach ${format(
           tmp["e"].challenges[11].goal,
@@ -134,7 +135,8 @@ addLayer("e", {
     },
     12: {
       name: "Kowloon",
-      challengeDescription: "The Famous Walled City of Kowloon. Sounds like a nightmare to live in right?",
+      challengeDescription:
+        "The Famous Walled City of Kowloon. Sounds like a nightmare to live in right?",
       goalDescription() {
         return `Well, get to ${format(
           tmp["e"].challenges[12].goal,
