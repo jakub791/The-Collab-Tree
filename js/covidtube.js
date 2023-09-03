@@ -73,25 +73,33 @@ addLayer("cv", {
       title: "TBD",
       description: "Placeholder",
       cost: new Decimal(1e100),
-      unlocked(){return hasUpgrade("ba",11) && player.e.points.gte(5)}
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
     },
     22: {
       title: "TBD",
       description: "Placeholder",
       cost: new Decimal(1e200),
-      unlocked(){return hasUpgrade("ba",11) && player.e.points.gte(5)}
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
     },
     23: {
       title: "TBD",
       description: "Placeholder",
       cost: new Decimal(1e300),
-      unlocked(){return hasUpgrade("ba",11) && player.e.points.gte(5)}
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
     },
     24: {
       title: "TBD",
       description: "Placeholder",
       cost: new Decimal(1e400),
-      unlocked(){return hasUpgrade("ba",11) && player.e.points.gte(5)}
+      unlocked() {
+        return hasUpgrade("ba", 11) && player.e.points.gte(5);
+      },
     },
   },
   doReset(l) {
@@ -134,8 +142,8 @@ addLayer("tb", {
   gainExp() {
     // Calculate the exponent on main currency from bonuses
     let exp = new Decimal(1);
-    if (hasUpgrade("ba",11) && player.e.points.gte(3)) exp=exp.mul(1.05)
-    return exp
+    if (hasUpgrade("ba", 11) && player.e.points.gte(3)) exp = exp.mul(1.05);
+    return exp;
   },
   row: 0, // Row the layer is in on the tree (0 is the first row)
   hotkeys: [

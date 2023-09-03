@@ -32,9 +32,10 @@ addLayer("je", {
   gainMult() {
     // Calculate the multiplier for main currency from bonuses
     mult = new Decimal(1);
-    if (hasUpgrade("ba",11) && player.e.points.gte(1)) mult=mult.mul(2)
-    if (hasUpgrade("ba",11) && player.e.points.gte(4)) mult=mult.mul(tmp.ba.upgrades[11].effect1)
-    if (hasMilestone("tdr",5)) mult=mult.mul(20)
+    if (hasUpgrade("ba", 11) && player.e.points.gte(1)) mult = mult.mul(2);
+    if (hasUpgrade("ba", 11) && player.e.points.gte(4))
+      mult = mult.mul(tmp.ba.upgrades[11].effect1);
+    if (hasMilestone("tdr", 5)) mult = mult.mul(20);
     return mult;
   },
   gainExp() {

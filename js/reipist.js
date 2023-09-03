@@ -82,26 +82,31 @@ addLayer("ba", {
   },
 
   layerShown() {
-    return hasUpgrade("poi",13);
+    return hasUpgrade("poi", 13);
   }, // Returns a bool for if this layer's node should be visible in the tree.
   upgrades: {
     11: {
       title: "Pathogens",
-      style: {width: "300px"},
+      style: { width: "300px" },
       cost: new Decimal(1),
-      description(){
-        let s = `Per lycoris flower up to 5 unlock a new effect.`
-        if (player.e.points.eq(0)) s+="<br>Oh no, you don't have any lycoris flowers!"
-        if (player.e.points.gte(1)) s+="<br>Double Jacorbian Energy gain."
-        if (player.e.points.gte(2)) s+="<br>Dice gain 2 extra sides."
-        if (player.e.points.gte(3)) s+="<br>Tuberculosis gain ^1.05."
-        if (player.e.points.gte(4)) s+="<br>Bacteria boosts Jacorbian Energy gain. Currently: *"+format(tmp.ba.upgrades[11].effect1)
-        if (player.e.points.gte(5)) s+="<br>Unlock a new row of coronavirus upgrades."
-        return s
+      description() {
+        let s = `Per lycoris flower up to 5 unlock a new effect.`;
+        if (player.e.points.eq(0))
+          s += "<br>Oh no, you don't have any lycoris flowers!";
+        if (player.e.points.gte(1)) s += "<br>Double Jacorbian Energy gain.";
+        if (player.e.points.gte(2)) s += "<br>Dice gain 2 extra sides.";
+        if (player.e.points.gte(3)) s += "<br>Tuberculosis gain ^1.05.";
+        if (player.e.points.gte(4))
+          s +=
+            "<br>Bacteria boosts Jacorbian Energy gain. Currently: *" +
+            format(tmp.ba.upgrades[11].effect1);
+        if (player.e.points.gte(5))
+          s += "<br>Unlock a new row of coronavirus upgrades.";
+        return s;
       },
-      effect1(){
-        return player.ba.points.sqrt().add(1)
-      }
-    }
-  }
+      effect1() {
+        return player.ba.points.sqrt().add(1);
+      },
+    },
+  },
 });
