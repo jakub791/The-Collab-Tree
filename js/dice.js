@@ -320,16 +320,17 @@ addLayer("tdr", {
     },
   },
   update(diff) {
-    let cooldownRate = diff *
-    (hasUpgrade("tb", 15)
-      ? tmp.t.timeCalculation.add(10).log10().toNumber()
-      : 1) *
-    (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
+    let cooldownRate =
+      diff *
+      (hasUpgrade("tb", 15)
+        ? tmp.t.timeCalculation.add(10).log10().toNumber()
+        : 1) *
+      (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
     if (player.tdr.cooldown > 0) {
-      player.tdr.cooldown -=cooldownRate
+      player.tdr.cooldown -= cooldownRate;
     }
     if (player.tdr.cooldown2 > 0) {
-      player.tdr.cooldown2 -= cooldownRate
+      player.tdr.cooldown2 -= cooldownRate;
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
     player.tdr.cooldown2 = Math.max(player.tdr.cooldown2, 0);
