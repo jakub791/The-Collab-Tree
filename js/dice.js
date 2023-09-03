@@ -197,7 +197,7 @@ addLayer("tdr", {
       effect() {
         return getBuyableAmount(this.layer, this.id)
           .sqrt()
-          .mul(player.je.points.add(10).log10().sqrt());
+          .mul(player.je.points.add(10).log10().sqrt()).floor();
       },
       buy() {
         player.tb.points = player.tb.points.sub(this.cost());
@@ -267,6 +267,7 @@ addLayer("tdr", {
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 20) + 1;
+        save()
       },
       onExit() {
         player.e.points = new Decimal(0);
@@ -283,6 +284,7 @@ addLayer("tdr", {
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 10) + 1;
+        save()
       },
       onExit() {
         player.e.points = new Decimal(0);
@@ -291,6 +293,26 @@ addLayer("tdr", {
       },
       unlocked() {
         return hasChallenge("tdr", 11);
+      },
+    },
+    13: {
+      name: "Luck Testing III",
+      fullDisplay:
+        "You have TBD seconds to complete this challenge. EFFECT TBD. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: TBD sickness<br>Reward: Unlock TBD.",
+      canComplete() {
+        return false;
+      },
+      onEnter() {/*
+        player.tdr.luck = Math.floor(Math.random() * 0) + 1;
+        save()*/
+      },
+      onExit() {/*
+        player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
+        player.e.milestones = [];*/
+      },
+      unlocked() {
+        return hasChallenge("tdr", 12);
       },
     },
   },
