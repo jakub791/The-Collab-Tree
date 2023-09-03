@@ -114,7 +114,7 @@ addLayer("ba", {
       cost: new Decimal(10),
       description() {
         let s = `Every 2 lycoris flowers unlocks a new effect, up to 10 flowers.<br><br><b>Effects:</b>`;
-        if (player.e.points.eq(0))
+        if (player.e.points.lt(2))
           s += "<br>Oh no, you don't have enough lycoris flowers!";
         if (player.e.points.gte(2)) s += "<br>Jacorbian Energy doesn't reset CV or TB upgrades.";
         if (player.e.points.gte(4)) s += "<br>You always have the 20 dice milestone no matter what.";
