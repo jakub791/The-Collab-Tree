@@ -109,8 +109,9 @@ addLayer("e", {
   challenges: {
     11: {
       name: "TremENDouS",
+      challengeDescription: "TremENDouS Power watches over you like leaves in a cherry blossom.",
       goalDescription() {
-        return `TremENDouS Power watches over you like leaves in a cherry blossom. I want you to reach ${format(
+        return `I want you to reach ${format(
           tmp["e"].challenges[11].goal,
         )} points while nerfed by the songs current BPM.`;
       },
@@ -133,8 +134,9 @@ addLayer("e", {
     },
     12: {
       name: "Kowloon",
+      challengeDescription: "The Famous Walled City of Kowloon. Sounds like a nightmare to live in right?",
       goalDescription() {
-        return `The Famous Walled City of Kowloon. Sounds like a nightmare to live in right? Well, get to ${format(
+        return `Well, get to ${format(
           tmp["e"].challenges[12].goal,
         )} points while trapped in this Labyrinth of a nerf. (^0.0667185)`;
       },
