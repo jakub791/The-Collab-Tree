@@ -62,6 +62,7 @@ function getPointGen() {
   if (hasUpgrade("cv", 13)) gain = gain.pow(1.25);
   if (inChallenge("e", 11)) gain = gain.pow(treNerf);
   if (inChallenge("e", 12)) gain = gain.pow(0.0667185);
+  if (inChallenge("e", 13)) gain = gain.pow(randomNumber(1, 100).div(100))
   return gain;
 }
 
@@ -91,6 +92,9 @@ const backgroundStyle = {};
 
 function maxTickLength() {
   return 3600;
+}
+function randomNumber(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 function fixOldSave(oldVersion) {}

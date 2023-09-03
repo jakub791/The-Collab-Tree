@@ -151,6 +151,14 @@ addLayer("e", {
       rewardDescription:
         "Roll time is cut in half, and CV and TB gain are boosted by ^1.255.",
     },
+    21: {
+      name: "Compute it with some Devilish Alcoholic Steampunk Engines",
+      challengeDescription: "Heyyyy... Can you do this *hic* challenge for *hic* me pleaseeeee...",
+      goalDescription() {return `Get *hic* ${format(tmp["e"].challenges[21].goal)} while the *hic* nerf is drunkkkk... *passes out on the bar*`},
+      goal() { return new Decimal(1e15)},
+      canComplete: function () { return player.points.gte(1e15)},
+      rewardDescription: "Might as well *hic* give you a key to keep your *hic* stuff on *hic* resetttt...",
+    },
   },
   update(diff) {
     let treGain = new Decimal(0);
