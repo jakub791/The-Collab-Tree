@@ -289,6 +289,7 @@ addLayer("tdr", {
         player.e.total = new Decimal(0);
         player.e.milestones = [];
       },
+      unlocked(){return hasChallenge("tdr",11)}
     },
   },
   update(diff) {
