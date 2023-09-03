@@ -183,7 +183,8 @@ addLayer("tdr", {
     },
     2: {
       requirementDescription: "6 6s rolled",
-      effectDescription: "Gain 666x coronavirus, and keep coronavirus upgrades on dice reset",
+      effectDescription:
+        "Gain 666x coronavirus, and keep coronavirus upgrades on dice reset",
       done() {
         return false;
       },
@@ -213,17 +214,20 @@ addLayer("tdr", {
   },
   challenges: {
     11: {
-        name: "Luck Testing",
-        fullDisplay: "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness",
-        canComplete() {return player.points.gte(1e16)},
-        onEnter(){
-          player.tdr.luck = Math.floor(Math.random()*20)+1;
-        },
-        onExit(){
-          player.e.points=new Decimal(0);
-          player.e.total=new Decimal(0);
-          player.e.milestones=[];
-        }
+      name: "Luck Testing",
+      fullDisplay:
+        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness",
+      canComplete() {
+        return player.points.gte(1e16);
+      },
+      onEnter() {
+        player.tdr.luck = Math.floor(Math.random() * 20) + 1;
+      },
+      onExit() {
+        player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
+        player.e.milestones = [];
+      },
     },
   },
   update(diff) {
@@ -233,14 +237,12 @@ addLayer("tdr", {
         (hasUpgrade("tb", 15)
           ? tmp.t.timeCalculation.add(10).log10().toNumber()
           : 1) *
-        (hasUpgrade("je", 13)
-          ? upgradeEffect("je", 13).toNumber()
-          : 1);
+        (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
-    if (inChallenge(this.layer,11))player.tdr.luck=player.tdr.luck-diff
-    if (player.tdr.luck<=0){
-      completeChallenge(this.layer,11)
+    if (inChallenge(this.layer, 11)) player.tdr.luck = player.tdr.luck - diff;
+    if (player.tdr.luck <= 0) {
+      completeChallenge(this.layer, 11);
     }
   },
   tabFormat: {

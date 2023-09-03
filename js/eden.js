@@ -15,7 +15,9 @@ addLayer("e", {
   branches: ["tdr"],
 
   baseResource: "Dice Roll Points",
-  canReset(){return hasChallenge("tdr",11)},
+  canReset() {
+    return hasChallenge("tdr", 11);
+  },
   baseAmount() {
     return player.tdr.totalroll;
   },
