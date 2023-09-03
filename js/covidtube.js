@@ -13,7 +13,11 @@ addLayer("cv", {
   resource: "Coronavirus", // Name of prestige currency
   baseResource: "sickness", // Name of resource prestige is based on
   passiveGeneration() {
-    return hasMilestone("e", 1) ? 0.01 : 0;
+    return hasMilestone("e", 1)
+      ? hasUpgrade("ba", 21) && player.e.points.gte(8)
+        ? 0.5
+        : 0.01
+      : 0;
   },
   baseAmount() {
     return player.points;
@@ -106,6 +110,8 @@ addLayer("cv", {
     if (layers[l].row > this.row) {
       let keep = [];
       if (l == "tdr" && hasMilestone("tdr", 2)) keep.push("upgrades");
+      if (l == "je" && hasUpgrade("ba", 21) && player.e.points.gte(2))
+        keep.push("upgrades");
       layerDataReset(this.layer, keep);
     }
   },
@@ -128,7 +134,11 @@ addLayer("tb", {
   resource: "Tuberculosis", // Name of prestige currency
   baseResource: "sickness", // Name of resource prestige is based on
   passiveGeneration() {
-    return hasMilestone("e", 1) ? 0.01 : 0;
+    return hasMilestone("e", 1)
+      ? hasUpgrade("ba", 21) && player.e.points.gte(8)
+        ? 0.5
+        : 0.01
+      : 0;
   },
   baseAmount() {
     return player.points;
@@ -239,6 +249,8 @@ addLayer("tb", {
     if (layers[l].row > this.row) {
       let keep = [];
       if (l == "tdr" && hasMilestone("tdr", 3)) keep.push("upgrades");
+      if (l == "je" && hasUpgrade("ba", 21) && player.e.points.gte(2))
+        keep.push("upgrades");
       layerDataReset(this.layer, keep);
     }
   },

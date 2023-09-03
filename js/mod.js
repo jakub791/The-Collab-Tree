@@ -63,6 +63,8 @@ function getPointGen() {
   if (inChallenge("e", 11)) gain = gain.pow(treNerf);
   if (inChallenge("e", 12)) gain = gain.pow(0.0667185);
   if (inChallenge("e", 21)) gain = gain.pow(Math.random());
+  if (inChallenge("tdr", 12))
+    gain = gain.div(player.tdr.points.mul(tmp.tdr.effect).max(1));
   return gain;
 }
 
@@ -84,7 +86,7 @@ const displayThings = [
     }`,
   () =>
     `${
-      inChallenge("tdr", 11)
+      inChallenge("tdr", 11) || inChallenge("tdr", 12) || inChallenge("tdr", 21)
         ? `You have ${formatTime(player.tdr.luck)} seconds left.`
         : ""
     }`,

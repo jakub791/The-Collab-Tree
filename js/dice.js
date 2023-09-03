@@ -10,8 +10,10 @@ addLayer("tdr", {
       points: Decimal.dZero,
       totalroll: Decimal.dZero,
       lastRoll: "",
+      lastWeekly: 1,
       rollType: "additive",
       cooldown: 0,
+      cooldown2: 0,
       luck: 0,
     };
   },
@@ -77,7 +79,11 @@ addLayer("tdr", {
       if (i == 6) sixes++;
       if (i == 20 && !hasMilestone("tdr", 5)) player.tdr.milestones.push(5);
     }
-    if (sixes >= 6 && !hasMilestone("tdr", 2)) player.tdr.milestones.push(2);
+    if (
+      sixes >= (hasUpgrade("ba", 21) && player.e.points.gte(6) ? 3 : 6) &&
+      !hasMilestone("tdr", 2)
+    )
+      player.tdr.milestones.push(2);
     if (player.tdr.rollType === "additive") {
       score = rolls.reduce(
         (accumulated, current) => accumulated.add(current),
@@ -96,7 +102,7 @@ addLayer("tdr", {
   },
   clickables: {
     11: {
-      title: "Daily Reminder to Roll",
+      title: "Do the <b>Daily</b> Roll",
       canClick() {
         return player.tdr.cooldown <= 0;
       },
@@ -109,8 +115,34 @@ addLayer("tdr", {
         player.tdr.cooldown = cool;
       },
       display() {
-        return `Roll your dice.
+        return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>${
+          hasChallenge(this.layer, 11)
+            ? 24 - player.e.points.min(20).floor()
+            : 24
+        }</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
+      },
+    },
+    12: {
+      title: "Do the <b>Weekly</b> Roll",
+      canClick() {
+        return player.tdr.cooldown2 <= 0;
+      },
+      onClick() {
+        player.tdr.lastWeekly = new Decimal(Math.random())
+          .mul(tmp.tdr.effect)
+          .floor()
+          .add(1)
+          .toNumber();
+        let cool = 86400 * 7;
+        player.tdr.cooldown = cool;
+      },
+      display() {
+        return `Roll one of your dice for a point gain multiplier! <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>1</b> WEEK.</span>
+                Cooldown: ${formatTime(player.tdr.cooldown2)}`;
+      },
+      unlocked() {
+        return hasChallenge("tdr", 12);
       },
     },
   },
@@ -165,7 +197,8 @@ addLayer("tdr", {
       effect() {
         return getBuyableAmount(this.layer, this.id)
           .sqrt()
-          .mul(player.je.points.add(10).log10().sqrt());
+          .mul(player.je.points.add(10).log10().sqrt())
+          .floor();
       },
       buy() {
         player.tb.points = player.tb.points.sub(this.cost());
@@ -185,7 +218,10 @@ addLayer("tdr", {
       requirementDescription: "10 dice",
       effectDescription: "Unlock a buyable, and another tab at 15 dice",
       done() {
-        return player.tdr.points.gte(10);
+        return (
+          player.tdr.points.gte(10) ||
+          (hasUpgrade("ba", 21) && player.e.points.gte(10))
+        );
       },
     },
     2: {
@@ -201,7 +237,10 @@ addLayer("tdr", {
       effectDescription:
         "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
       done() {
-        return player.tdr.points.gte(20);
+        return (
+          player.tdr.points.gte(20) ||
+          (hasUpgrade("ba", 21) && player.e.points.gte(4))
+        );
       },
     },
     4: {
@@ -223,17 +262,60 @@ addLayer("tdr", {
     11: {
       name: "Luck Testing",
       fullDisplay:
-        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from roll timer",
+        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from base roll cooldown.",
       canComplete() {
         return player.points.gte(1e16);
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 20) + 1;
+        save();
       },
       onExit() {
         player.e.points = new Decimal(0);
         player.e.total = new Decimal(0);
         player.e.milestones = [];
+      },
+    },
+    12: {
+      name: "Luck Testing II",
+      fullDisplay:
+        "You have 1d10 seconds to complete this challenge. Sickness gain is divided by total dice sides. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e12 sickness<br>Reward: Unlock the weekly roll.",
+      canComplete() {
+        return player.points.gte(1e12);
+      },
+      onEnter() {
+        player.tdr.luck = Math.floor(Math.random() * 10) + 1;
+        save();
+      },
+      onExit() {
+        player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
+        player.e.milestones = [];
+      },
+      unlocked() {
+        return hasChallenge("tdr", 11);
+      },
+    },
+    21: {
+      name: "Luck Testing III",
+      fullDisplay:
+        "You have TBD seconds to complete this challenge. EFFECT TBD. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: TBD sickness<br>Reward: Unlock TBD.",
+      canComplete() {
+        return false;
+      },
+      onEnter() {
+        /*
+        player.tdr.luck = Math.floor(Math.random() * 0) + 1;
+        save()*/
+      },
+      onExit() {
+        /*
+        player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
+        player.e.milestones = [];*/
+      },
+      unlocked() {
+        return hasChallenge("tdr", 12);
       },
     },
   },
@@ -247,9 +329,9 @@ addLayer("tdr", {
         (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
-    if (inChallenge(this.layer, 11)) player.tdr.luck = player.tdr.luck - diff;
+    if (player.tdr.activeChallenge) player.tdr.luck = player.tdr.luck - diff;
     if (player.tdr.luck <= 0) {
-      completeChallenge(this.layer, 11);
+      completeChallenge(this.layer, player.tdr.activeChallenge);
     }
   },
   tabFormat: {
@@ -269,6 +351,10 @@ addLayer("tdr", {
         "clickables",
         "blank",
         ["display-text", () => `Latest roll: ${player.tdr.lastRoll}`],
+        [
+          "display-text",
+          () => `Weekly multiplier to rolls: x${player.tdr.lastWeekly}`,
+        ],
         "blank",
         "buyables",
       ],
