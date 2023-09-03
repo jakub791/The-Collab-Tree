@@ -10,8 +10,10 @@ addLayer("tdr", {
       points: Decimal.dZero,
       totalroll: Decimal.dZero,
       lastRoll: "",
+      lastWeekly: 1,
       rollType: "additive",
       cooldown: 0,
+      cooldown2: 0,
       luck: 0,
     };
   },
@@ -116,6 +118,22 @@ addLayer("tdr", {
         return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>${hasChallenge(this.layer,11)?24-player.e.points.min(20).floor():24}</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
       },
+    },
+    12: {
+      title: "Do the <b>Weekly</b> Roll",
+      canClick() {
+        return player.tdr.cooldown2 <= 0;
+      },
+      onClick() {
+        player.tdr.lastWeekly = new Decimal(Math.random()).mul(tmp.tdr.effect).floor().add(1).toNumber()
+        let cool = 86400*7;
+        player.tdr.cooldown = cool;
+      },
+      display() {
+        return `Roll one of your dice for a point gain multiplier! <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>1</b> WEEK.</span>
+                Cooldown: ${formatTime(player.tdr.cooldown2)}`;
+      },
+      unlocked(){return hasChallenge("tdr",12)}
     },
   },
   buyables: {
@@ -233,12 +251,28 @@ addLayer("tdr", {
     11: {
       name: "Luck Testing",
       fullDisplay:
-        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from roll timer",
+        "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from base roll cooldown.",
       canComplete() {
         return player.points.gte(1e16);
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 20) + 1;
+      },
+      onExit() {
+        player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
+        player.e.milestones = [];
+      },
+    },
+    12: {
+      name: "Luck Testing II",
+      fullDisplay:
+        "You have 1d10 seconds to complete this challenge. Sickness gain is divided by total dice sides. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e12 sickness<br>Reward: Unlock the weekly roll.",
+      canComplete() {
+        return player.points.gte(1e12);
+      },
+      onEnter() {
+        player.tdr.luck = Math.floor(Math.random() * 10) + 1;
       },
       onExit() {
         player.e.points = new Decimal(0);
@@ -257,9 +291,9 @@ addLayer("tdr", {
         (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
-    if (inChallenge(this.layer, 11)) player.tdr.luck = player.tdr.luck - diff;
+    if (player.tdr.activeChallenge) player.tdr.luck = player.tdr.luck - diff;
     if (player.tdr.luck <= 0) {
-      completeChallenge(this.layer, 11);
+      completeChallenge(this.layer, player.tdr.activeChallenge);
     }
   },
   tabFormat: {
@@ -279,6 +313,7 @@ addLayer("tdr", {
         "clickables",
         "blank",
         ["display-text", () => `Latest roll: ${player.tdr.lastRoll}`],
+        ["display-text", () => `Weekly multiplier to rolls: x${player.tdr.lastWeekly}`],
         "blank",
         "buyables",
       ],
