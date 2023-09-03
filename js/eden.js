@@ -131,6 +131,22 @@ addLayer("e", {
         player.e.tre = new Decimal(0);
       },
     },
+    12: {
+      name: "Kowloon",
+      goalDescription() {
+        return `The Famous Walled City of Kowloon. Sounds like a nightmare to live in right? Well, get to ${format(
+          tmp["e"].challenges[12].goal,
+        )} points while trapped in this Labyrinth of a nerf. (^0.0667185)`;
+      },
+      goal() {
+        return new Decimal(1255000);
+      },
+      canComplete: function () {
+        return player.points.gte(1255000);
+      },
+      rewardDescription:
+        "Roll time is cut in half, and CV and TB gain are boosted by ^1.255.",
+    }
   },
   update(diff) {
     let treGain = new Decimal(0);
