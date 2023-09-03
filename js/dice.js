@@ -197,7 +197,8 @@ addLayer("tdr", {
       effect() {
         return getBuyableAmount(this.layer, this.id)
           .sqrt()
-          .mul(player.je.points.add(10).log10().sqrt()).floor();
+          .mul(player.je.points.add(10).log10().sqrt())
+          .floor();
       },
       buy() {
         player.tb.points = player.tb.points.sub(this.cost());
@@ -267,7 +268,7 @@ addLayer("tdr", {
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 20) + 1;
-        save()
+        save();
       },
       onExit() {
         player.e.points = new Decimal(0);
@@ -284,7 +285,7 @@ addLayer("tdr", {
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 10) + 1;
-        save()
+        save();
       },
       onExit() {
         player.e.points = new Decimal(0);
@@ -302,11 +303,13 @@ addLayer("tdr", {
       canComplete() {
         return false;
       },
-      onEnter() {/*
+      onEnter() {
+        /*
         player.tdr.luck = Math.floor(Math.random() * 0) + 1;
         save()*/
       },
-      onExit() {/*
+      onExit() {
+        /*
         player.e.points = new Decimal(0);
         player.e.total = new Decimal(0);
         player.e.milestones = [];*/
