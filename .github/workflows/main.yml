@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Prettify Code
 
 # This action works with pushes
 on:
