@@ -86,7 +86,7 @@ const displayThings = [
     }`,
   () =>
     `${
-      inChallenge("tdr", 11) || inChallenge("tdr", 12) || inChallenge("tdr", 21)
+      inChallenge("tdr", 11) || inChallenge("tdr", 12) || inChallenge("tdr", 13)
         ? `You have ${formatTime(player.tdr.luck)} seconds left.`
         : ""
     }`,
