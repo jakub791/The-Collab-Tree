@@ -129,15 +129,21 @@ addLayer("tdr", {
         return player.tdr.cooldown2 <= 0;
       },
       onClick() {
-        player.tdr.lastWeekly = new Decimal(Math.random()).mul(tmp.tdr.effect).floor().add(1).toNumber()
-        let cool = 86400*7;
+        player.tdr.lastWeekly = new Decimal(Math.random())
+          .mul(tmp.tdr.effect)
+          .floor()
+          .add(1)
+          .toNumber();
+        let cool = 86400 * 7;
         player.tdr.cooldown = cool;
       },
       display() {
         return `Roll one of your dice for a point gain multiplier! <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>1</b> WEEK.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown2)}`;
       },
-      unlocked(){return hasChallenge("tdr",12)}
+      unlocked() {
+        return hasChallenge("tdr", 12);
+      },
     },
   },
   buyables: {
@@ -317,7 +323,10 @@ addLayer("tdr", {
         "clickables",
         "blank",
         ["display-text", () => `Latest roll: ${player.tdr.lastRoll}`],
-        ["display-text", () => `Weekly multiplier to rolls: x${player.tdr.lastWeekly}`],
+        [
+          "display-text",
+          () => `Weekly multiplier to rolls: x${player.tdr.lastWeekly}`,
+        ],
         "blank",
         "buyables",
       ],
