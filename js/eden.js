@@ -15,6 +15,7 @@ addLayer("e", {
   branches: ["tdr"],
 
   baseResource: "Dice Roll Points",
+  base: 3.5,
   canReset() {
     return hasChallenge("tdr", 11);
   },
