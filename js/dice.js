@@ -12,6 +12,7 @@ addLayer("tdr", {
       lastRoll: "",
       rollType: "additive",
       cooldown: 0,
+      luck: 0,
     };
   },
   color: "#4BDC13",
@@ -175,14 +176,14 @@ addLayer("tdr", {
   milestones: {
     1: {
       requirementDescription: "10 dice",
-      effectDescription: "Unlock a buyable",
+      effectDescription: "Unlock a buyable, and another tab at 15 dice",
       done() {
         return player.tdr.points.gte(10);
       },
     },
     2: {
       requirementDescription: "6 6s rolled",
-      effectDescription: "Gain 666x coronavirus",
+      effectDescription: "Gain 666x coronavirus, and keep coronavirus upgrades on dice reset",
       done() {
         return false;
       },
@@ -210,6 +211,21 @@ addLayer("tdr", {
       },
     },
   },
+  challenges: {
+    11: {
+        name: "Luck Testing",
+        fullDisplay: "You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness",
+        canComplete() {return player.points.gte(1e16)},
+        onEnter(){
+          player.tdr.luck = Math.floor(Math.random()*20)+1;
+        },
+        onExit(){
+          player.e.points=new Decimal(0);
+          player.e.total=new Decimal(0);
+          player.e.milestones=[];
+        }
+    },
+  },
   update(diff) {
     if (player.tdr.cooldown > 0) {
       player.tdr.cooldown -=
@@ -218,10 +234,14 @@ addLayer("tdr", {
           ? tmp.t.timeCalculation.add(10).log10().toNumber()
           : 1) *
         (hasUpgrade("je", 13)
-          ? upgradeEffect("je", 13).pow(0.5).toNumber()
+          ? upgradeEffect("je", 13).toNumber()
           : 1);
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
+    if (inChallenge(this.layer,11))player.tdr.luck=player.tdr.luck-diff
+    if (player.tdr.luck<=0){
+      completeChallenge(this.layer,11)
+    }
   },
   tabFormat: {
     Dice: {
@@ -249,6 +269,12 @@ addLayer("tdr", {
         return player.tdr.points.gte(5);
       },
       content: ["milestones"],
+    },
+    Challenges: {
+      unlocked() {
+        return player.tdr.points.gte(15);
+      },
+      content: ["challenges"],
     },
   },
 });

@@ -1,7 +1,7 @@
 addLayer("cv", {
   name: "Coronavirus", // This is optional, only used in a few places, If absent it just uses the layer id.
   symbol: "CV", // This appears on the layer's node. Default is the id with the first letter capitalized
-  position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+  position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
   startData() {
     return {
       unlocked: true,
@@ -66,11 +66,18 @@ addLayer("cv", {
       cost: new Decimal(420),
     },
   },
+  doReset(l) {
+    if (layers[l].row > this.row) {
+      let keep = [];
+      if (l == "tdr" && hasMilestone("tdr", 2)) keep.push("upgrades");
+      layerDataReset(this.layer, keep);
+    }
+  },
 });
 addLayer("tb", {
   name: "Tuberculosis", // This is optional, only used in a few places, If absent it just uses the layer id.
   symbol: "TB", // This appears on the layer's node. Default is the id with the first letter capitalized
-  position: 2, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+  position: 1, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
   startData() {
     return {
       unlocked: true,

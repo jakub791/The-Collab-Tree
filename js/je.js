@@ -162,7 +162,7 @@ addLayer("je", {
         return player.je;
       },
       effect() {
-        return player.tdr.points.add(1).pow(1.3);
+        return player.tdr.points.add(1).pow(0.65);
       },
       effectDisplay() {
         return format(upgradeEffect(this.layer, this.id)) + "x";
