@@ -13,7 +13,9 @@ addLayer("e", {
   resource: "Lycoris Flowers",
   row: 2,
   branches: ["tdr"],
-
+  canReset() {
+    return hasChallenge("tdr", 11);
+  },
   baseResource: "Dice Roll Points",
   base: 3.5,
   baseAmount() {
