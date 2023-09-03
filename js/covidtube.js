@@ -12,7 +12,9 @@ addLayer("cv", {
   requires: new Decimal(100), // Can be a function that takes requirement increases into account
   resource: "Coronavirus", // Name of prestige currency
   baseResource: "sickness", // Name of resource prestige is based on
-  passiveGeneration(){return (hasMilestone("e",1)?0.01:0)},
+  passiveGeneration() {
+    return hasMilestone("e", 1) ? 0.01 : 0;
+  },
   baseAmount() {
     return player.points;
   }, // Get the current amount of baseResource
@@ -25,7 +27,7 @@ addLayer("cv", {
     if (hasUpgrade("cv", 12)) mult = mult.mul(2);
     if (hasUpgrade("cv", 13)) mult = mult.mul(3);
     if (hasUpgrade("je", 11)) mult = mult.mul(upgradeEffect("je", 11));
-    if (hasMilestone("e",3))mult=mult.mul(3)
+    if (hasMilestone("e", 3)) mult = mult.mul(3);
     return mult;
   },
   gainExp() {
@@ -90,7 +92,9 @@ addLayer("tb", {
   requires: new Decimal(5), // Can be a function that takes requirement increases into account
   resource: "Tuberculosis", // Name of prestige currency
   baseResource: "sickness", // Name of resource prestige is based on
-  passiveGeneration(){return (hasMilestone("e",1)?0.01:0)},
+  passiveGeneration() {
+    return hasMilestone("e", 1) ? 0.01 : 0;
+  },
   baseAmount() {
     return player.points;
   }, // Get the current amount of baseResource
@@ -100,7 +104,7 @@ addLayer("tb", {
     // Calculate the multiplier for main currency from bonuses
     mult = new Decimal(1);
     if (hasUpgrade("tb", 12)) mult = mult.mul(upgradeEffect("tb", 12));
-    if (hasMilestone("e",3))mult=mult.mul(3)
+    if (hasMilestone("e", 3)) mult = mult.mul(3);
     return mult;
   },
   gainExp() {

@@ -88,7 +88,9 @@ addLayer("tdr", {
         Decimal.dOne,
       );
     }
-    player.tdr.totalroll = player.tdr.totalroll.add(Decimal.mul(score,hasMilestone("e",2)?2:1));
+    player.tdr.totalroll = player.tdr.totalroll.add(
+      Decimal.mul(score, hasMilestone("e", 2) ? 2 : 1),
+    );
     return;
   },
   clickables: {
