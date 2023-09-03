@@ -59,7 +59,7 @@ addLayer("ba", {
 
   color: "#338844", // The color for this layer, which affects many elements.
   resource: "Bacteria", // The name of this layer's main prestige resource.
-  row: 0, // The row this layer is on (0 is the first row).
+  row: 1, // The row this layer is on (0 is the first row).
   position: 2,
   baseResource: "points", // The name of the resource your prestige gain is based on.
   baseAmount() {
