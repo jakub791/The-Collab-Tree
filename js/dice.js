@@ -115,7 +115,11 @@ addLayer("tdr", {
         player.tdr.cooldown = cool;
       },
       display() {
-        return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>${hasChallenge(this.layer,11)?24-player.e.points.min(20).floor():24}</b> HOURS.</span>
+        return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>${
+          hasChallenge(this.layer, 11)
+            ? 24 - player.e.points.min(20).floor()
+            : 24
+        }</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
       },
     },
