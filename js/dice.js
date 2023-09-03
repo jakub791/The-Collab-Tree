@@ -272,8 +272,6 @@ addLayer("tdr", {
       },
       onExit() {
         player.e.points = new Decimal(0);
-        player.e.total = new Decimal(0);
-        player.e.milestones = [];
       },
     },
     12: {
@@ -289,8 +287,6 @@ addLayer("tdr", {
       },
       onExit() {
         player.e.points = new Decimal(0);
-        player.e.total = new Decimal(0);
-        player.e.milestones = [];
       },
       unlocked() {
         return hasChallenge("tdr", 11);
@@ -310,9 +306,7 @@ addLayer("tdr", {
       },
       onExit() {
         /*
-        player.e.points = new Decimal(0);
-        player.e.total = new Decimal(0);
-        player.e.milestones = [];*/
+        player.e.points = new Decimal(0);*/
       },
       unlocked() {
         return hasChallenge("tdr", 12);
