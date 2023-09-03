@@ -26,6 +26,7 @@ addLayer("tdr", {
     sides = sides.add(buyableEffect("tdr", 11));
     sides = sides.add(buyableEffect("tdr", 12));
     sides = sides.add(buyableEffect("je", 11));
+    if (hasUpgrade("ba",11) && player.e.points.gte(2)) sides=sides.add(2)
     return sides;
   },
   requires: Decimal.dTen,

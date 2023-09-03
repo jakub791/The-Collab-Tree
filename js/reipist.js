@@ -48,7 +48,7 @@ addLayer("poi", {
     },
   },
 });
-addLayer("Ba", {
+addLayer("ba", {
   startData() {
     return {
       // startData is a function that returns default data for a layer.
@@ -57,7 +57,7 @@ addLayer("Ba", {
     };
   },
 
-  color: "#NV7744", // The color for this layer, which affects many elements.
+  color: "#338844", // The color for this layer, which affects many elements.
   resource: "Bacteria", // The name of this layer's main prestige resource.
   row: 0, // The row this layer is on (0 is the first row).
   position: 2,
@@ -82,6 +82,26 @@ addLayer("Ba", {
   },
 
   layerShown() {
-    return true;
+    return hasUpgrade("poi",13);
   }, // Returns a bool for if this layer's node should be visible in the tree.
+  upgrades: {
+    11: {
+      title: "Pathogens",
+      style: {width: "300px"},
+      cost: new Decimal(1),
+      description(){
+        let s = `Per lycoris flower up to 5 unlock a new effect.`
+        if (player.e.points.eq(0)) s+="<br>Oh no, you don't have any lycoris flowers!"
+        if (player.e.points.gte(1)) s+="<br>Double Jacorbian Energy gain."
+        if (player.e.points.gte(2)) s+="<br>Dice gain 2 extra sides."
+        if (player.e.points.gte(3)) s+="<br>Tuberculosis gain ^1.05."
+        if (player.e.points.gte(4)) s+="<br>Bacteria boosts Jacorbian Energy gain. Currently: *"+format(tmp.ba.upgrades[11].effect1)
+        if (player.e.points.gte(5)) s+="<br>Unlock a new row of coronavirus upgrades."
+        return s
+      },
+      effect1(){
+        return player.ba.points.sqrt().add(1)
+      }
+    }
+  }
 });
