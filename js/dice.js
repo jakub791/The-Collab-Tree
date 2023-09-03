@@ -135,7 +135,7 @@ addLayer("tdr", {
           .add(1)
           .toNumber();
         let cool = 86400 * 7;
-        player.tdr.cooldown = cool;
+        player.tdr.cooldown2 = cool;
       },
       display() {
         return `Roll one of your dice for a point gain multiplier! <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>1</b> WEEK.</span>
@@ -320,15 +320,19 @@ addLayer("tdr", {
     },
   },
   update(diff) {
+    let cooldownRate = diff *
+    (hasUpgrade("tb", 15)
+      ? tmp.t.timeCalculation.add(10).log10().toNumber()
+      : 1) *
+    (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
     if (player.tdr.cooldown > 0) {
-      player.tdr.cooldown -=
-        diff *
-        (hasUpgrade("tb", 15)
-          ? tmp.t.timeCalculation.add(10).log10().toNumber()
-          : 1) *
-        (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
+      player.tdr.cooldown -=cooldownRate
+    }
+    if (player.tdr.cooldown2 > 0) {
+      player.tdr.cooldown2 -= cooldownRate
     }
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
+    player.tdr.cooldown2 = Math.max(player.tdr.cooldown2, 0);
     if (player.tdr.activeChallenge) player.tdr.luck = player.tdr.luck - diff;
     if (player.tdr.luck <= 0) {
       completeChallenge(this.layer, player.tdr.activeChallenge);
