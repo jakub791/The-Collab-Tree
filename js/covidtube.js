@@ -109,6 +109,9 @@ addLayer("cv", {
       layerDataReset(this.layer, keep);
     }
   },
+  passiveGeneration() {
+    return hasMilestone("e", 1) ? 0.01 : 0;
+  },
 });
 addLayer("tb", {
   name: "Tuberculosis", // This is optional, only used in a few places, If absent it just uses the layer id.
