@@ -296,7 +296,7 @@ addLayer("tdr", {
         return hasChallenge("tdr", 11);
       },
     },
-    21: {
+    13: {
       name: "Luck Testing III",
       fullDisplay:
         "You have TBD seconds to complete this challenge. EFFECT TBD. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: TBD sickness<br>Reward: Unlock TBD.",
