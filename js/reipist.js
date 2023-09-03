@@ -116,18 +116,25 @@ addLayer("ba", {
         let s = `Every 2 lycoris flowers unlocks a new effect, up to 10 flowers.<br><br><b>Effects:</b>`;
         if (player.e.points.lt(2))
           s += "<br>Oh no, you don't have enough lycoris flowers!";
-        if (player.e.points.gte(2)) s += "<br>Jacorbian Energy doesn't reset CV or TB upgrades.";
-        if (player.e.points.gte(4)) s += "<br>You always have the 20 dice milestone no matter what.";
-        if (player.e.points.gte(6)) s += "<br>6 6s milestone now only requires 3 6s.";
-        if (player.e.points.gte(8)) s += "<br>The 2 lycoris flower milestone is 50x as powerful.";
-        if (player.e.points.gte(10))s += "<br>You start lycoris resets with the 10 dice milestone.";
+        if (player.e.points.gte(2))
+          s += "<br>Jacorbian Energy doesn't reset CV or TB upgrades.";
+        if (player.e.points.gte(4))
+          s += "<br>You always have the 20 dice milestone no matter what.";
+        if (player.e.points.gte(6))
+          s += "<br>6 6s milestone now only requires 3 6s.";
+        if (player.e.points.gte(8))
+          s += "<br>The 2 lycoris flower milestone is 50x as powerful.";
+        if (player.e.points.gte(10))
+          s += "<br>You start lycoris resets with the 10 dice milestone.";
         return s;
       },
     },
   },
-  
+
   doReset(l) {
-    if (l == "e"){return}
+    if (l == "e") {
+      return;
+    }
     if (layers[l].row > this.row) {
       let keep = ["upgrades"];
       layerDataReset(this.layer, keep);

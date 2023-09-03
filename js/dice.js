@@ -77,7 +77,11 @@ addLayer("tdr", {
       if (i == 6) sixes++;
       if (i == 20 && !hasMilestone("tdr", 5)) player.tdr.milestones.push(5);
     }
-    if (sixes >= ((hasUpgrade("ba",21) && player.e.points.gte(6)) ? 3 : 6) && !hasMilestone("tdr", 2)) player.tdr.milestones.push(2);
+    if (
+      sixes >= (hasUpgrade("ba", 21) && player.e.points.gte(6) ? 3 : 6) &&
+      !hasMilestone("tdr", 2)
+    )
+      player.tdr.milestones.push(2);
     if (player.tdr.rollType === "additive") {
       score = rolls.reduce(
         (accumulated, current) => accumulated.add(current),
@@ -185,7 +189,10 @@ addLayer("tdr", {
       requirementDescription: "10 dice",
       effectDescription: "Unlock a buyable, and another tab at 15 dice",
       done() {
-        return player.tdr.points.gte(10)|| (hasUpgrade("ba",21) && player.e.points.gte(10));
+        return (
+          player.tdr.points.gte(10) ||
+          (hasUpgrade("ba", 21) && player.e.points.gte(10))
+        );
       },
     },
     2: {
@@ -201,7 +208,10 @@ addLayer("tdr", {
       effectDescription:
         "Keep tuberculosis upgrades on dice reset, and unlock another buyable",
       done() {
-        return player.tdr.points.gte(20) || (hasUpgrade("ba",21) && player.e.points.gte(4));
+        return (
+          player.tdr.points.gte(20) ||
+          (hasUpgrade("ba", 21) && player.e.points.gte(4))
+        );
       },
     },
     4: {
