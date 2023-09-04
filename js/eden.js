@@ -127,8 +127,14 @@ addLayer("e", {
   achievements: {
     11: {
       name: "What a nice flower you have...",
-      tooltip() {return hasAchievement(this.layer, this.id) ? "You got me there... (Reach 69 Lycoris Flowers Planted(nice))" : "Do you think you are entitled to those flowers? Prove me wrong."},
-      done() {return player.e.points.gte(69)}
+      tooltip() {
+        return hasAchievement(this.layer, this.id)
+          ? "You got me there... (Reach 69 Lycoris Flowers Planted(nice))"
+          : "Do you think you are entitled to those flowers? Prove me wrong.";
+      },
+      done() {
+        return player.e.points.gte(69);
+      },
     },
   },
   challenges: {
