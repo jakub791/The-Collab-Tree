@@ -62,6 +62,21 @@ addLayer("e", {
         "challenges",
       ],
     },
+    "Achievements of Eden": {
+      unlocked: true,
+      content: [
+        [
+          "display-text",
+          () =>
+            "You have planted " +
+            colored("e", format(player.e.points)) +
+            " Lycoris Flowers, in the Amnehilesie of Eden.",
+        ],
+        "prestige-button",
+        "blank",
+        "achievements",
+      ],
+    },
   },
   milestones: {
     0: {
@@ -107,6 +122,13 @@ addLayer("e", {
       done() {
         return player.e.total.gte(25);
       },
+    },
+  },
+  achievements: {
+    11: {
+      name: "What a nice flower you have...",
+      tooltip() {return hasAchievement(this.layer, this.id) ? "You got me there... (Reach 69 Lycoris Flowers Planted(nice))" : "Do you think you are entitled to those flowers? Prove me wrong."},
+      done() {return player.e.points.gte(69)}
     },
   },
   challenges: {
