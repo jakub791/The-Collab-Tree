@@ -138,8 +138,14 @@ addLayer("e", {
     },
     12: {
       name: "That was an overpowered failure...",
-      tooltip() {return hasAchievement(this.layer, this.id) ? "Did you do it for the achievement or did you actually failed? (Fail TremENDouS Challenge)" : "Brush up on those skills, oh god... Why is your score SO DAMN LOW!? YOU FUCKING BASTARD, I BELIEVED IN YOU! I THOUGHT YOU WOULD WIN THE TOURNAMENT, BUT NO, YOU FUCKING FAILED ME YOU LITTLE INSULTING FUCKING BITCH. I WILL MAKE YOU PLAY UNTIL YOUR FINGERS BEG FOR MERCY."},
-      done() {return player.e.fail.gte(1)}
+      tooltip() {
+        return hasAchievement(this.layer, this.id)
+          ? "Did you do it for the achievement or did you actually failed? (Fail TremENDouS Challenge)"
+          : "Brush up on those skills, oh god... Why is your score SO DAMN LOW!? YOU FUCKING BASTARD, I BELIEVED IN YOU! I THOUGHT YOU WOULD WIN THE TOURNAMENT, BUT NO, YOU FUCKING FAILED ME YOU LITTLE INSULTING FUCKING BITCH. I WILL MAKE YOU PLAY UNTIL YOUR FINGERS BEG FOR MERCY.";
+      },
+      done() {
+        return player.e.fail.gte(1);
+      },
     },
   },
   challenges: {
