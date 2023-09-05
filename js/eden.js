@@ -73,6 +73,14 @@ addLayer("e", {
             " Lycoris Flowers, in the Amnehilesie of Eden.",
         ],
         "prestige-button",
+        [
+          "display-text",
+          () => `<h2> Lycoris Achievements are secret achievements that are here just for fun!<br>
+          Please don't get mad at Eden because you couldn't get the achievement, if you read this, you should know that it is just for fun.<br>
+          They are just for fun, right, Eden?<br>
+          Eden?<br>
+          EDEN YOU MOTHER--</h2>`
+        ],
         "blank",
         "achievements",
       ],
