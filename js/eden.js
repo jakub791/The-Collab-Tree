@@ -7,6 +7,7 @@ addLayer("e", {
       points: Decimal.dZero,
       tre: Decimal.dZero,
       bpm: Decimal.dZero,
+      fail: false,
     };
   },
   color: "#E0E1CC",
@@ -152,7 +153,7 @@ addLayer("e", {
           : "Brush up on those skills, oh god... Why is your score SO DAMN LOW!? YOU FUCKING BASTARD, I BELIEVED IN YOU! I THOUGHT YOU WOULD WIN THE TOURNAMENT, BUT NO, YOU FUCKING FAILED ME YOU LITTLE INSULTING FUCKING BITCH. I WILL MAKE YOU PLAY UNTIL YOUR FINGERS BEG FOR MERCY.";
       },
       done() {
-        return player.e.fail.gte(1);
+        return player.e.fail == true;
       },
     },
   },
@@ -296,7 +297,7 @@ addLayer("e", {
         alert(
           "!23M3ND0U5 P0W32 HA5 C0N5UM3D Y0U F20M W1!H1N. !2Y A6A1N N3X! !1M3.",
         );
-        player.e.fail = 1;
+        player.e.fail = true;
         player.e.activeChallenge = null;
         doReset("e", true);
         player.e.tre = 0;
