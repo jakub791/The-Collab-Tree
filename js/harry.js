@@ -79,7 +79,6 @@ addLayer("Hr", {
             player.Hr.gtick = 0
         }
     }
-  },
 });
 
 /* in development :P
