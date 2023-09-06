@@ -214,10 +214,58 @@ addLayer("cheese", {
       },
       branches: [["b1", "rgb(255,217,131)"]],
     },
+    d0: {
+      fullDisplay() {return `
+        <h3>The Final Push</h3>
+        <br><span>Unlocks 6th 🧀 and final buyable<br><br>Cost: ${format(this.cost())} blessings
+        `
+      },
+      tooltip: "An approriate name for such silly upgrade.",
+      effect() {
+        return player.cheese.blessings.add(1).log(777).add(1);
+      },
+      cost() {
+        return new Decimal(hasUpgrade("cheese","d1")?"1e10":"1e9");
+      },
+      currencyInternalName: "blessings",
+      currencyDisplayName: "blessing",
+      currencyLayer: "cheese",
+      onPurchase() {
+        player.cheese.upgrades.push("d0");
+      },
+      unlocked() {
+        return hasUpgrade("cheese", "ab20");
+      },
+      branches: [["c1", "rgb(255,217,131)"]],
+    },
+    d1: {
+      fullDisplay() {return `
+        <h3>long-Term Consequences</h3>
+        <br><span>Boosts 🧀 gain by +5 per 🐀<br><br>Cost: ${format(this.cost())} blessings
+        `
+      },
+      tooltip: "An approriate name for such silly upgrade.",
+      effect() {
+        return player.cheese.blessings.add(1).log(777).add(1);
+      },
+      cost() {
+        return new Decimal(hasUpgrade("cheese","d0")?"1e10":"1e9");
+      },
+      currencyInternalName: "blessings",
+      currencyDisplayName: "blessing",
+      currencyLayer: "cheese",
+      onPurchase() {
+        player.cheese.upgrades.push("d1");
+      },
+      unlocked() {
+        return hasUpgrade("cheese", "ab20");
+      },
+      branches: [["c1", "rgb(255,217,131)"]],
+    },
     ab00: {
       fullDisplay: `<h3>Breakdown</h3>
                     <br><span>Sacrifices are x4 stronger and you sacrifice x4 more
-                    <br><br>Cost: 1,000,000 blessing`,
+                    <br><br>Cost: 1,000,000 blessings`,
       tooltip: `<span style='color: #006080;'>Personally, I prefer CHASE. It just has so much impact and raw atmosphere compared to other OPs. It also sounds pretty good in my opinion.`,
       cost: new Decimal(1000000),
       unlocked() {
@@ -245,7 +293,7 @@ addLayer("cheese", {
                     <br>🐀🐀🐀
                     <br>🐀🐀
                     <br>🐀
-                    <br><br>Cost: 25,000,000 blessing`,
+                    <br><br>Cost: 25,000,000 blessings`,
       tooltip: `<h5 style='color: #006080; font-size: 6px;'>Here I come, rougher than the rest of them<br>The best of them, tougher than leather<br>You can call me Knuckles, unlike Sonic I don't chuckle<br>I'd rather flex my muscles<br>I'm hard as nails, it ain't hard to tell<br>I break 'em down whether they solid or frail<br>Unlike the rest I'm independent since my first breath, first test<br>Feel the right then the worst's left<br>Born on an island in the heavens<br>The blood of my ancestors flows inside me<br>My duty is to save the flower from evil deterioration<br>I will be the one to set your heart free true<br>Cleanse yourself of them evil spirits that's in you<br>Streaking lights, loud sounds, and instinct<br>Are the elements that keep me going<br>I am fighting my own mission<br>Nothing's gonna stand in my way<br>I will be the one to set your heart free true<br>Cleanse yourself of them evil spirits that's in you<br>Won't be frightened, I'll stand up to all the pain and turmoil<br>Just believe in myself, won't rely on others<br>Get this power to wipe out the havoc and anarchy<br>This is my planet, gonna fight for my destiny<br>Here I come, rougher than the rest of them<br>The best of them, tougher than leather<br>You can call me Knuckles, unlike Sonic I don't chuckle<br>I'd rather flex my muscles<br>I'm hard as nails, it ain't hard to tell<br>I break 'em down whether they solid or frail<br>Unlike the rest I'm independent since my first breath, first test<br>Feel the right then the worst's left<br>I have no such things as weak spots<br>Don't approve of him, but got to trust him<br>This alliance has a purpose<br>This partnership is only temporary<br>I will be the one to set your heart free true<br>Cleanse yourself of evil spirits that got in you<br>Won't be frightened, I'll stand up to all the pain and turmoil<br>Just believe in myself, won't rely on others<br>Freedom will be waiting when serenity is restored<br>This is my planet, I shall not surrender<br>Won't be frightened, I'll stand up to all the pain and turmoil<br>Just believe in myself, won't rely on others<br>Get this power to wipe out the havoc and anarchy<br>This is my planet, gonna fight (aah, oh)<br>Won't be frightened, I'll stand up to all the pain and turmoil<br>Just believe in myself, won't rely on others<br>Freedom will be waiting when serenity is restored<br>This is my planet, I shall not surrender<br>The new porcupine on the block with the puffed chest<br>Out the wilderness with the ruggedness<br>Knock, knock, it's Knuckles, the blow thrower<br>Independent flower, magical Emerald holder<br>Give you the coldest shoulder<br>My spike goes through boulders<br>That's why I stay a loner<br>I was born by myself<br>I don't need a posse, I get it on by myself<br>Adversaries get shelved`,
       cost: new Decimal(25000000),
       unlocked() {
@@ -268,13 +316,10 @@ addLayer("cheese", {
       },
     },
     ab20: {
-      fullDisplay: `<h3>??? (wip)</h3>
-                    <br><span>???<br><br>Cost: ??? blessing`,
+      fullDisplay: `<h3>Linear Progression</h3>
+                    <br><span>Boosts special point gain by x4 and each upgrade increases SP's exponent gain by +^0.01<br><br>Cost: 100,000,000 blessings`,
       tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
-      cost: new Decimal(625000000),
-      canAfford() {
-        return false;
-      },
+      cost: new Decimal(100000000),
       unlocked() {
         return hasUpgrade("cheese", "ab10");
       },
@@ -282,6 +327,95 @@ addLayer("cheese", {
       currencyDisplayName: "blessing",
       currencyLayer: "cheese",
       branches: [["ab10", "#006080"]],
+      style() {
+        return {
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
+          color: "black",
+          "border-color": "rgba(0,0,0,0.125)",
+        };
+      },
+    },
+    ab01: {
+      fullDisplay: `<h3>???</h3>
+                    <br><span>Unlocks the</span> <h2>BAR</h2> and you no longer lose your 🧀 sacrifices on Ascend reset<br><br>Cost: ??? sickness`,
+      tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
+      cost: new Decimal(0),
+      canAfford: false,
+      unlocked() {
+        return hasUpgrade("cheese", "ab20");
+      },
+      currencyInternalName: "blessings",
+      currencyDisplayName: "blessing",
+      currencyLayer: "cheese",
+      branches: [["ab10", "#006080"]],
+      style() {
+        return {
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
+          color: "black",
+          "border-color": "rgba(0,0,0,0.125)",
+        };
+      },
+    },
+    ab30: {
+      fullDisplay() {return `
+        <h3>A fucking disease</h3>
+        <br><span>Special point's effect affects both COVID and Tuberculosis gains<br><br>Cost: ${format(this.cost())} special points
+        `
+      },
+      tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
+      cost() {
+        return new Decimal(hasUpgrade("cheese", "ab31")?"2.1e21":"2e20")
+      },
+      unlocked() {
+        return hasUpgrade("cheese", "ab20");
+      },
+      onPurchase() {
+          player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(hasUpgrade("cheese", "ab31")?"2.1e21":"2e20")
+      },
+      currencyInternalName: "laeceaPoints",
+      currencyDisplayName: "special points",
+      currencyLayer: "cheese",
+      branches: [["ab20", "#006080"]],
+      style() {
+        return {
+          "background-color": hasUpgrade("cheese", this.id)
+            ? "#006080"
+            : canAffordUpgrade("cheese", this.id)
+            ? "cyan"
+            : "",
+          color: "black",
+          "border-color": "rgba(0,0,0,0.125)",
+        };
+      },
+    },
+    ab31: {
+      fullDisplay() {return `
+        <h3>The Illegal Move</h3>
+        <br><span>4x sickness gain<br><br>Cost: ${format(this.cost())} special points
+        `
+      },
+      tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
+      cost() {
+        return new Decimal(hasUpgrade("cheese", "ab30")?"2.1e21":"2e20")
+      },
+      unlocked() {
+        return hasUpgrade("cheese", "ab20");
+      },
+      onPurchase() {
+          player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(hasUpgrade("cheese", "ab30")?"2.1e21":"2e20")
+      },
+      currencyInternalName: "laeceaPoints",
+      currencyDisplayName: "special points",
+      currencyLayer: "cheese",
+      branches: [["ab20", "#006080"]],
       style() {
         return {
           "background-color": hasUpgrade("cheese", this.id)
@@ -311,7 +445,7 @@ addLayer("cheese", {
         Math.ceil(Math.random() * 60) == 21
           ? 7
           : (player.cheese.activity.gte(30) &&
-              player.cheese.currentState == 1) ||
+              player.cheese.currentState == 1 && player.cheese.bruh2.gte(10)) ||
             (player.cheese.currentState == 2 && player.cheese.bruh2.gte(10))
           ? 8
           : player.cheese.bruh.gte(6)
@@ -361,6 +495,10 @@ addLayer("cheese", {
               ? 1.1
               : 1,
           )
+          .mul(hasUpgrade("cheese", "d1") ?
+            new Decimal(player.cheese.achievements.length).mul(Decimal.add(1, (player.cheese.achievements.length - 1) / 2)).mul(0.05).add(1) :
+            1
+          )
           .mul(hasUpgrade("cheese", "a0") ? 4 : 1)
           .mul(hasUpgrade("cheese", "b2") ? 4 : 1)
           .mul(
@@ -382,7 +520,7 @@ addLayer("cheese", {
           .add(1)
           .log(10)
           .div(20)
-          .pow(1.69)
+          .pow(new Decimal(1.69).add(hasUpgrade("cheese","ab20")?player.cheese.upgrades.length/100:0))
           .mul(
             Decimal.pow(
               4,
@@ -403,7 +541,7 @@ addLayer("cheese", {
             Decimal.mul(
               0.05,
               hasAchievement("cheese", 23)
-                ? hasUpgrade("cheese", "ab10")
+                ? hasUpgrade("cheese", "ab10") 
                   ? new Decimal(player.cheese.achievements.length).mul(
                       Decimal.add(
                         1,
@@ -414,6 +552,7 @@ addLayer("cheese", {
                 : 0,
             ).add(1),
           )
+          .mul(hasUpgrade("cheese", "ab20")?4:1)
           .pow(tmp.cheese.buyables["ab13"].effect);
   },
   laeceaEffect() {
@@ -533,7 +672,7 @@ addLayer("cheese", {
       },
     },
     11: {
-      title: "<h3>Cheese Generator",
+      title: "<h3>Cheese<br>Generator",
       cost() {
         return player.cheese.buyables[11]
           .mul(player.cheese.buyables[11].add(1))
@@ -553,7 +692,7 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return player.cheese.buyables[11].mul(
+        return player.cheese.buyables[11].mul(tmp.cheese.buyables[16].effect).mul(
           hasUpgrade("cheese", "c2") ? tmp.cheese.buyables[22].effect : 1,
         );
       },
@@ -567,21 +706,39 @@ addLayer("cheese", {
           this.effect(),
         )} 🧀/sec<br>Amount: ${formatWhole(
           player.cheese.buyables[this.id],
-        )}<br>Cost: ${format(this.cost())} 🧀`;
+        )}`+(
+        player.cheese.buyables[16].gte(1) ?
+          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
+          ``
+        )+`<br>Cost: ${format(this.cost())} 🧀`;
       },
       style() {
-        return {
-          height: "112px",
-          width: "192px",
-          border: "5px solid",
-          "border-radius": "112px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+          return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: "175px",
+            border: "5px solid",
+            "border-radius": "0px",
+            "border-top-left-radius": "50px",
+            "border-right-width": "2.5px",
+            "border-bottom-width": "2.5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
+            height: "125px",
+            width: "200px",
+            border: "5px solid",
+            "border-radius": "125px",
+            "border-right-width": "5px",
+            "border-bottom-width": "5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          }
       },
     },
     12: {
-      title: "<h3>Cheddar Generalizer",
+      title: "<h3>Cheddar<br>Generalizer",
       cost() {
         return new Decimal(400)
           .mul(Decimal.pow(1.15, player.cheese.buyables[12].pow(1.3)))
@@ -602,7 +759,7 @@ addLayer("cheese", {
       effect() {
         return Decimal.pow(
           new Decimal(1.15).add(tmp.cheese.buyables[15].effect),
-          player.cheese.buyables[12],
+          player.cheese.buyables[12].mul(tmp.cheese.buyables[16].effect),
         ).mul(hasUpgrade("cheese", "c2") ? tmp.cheese.buyables[22].effect : 1);
       },
       buy() {
@@ -615,21 +772,40 @@ addLayer("cheese", {
           this.effect(),
         )}<br>Amount: ${formatWhole(
           player.cheese.buyables[this.id],
-        )}<br>Cost: ${format(this.cost())} 🧀`;
+        )}`+(
+        player.cheese.buyables[16].gte(1) ?
+          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
+          ``
+        )+`<br>Cost: ${format(this.cost())} 🧀`;
       },
       style() {
-        return {
-          height: "112px",
-          width: "192px",
-          border: "5px solid",
-          "border-radius": "112px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+          return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: "175px",
+            border: "5px solid",
+            "border-radius": "0px",
+            "border-right-width": "2.5px",
+            "border-bottom-width": "2.5px",
+            "border-left-width": "2.5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
+            height: "125px",
+            width: "200px",
+            border: "5px solid",
+            "border-radius": "125px",
+            "border-right-width": "5px",
+            "border-bottom-width": "5px",
+            "border-left-width": "5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          }
       },
     },
     13: {
-      title: "<h3>Chevre Graduator",
+      title: "<h3>Chevre<br>Graduator",
       cost() {
         return new Decimal(8000)
           .mul(Decimal.pow(4, player.cheese.buyables[13].pow(1.45)))
@@ -652,7 +828,7 @@ addLayer("cheese", {
           new Decimal(2).root(
             new Decimal(10).root(player.cheese.points.max(1).root(10)),
           ),
-          player.cheese.buyables[13],
+          player.cheese.buyables[13].mul(tmp.cheese.buyables[16].effect),
         ).mul(hasUpgrade("cheese", "c2") ? tmp.cheese.buyables[22].effect : 1);
       },
       buy() {
@@ -665,21 +841,39 @@ addLayer("cheese", {
           this.effect(),
         )} based on 🧀<br>Amount: ${formatWhole(
           player.cheese.buyables[this.id],
-        )}<br>Cost: ${format(this.cost())} 🧀`;
+        )}`+(
+        player.cheese.buyables[16].gte(1) ?
+          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
+          ``
+        )+`<br>Cost: ${format(this.cost())} 🧀`;
       },
       style() {
-        return {
-          height: "112px",
-          width: "192px",
-          border: "5px solid",
-          "border-radius": "112px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+          return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: "175px",
+            border: "5px solid",
+            "border-radius": "0px",
+            "border-top-right-radius": "50px",
+            "border-bottom-width": "2.5px",
+            "border-left-width": "2.5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
+            height: "125px",
+            width: "200px",
+            border: "5px solid",
+            "border-radius": "125px",
+            "border-bottom-width": "5px",
+            "border-left-width": "5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          }
       },
     },
     14: {
-      title: "<h3>Classy Gargantuan-or",
+      title: "<h3>Classy<br>Gargantuan-or",
       cost() {
         return new Decimal("1.6e12")
           .mul(Decimal.pow(1612, player.cheese.buyables[14].pow(1.6)))
@@ -698,7 +892,7 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return Decimal.pow(4, player.cheese.buyables[14]);
+        return Decimal.pow(4, player.cheese.buyables[14].mul(tmp.cheese.buyables[16].effect));
       },
       buy() {
         player.cheese.points = player.cheese.points.sub(this.cost());
@@ -710,24 +904,43 @@ addLayer("cheese", {
           this.effect(),
         )}<br>Amount: ${formatWhole(
           player.cheese.buyables[this.id],
-        )}<br>Cost: ${format(this.cost())} 🧀`;
+        )}`+(
+        player.cheese.buyables[16].gte(1) ?
+          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
+          ``
+        )+`<br>Cost: ${format(this.cost())} 🧀`;
       },
       style() {
-        return {
-          height: "112px",
-          width: "192px",
-          border: "5px solid",
-          "border-radius": "112px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+          return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
+            border: "5px solid",
+            "border-radius": "0px",
+            "border-right-width": "2.5px",
+            "border-bottom-width": "2.5px",
+            "border-top-width": "2.5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
+            height: "125px",
+            width: "200px",
+            border: "5px solid",
+            "border-radius": "125px",
+            "border-right-width": "5px",
+            "border-bottom-width": "5px",
+            "border-top-width": "5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          }
       },
       unlocked() {
         return hasUpgrade("cheese", "c1");
       },
     },
     15: {
-      title: "<h3>ciao gator",
+      title: "<h3>ciao<br>gator",
       cost() {
         return new Decimal("3.2e15")
           .mul(Decimal.pow(3215, player.cheese.buyables[15].pow(1.75)))
@@ -746,7 +959,7 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return player.cheese.buyables[15].pow(1.15).mul(0.015);
+        return player.cheese.buyables[15].mul(tmp.cheese.buyables[16].effect).pow(1.15).mul(0.015);
       },
       buy() {
         player.cheese.points = player.cheese.points.sub(this.cost());
@@ -758,20 +971,104 @@ addLayer("cheese", {
           this.effect(),
         )}<br>Amount: ${formatWhole(
           player.cheese.buyables[this.id],
-        )}<br>Cost: ${format(this.cost())} 🧀`;
+        )}`+(
+        player.cheese.buyables[16].gte(1) ?
+          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
+          ``
+        )+`<br>Cost: ${format(this.cost())} 🧀`;
       },
       style() {
-        return {
-          height: "112px",
-          width: "192px",
-          border: "5px solid",
-          "border-radius": "112px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,154,12)" : "",
-        };
+          return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
+            border: "5px solid",
+            "border-right-width": "2.5px",
+            "border-bottom-width": "2.5px",
+            "border-top-width": "2.5px",
+            "border-left-width": "2.5px",
+            "border-radius": "0px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
+            height: "125px",
+            width: "200px",
+            border: "5px solid",
+            "border-radius": "125px",
+            "border-right-width": "5px",
+            "border-bottom-width": "5px",
+            "border-top-width": "5px",
+            "border-left-width": "5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          }
       },
       unlocked() {
         return hasUpgrade("cheese", "c1");
+      },
+    },
+    16: {
+      title: "<h3>Chaotic<br>Goat",
+      cost() {
+        return new Decimal("1e20")
+          .mul(Decimal.pow(player.cheese.buyables[16].add(1), player.cheese.buyables[16].pow(1.9)))
+          .pow(
+            player.cheese.buyables[16].gte(100)
+              ? player.cheese.buyables[16].sub(100).mul(0.09).add(1)
+              : 1,
+          )
+          .pow(
+            player.cheese.buyables[16].gte(255)
+              ? player.cheese.buyables[16].sub(255).mul(0.9).add(1)
+              : 1,
+          );
+      },
+      canAfford() {
+        return player.cheese.points.gte(this.cost());
+      },
+      effect() {
+        return player.cheese.buyables[16].mul(0.01).add(1)
+      },
+      buy() {
+        player.cheese.points = player.cheese.points.sub(this.cost());
+        player.cheese.buyables[16] = player.cheese.buyables[16].add(1);
+        player.cheese.activity = player.cheese.activity.add(1);
+      },
+      display() {
+        return `<h3>Gives ${format(
+          this.effect().sub(1).mul(100),
+        )}% of previous buyables amount free amounts<br>Amount: ${formatWhole(
+          player.cheese.buyables[this.id],
+        )}<br>Cost: ${format(this.cost())} 🧀`;
+      },
+      style() {
+          return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: "175px",
+            border: "5px solid",
+            "border-radius": "0px",
+            "border-left-width": "2.5px",
+            "border-bottom-width": "2.5px",
+            "border-top-width": "2.5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
+            height: "125px",
+            width: "200px",
+            border: "5px solid",
+            "border-radius": "125px",
+            "border-left-width": "5px",
+            "border-bottom-width": "5px",
+            "border-top-width": "5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          }
+      },
+      unlocked() {
+        return hasUpgrade("cheese", "d0");
       },
     },
     21: {
@@ -816,11 +1113,24 @@ addLayer("cheese", {
         )} 🧀`;
       },
       style() {
-        return {
+        return options.cheeseBuyables ?
+          {
+            height: "100px",
+            width: "525px",
+            border: "5px solid",
+            "border-radius": "0px",
+            "border-bottom-left-radius": "50px",
+            "border-bottom-right-radius": "50px",
+            "border-top-width": "2.5px",
+            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+            color: this.canAfford() ? "rgb(244,144,12)" : "",
+          } :
+          {
           height: "150px",
           width: "300px",
           border: "5px solid",
           "border-radius": "150px",
+          "border-top-width": "5px",
           "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
           color: this.canAfford() ? "rgb(244,144,12)" : "",
         };
@@ -1087,6 +1397,27 @@ addLayer("cheese", {
       },
       tooltip: `enough said`,
     },
+    25: {
+      name: "NO SOFTCAPS?",
+      done() {
+        return tmp.cheese.laeceaEffect.gte(4);
+      },
+      tooltip: `Reach 4x special point effect`,
+    },
+    26: {
+      name: "THE COST SCALING IS RISING!<br><br>IT'S OVERFLOWING!",
+      done() {
+        return player.cheese.buyables[12].gte(100);
+      },
+      tooltip: "Reach 100 Cheddar Generalizers",
+    },
+    31: {
+      name: "Ah yes. My favorite syntax.",
+      done() {
+        return player.cheese.points.gte("1e30");
+      },
+      tooltip: "Reach 1 No 🧀",
+    },
   },
   microtabs: {
     AB: {
@@ -1140,7 +1471,7 @@ addLayer("cheese", {
               (tmp.cheese.laeceaGain.gt(Decimal.dZero)
                 ? `<h4>(${format(
                     tmp.cheese.laeceaGain,
-                  )} SP/sec [(log(🧀 + 1) / 20) ^ 1.69])`
+                  )} SP/sec [(log(🧀 + 1) / 20) ^ ${format(new Decimal(1.69).add(hasUpgrade("cheese","ab20")?player.cheese.upgrades.length/100:0))}])`
                 : ``),
           ],
           "blank",
@@ -1226,15 +1557,21 @@ addLayer("cheese", {
           "row",
           [
             ["buyable", [11]],
-            "blank",
+            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "8px"]}],
             ["buyable", [12]],
-            "blank",
+            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "8px"]}],
             ["buyable", [13]],
           ],
         ],
-        "blank",
-        ["row", [["buyable", [14]], "blank", ["buyable", [15]]]],
-        "blank",
+        ["blank",function () {return ["16px", options.cheeseBuyables ? "0px" : "16px"]}],
+        ["row", [
+            ["buyable", [14]],
+            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "16px"]}],
+            ["buyable", [15]],
+            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "16px"]}],
+            ["buyable", [16]]
+        ]],
+        ["blank",function () {return ["16px", options.cheeseBuyables ? "0px" : "16px"]}],
         ["buyable", [21]],
       ],
       buttonStyle: {
@@ -1282,7 +1619,14 @@ addLayer("cheese", {
             [
               "blank",
               function () {
-                return [hasUpgrade("cheese", "b2") ? "152px" : "0px", "0px"];
+                return [hasUpgrade("cheese", "ab20") ? "16px" : "0px", "0px"];
+              },
+            ],
+            ["upgrade", "ab01"],
+            [
+              "blank",
+              function () {
+                return [hasUpgrade("cheese", "ab20") ? "16px" : hasUpgrade("cheese", "b2") ? "156px" : "0px", "0px"];
               },
             ],
             ["upgrade", "ab00"],
@@ -1354,6 +1698,20 @@ addLayer("cheese", {
             ],
             ["upgrade", "ab20"],
           ],
+        ],
+        "blank",
+        "blank",
+        [
+          "row",
+          [
+            ["upgrade", "d0"],
+            ["blank", ["16px", "0px"]],
+            ["upgrade", "d1"],
+            ["blank", ["16px", "0px"]],
+            ["upgrade", "ab30"],
+            ["blank", ["16px", "0px"]],
+            ["upgrade", "ab31"],
+          ]
         ],
       ],
       buttonStyle: {
