@@ -7,6 +7,7 @@ addLayer("e", {
       points: Decimal.dZero,
       tre: Decimal.dZero,
       bpm: Decimal.dZero,
+      fail: Decimal.dZero
     };
   },
   color: "#E0E1CC",
