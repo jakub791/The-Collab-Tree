@@ -58,21 +58,7 @@ addLayer("Hr", {
                         return `<small>${Math.round((player.Hr.interval*20 - player.Hr.gtick) / 20)} seconds until growth.</small>`
                     }
                 ],
-                [
-                    "display-text",
-                    () => {
-                        return `Next feature is unlocked at ${
-                            player.Hr.male.add(player.Hr.female).add(player.Hr.baby).gte(1e12) ? format(new Decimal("1e100")) :
-                            format(new Decimal("1e12"))
-                        } total rabbits.`
-                    }
-                ]
             ]
-        },
-        "Seal Merchant": {
-            unlocked() {
-                return player.Hr.male.add(player.Hr.female).add(player.Hr.baby).gte("1e12")
-            }
         }
     },
     automate() {
@@ -93,7 +79,8 @@ addLayer("Hr", {
             player.Hr.gtick = 0
         }
     }
-})
+  },
+});
 
 /* in development :P
 addLayer("Hm", {
