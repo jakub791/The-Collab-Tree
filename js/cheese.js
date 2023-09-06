@@ -215,17 +215,20 @@ addLayer("cheese", {
       branches: [["b1", "rgb(255,217,131)"]],
     },
     d0: {
-      fullDisplay() {return `
+      fullDisplay() {
+        return `
         <h3>The Final Push</h3>
-        <br><span>Unlocks 6th 🧀 and final buyable<br><br>Cost: ${format(this.cost())} blessings
-        `
+        <br><span>Unlocks 6th 🧀 and final buyable<br><br>Cost: ${format(
+          this.cost(),
+        )} blessings
+        `;
       },
       tooltip: "An approriate name for such silly upgrade.",
       effect() {
         return player.cheese.blessings.add(1).log(777).add(1);
       },
       cost() {
-        return new Decimal(hasUpgrade("cheese","d1")?"1e10":"1e9");
+        return new Decimal(hasUpgrade("cheese", "d1") ? "1e10" : "1e9");
       },
       currencyInternalName: "blessings",
       currencyDisplayName: "blessing",
@@ -239,17 +242,20 @@ addLayer("cheese", {
       branches: [["c1", "rgb(255,217,131)"]],
     },
     d1: {
-      fullDisplay() {return `
+      fullDisplay() {
+        return `
         <h3>long-Term Consequences</h3>
-        <br><span>Boosts 🧀 gain by +5 per 🐀<br><br>Cost: ${format(this.cost())} blessings
-        `
+        <br><span>Boosts 🧀 gain by +5 per 🐀<br><br>Cost: ${format(
+          this.cost(),
+        )} blessings
+        `;
       },
       tooltip: "An approriate name for such silly upgrade.",
       effect() {
         return player.cheese.blessings.add(1).log(777).add(1);
       },
       cost() {
-        return new Decimal(hasUpgrade("cheese","d0")?"1e10":"1e9");
+        return new Decimal(hasUpgrade("cheese", "d0") ? "1e10" : "1e9");
       },
       currencyInternalName: "blessings",
       currencyDisplayName: "blessing",
@@ -365,20 +371,25 @@ addLayer("cheese", {
       },
     },
     ab30: {
-      fullDisplay() {return `
+      fullDisplay() {
+        return `
         <h3>A fucking disease</h3>
-        <br><span>Special point's effect affects both COVID and Tuberculosis gains<br><br>Cost: ${format(this.cost())} special points
-        `
+        <br><span>Special point's effect affects both COVID and Tuberculosis gains<br><br>Cost: ${format(
+          this.cost(),
+        )} special points
+        `;
       },
       tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
       cost() {
-        return new Decimal(hasUpgrade("cheese", "ab31")?"2.1e21":"2e20")
+        return new Decimal(hasUpgrade("cheese", "ab31") ? "2.1e21" : "2e20");
       },
       unlocked() {
         return hasUpgrade("cheese", "ab20");
       },
       onPurchase() {
-          player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(hasUpgrade("cheese", "ab31")?"2.1e21":"2e20")
+        player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(
+          hasUpgrade("cheese", "ab31") ? "2.1e21" : "2e20",
+        );
       },
       currencyInternalName: "laeceaPoints",
       currencyDisplayName: "special points",
@@ -397,20 +408,25 @@ addLayer("cheese", {
       },
     },
     ab31: {
-      fullDisplay() {return `
+      fullDisplay() {
+        return `
         <h3>The Illegal Move</h3>
-        <br><span>4x sickness gain<br><br>Cost: ${format(this.cost())} special points
-        `
+        <br><span>4x sickness gain<br><br>Cost: ${format(
+          this.cost(),
+        )} special points
+        `;
       },
       tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
       cost() {
-        return new Decimal(hasUpgrade("cheese", "ab30")?"2.1e21":"2e20")
+        return new Decimal(hasUpgrade("cheese", "ab30") ? "2.1e21" : "2e20");
       },
       unlocked() {
         return hasUpgrade("cheese", "ab20");
       },
       onPurchase() {
-          player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(hasUpgrade("cheese", "ab30")?"2.1e21":"2e20")
+        player.cheese.laeceaPoints = player.cheese.laeceaPoints.add(
+          hasUpgrade("cheese", "ab30") ? "2.1e21" : "2e20",
+        );
       },
       currencyInternalName: "laeceaPoints",
       currencyDisplayName: "special points",
@@ -445,7 +461,8 @@ addLayer("cheese", {
         Math.ceil(Math.random() * 60) == 21
           ? 7
           : (player.cheese.activity.gte(30) &&
-              player.cheese.currentState == 1 && player.cheese.bruh2.gte(10)) ||
+              player.cheese.currentState == 1 &&
+              player.cheese.bruh2.gte(10)) ||
             (player.cheese.currentState == 2 && player.cheese.bruh2.gte(10))
           ? 8
           : player.cheese.bruh.gte(6)
@@ -495,9 +512,15 @@ addLayer("cheese", {
               ? 1.1
               : 1,
           )
-          .mul(hasUpgrade("cheese", "d1") ?
-            new Decimal(player.cheese.achievements.length).mul(Decimal.add(1, (player.cheese.achievements.length - 1) / 2)).mul(0.05).add(1) :
-            1
+          .mul(
+            hasUpgrade("cheese", "d1")
+              ? new Decimal(player.cheese.achievements.length)
+                  .mul(
+                    Decimal.add(1, (player.cheese.achievements.length - 1) / 2),
+                  )
+                  .mul(0.05)
+                  .add(1)
+              : 1,
           )
           .mul(hasUpgrade("cheese", "a0") ? 4 : 1)
           .mul(hasUpgrade("cheese", "b2") ? 4 : 1)
@@ -520,7 +543,13 @@ addLayer("cheese", {
           .add(1)
           .log(10)
           .div(20)
-          .pow(new Decimal(1.69).add(hasUpgrade("cheese","ab20")?player.cheese.upgrades.length/100:0))
+          .pow(
+            new Decimal(1.69).add(
+              hasUpgrade("cheese", "ab20")
+                ? player.cheese.upgrades.length / 100
+                : 0,
+            ),
+          )
           .mul(
             Decimal.pow(
               4,
@@ -541,7 +570,7 @@ addLayer("cheese", {
             Decimal.mul(
               0.05,
               hasAchievement("cheese", 23)
-                ? hasUpgrade("cheese", "ab10") 
+                ? hasUpgrade("cheese", "ab10")
                   ? new Decimal(player.cheese.achievements.length).mul(
                       Decimal.add(
                         1,
@@ -552,7 +581,7 @@ addLayer("cheese", {
                 : 0,
             ).add(1),
           )
-          .mul(hasUpgrade("cheese", "ab20")?4:1)
+          .mul(hasUpgrade("cheese", "ab20") ? 4 : 1)
           .pow(tmp.cheese.buyables["ab13"].effect);
   },
   laeceaEffect() {
@@ -692,9 +721,9 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return player.cheese.buyables[11].mul(tmp.cheese.buyables[16].effect).mul(
-          hasUpgrade("cheese", "c2") ? tmp.cheese.buyables[22].effect : 1,
-        );
+        return player.cheese.buyables[11]
+          .mul(tmp.cheese.buyables[16].effect)
+          .mul(hasUpgrade("cheese", "c2") ? tmp.cheese.buyables[22].effect : 1);
       },
       buy() {
         player.cheese.points = player.cheese.points.sub(this.cost());
@@ -702,39 +731,45 @@ addLayer("cheese", {
         player.cheese.activity = player.cheese.activity.add(1);
       },
       display() {
-        return `<h3>You currently gain ${format(
-          this.effect(),
-        )} 🧀/sec<br>Amount: ${formatWhole(
-          player.cheese.buyables[this.id],
-        )}`+(
-        player.cheese.buyables[16].gte(1) ?
-          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
-          ``
-        )+`<br>Cost: ${format(this.cost())} 🧀`;
+        return (
+          `<h3>You currently gain ${format(
+            this.effect(),
+          )} 🧀/sec<br>Amount: ${formatWhole(
+            player.cheese.buyables[this.id],
+          )}` +
+          (player.cheese.buyables[16].gte(1)
+            ? ` (+${format(
+                player.cheese.buyables[this.id]
+                  .mul(0.01)
+                  .mul(player.cheese.buyables[16]),
+              )})`
+            : ``) +
+          `<br>Cost: ${format(this.cost())} 🧀`
+        );
       },
       style() {
-          return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: "175px",
-            border: "5px solid",
-            "border-radius": "0px",
-            "border-top-left-radius": "50px",
-            "border-right-width": "2.5px",
-            "border-bottom-width": "2.5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-            height: "125px",
-            width: "200px",
-            border: "5px solid",
-            "border-radius": "125px",
-            "border-right-width": "5px",
-            "border-bottom-width": "5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          }
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: "175px",
+              border: "5px solid",
+              "border-radius": "0px",
+              "border-top-left-radius": "50px",
+              "border-right-width": "2.5px",
+              "border-bottom-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "125px",
+              width: "200px",
+              border: "5px solid",
+              "border-radius": "125px",
+              "border-right-width": "5px",
+              "border-bottom-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
     },
     12: {
@@ -768,40 +803,44 @@ addLayer("cheese", {
         player.cheese.activity = player.cheese.activity.add(1);
       },
       display() {
-        return `<h3>Multiplies 🧀 gain by x${format(
-          this.effect(),
-        )}<br>Amount: ${formatWhole(
-          player.cheese.buyables[this.id],
-        )}`+(
-        player.cheese.buyables[16].gte(1) ?
-          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
-          ``
-        )+`<br>Cost: ${format(this.cost())} 🧀`;
+        return (
+          `<h3>Multiplies 🧀 gain by x${format(
+            this.effect(),
+          )}<br>Amount: ${formatWhole(player.cheese.buyables[this.id])}` +
+          (player.cheese.buyables[16].gte(1)
+            ? ` (+${format(
+                player.cheese.buyables[this.id]
+                  .mul(0.01)
+                  .mul(player.cheese.buyables[16]),
+              )})`
+            : ``) +
+          `<br>Cost: ${format(this.cost())} 🧀`
+        );
       },
       style() {
-          return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: "175px",
-            border: "5px solid",
-            "border-radius": "0px",
-            "border-right-width": "2.5px",
-            "border-bottom-width": "2.5px",
-            "border-left-width": "2.5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-            height: "125px",
-            width: "200px",
-            border: "5px solid",
-            "border-radius": "125px",
-            "border-right-width": "5px",
-            "border-bottom-width": "5px",
-            "border-left-width": "5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          }
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: "175px",
+              border: "5px solid",
+              "border-radius": "0px",
+              "border-right-width": "2.5px",
+              "border-bottom-width": "2.5px",
+              "border-left-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "125px",
+              width: "200px",
+              border: "5px solid",
+              "border-radius": "125px",
+              "border-right-width": "5px",
+              "border-bottom-width": "5px",
+              "border-left-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
     },
     13: {
@@ -837,39 +876,45 @@ addLayer("cheese", {
         player.cheese.activity = player.cheese.activity.add(1);
       },
       display() {
-        return `<h3>Multiplies 🧀 gain by x${format(
-          this.effect(),
-        )} based on 🧀<br>Amount: ${formatWhole(
-          player.cheese.buyables[this.id],
-        )}`+(
-        player.cheese.buyables[16].gte(1) ?
-          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
-          ``
-        )+`<br>Cost: ${format(this.cost())} 🧀`;
+        return (
+          `<h3>Multiplies 🧀 gain by x${format(
+            this.effect(),
+          )} based on 🧀<br>Amount: ${formatWhole(
+            player.cheese.buyables[this.id],
+          )}` +
+          (player.cheese.buyables[16].gte(1)
+            ? ` (+${format(
+                player.cheese.buyables[this.id]
+                  .mul(0.01)
+                  .mul(player.cheese.buyables[16]),
+              )})`
+            : ``) +
+          `<br>Cost: ${format(this.cost())} 🧀`
+        );
       },
       style() {
-          return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: "175px",
-            border: "5px solid",
-            "border-radius": "0px",
-            "border-top-right-radius": "50px",
-            "border-bottom-width": "2.5px",
-            "border-left-width": "2.5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-            height: "125px",
-            width: "200px",
-            border: "5px solid",
-            "border-radius": "125px",
-            "border-bottom-width": "5px",
-            "border-left-width": "5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          }
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: "175px",
+              border: "5px solid",
+              "border-radius": "0px",
+              "border-top-right-radius": "50px",
+              "border-bottom-width": "2.5px",
+              "border-left-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "125px",
+              width: "200px",
+              border: "5px solid",
+              "border-radius": "125px",
+              "border-bottom-width": "5px",
+              "border-left-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
     },
     14: {
@@ -892,7 +937,10 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return Decimal.pow(4, player.cheese.buyables[14].mul(tmp.cheese.buyables[16].effect));
+        return Decimal.pow(
+          4,
+          player.cheese.buyables[14].mul(tmp.cheese.buyables[16].effect),
+        );
       },
       buy() {
         player.cheese.points = player.cheese.points.sub(this.cost());
@@ -900,40 +948,44 @@ addLayer("cheese", {
         player.cheese.activity = player.cheese.activity.add(1);
       },
       display() {
-        return `<h3>Multiplies 🧀 gain by x${format(
-          this.effect(),
-        )}<br>Amount: ${formatWhole(
-          player.cheese.buyables[this.id],
-        )}`+(
-        player.cheese.buyables[16].gte(1) ?
-          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
-          ``
-        )+`<br>Cost: ${format(this.cost())} 🧀`;
+        return (
+          `<h3>Multiplies 🧀 gain by x${format(
+            this.effect(),
+          )}<br>Amount: ${formatWhole(player.cheese.buyables[this.id])}` +
+          (player.cheese.buyables[16].gte(1)
+            ? ` (+${format(
+                player.cheese.buyables[this.id]
+                  .mul(0.01)
+                  .mul(player.cheese.buyables[16]),
+              )})`
+            : ``) +
+          `<br>Cost: ${format(this.cost())} 🧀`
+        );
       },
       style() {
-          return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
-            border: "5px solid",
-            "border-radius": "0px",
-            "border-right-width": "2.5px",
-            "border-bottom-width": "2.5px",
-            "border-top-width": "2.5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-            height: "125px",
-            width: "200px",
-            border: "5px solid",
-            "border-radius": "125px",
-            "border-right-width": "5px",
-            "border-bottom-width": "5px",
-            "border-top-width": "5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          }
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
+              border: "5px solid",
+              "border-radius": "0px",
+              "border-right-width": "2.5px",
+              "border-bottom-width": "2.5px",
+              "border-top-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "125px",
+              width: "200px",
+              border: "5px solid",
+              "border-radius": "125px",
+              "border-right-width": "5px",
+              "border-bottom-width": "5px",
+              "border-top-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
       unlocked() {
         return hasUpgrade("cheese", "c1");
@@ -959,7 +1011,10 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return player.cheese.buyables[15].mul(tmp.cheese.buyables[16].effect).pow(1.15).mul(0.015);
+        return player.cheese.buyables[15]
+          .mul(tmp.cheese.buyables[16].effect)
+          .pow(1.15)
+          .mul(0.015);
       },
       buy() {
         player.cheese.points = player.cheese.points.sub(this.cost());
@@ -967,42 +1022,46 @@ addLayer("cheese", {
         player.cheese.activity = player.cheese.activity.add(1);
       },
       display() {
-        return `<h3>Increases Cheddar Generalizer's base by +${format(
-          this.effect(),
-        )}<br>Amount: ${formatWhole(
-          player.cheese.buyables[this.id],
-        )}`+(
-        player.cheese.buyables[16].gte(1) ?
-          ` (+${format(player.cheese.buyables[this.id].mul(0.01).mul(player.cheese.buyables[16]))})` :
-          ``
-        )+`<br>Cost: ${format(this.cost())} 🧀`;
+        return (
+          `<h3>Increases Cheddar Generalizer's base by +${format(
+            this.effect(),
+          )}<br>Amount: ${formatWhole(player.cheese.buyables[this.id])}` +
+          (player.cheese.buyables[16].gte(1)
+            ? ` (+${format(
+                player.cheese.buyables[this.id]
+                  .mul(0.01)
+                  .mul(player.cheese.buyables[16]),
+              )})`
+            : ``) +
+          `<br>Cost: ${format(this.cost())} 🧀`
+        );
       },
       style() {
-          return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
-            border: "5px solid",
-            "border-right-width": "2.5px",
-            "border-bottom-width": "2.5px",
-            "border-top-width": "2.5px",
-            "border-left-width": "2.5px",
-            "border-radius": "0px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-            height: "125px",
-            width: "200px",
-            border: "5px solid",
-            "border-radius": "125px",
-            "border-right-width": "5px",
-            "border-bottom-width": "5px",
-            "border-top-width": "5px",
-            "border-left-width": "5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          }
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
+              border: "5px solid",
+              "border-right-width": "2.5px",
+              "border-bottom-width": "2.5px",
+              "border-top-width": "2.5px",
+              "border-left-width": "2.5px",
+              "border-radius": "0px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "125px",
+              width: "200px",
+              border: "5px solid",
+              "border-radius": "125px",
+              "border-right-width": "5px",
+              "border-bottom-width": "5px",
+              "border-top-width": "5px",
+              "border-left-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
       unlocked() {
         return hasUpgrade("cheese", "c1");
@@ -1012,7 +1071,12 @@ addLayer("cheese", {
       title: "<h3>Chaotic<br>Goat",
       cost() {
         return new Decimal("1e20")
-          .mul(Decimal.pow(player.cheese.buyables[16].add(1), player.cheese.buyables[16].pow(1.9)))
+          .mul(
+            Decimal.pow(
+              player.cheese.buyables[16].add(1),
+              player.cheese.buyables[16].pow(1.9),
+            ),
+          )
           .pow(
             player.cheese.buyables[16].gte(100)
               ? player.cheese.buyables[16].sub(100).mul(0.09).add(1)
@@ -1028,7 +1092,7 @@ addLayer("cheese", {
         return player.cheese.points.gte(this.cost());
       },
       effect() {
-        return player.cheese.buyables[16].mul(0.01).add(1)
+        return player.cheese.buyables[16].mul(0.01).add(1);
       },
       buy() {
         player.cheese.points = player.cheese.points.sub(this.cost());
@@ -1043,29 +1107,29 @@ addLayer("cheese", {
         )}<br>Cost: ${format(this.cost())} 🧀`;
       },
       style() {
-          return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: "175px",
-            border: "5px solid",
-            "border-radius": "0px",
-            "border-left-width": "2.5px",
-            "border-bottom-width": "2.5px",
-            "border-top-width": "2.5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-            height: "125px",
-            width: "200px",
-            border: "5px solid",
-            "border-radius": "125px",
-            "border-left-width": "5px",
-            "border-bottom-width": "5px",
-            "border-top-width": "5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          }
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: "175px",
+              border: "5px solid",
+              "border-radius": "0px",
+              "border-left-width": "2.5px",
+              "border-bottom-width": "2.5px",
+              "border-top-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "125px",
+              width: "200px",
+              border: "5px solid",
+              "border-radius": "125px",
+              "border-left-width": "5px",
+              "border-bottom-width": "5px",
+              "border-top-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
       unlocked() {
         return hasUpgrade("cheese", "d0");
@@ -1113,27 +1177,27 @@ addLayer("cheese", {
         )} 🧀`;
       },
       style() {
-        return options.cheeseBuyables ?
-          {
-            height: "100px",
-            width: "525px",
-            border: "5px solid",
-            "border-radius": "0px",
-            "border-bottom-left-radius": "50px",
-            "border-bottom-right-radius": "50px",
-            "border-top-width": "2.5px",
-            "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-            color: this.canAfford() ? "rgb(244,144,12)" : "",
-          } :
-          {
-          height: "150px",
-          width: "300px",
-          border: "5px solid",
-          "border-radius": "150px",
-          "border-top-width": "5px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: "525px",
+              border: "5px solid",
+              "border-radius": "0px",
+              "border-bottom-left-radius": "50px",
+              "border-bottom-right-radius": "50px",
+              "border-top-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "150px",
+              width: "300px",
+              border: "5px solid",
+              "border-radius": "150px",
+              "border-top-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
     },
     22: {
@@ -1471,7 +1535,13 @@ addLayer("cheese", {
               (tmp.cheese.laeceaGain.gt(Decimal.dZero)
                 ? `<h4>(${format(
                     tmp.cheese.laeceaGain,
-                  )} SP/sec [(log(🧀 + 1) / 20) ^ ${format(new Decimal(1.69).add(hasUpgrade("cheese","ab20")?player.cheese.upgrades.length/100:0))}])`
+                  )} SP/sec [(log(🧀 + 1) / 20) ^ ${format(
+                    new Decimal(1.69).add(
+                      hasUpgrade("cheese", "ab20")
+                        ? player.cheese.upgrades.length / 100
+                        : 0,
+                    ),
+                  )}])`
                 : ``),
           ],
           "blank",
@@ -1557,21 +1627,54 @@ addLayer("cheese", {
           "row",
           [
             ["buyable", [11]],
-            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "8px"]}],
+            [
+              "blank",
+              function () {
+                return [options.cheeseBuyables ? "0px" : "8px", "8px"];
+              },
+            ],
             ["buyable", [12]],
-            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "8px"]}],
+            [
+              "blank",
+              function () {
+                return [options.cheeseBuyables ? "0px" : "8px", "8px"];
+              },
+            ],
             ["buyable", [13]],
           ],
         ],
-        ["blank",function () {return ["16px", options.cheeseBuyables ? "0px" : "16px"]}],
-        ["row", [
+        [
+          "blank",
+          function () {
+            return ["16px", options.cheeseBuyables ? "0px" : "16px"];
+          },
+        ],
+        [
+          "row",
+          [
             ["buyable", [14]],
-            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "16px"]}],
+            [
+              "blank",
+              function () {
+                return [options.cheeseBuyables ? "0px" : "8px", "16px"];
+              },
+            ],
             ["buyable", [15]],
-            ["blank",function () {return [options.cheeseBuyables ? "0px" : "8px", "16px"]}],
-            ["buyable", [16]]
-        ]],
-        ["blank",function () {return ["16px", options.cheeseBuyables ? "0px" : "16px"]}],
+            [
+              "blank",
+              function () {
+                return [options.cheeseBuyables ? "0px" : "8px", "16px"];
+              },
+            ],
+            ["buyable", [16]],
+          ],
+        ],
+        [
+          "blank",
+          function () {
+            return ["16px", options.cheeseBuyables ? "0px" : "16px"];
+          },
+        ],
         ["buyable", [21]],
       ],
       buttonStyle: {
@@ -1626,7 +1729,14 @@ addLayer("cheese", {
             [
               "blank",
               function () {
-                return [hasUpgrade("cheese", "ab20") ? "16px" : hasUpgrade("cheese", "b2") ? "156px" : "0px", "0px"];
+                return [
+                  hasUpgrade("cheese", "ab20")
+                    ? "16px"
+                    : hasUpgrade("cheese", "b2")
+                    ? "156px"
+                    : "0px",
+                  "0px",
+                ];
               },
             ],
             ["upgrade", "ab00"],
@@ -1711,7 +1821,7 @@ addLayer("cheese", {
             ["upgrade", "ab30"],
             ["blank", ["16px", "0px"]],
             ["upgrade", "ab31"],
-          ]
+          ],
         ],
       ],
       buttonStyle: {
