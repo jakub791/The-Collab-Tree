@@ -15,6 +15,7 @@ const modInfo = {
     "eden.js",
     "side-layers.js",
     "je.js",
+    "harry.js" // Oh god it begins
   ],
   discordName: "",
   discordLink: "",
@@ -29,12 +30,13 @@ const VERSION = {
 
 const changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Add content...`;
+		- Add content...
+    - Quack. `;
 
 const winText =
   "Congratulations! You have reached the end and beaten this game, but for now...";
 
-const doNotCallTheseFunctionsEveryTick = ["roll"];
+const doNotCallTheseFunctionsEveryTick = ["roll", "invSwap"];
 
 function getStartPoints() {
   return modInfo.initialStartPoints;
