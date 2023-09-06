@@ -154,6 +154,7 @@ const systemComponents = {
                 <td><button class="opt" onclick="save()">Save</button></td>
                 <td><button class="opt" onclick="toggleOpt('autosave')">Autosave: {{ options.autosave?"ON":"OFF" }}</button></td>
                 <td><button class="opt" onclick="hardReset()">HARD RESET</button></td>
+                <td><button class="opt" onclick="toggleOpt('cheeseBuyables')">🧀 Buyables Layout: {{ options.cheeseBuyables?"Compact":"Classic"}}</button></td>
             </tr>
             <tr>
                 <td><button class="opt" onclick="exportSave()">Export to clipboard</button></td>
