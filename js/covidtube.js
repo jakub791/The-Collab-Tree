@@ -32,6 +32,7 @@ addLayer("cv", {
     if (hasUpgrade("cv", 13)) mult = mult.mul(3);
     if (hasUpgrade("je", 11)) mult = mult.mul(upgradeEffect("je", 11));
     if (hasMilestone("e", 3)) mult = mult.mul(3);
+    if (hasUpgrade("cheese", "ab30")) mult = mult.mul(tmp.cheese.laeceaEffect);
     return mult;
   },
   gainExp() {
@@ -150,6 +151,7 @@ addLayer("tb", {
     mult = new Decimal(1);
     if (hasUpgrade("tb", 12)) mult = mult.mul(upgradeEffect("tb", 12));
     if (hasMilestone("e", 3)) mult = mult.mul(3);
+    if (hasUpgrade("cheese", "ab30")) mult = mult.mul(tmp.cheese.laeceaEffect);
     return mult;
   },
   gainExp() {

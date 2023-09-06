@@ -15,6 +15,7 @@ const modInfo = {
     "eden.js",
     "side-layers.js",
     "je.js",
+    "harry.js", // Oh god it begins
   ],
   discordName: "",
   discordLink: "",
@@ -29,12 +30,13 @@ const VERSION = {
 
 const changelog = `<h1>Changelog:</h1><br>
 	<h3>v0.0</h3><br>
-		- Add content...`;
+		- Add content...
+    - Quack. `;
 
 const winText =
   "Congratulations! You have reached the end and beaten this game, but for now...";
 
-const doNotCallTheseFunctionsEveryTick = ["roll"];
+const doNotCallTheseFunctionsEveryTick = ["roll", "invSwap"];
 
 function getStartPoints() {
   return modInfo.initialStartPoints;
@@ -54,6 +56,7 @@ function getPointGen() {
   if (hasUpgrade("cv", 11)) gain = gain.mul(Decimal.dTwo);
   if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb", 13));
   if (hasUpgrade("poi", 11)) gain = gain.mul(2);
+  if (hasUpgrade("cheese", "ab31")) gain = gain.mul(4);
   if (hasUpgrade("poi", 12))
     gain = gain.times(player.poi.upgrades.length).add(1).pow(1.25);
   gain = gain.mul(tmp.tdr.rollSumEffect);

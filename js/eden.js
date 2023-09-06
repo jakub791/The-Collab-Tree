@@ -7,7 +7,7 @@ addLayer("e", {
       points: Decimal.dZero,
       tre: Decimal.dZero,
       bpm: Decimal.dZero,
-      fail: false,
+      fail: Decimal.dZero,
     };
   },
   color: "#E0E1CC",
@@ -297,7 +297,7 @@ addLayer("e", {
         alert(
           "!23M3ND0U5 P0W32 HA5 C0N5UM3D Y0U F20M W1!H1N. !2Y A6A1N N3X! !1M3.",
         );
-        player.e.fail = true;
+        player.e.fail = 1;
         player.e.activeChallenge = null;
         doReset("e", true);
         player.e.tre = 0;
