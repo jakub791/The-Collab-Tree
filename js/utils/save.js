@@ -273,7 +273,7 @@ function exportSave() {
   document.body.removeChild(el);
 }
 function importSave(imported = undefined, forced = false) {
-  if (player.tdr.activeChallenge) exportSave()
+  if (player.tdr.activeChallenge) exportSave();
   if (imported === undefined) imported = prompt("Paste your save here");
   try {
     tempPlr = Object.assign(getStartPlayer(), JSON.parse(atob(imported)));
