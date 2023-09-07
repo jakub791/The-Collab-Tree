@@ -235,8 +235,7 @@ addLayer("e", {
       canComplete: function () {
         return player.points.gte(1e22);
       },
-      rewardDescription:
-        "Jacorbian Energy is boosted by 222x.",
+      rewardDescription: "Jacorbian Energy is boosted by 222x.",
     },
   },
   update(diff) {
