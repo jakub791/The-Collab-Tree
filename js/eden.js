@@ -220,6 +220,24 @@ addLayer("e", {
       rewardDescription:
         "Might as well *hic* give you a key to keep your *hic* stuff on *hic* resetttt...",
     },
+    14: {
+      name: "Spin Eternally",
+      challengeDescription:
+        "Why is everything spinning... Aughhhh... *throws up*",
+      goalDescription() {
+        return `${format(
+          tmp["e"].challenges[14].goal,
+        )} is your goal... I don't know how you will be seeing it after this one...`;
+      },
+      goal() {
+        return new Decimal(1e22);
+      },
+      canComplete: function () {
+        return player.points.gte(1e22);
+      },
+      rewardDescription:
+        "Jacorbian Energy is boosted by 222x.",
+    },
   },
   update(diff) {
     let treGain = new Decimal(0);
