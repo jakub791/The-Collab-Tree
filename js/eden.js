@@ -153,7 +153,7 @@ addLayer("e", {
           : "Brush up on those skills, oh god... Why is your score SO DAMN LOW!? YOU FUCKING BASTARD, I BELIEVED IN YOU! I THOUGHT YOU WOULD WIN THE TOURNAMENT, BUT NO, YOU FUCKING FAILED ME YOU LITTLE INSULTING FUCKING BITCH. I WILL MAKE YOU PLAY UNTIL YOUR FINGERS BEG FOR MERCY.";
       },
       done() {
-        return player.e.fail.gte(1);
+        return player.e.fail == true;
       },
     },
   },
@@ -219,6 +219,23 @@ addLayer("e", {
       },
       rewardDescription:
         "Might as well *hic* give you a key to keep your *hic* stuff on *hic* resetttt...",
+    },
+    14: {
+      name: "Spin Eternally",
+      challengeDescription:
+        "Why is everything spinning... Aughhhh... *throws up*",
+      goalDescription() {
+        return `${format(
+          tmp["e"].challenges[14].goal,
+        )} is your goal... I don't know how you will be seeing it after this one...`;
+      },
+      goal() {
+        return new Decimal(1e22);
+      },
+      canComplete: function () {
+        return player.points.gte(1e22);
+      },
+      rewardDescription: "Jacorbian Energy is boosted by 222x.",
     },
   },
   update(diff) {

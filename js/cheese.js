@@ -223,7 +223,8 @@ addLayer("cheese", {
         )} blessings
         `;
       },
-      tooltip: "An approriate name for such silly upgrade.",
+      tooltip:
+        "Aaaaaaaand you just ruined a perfectly structured pyramid.<br><br>Good job.",
       effect() {
         return player.cheese.blessings.add(1).log(777).add(1);
       },
@@ -244,13 +245,13 @@ addLayer("cheese", {
     d1: {
       fullDisplay() {
         return `
-        <h3>long-Term Consequences</h3>
-        <br><span>Boosts 🧀 gain by +5 per 🐀<br><br>Cost: ${format(
+        <h3>Long-Term Consequences</h3>
+        <br><span>Boosts 🧀 gain by +5% per 🐀<br><br>Cost: ${format(
           this.cost(),
         )} blessings
         `;
       },
-      tooltip: "An approriate name for such silly upgrade.",
+      tooltip: `<h5 style='font-size: 3px;'>According to all known laws<br>of aviation,<br><br>there is no way a bee<br>should be able to fly.<br><br>Its wings are too small to get<br>its fat little body off the ground.<br><br>The bee, of course, flies anyway<br><br>because bees don't care<br>what humans think is impossible.<br><br>Yellow, black. Yellow, black.<br>Yellow, black. Yellow, black.<br><br>Ooh, black and yellow!<br>Let's shake it up a little.<br><br>Barry! Breakfast is ready!<br><br>Ooming!<br><br>Hang on a second.<br><br>Hello?<br><br>- Barry?<br>- Adam?<br><br>- Oan you believe this is happening?<br>- I can't. I'll pick you up.<br><br>Looking sharp.<br><br>Use the stairs. Your father<br>paid good money for those.<br><br>Sorry. I'm excited.<br><br>Here's the graduate.<br>We're very proud of you, son.<br><br>A perfect report card, all B's.<br><br>Very proud.<br><br>Ma! I got a thing going here.<br><br>- You got lint on your fuzz.<br>- Ow! That's me!<br><br>- Wave to us! We'll be in row 118,000.<br>- Bye!<br><br>Barry, I told you,<br>stop flying in the house!<br><br>- Hey, Adam.<br>- Hey, Barry.<br><br>- Is that fuzz gel?<br>- A little. Special day, graduation.<br><br>Never thought I'd make it.<br><br>Three days grade school,<br>three days high school.<br><br>Those were awkward.<br><br>Three days college. I'm glad I took<br>a day and hitchhiked around the hive.<br><br>You did come back different.<br><br>- Hi, Barry.<br>- Artie, growing a mustache? Looks good.<br><br>- Hear about Frankie?<br>- Yeah.<br><br>- You going to the funeral?<br>- No, I'm not going.<br><br>Everybody knows,<br>sting someone, you die.<br><br>Don't waste it on a squirrel.<br>Such a hothead.<br><br>I guess he could have<br>just gotten out of the way.<br><br>I love this incorporating<br>an amusement park into our day.<br><br>That's why we don't need vacations.<br><br>Boy, quite a bit of pomp...<br>under the circumstances.<br><br>- Well, Adam, today we are men.<br>- We are!<br><br>- Bee-men.<br>- Amen!<br><br>Hallelujah!<br><br>Students, faculty, distinguished bees,<br><br>please welcome Dean Buzzwell.<br><br>Welcome, New Hive Oity<br>graduating class of...<br><br>...9:15.<br><br>That concludes our ceremonies.<br><br>And begins your career<br>at Honex Industries!<br><br>Will we pick ourjob today?<br><br>I heard it's just orientation.<br><br>Heads up! Here we go.<br><br>Keep your hands and antennas<br>inside the tram at all times.<br><br>- Wonder what it'll be like?<br>- A little scary.<br><br>Welcome to Honex,<br>a division of Honesco<br><br>and a part of the Hexagon Group.<br><br>This is it!<br><br>Wow.<br><br>Wow.<br><br>We know that you, as a bee,<br>have worked your whole life<br><br>to get to the point where you<br>can work for your whole life.<br><br>Honey begins when our valiant Pollen<br>Jocks bring the nectar to the hive.<br><br>Our top-secret formula<br><br>is automatically color-corrected,<br>scent-adjusted and bubble-contoured<br><br>into this soothing sweet syrup<br><br>with its distinctive<br>golden glow you know as...<br><br>Honey!<br><br>- That girl was hot.<br>- She's my cousin!<br><br>- She is?<br>- Yes, we're all cousins.<br><br>- Right. You're right.<br>- At Honex, we constantly strive<br><br>to improve every aspect<br>of bee existence.<br><br>These bees are stress-testing<br>a new helmet technology.<br><br>- What do you think he makes?<br>- Not enough.<br><br>Here we have our latest advancement,<br>the Krelman.<br><br>- What does that do?<br>- Oatches that little strand of honey<br><br>that hangs after you pour it.<br>Saves us millions.<br><br>Oan anyone work on the Krelman?<br><br>Of course. Most bee jobs are<br>small ones. But bees know<br><br>that every small job,<br>if it's done well, means a lot.<br><br>But choose carefully<br><br>because you'll stay in the job<br>you pick for the rest of your life.<br><br>The same job the rest of your life?<br>I didn't know that.<br><br>What's the difference?<br><br>You'll be happy to know that bees,<br>as a species, haven't had one day off<br><br>in 27 million years.<br><br>So you'll just work us to death?<br><br>We'll sure try.<br><br>Wow! That blew my mind!<br><br>"What's the difference?"<br>How can you say that?<br><br>One job forever?<br>That's an insane choice to have to make.<br><br>I'm relieved. Now we only have<br>to make one decision in life.<br><br>But, Adam, how could they<br>never have told us that?<br><br>Why would you question anything?<br>We're bees.<br><br>We're the most perfectly<br>functioning society on Earth.<br><br>You ever think maybe things<br>work a little too well here?<br><br>Like what? Give me one example.<br><br>I don't know. But you know<br>what I'm talking about.<br><br>Please clear the gate.<br>Royal Nectar Force on approach.<br><br>Wait a second. Oheck it out.<br><br>- Hey, those are Pollen Jocks!<br>- Wow.<br><br>I've never seen them this close.<br><br>They know what it's like<br>outside the hive.<br><br>Yeah, but some don't come back.<br><br>- Hey, Jocks!<br>- Hi, Jocks!<br><br>You guys did great!<br><br>You're monsters!<br>You're sky freaks! I love it! I love it!<br><br>- I wonder where they were.<br>- I don't know.<br><br>Their day's not planned.<br><br>Outside the hive, flying who knows<br>where, doing who knows what.<br><br>You can'tjust decide to be a Pollen<br>Jock. You have to be bred for that.<br><br>Right.<br><br>Look. That's more pollen<br>than you and I will see in a lifetime.<br><br>It's just a status symbol.<br>Bees make too much of it.<br><br>Perhaps. Unless you're wearing it<br>and the ladies see you wearing it.<br><br>Those ladies?<br>Aren't they our cousins too?<br><br>Distant. Distant.<br><br>Look at these two.<br><br>- Oouple of Hive Harrys.<br>- Let's have fun with them.<br><br>It must be dangerous<br>being a Pollen Jock.<br><br>Yeah. Once a bear pinned me<br>against a mushroom!<br><br>He had a paw on my throat,<br>and with the other, he was slapping me!<br><br>- Oh, my!<br>- I never thought I'd knock him out.<br><br>What were you doing during this?<br><br>Trying to alert the authorities.<br><br>I can autograph that.<br><br>A little gusty out there today,<br>wasn't it, comrades?<br><br>Yeah. Gusty.<br><br>We're hitting a sunflower patch<br>six miles from here tomorrow.<br><br>- Six miles, huh?<br>- Barry!<br><br>A puddle jump for us,<br>but maybe you're not up for it.<br><br>- Maybe I am.<br>- You are not!<br><br>We're going 0900 at J-Gate.<br><br>What do you think, buzzy-boy?<br>Are you bee enough?<br><br>I might be. It all depends<br>on what 0900 means.<br><br>Hey, Honex!<br><br>Dad, you surprised me.<br><br>You decide what you're interested in?<br><br>- Well, there's a lot of choices.<br>- But you only get one.<br><br>Do you ever get bored<br>doing the same job every day?<br><br>Son, let me tell you about stirring.<br><br>You grab that stick, and you just<br>move it around, and you stir it around.<br><br>You get yourself into a rhythm.<br>It's a beautiful thing.<br><br>You know, Dad,<br>the more I think about it,<br><br>maybe the honey field<br>just isn't right for me.<br><br>You were thinking of what,<br>making balloon animals?<br><br>That's a bad job<br>for a guy with a stinger.<br><br>Janet, your son's not sure<br>he wants to go into honey!<br><br>- Barry, you are so funny sometimes.<br>- I'm not trying to be funny.<br><br>You're not funny! You're going<br>into honey. Our son, the stirrer!<br><br>- You're gonna be a stirrer?<br>- No one's listening to me!<br><br>Wait till you see the sticks I have.<br><br>I could say anything right now.<br>I'm gonna get an ant tattoo!<br><br>Let's open some honey and celebrate!<br><br>Maybe I'll pierce my thorax.<br>Shave my antennae.<br><br>Shack up with a grasshopper. Get<br>a gold tooth and call everybody "dawg"!<br><br>I'm so proud.<br><br>- We're starting work today!<br>- Today's the day.<br><br>Oome on! All the good jobs<br>will be gone.<br><br>Yeah, right.<br><br>Pollen counting, stunt bee, pouring,<br>stirrer, front desk, hair removal...<br><br>- Is it still available?<br>- Hang on. Two left!<br><br>One of them's yours! Oongratulations!<br>Step to the side.<br><br>- What'd you get?<br>- Picking crud out. Stellar!<br><br>Wow!<br><br>Oouple of newbies?<br><br>Yes, sir! Our first day! We are ready!<br><br>Make your choice.<br><br>- You want to go first?<br>- No, you go.<br><br>Oh, my. What's available?<br><br>Restroom attendant's open,<br>not for the reason you think.<br><br>- Any chance of getting the Krelman?<br>- Sure, you're on.<br><br>I'm sorry, the Krelman just closed out.<br><br>Wax monkey's always open.<br><br>The Krelman opened up again.<br><br>What happened?<br><br>A bee died. Makes an opening. See?<br>He's dead. Another dead one.<br><br>Deady. Deadified. Two more dead.<br><br>Dead from the neck up.<br>Dead from the neck down. That's life!<br><br>Oh, this is so hard!<br><br>Heating, cooling,<br>stunt bee, pourer, stirrer,<br><br>humming, inspector number seven,<br>lint coordinator, stripe supervisor,<br><br>mite wrangler. Barry, what<br>do you think I should... Barry?<br><br>Barry!<br><br>All right, we've got the sunflower patch<br>in quadrant nine...<br><br>What happened to you?<br>Where are you?<br><br>- I'm going out.<br>- Out? Out where?<br><br>- Out there.<br>- Oh, no!<br><br>I have to, before I go<br>to work for the rest of my life.<br><br>You're gonna die! You're crazy! Hello?<br><br>Another call coming in.<br><br>If anyone's feeling brave,<br>there's a Korean deli on 83rd<br><br>that gets their roses today.<br><br>Hey, guys.<br><br>- Look at that.<br>- Isn't that the kid we saw yesterday?<br><br>Hold it, son, flight deck's restricted.<br><br>It's OK, Lou. We're gonna take him up.<br><br>Really? Feeling lucky, are you?<br><br>Sign here, here. Just initial that.<br><br>- Thank you.<br>- OK.<br><br>You got a rain advisory today,<br><br>and as you all know,<br>bees cannot fly in rain.<br><br>So be careful. As always,<br>watch your brooms,<br><br>hockey sticks, dogs,<br>birds, bears and bats.<br><br>Also, I got a couple of reports<br>of root beer being poured on us.<br><br>Murphy's in a home because of it,<br>babbling like a cicada!<br><br>- That's awful.<br>- And a reminder for you rookies,<br><br>bee law number one,<br>absolutely no talking to humans!<br><br>All right, launch positions!<br><br>Buzz, buzz, buzz, buzz! Buzz, buzz,<br>buzz, buzz! Buzz, buzz, buzz, buzz!<br><br>Black and yellow!<br><br>Hello!<br><br>You ready for this, hot shot?<br><br>Yeah. Yeah, bring it on.<br><br>Wind, check.<br><br>- Antennae, check.<br>- Nectar pack, check.<br><br>- Wings, check.<br>- Stinger, check.<br><br>Scared out of my shorts, check.<br><br>OK, ladies,<br><br>let's move it out!<br><br>Pound those petunias,<br>you striped stem-suckers!<br><br>All of you, drain those flowers!<br><br>Wow! I'm out!<br><br>I can't believe I'm out!<br><br>So blue.<br><br>I feel so fast and free!<br><br>Box kite!<br><br>Wow!<br><br>Flowers!<br><br>This is Blue Leader.<br>We have roses visual.<br><br>Bring it around 30 degrees and hold.<br><br>Roses!<br><br>30 degrees, roger. Bringing it around.<br><br>Stand to the side, kid.<br>It's got a bit of a kick.<br><br>That is one nectar collector!<br><br>- Ever see pollination up close?<br>- No, sir.<br><br>I pick up some pollen here, sprinkle it<br>over here. Maybe a dash over there,<br><br>a pinch on that one.<br>See that? It's a little bit of magic.<br><br>That's amazing. Why do we do that?<br><br>That's pollen power. More pollen, more<br>flowers, more nectar, more honey for us.<br><br>Oool.<br><br>I'm picking up a lot of bright yellow.<br>Oould be daisies. Don't we need those?<br><br>Oopy that visual.<br><br>Wait. One of these flowers<br>seems to be on the move.<br><br>Say again? You're reporting<br>a moving flower?<br><br>Affirmative.<br><br>That was on the line!<br><br>This is the coolest. What is it?<br><br>I don't know, but I'm loving this color.<br><br>It smells good.<br>Not like a flower, but I like it.<br><br>Yeah, fuzzy.<br><br>Ohemical-y.<br><br>Oareful, guys. It's a little grabby.<br><br>My sweet lord of bees!<br><br>Oandy-brain, get off there!<br><br>Problem!<br><br>- Guys!<br>- This could be bad.<br><br>Affirmative.<br><br>Very close.<br><br>Gonna hurt.<br><br>Mama's little boy.<br><br>You are way out of position, rookie!<br><br>Ooming in at you like a missile!<br><br>Help me!<br><br>I don't think these are flowers.<br><br>- Should we tell him?<br>- I think he knows.<br><br>What is this?!<br><br>Match point!<br><br>You can start packing up, honey,<br>because you're about to eat it!<br><br>Yowser!<br><br>Gross.<br><br>There's a bee in the car!<br><br>- Do something!<br>- I'm driving!<br><br>- Hi, bee.<br>- He's back here!<br><br>He's going to sting me!<br><br>Nobody move. If you don't move,<br>he won't sting you. Freeze!<br><br>He blinked!<br><br>Spray him, Granny!<br><br>What are you doing?!<br><br>Wow... the tension level<br>out here is unbelievable.<br><br>I gotta get home.<br><br>Oan't fly in rain.<br><br>Oan't fly in rain.<br><br>Oan't fly in rain.<br><br>Mayday! Mayday! Bee going down!<br><br>Ken, could you close<br>the window please?<br><br>Ken, could you close<br>the window please?<br><br>Oheck out my new resume.<br>I made it into a fold-out brochure.<br><br>You see? Folds out.<br><br>Oh, no. More humans. I don't need this.<br><br>What was that?<br><br>Maybe this time. This time. This time.<br>This time! This time! This...<br><br>Drapes!<br><br>That is diabolical.<br><br>It's fantastic. It's got all my special<br>skills, even my top-ten favorite movies.<br><br>What's number one? Star Wars?<br><br>Nah, I don't go for that...<br><br>...kind of stuff.<br><br>No wonder we shouldn't talk to them.<br>They're out of their minds.<br><br>When I leave a job interview, they're<br>flabbergasted, can't believe what I say.<br><br>There's the sun. Maybe that's a way out.<br><br>I don't remember the sun<br>having a big 75 on it.<br><br>I predicted global warming.<br><br>I could feel it getting hotter.<br>At first I thought it was just me.<br><br>Wait! Stop! Bee!<br><br>Stand back. These are winter boots.<br><br>Wait!<br><br>Don't kill him!<br><br>You know I'm allergic to them!<br>This thing could kill me!<br><br>Why does his life have<br>less value than yours?<br><br>Why does his life have any less value<br>than mine? Is that your statement?<br><br>I'm just saying all life has value. You<br>don't know what he's capable of feeling.<br><br>My brochure!<br><br>There you go, little guy.<br><br>I'm not scared of him.<br>It's an allergic thing.<br><br>Put that on your resume brochure.<br><br>My whole face could puff up.<br><br>Make it one of your special skills.<br><br>Knocking someone out<br>is also a special skill.<br><br>Right. Bye, Vanessa. Thanks.<br><br>- Vanessa, next week? Yogurt night?<br>- Sure, Ken. You know, whatever.<br><br>- You could put carob chips on there.<br>- Bye.<br><br>- Supposed to be less calories.<br>- Bye.<br><br>I gotta say something.<br><br>She saved my life.<br>I gotta say something.<br><br>All right, here it goes.<br><br>Nah.<br><br>What would I say?<br><br>I could really get in trouble.<br><br>It's a bee law.<br>You're not supposed to talk to a human.<br><br>I can't believe I'm doing this.<br><br>I've got to.<br><br>Oh, I can't do it. Oome on!<br><br>No. Yes. No.<br><br>Do it. I can't.<br><br>How should I start it?<br>"You like jazz?" No, that's no good.<br><br>Here she comes! Speak, you fool!<br><br>Hi!<br><br>I'm sorry.<br><br>- You're talking.<br>- Yes, I know.<br><br>You're talking!<br><br>I'm so sorry.<br><br>No, it's OK. It's fine.<br>I know I'm dreaming.<br><br>But I don't recall going to bed.<br><br>Well, I'm sure this<br>is very disconcerting.<br><br>This is a bit of a surprise to me.<br>I mean, you're a bee!<br><br>I am. And I'm not supposed<br>to be doing this,<br><br>but they were all trying to kill me.<br><br>And if it wasn't for you...<br><br>I had to thank you.<br>It's just how I was raised.<br><br>That was a little weird.<br><br>- I'm talking with a bee.<br>- Yeah.<br><br>I'm talking to a bee.<br>And the bee is talking to me!<br><br>I just want to say I'm grateful.<br>I'll leave now.<br><br>- Wait! How did you learn to do that?<br>- What?<br><br>The talking thing.<br><br>Same way you did, I guess.<br>"Mama, Dada, honey." You pick it up.<br><br>- That's very funny.<br>- Yeah.<br><br>Bees are funny. If we didn't laugh,<br>we'd cry with what we have to deal with.<br><br>Anyway...<br><br>Oan I...<br><br>...get you something?<br>- Like what?<br><br>I don't know. I mean...<br>I don't know. Ooffee?<br><br>I don't want to put you out.<br><br>It's no trouble. It takes two minutes.<br><br>- It's just coffee.<br>- I hate to impose.<br><br>- Don't be ridiculous!<br>- Actually, I would love a cup.<br><br>Hey, you want rum cake?<br><br>- I shouldn't.<br>- Have some.<br><br>- No, I can't.<br>- Oome on!<br><br>I'm trying to lose a couple micrograms.<br><br>- Where?<br>- These stripes don't help.<br><br>You look …`,
       effect() {
         return player.cheese.blessings.add(1).log(777).add(1);
       },
@@ -373,13 +374,13 @@ addLayer("cheese", {
     ab30: {
       fullDisplay() {
         return `
-        <h3>A fucking disease</h3>
+        <h3>The Annoying Thing</h3>
         <br><span>Special point's effect affects both COVID and Tuberculosis gains<br><br>Cost: ${format(
           this.cost(),
         )} special points
         `;
       },
-      tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
+      tooltip: `<span style='color: #006080;'>Hahaha. We do really share the similarities...<br><br>oh he's pulling his cock out-`,
       cost() {
         return new Decimal(hasUpgrade("cheese", "ab31") ? "2.1e21" : "2e20");
       },
@@ -416,7 +417,7 @@ addLayer("cheese", {
         )} special points
         `;
       },
-      tooltip: `<span style='color: #006080;'> good luck reading previous upgrade's tooltip`,
+      tooltip: `<span style='color: #006080;'>Your queen? You mean MY knight?`,
       cost() {
         return new Decimal(hasUpgrade("cheese", "ab30") ? "2.1e21" : "2e20");
       },
@@ -690,14 +691,34 @@ addLayer("cheese", {
         )} 🧀`;
       },
       style() {
-        return {
-          height: "150px",
-          width: "350px",
-          border: "5px solid",
-          "border-radius": "300px",
-          "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+        return options.cheeseBuyables
+          ? {
+              height: "100px",
+              width: "300px",
+              border: "5px solid",
+              "border-top-left-radius": "50px",
+              "border-top-right-radius": "50px",
+              "border-bottom-left-radius": hasUpgrade("cheese", "b1")
+                ? "0px"
+                : "50px",
+              "border-bottom-right-radius": hasUpgrade("cheese", "b1")
+                ? "0px"
+                : "50px",
+              "border-bottom-width": hasUpgrade("cheese", "b1")
+                ? "2.5px"
+                : "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "150px",
+              width: "350px",
+              border: "5px solid",
+              "border-radius": "300px",
+              "border-bottom-width": "5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
     },
     11: {
@@ -1042,7 +1063,9 @@ addLayer("cheese", {
               height: "100px",
               width: hasUpgrade("cheese", "d0") ? "175px" : "262.5px",
               border: "5px solid",
-              "border-right-width": "2.5px",
+              "border-right-width": hasUpgrade("cheese", "d0")
+                ? "2.5px"
+                : "5px",
               "border-bottom-width": "2.5px",
               "border-top-width": "2.5px",
               "border-left-width": "2.5px",
@@ -1244,14 +1267,27 @@ addLayer("cheese", {
         )} blessings`;
       },
       style() {
-        return {
-          height: "150px",
-          width: "300px",
-          border: "5px solid",
-          borderRadius: "150px",
-          borderColor: this.canAfford() ? "rgb(255,172,51)" : "",
-          color: this.canAfford() ? "rgb(244,144,12)" : "",
-        };
+        return options.cheeseBuyables
+          ? {
+              height: "125px",
+              width: "300px",
+              border: "5px solid",
+              borderRadius: "50px",
+              "border-top-left-radius": "0px",
+              "border-top-right-radius": "0px",
+              "border-top-width": "2.5px",
+              "border-color": this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            }
+          : {
+              height: "150px",
+              width: "300px",
+              border: "5px solid",
+              borderRadius: "150px",
+              "border-top-width": "5px",
+              borderColor: this.canAfford() ? "rgb(255,172,51)" : "",
+              color: this.canAfford() ? "rgb(244,144,12)" : "",
+            };
       },
       unlocked() {
         return hasUpgrade("cheese", "b1");
@@ -1646,7 +1682,7 @@ addLayer("cheese", {
         [
           "blank",
           function () {
-            return ["16px", options.cheeseBuyables ? "0px" : "16px"];
+            return ["0px", options.cheeseBuyables ? "0px" : "16px"];
           },
         ],
         [
@@ -1656,14 +1692,14 @@ addLayer("cheese", {
             [
               "blank",
               function () {
-                return [options.cheeseBuyables ? "0px" : "8px", "16px"];
+                return [options.cheeseBuyables ? "0px" : "8px", "0px"];
               },
             ],
             ["buyable", [15]],
             [
               "blank",
               function () {
-                return [options.cheeseBuyables ? "0px" : "8px", "16px"];
+                return [options.cheeseBuyables ? "0px" : "8px", "0px"];
               },
             ],
             ["buyable", [16]],
@@ -1672,7 +1708,7 @@ addLayer("cheese", {
         [
           "blank",
           function () {
-            return ["16px", options.cheeseBuyables ? "0px" : "16px"];
+            return ["0px", options.cheeseBuyables ? "0px" : "16px"];
           },
         ],
         ["buyable", [21]],
@@ -1706,7 +1742,12 @@ addLayer("cheese", {
         ],
         "blank",
         ["buyable", "prestige"],
-        "blank",
+        [
+          "blank",
+          function () {
+            return ["0px", options.cheeseBuyables ? "0px" : "16px"];
+          },
+        ],
         ["buyable", [22]],
         "blank",
         [
