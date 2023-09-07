@@ -56,7 +56,7 @@ addLayer("tdr", {
     return player.tdr.unlocked || hasUpgrade("cv", 14);
   },
   rollSumEffect() {
-    const effect = player.tdr.totalroll.add(1);
+    let effect = player.tdr.totalroll.add(1);
     let exponent = Decimal.dOne;
     if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
     return effect.pow(exponent);
