@@ -72,13 +72,11 @@ addLayer("Hr", {
     },
   },
   production() {
-    return player.Hr.male.min(player.Hr.female).mul(0.075)
+    return player.Hr.male.min(player.Hr.female).mul(0.075);
   },
   update(tick) {
     player.Hr.gtick += tick;
-    player.Hr.baby = player.Hr.baby.add(
-      tmp.Hr.production.mul(tick),
-    );
+    player.Hr.baby = player.Hr.baby.add(tmp.Hr.production.mul(tick));
     if (player.Hr.gtick >= player.Hr.interval) {
       let grow = player.Hr.baby.div(2);
       player.Hr.baby = player.Hr.baby.div(2);
