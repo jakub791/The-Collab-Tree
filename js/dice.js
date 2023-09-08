@@ -272,6 +272,7 @@ addLayer("tdr", {
       },
       onExit() {
         player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
       },
     },
     12: {
@@ -287,6 +288,7 @@ addLayer("tdr", {
       },
       onExit() {
         player.e.points = new Decimal(0);
+        player.e.total = new Decimal(0);
       },
       unlocked() {
         return hasChallenge("tdr", 11);
