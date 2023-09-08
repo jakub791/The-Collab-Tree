@@ -112,7 +112,6 @@ addLayer("Hr", {
         player.Hr.soft1 = new Decimal(0.99).pow(player.Hr.total.div(1e12).max(1).log(10))
         player.Hr.soft2 = new Decimal(1.002).pow(player.Hr.total.div(1e20).max(1).log(10))
     }
-  },
 });
 
 /* in development :P
