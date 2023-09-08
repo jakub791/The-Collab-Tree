@@ -23,25 +23,25 @@ addLayer("Hr", {
         [
           "display-text",
           () => {
-            return `You have <big><big>${format(
+            return `You have <big>${format(
               player.Hr.male,
-            )}</big></big> male rabbits.`;
+            )}</big> male rabbits.`;
           },
         ],
         [
           "display-text",
           () => {
-            return `You have <big><big>${format(
+            return `You have <big>${format(
               player.Hr.female,
-            )}</big></big> female rabbits.`;
+            )}</big> female rabbits.`;
           },
         ],
         [
           "display-text",
           () => {
-            return `<small>You have <big><big>${format(
+            return `<small>You have <big>${format(
               player.Hr.baby.floor(),
-            )}</big></big> baby rabbits.</small>`;
+            )}</big> baby rabbits.</small>`;
           },
         ],
         "blank",
@@ -49,9 +49,9 @@ addLayer("Hr", {
         [
           "display-text",
           () => {
-            return `Your rabbits are currently producing <big><big>${format(
-              player.Hr.male.min(player.Hr.female).mul(0.075),
-            )}</big></big> baby rabbits per second.<br><small>(${1}-uplets)`;
+            return `Your rabbits are currently producing <big>${format(
+              tmp.Hr.production,
+            )}</big> baby rabbits per second.<br><small>(1-uplets)</small>`;
           },
         ],
         [
@@ -64,19 +64,22 @@ addLayer("Hr", {
           "display-text",
           () => {
             return `<small>${Math.round(
-              (player.Hr.interval * 20 - player.Hr.gtick) / 20,
+              player.Hr.interval - player.Hr.gtick,
             )} seconds until growth.</small>`;
           },
         ],
       ],
     },
   },
-  automate() {
-    player.Hr.gtick++;
+  production() {
+    return player.Hr.male.min(player.Hr.female).mul(0.075)
+  },
+  update(tick) {
+    player.Hr.gtick += tick;
     player.Hr.baby = player.Hr.baby.add(
-      player.Hr.male.min(player.Hr.female).mul(0.075).div(20),
+      tmp.Hr.production.mul(tick),
     );
-    if (player.Hr.gtick > player.Hr.interval * 20) {
+    if (player.Hr.gtick >= player.Hr.interval) {
       let grow = player.Hr.baby.div(2);
       player.Hr.baby = player.Hr.baby.div(2);
       if (grow.lte(100)) {
@@ -86,8 +89,8 @@ addLayer("Hr", {
             : (player.Hr.female = player.Hr.female.add(1));
         }
       } else {
-        player.Hr.female = player.Hr.female.add(grow.div(2).floor());
         grow = grow.div(2).floor();
+        player.Hr.female = player.Hr.female.add(grow);
         player.Hr.male = player.Hr.male.add(grow);
       }
       player.Hr.gtick = 0;
