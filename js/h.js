@@ -32,7 +32,7 @@ addLayer("t", {
     player.t.whar = player.t.whar.sub(tmp.t.whar.times(delta));
     if (player.t.whar.lte(0)) {
       player.t.whar = new Decimal(4);
-      
+
       tmp.t.what;
     }
   },

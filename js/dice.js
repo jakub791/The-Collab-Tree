@@ -59,7 +59,7 @@ addLayer("tdr", {
     let effect = player.tdr.totalroll.add(1);
     let exponent = Decimal.dOne;
     if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
-    if (hasChallenge("tdr",13)) exponent = exponent.mul(4);
+    if (hasChallenge("tdr", 13)) exponent = exponent.mul(4);
     return effect.pow(exponent);
   },
   roll() {
@@ -304,12 +304,14 @@ addLayer("tdr", {
       },
       onEnter() {
         player.tdr.luck = Math.floor(Math.random() * 15) + 1;
-        save()
+        save();
       },
       onExit() {
         player.e.points = new Decimal(0);
         player.e.total = new Decimal(0);
-        for(let i in player.e.challenges){player.e.challenges[i] = 0}
+        for (let i in player.e.challenges) {
+          player.e.challenges[i] = 0;
+        }
       },
       unlocked() {
         return hasChallenge("tdr", 12);
@@ -323,7 +325,7 @@ addLayer("tdr", {
         ? tmp.t.timeCalculation.add(10).log10().toNumber()
         : 1) *
       (hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
-    if (hasChallenge("tdr",13)) cooldownRate *= 20;
+    if (hasChallenge("tdr", 13)) cooldownRate *= 20;
     if (player.tdr.cooldown > 0) {
       player.tdr.cooldown -= cooldownRate;
     }
@@ -333,10 +335,10 @@ addLayer("tdr", {
     player.tdr.cooldown = Math.max(player.tdr.cooldown, 0);
     player.tdr.cooldown2 = Math.max(player.tdr.cooldown2, 0);
     if (player.tdr.activeChallenge) player.tdr.luck = player.tdr.luck - diff;
-    if (inChallenge("tdr",13)){
-      player.points=player.points.mul(1-diff)
-      player.cv.points=player.cv.points.mul(1-diff)
-      player.tb.points=player.tb.points.mul(1-diff)
+    if (inChallenge("tdr", 13)) {
+      player.points = player.points.mul(1 - diff);
+      player.cv.points = player.cv.points.mul(1 - diff);
+      player.tb.points = player.tb.points.mul(1 - diff);
     }
     if (player.tdr.luck <= 0) {
       completeChallenge(this.layer, player.tdr.activeChallenge);
