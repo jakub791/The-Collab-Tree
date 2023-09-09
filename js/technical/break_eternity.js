@@ -2304,16 +2304,7 @@ class Decimal {
         Number.NaN,
       );
     }
-    return Decimal.ln(this.add(1).div(Decimal.fromNumber(1).sub(this))).div(2);
-  }
-  ascensionPenalty(ascensions) {
-    if (ascensions === 0) {
-      return this;
-    }
-    return this.root(Decimal.pow(10, ascensions));
-  }
-  egg() {
-    return this.add(9);
+    return Decimal.ln(this.add(1).div(Decimal.dOne.sub(this))).div(2);
   }
   lessThanOrEqualTo(other) {
     return this.cmp(other) < 1;

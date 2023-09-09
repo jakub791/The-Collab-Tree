@@ -292,7 +292,7 @@ function importSave(imported = undefined, forced = false) {
     NaNcheck(save);
     save();
     window.location.reload();
-  } catch (e) {
+  } catch {
     return;
   }
 }

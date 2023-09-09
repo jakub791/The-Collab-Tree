@@ -390,14 +390,6 @@ declare class Decimal {
   asinh(): Decimal;
   acosh(): Decimal;
   atanh(): Decimal;
-  /**
-   * Joke function from Realm Grinder
-   */
-  ascensionPenalty(ascensions: DecimalSource): Decimal;
-  /**
-   * Joke function from Cookie Clicker. It's 'egg'
-   */
-  egg(): Decimal;
   lessThanOrEqualTo(other: DecimalSource): boolean;
   lessThan(other: DecimalSource): boolean;
   greaterThanOrEqualTo(other: DecimalSource): boolean;
