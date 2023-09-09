@@ -175,10 +175,10 @@ addLayer("tb", {
   },
   upgrades: {
     11: {
-      title: "Bacterial Infection",
+      title: "Bacterial Invasion",
       description() {
         return (
-          "Total diseases increase your sickness gain. Currently: +" +
+          "Total Coronavirus and Tuberculosis increase your sickness gain. Currently: +" +
           format(this.effect())
         );
       },
@@ -228,7 +228,7 @@ addLayer("tb", {
       description() {
         return (
           "Time speed affects roll cooldown at a reduced rate. Currently sped up by: x" +
-          format(tmp.t.timeCalculation.add(10).log10())
+          format(tmp.t.timeCalculation.add(10).log5())
         );
       },
       cost: new Decimal(390625),

@@ -23,26 +23,26 @@ addLayer("poi", {
   ],
   upgrades: {
     11: {
-      title: "Lazy Upgrade...",
-      description: "Multiply point gain by 2.",
+      title: "Fever.",
+      description: "Multiply sickness gain by 2.",
       cost: new Decimal(100),
-      currencyDisplayName: "points",
+      currencyDisplayName: "sickness",
 
       currencyInternalName: "points",
     },
     12: {
-      title: "Crazy? I was crazy once...",
-      description: "Multiply point gain based on Point Upgrades.",
+      title: "Nausea.",
+      description: "Multiply sickness gain based on sickness Upgrades.",
       cost: new Decimal(1000),
-      currencyDisplayName: "points",
+      currencyDisplayName: "sickness",
 
       currencyInternalName: "points",
     },
     13: {
-      title: "Alright, this is getting boring.",
-      description: "Unlock ???",
+      title: "Bacterial Infection.",
+      description: "Unlock Bacteria",
       cost: new Decimal(1e7),
-      currencyDisplayName: "points",
+      currencyDisplayName: "sickness",
 
       currencyInternalName: "points",
     },

@@ -2,7 +2,7 @@ const modInfo = {
   name: "The Collab Tree",
   id: "thecollabtree-9978665485",
   author:
-    "incremental_gamer, harry(psi), niko, thenonymous, downvoid, icecreamdude, and jakub",
+    "incremental_gamer, harry(psi), niko, thenonymous, downvoid, icecreamdude, reip, and jakub",
   pointsName: "sickness",
   modFiles: [
     "cheese.js",
