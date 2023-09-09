@@ -51,15 +51,8 @@ addLayer("Hr", {
 					"display-text",
 					() => {
 						return `Your rabbits are currently producing <big><big>${format(
-							player.Hr.total.lte(1e12)
-								? player.Hr.male
-										.min(player.Hr.female)
-										.mul(0.075)
-								: player.Hr.male
-										.min(player.Hr.female)
-										.mul(0.075)
-										.pow(player.Hr.soft1),
-						)}</big></big> baby rabbits per second.<br><small>(${1}-uplets)`;
+							tmp.Hr.growth,
+						)}</big></big> baby rabbits per second.<br><small>(${1}-uplets)</small>`;
 					},
 				],
 				[
@@ -72,7 +65,7 @@ addLayer("Hr", {
 					"display-text",
 					() => {
 						return `<small>${Math.round(
-							(player.Hr.interval * 20 - player.Hr.gtick) / 20,
+							player.Hr.interval - player.Hr.gtick,
 						)} seconds until growth.</small>`;
 					},
 				],
@@ -87,10 +80,10 @@ addLayer("Hr", {
 							: `
                             Your rabbits are experiencing overcrowdedness!<br>
                             <big>Debuffs:</big><br>
-                            Baby rabbit gain ^${format(player.Hr.soft1)}<br>
-                            Rabbit amount reduced by ÷${format(
-								player.Hr.soft2,
-							)} each game tick (only if over 1e20 rabbits)<br>
+                            Baby rabbit gain ^${format(tmp.Hr.soft1)}<br>
+                            ${player.Hr.total.gt(1e20) ? `Rabbit amount reduced by ÷${format(
+								tmp.Hr.soft2,
+							)} every second<br>` : ""}
                             Rabbits are feeling sad :(
                         `;
 					},
@@ -98,27 +91,42 @@ addLayer("Hr", {
 			],
 		},
 	},
-	automate() {
-		player.Hr.gtick++;
+	soft1() {
+		return new Decimal(0.99).pow(
+			player.Hr.total.div(1e12).max(1).log(10),
+		);
+	},
+	soft2() {
+		return new Decimal(1.041).pow(
+			player.Hr.total.div(1e20).max(1).log(10),
+		);
+	},
+	growth() {
+		// soft is always 1 below 1e12
+		return player.Hr.male
+										.min(player.Hr.female)
+										.mul(0.075)
+										.pow(tmp.Hr.soft1)
+	},
+	update(tick) {
+		player.Hr.gtick += tick;
 		player.Hr.baby = player.Hr.baby.add(
-			player.Hr.total.lte(1e12)
-				? player.Hr.male.min(player.Hr.female).mul(0.075).div(20)
-				: player.Hr.male
-						.min(player.Hr.female)
-						.mul(0.075)
-						.pow(player.Hr.soft1)
-						.div(20),
+			tmp.Hr.growth
+						.mul(tick),
 		);
 
-		if (player.Hr.total.gte(1e20)) {
-			player.Hr.male = player.Hr.male.div(player.Hr.soft2);
-			player.Hr.female = player.Hr.female.div(player.Hr.soft2);
-			player.Hr.baby = player.Hr.baby.div(player.Hr.soft2);
+		if (player.Hr.total.gt(1e20)) {
+			// don't go below 1e20
+			const maxDivide = player.Hr.total.div(1e20)
+			player.Hr.male = player.Hr.male.div(tmp.Hr.soft2.pow(tick).min(maxDivide));
+			player.Hr.female = player.Hr.female.div(tmp.Hr.soft2.pow(tick).min(maxDivide));
+			player.Hr.baby = player.Hr.baby.div(tmp.Hr.soft2.pow(tick).min(maxDivide));
 		}
 
-		if (player.Hr.gtick > player.Hr.interval * 20 || true) {
-			let grow = player.Hr.baby.div(2);
+		// why always true??
+		if (player.Hr.gtick > player.Hr.interval) {
 			player.Hr.baby = player.Hr.baby.div(2);
+			let grow = player.Hr.baby;
 			if (grow.lte(100)) {
 				for (; grow.gt(0); grow = grow.sub(1)) {
 					Math.random() > 0.5
@@ -126,8 +134,8 @@ addLayer("Hr", {
 						: (player.Hr.female = player.Hr.female.add(1));
 				}
 			} else {
-				player.Hr.female = player.Hr.female.add(grow.div(2).floor());
 				grow = grow.div(2).floor();
+				player.Hr.female = player.Hr.female.add(grow);
 				player.Hr.male = player.Hr.male.add(grow);
 			}
 			player.Hr.gtick = 0;
@@ -135,12 +143,7 @@ addLayer("Hr", {
 		player.Hr.total = player.Hr.male
 			.add(player.Hr.female)
 			.add(player.Hr.baby);
-		player.Hr.soft1 = new Decimal(0.99).pow(
-			player.Hr.total.div(1e12).max(1).log(10),
-		);
-		player.Hr.soft2 = new Decimal(1.002).pow(
-			player.Hr.total.div(1e20).max(1).log(10),
-		);
+		
 	},
 });
 
