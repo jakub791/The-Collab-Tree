@@ -81,9 +81,13 @@ addLayer("Hr", {
                             Your rabbits are experiencing overcrowdedness!<br>
                             <big>Debuffs:</big><br>
                             Baby rabbit gain ^${format(tmp.Hr.soft1)}<br>
-                            ${player.Hr.total.gt(1e20) ? `Rabbit amount reduced by ÷${format(
-								tmp.Hr.soft2,
-							)} every second<br>` : ""}
+                            ${
+								player.Hr.total.gt(1e20)
+									? `Rabbit amount reduced by ÷${format(
+											tmp.Hr.soft2,
+									  )} every second<br>`
+									: ""
+							}
                             Rabbits are feeling sad :(
                         `;
 					},
@@ -92,35 +96,34 @@ addLayer("Hr", {
 		},
 	},
 	soft1() {
-		return new Decimal(0.99).pow(
-			player.Hr.total.div(1e12).max(1).log(10),
-		);
+		return new Decimal(0.99).pow(player.Hr.total.div(1e12).max(1).log(10));
 	},
 	soft2() {
-		return new Decimal(1.041).pow(
-			player.Hr.total.div(1e20).max(1).log(10),
-		);
+		return new Decimal(1.041).pow(player.Hr.total.div(1e20).max(1).log(10));
 	},
 	growth() {
 		// soft is always 1 below 1e12
 		return player.Hr.male
-										.min(player.Hr.female)
-										.mul(0.075)
-										.pow(tmp.Hr.soft1)
+			.min(player.Hr.female)
+			.mul(0.075)
+			.pow(tmp.Hr.soft1);
 	},
 	update(tick) {
 		player.Hr.gtick += tick;
-		player.Hr.baby = player.Hr.baby.add(
-			tmp.Hr.growth
-						.mul(tick),
-		);
+		player.Hr.baby = player.Hr.baby.add(tmp.Hr.growth.mul(tick));
 
 		if (player.Hr.total.gt(1e20)) {
 			// don't go below 1e20
-			const maxDivide = player.Hr.total.div(1e20)
-			player.Hr.male = player.Hr.male.div(tmp.Hr.soft2.pow(tick).min(maxDivide));
-			player.Hr.female = player.Hr.female.div(tmp.Hr.soft2.pow(tick).min(maxDivide));
-			player.Hr.baby = player.Hr.baby.div(tmp.Hr.soft2.pow(tick).min(maxDivide));
+			const maxDivide = player.Hr.total.div(1e20);
+			player.Hr.male = player.Hr.male.div(
+				tmp.Hr.soft2.pow(tick).min(maxDivide),
+			);
+			player.Hr.female = player.Hr.female.div(
+				tmp.Hr.soft2.pow(tick).min(maxDivide),
+			);
+			player.Hr.baby = player.Hr.baby.div(
+				tmp.Hr.soft2.pow(tick).min(maxDivide),
+			);
 		}
 
 		// why always true??
@@ -143,7 +146,6 @@ addLayer("Hr", {
 		player.Hr.total = player.Hr.male
 			.add(player.Hr.female)
 			.add(player.Hr.baby);
-		
 	},
 });
 
