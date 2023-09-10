@@ -1,7 +1,7 @@
 const systemComponents = {
-  "tab-buttons": {
-    props: ["layer", "data", "name"],
-    template: `
+	"tab-buttons": {
+		props: ["layer", "data", "name"],
+		template: `
 			<div class="upgRow">
 				<div v-for="tab in Object.keys(data)">
 					<button v-if="data[tab].unlocked == undefined || data[tab].unlocked" v-bind:class="{tabButton: true, notify: subtabShouldNotify(layer, name, tab), resetNotify: subtabResetNotify(layer, name, tab)}"
@@ -10,11 +10,11 @@ const systemComponents = {
 				</div>
 			</div>
 		`,
-  },
+	},
 
-  "tree-node": {
-    props: ["layer", "abb", "size", "prev"],
-    template: `
+	"tree-node": {
+		props: ["layer", "abb", "size", "prev"],
+		template: `
 		<button v-if="nodeShown(layer)"
 			v-bind:id="layer"
 			v-on:click="function() {
@@ -61,11 +61,11 @@ const systemComponents = {
 			<node-mark :layer='layer' :data='tmp[layer].marked'></node-mark></span>
 		</button>
 		`,
-  },
+	},
 
-  "layer-tab": {
-    props: ["layer", "back", "spacing", "embedded"],
-    template: `<div v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {}]" class="noBackground">
+	"layer-tab": {
+		props: ["layer", "back", "spacing", "embedded"],
+		template: `<div v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {}]" class="noBackground">
 		<div v-if="back"><button v-bind:class="back == 'big' ? 'other-back' : 'back'" v-on:click="goBack(layer)">←</button></div>
 		<div v-if="!tmp[layer].tabFormat">
 			<div v-if="spacing" v-bind:style="{'height': spacing}" :key="this.$vnode.key + '-spacing'"></div>
@@ -99,10 +99,10 @@ const systemComponents = {
 			</div>
 		</div></div>
 			`,
-  },
+	},
 
-  "overlay-head": {
-    template: `			
+	"overlay-head": {
+		template: `			
 		<div class="overlayThing" style="padding-bottom:7px; width: 90%; z-index: 1000; position: relative">
 		<span v-if="player.devSpeed && player.devSpeed != 1" class="overlayThing">
 			<br>Dev Speed: {{format(player.devSpeed)}}x<br>
@@ -119,10 +119,10 @@ const systemComponents = {
 		<div v-for="thing in tmp.displayThings" class="overlayThing"><span v-if="thing" v-html="thing"></span></div>
 	</div>
 	`,
-  },
+	},
 
-  "info-tab": {
-    template: `
+	"info-tab": {
+		template: `
         <div>
         <h2>{{modInfo.name}}</h2>
         <br>
@@ -145,10 +145,10 @@ const systemComponents = {
         <h3>Hotkeys</h3><br>
         <span v-for="key in hotkeys" v-if="player[key.layer].unlocked && tmp[key.layer].hotkeys[key.id].unlocked"><br>{{key.description}}</span></div>
     `,
-  },
+	},
 
-  "options-tab": {
-    template: `
+	"options-tab": {
+		template: `
         <table>
             <tr>
                 <td><button class="opt" onclick="save()">Save</button></td>
@@ -173,37 +173,37 @@ const systemComponents = {
 				<td><button class="opt" onclick="toggleOpt('forceTooltips'); needsCanvasUpdate = true">Shift-Click to Toggle Tooltips: {{ options.forceTooltips?"ON":"OFF" }}</button></td>
 				</tr> 
         </table>`,
-  },
+	},
 
-  "back-button": {
-    template: `
+	"back-button": {
+		template: `
         <button v-bind:class="back" onclick="goBack()">←</button>
         `,
-  },
+	},
 
-  tooltip: {
-    props: ["text"],
-    template: `<div class="tooltip" v-html="text"></div>
+	tooltip: {
+		props: ["text"],
+		template: `<div class="tooltip" v-html="text"></div>
 		`,
-  },
+	},
 
-  "node-mark": {
-    props: {
-      layer: {},
-      data: {},
-      offset: { default: 0 },
-      scale: { default: 1 },
-    },
-    template: `<div v-if='data'>
+	"node-mark": {
+		props: {
+			layer: {},
+			data: {},
+			offset: { default: 0 },
+			scale: { default: 1 },
+		},
+		template: `<div v-if='data'>
 			<div v-if='data === true' class='star' v-bind:style='{position: "absolute", left: (offset-10) + "px", top: (offset-10) + "px", transform: "scale( " + scale||1 + ", " + scale||1 + ")"}'></div>
 			<img v-else class='mark' v-bind:style='{position: "absolute", left: (offset-22) + "px", top: (offset-15) + "px", transform: "scale( " + scale||1 + ", " + scale||1 + ")"}' v-bind:src="data"></div>
 		</div>
 		`,
-  },
+	},
 
-  particle: {
-    props: ["data", "index"],
-    template: `<div><div class='particle instant' v-bind:style="[constructParticleStyle(data), data.style]" 
+	particle: {
+		props: ["data", "index"],
+		template: `<div><div class='particle instant' v-bind:style="[constructParticleStyle(data), data.style]" 
 			v-on:click="run(data.onClick, data)"  v-on:mouseenter="run(data.onMouseOver, data)" v-on:mouseleave="run(data.onMouseLeave, data)" ><span v-html="data.text"></span>
 		</div>
 		<svg version="2" v-if="data.color">
@@ -213,11 +213,11 @@ const systemComponents = {
     	</svg>
 		</div>
 		`,
-  },
+	},
 
-  bg: {
-    props: ["layer"],
-    template: `<div class ="bg" v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {}]"></div>
+	bg: {
+		props: ["layer"],
+		template: `<div class ="bg" v-bind:style="[tmp[layer].style ? tmp[layer].style : {}, (tmp[layer].tabFormat && !Array.isArray(tmp[layer].tabFormat)) ? tmp[layer].tabFormat[player.subtabs[layer].mainTabs].style : {}]"></div>
 		`,
-  },
+	},
 };
