@@ -57,7 +57,7 @@ function getPointGen() {
 	if (hasUpgrade("poi", 11)) gain = gain.mul(2);
 	if (hasUpgrade("cheese", "ab31")) gain = gain.mul(4);
 	if (hasUpgrade("poi", 12))
-		gain = gain.times(Decimal.add(1,player.poi.upgrades.length).pow(1.25));
+		gain = gain.times(Decimal.add(1, player.poi.upgrades.length).pow(1.25));
 	gain = gain.mul(tmp.tdr.rollSumEffect);
 	if (hasMilestone("e", 0)) gain = gain.mul(5);
 	gain = gain.mul(tmp.je.effect);
