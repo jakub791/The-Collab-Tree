@@ -1,145 +1,149 @@
 addLayer("tdr", {
-  name: "The Daily Roll",
-  symbol() {
-    return `<h6>${player.tdr.points.toNumber()}d${formatWhole(tmp.tdr.effect)}`;
-  }, // This appears on the layer's node. Default is the id with the first letter capitalized
-  position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-  startData() {
-    return {
-      unlocked: false,
-      points: Decimal.dZero,
-      totalroll: Decimal.dZero,
-      lastRoll: "",
-      lastWeekly: 1,
-      rollType: "additive",
-      cooldown: 0,
-      cooldown2: 0,
-      luck: 0,
-    };
-  },
-  color: "#4BDC13",
-  branches: ["cv", "tb"],
-  effectDescription() {
-    return `each having ${formatWhole(tmp.tdr.effect)} sides.`;
-  },
-  effect() {
-    let sides = new Decimal(2);
-    if (hasUpgrade("tb", 14)) sides = sides.add(1);
-    sides = sides.add(buyableEffect("tdr", 11));
-    sides = sides.add(buyableEffect("tdr", 12));
-    sides = sides.add(buyableEffect("je", 11));
-    if (hasUpgrade("ba", 11) && player.e.points.gte(2)) sides = sides.add(2);
-    return sides;
-  },
-  requires: Decimal.dTen,
-  resource: "dice",
-  baseResource: "sickness",
-  baseAmount() {
-    return player.points;
-  },
-  type: "static",
-  base: 10,
-  exponent: Decimal.dOne,
-  gainMult: Decimal.dOne,
-  gainExp: Decimal.dOne,
-  row: 1,
-  hotkeys: [
-    {
-      key: "d",
-      description: "D: Obtain some dice",
-      onPress() {
-        if (canReset("tdr")) doReset("tdr");
-      },
-    },
-  ],
-  layerShown() {
-    return player.tdr.unlocked || hasUpgrade("cv", 14);
-  },
-  rollSumEffect() {
-    let effect = player.tdr.totalroll.add(1);
-    let exponent = Decimal.dOne;
-    if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
-    if (hasChallenge("tdr", 13)) exponent = exponent.mul(4);
-    return effect.pow(exponent);
-  },
-  roll() {
-    const rolls = [];
-    for (let i = 0; i < player.tdr.points.toNumber(); i++) {
-      rolls.push(
-        new Decimal(Math.random())
-          .mul(tmp.tdr.effect)
-          .floor()
-          .add(1)
-          .toNumber(),
-      );
-    }
-    player.tdr.lastRoll = rolls.join(", ");
-    let score = Decimal.dZero;
-    let sixes = 0;
-    for (let i of rolls) {
-      if (i == 6) sixes++;
-      if (i == 20 && !hasMilestone("tdr", 5)) player.tdr.milestones.push(5);
-    }
-    if (
-      sixes >= (hasUpgrade("ba", 21) && player.e.points.gte(6) ? 3 : 6) &&
-      !hasMilestone("tdr", 2)
-    )
-      player.tdr.milestones.push(2);
-    if (player.tdr.rollType === "additive") {
-      score = rolls.reduce(
-        (accumulated, current) => accumulated.add(current),
-        Decimal.dZero,
-      );
-    } else {
-      score = rolls.reduce(
-        (accumulated, current) => accumulated.mul(current),
-        Decimal.dOne,
-      );
-    }
-    player.tdr.totalroll = player.tdr.totalroll.add(
-      Decimal.mul(score, hasMilestone("e", 2) ? 2 : 1),
-    );
-    return;
-  },
-  clickables: {
-    11: {
-      title: "Do the <b>Daily</b> Roll",
-      canClick() {
-        return player.tdr.cooldown <= 0;
-      },
-      onClick() {
-        layers.tdr.roll();
-        let cool = 86400;
-        if (hasChallenge(this.layer, 11)) {
-          cool -= player.e.points.min(20).mul(3600).toNumber();
-        }
-        player.tdr.cooldown = cool;
-      },
-      display() {
-        return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>${
-          hasChallenge(this.layer, 11)
-            ? 24 - player.e.points.min(20).floor()
-            : 24
-        }</b> HOURS.</span>
+	name: "The Daily Roll",
+	symbol() {
+		return `<h6>${player.tdr.points.toNumber()}d${formatWhole(
+			tmp.tdr.effect,
+		)}`;
+	}, // This appears on the layer's node. Default is the id with the first letter capitalized
+	position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
+	startData() {
+		return {
+			unlocked: false,
+			points: Decimal.dZero,
+			totalroll: Decimal.dZero,
+			lastRoll: "",
+			lastWeekly: 1,
+			rollType: "additive",
+			cooldown: 0,
+			cooldown2: 0,
+			luck: 0,
+		};
+	},
+	color: "#4BDC13",
+	branches: ["cv", "tb"],
+	effectDescription() {
+		return `each having ${formatWhole(tmp.tdr.effect)} sides.`;
+	},
+	effect() {
+		let sides = new Decimal(2);
+		if (hasUpgrade("tb", 14)) sides = sides.add(1);
+		sides = sides.add(buyableEffect("tdr", 11));
+		sides = sides.add(buyableEffect("tdr", 12));
+		sides = sides.add(buyableEffect("je", 11));
+		if (hasUpgrade("ba", 11) && player.e.points.gte(2))
+			sides = sides.add(2);
+		return sides;
+	},
+	requires: Decimal.dTen,
+	resource: "dice",
+	baseResource: "sickness",
+	baseAmount() {
+		return player.points;
+	},
+	type: "static",
+	base: 10,
+	exponent: Decimal.dOne,
+	gainMult: Decimal.dOne,
+	gainExp: Decimal.dOne,
+	row: 1,
+	hotkeys: [
+		{
+			key: "d",
+			description: "D: Obtain some dice",
+			onPress() {
+				if (canReset("tdr")) doReset("tdr");
+			},
+		},
+	],
+	layerShown() {
+		return player.tdr.unlocked || hasUpgrade("cv", 14);
+	},
+	rollSumEffect() {
+		let effect = player.tdr.totalroll.add(1);
+		let exponent = Decimal.dOne;
+		if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
+		if (hasChallenge("tdr", 13)) exponent = exponent.mul(4);
+		return effect.pow(exponent);
+	},
+	roll() {
+		const rolls = [];
+		for (let i = 0; i < player.tdr.points.toNumber(); i++) {
+			rolls.push(
+				new Decimal(Math.random())
+					.mul(tmp.tdr.effect)
+					.floor()
+					.add(1)
+					.toNumber(),
+			);
+		}
+		player.tdr.lastRoll = rolls.join(", ");
+		let score = Decimal.dZero;
+		let sixes = 0;
+		for (let i of rolls) {
+			if (i == 6) sixes++;
+			if (i == 20 && !hasMilestone("tdr", 5))
+				player.tdr.milestones.push(5);
+		}
+		if (
+			sixes >= (hasUpgrade("ba", 21) && player.e.points.gte(6) ? 3 : 6) &&
+			!hasMilestone("tdr", 2)
+		)
+			player.tdr.milestones.push(2);
+		if (player.tdr.rollType === "additive") {
+			score = rolls.reduce(
+				(accumulated, current) => accumulated.add(current),
+				Decimal.dZero,
+			);
+		} else {
+			score = rolls.reduce(
+				(accumulated, current) => accumulated.mul(current),
+				Decimal.dOne,
+			);
+		}
+		player.tdr.totalroll = player.tdr.totalroll.add(
+			Decimal.mul(score, hasMilestone("e", 2) ? 2 : 1),
+		);
+		return;
+	},
+	clickables: {
+		11: {
+			title: "Do the <b>Daily</b> Roll",
+			canClick() {
+				return player.tdr.cooldown <= 0;
+			},
+			onClick() {
+				layers.tdr.roll();
+				let cool = 86400;
+				if (hasChallenge(this.layer, 11)) {
+					cool -= player.e.points.min(20).mul(3600).toNumber();
+				}
+				player.tdr.cooldown = cool;
+			},
+			display() {
+				return `Roll your dice. <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>${
+					hasChallenge(this.layer, 11)
+						? 24 - player.e.points.min(20).floor()
+						: 24
+				}</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
-      },
-    },
-    12: {
-      title: "Do the <b>Weekly</b> Roll",
-      canClick() {
-        return player.tdr.cooldown2 <= 0;
-      },
-      onClick() {
-        player.tdr.lastWeekly = new Decimal(Math.random())
-          .mul(tmp.tdr.effect)
-          .floor()
-          .add(1)
-          .toNumber();
-        let cool = 86400 * 7;
-        player.tdr.cooldown2 = cool;
-      },
-      display() {
-        return `Roll one of your dice for a point gain multiplier! <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>1</b> WEEK.</span>
+			},
+		},
+		12: {
+			title: "Do the <b>Weekly</b> Roll",
+			canClick() {
+				return player.tdr.cooldown2 <= 0;
+			},
+			onClick() {
+				player.tdr.lastWeekly = new Decimal(Math.random())
+					.mul(tmp.tdr.effect)
+					.floor()
+					.add(1)
+					.toNumber();
+				let cool = 86400 * 7;
+				player.tdr.cooldown2 = cool;
+			},
+			display() {
+				return `Roll one of your dice for a point gain multiplier! <span style="color: red">WARNING: THE BASE COOLDOWN IS <b>1</b> WEEK.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown2)}`;
       },
       unlocked() {
