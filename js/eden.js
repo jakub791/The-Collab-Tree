@@ -156,7 +156,7 @@ addLayer("e", {
 					: "Brush up on those skills, oh god... Why is your score SO DAMN LOW!? YOU FUCKING BASTARD, I BELIEVED IN YOU! I THOUGHT YOU WOULD WIN THE TOURNAMENT, BUT NO, YOU FUCKING FAILED ME YOU LITTLE INSULTING FUCKING BITCH. I WILL MAKE YOU PLAY UNTIL YOUR FINGERS BEG FOR MERCY.";
 			},
 			done() {
-				return player.e.fail == true;
+				return player.e.fail == 1;
 			},
 		},
 	},
