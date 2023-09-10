@@ -49,6 +49,22 @@ addLayer("poi", {
 
 			currencyInternalName: "points",
 		},
+		14: {
+		  title: "Jacorb is sick.",
+		  description: "Multiply JE gain by 2.72",
+		  cost: new Decimal(1e10),
+		      currencyDisplayName: "points",
+    
+    currencyInternalName: "points",
+		},
+		15: {
+		  title: "Bacterial Infection II.",
+		  description: "Multiply point gain by 12.",
+		  cost: new Decimal(5),
+currencyInternalName: "points",
+currencyDisplayName: "bacterias",
+currencyLayer: "ba",
+		}
 	},
 });
 addLayer("ba", {
