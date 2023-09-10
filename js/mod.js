@@ -68,7 +68,7 @@ function getPointGen() {
 	if (inChallenge("e", 13)) gain = gain.pow(Math.random());
 	if (inChallenge("tdr", 12))
 		gain = gain.div(player.tdr.points.mul(tmp.tdr.effect).max(1));
-	return gain;
+	return gain.mul(player.Hr.total.max(1).log10().mul(2).add(1));
 }
 
 function addedPlayerData() {

@@ -70,6 +70,12 @@ addLayer("Hr", {
 					},
 				],
 				"blank",
+				[
+					"display-text",
+					() => {
+						return `Rabbits boost points by x${format(player.Hr.total.max(1).log10().mul(2).add(1))} after ALL nerfs.`;
+					},
+				],
 				"blank",
 				"blank",
 				[
@@ -91,7 +97,7 @@ addLayer("Hr", {
                             Rabbits are feeling sad :(
                         `;
 					},
-				],
+				]
 			],
 		},
 	},
