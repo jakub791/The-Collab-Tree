@@ -247,34 +247,122 @@ function t4format(x, mult = false, y, z) {
 	return t4f;
 }
 
-function t5format(x,mult=false,y,z) {
-  let t5ills = ["","Unv","Duv","Eti","Cuv","Quv","Swi","Pyr","Oiv","Eni"]
-  let t5ones = ["","uN","dU","eT","cU","qU","sW","pY","oI","eI"]
-  let t5tns = ["Ek","Ev","Twy","Ekt","Ecv","Eqv","Esi","Eyr","Eiv","Ekn"]
-  let t5tens = ["","","Lan","Etk","Cuk","Quk","Swk","Pyk","Oik","Enk"]
-  let t5hunds = ["","Eva","Dva","Eta","Cva","Qva","Sva","Pva","Ova","Env"]
-  let t5f = t5ills[x]
-  if ((mult && y>0) || z>=1e3) t5f = t5ones[x]
-  let t5t = t5tens[Math.floor(x/10)%10]
-  let t5h = t5hunds[Math.floor(x/100)]
-  if (x%100<20&&x%100>9) t5t = t5tns[x%10]
-  if (x>=10) t5f = t5h+t5t
-  return t5f
+function t5format(x, mult = false, y, z) {
+	let t5ills = [
+		"",
+		"Unv",
+		"Duv",
+		"Eti",
+		"Cuv",
+		"Quv",
+		"Swi",
+		"Pyr",
+		"Oiv",
+		"Eni",
+	];
+	let t5ones = ["", "uN", "dU", "eT", "cU", "qU", "sW", "pY", "oI", "eI"];
+	let t5tns = [
+		"Ek",
+		"Ev",
+		"Twy",
+		"Ekt",
+		"Ecv",
+		"Eqv",
+		"Esi",
+		"Eyr",
+		"Eiv",
+		"Ekn",
+	];
+	let t5tens = [
+		"",
+		"",
+		"Lan",
+		"Etk",
+		"Cuk",
+		"Quk",
+		"Swk",
+		"Pyk",
+		"Oik",
+		"Enk",
+	];
+	let t5hunds = [
+		"",
+		"Eva",
+		"Dva",
+		"Eta",
+		"Cva",
+		"Qva",
+		"Sva",
+		"Pva",
+		"Ova",
+		"Env",
+	];
+	let t5f = t5ills[x];
+	if ((mult && y > 0) || z >= 1e3) t5f = t5ones[x];
+	let t5t = t5tens[Math.floor(x / 10) % 10];
+	let t5h = t5hunds[Math.floor(x / 100)];
+	if (x % 100 < 20 && x % 100 > 9) t5t = t5tns[x % 10];
+	if (x >= 10) t5f = t5h + t5t;
+	return t5f;
 }
 
-function t6format(x,mult=false,y,z) {
-  let t6ills = ["","Hap","Dis","Tri","Tek","Pek","Hek","Hpk","Ock","Eks"]
-  let t6ones = ["","hN","dU","eT","cU","qU","sW","pY","oI","eI"]
-  let t6tns = ["Dek","Hdk","Ddk","Dtk","Drk","Dpk","Dxk","Dhk","Dck","Dnk"]
-  let t6tens = ["","","Isk","Tck","Tsk","Pck","Hxs","Hdk","Odk","Ens"]
-  let t6hunds = ["","Hcts","Dias","Tras","Teas","Pens","Heas","Hpas","Ocas","Enas"]
-  let t6f = t6ills[x]
-  if ((mult && y>0) || z>=1e3) t6f = t6ones[x]
-  let t6t = t6tens[Math.floor(x/10)%10]
-  let t6h = t6hunds[Math.floor(x/100)]
-  if (x%100<20&&x%100>9) t6t = t6tns[x%10]
-  if (x>=10) t6f = t6h+t6t
-  return t6f
+function t6format(x, mult = false, y, z) {
+	let t6ills = [
+		"",
+		"Hap",
+		"Dis",
+		"Tri",
+		"Tek",
+		"Pek",
+		"Hek",
+		"Hpk",
+		"Ock",
+		"Eks",
+	];
+	let t6ones = ["", "hN", "dU", "eT", "cU", "qU", "sW", "pY", "oI", "eI"];
+	let t6tns = [
+		"Dek",
+		"Hdk",
+		"Ddk",
+		"Dtk",
+		"Drk",
+		"Dpk",
+		"Dxk",
+		"Dhk",
+		"Dck",
+		"Dnk",
+	];
+	let t6tens = [
+		"",
+		"",
+		"Isk",
+		"Tck",
+		"Tsk",
+		"Pck",
+		"Hxs",
+		"Hdk",
+		"Odk",
+		"Ens",
+	];
+	let t6hunds = [
+		"",
+		"Hcts",
+		"Dias",
+		"Tras",
+		"Teas",
+		"Pens",
+		"Heas",
+		"Hpas",
+		"Ocas",
+		"Enas",
+	];
+	let t6f = t6ills[x];
+	if ((mult && y > 0) || z >= 1e3) t6f = t6ones[x];
+	let t6t = t6tens[Math.floor(x / 10) % 10];
+	let t6h = t6hunds[Math.floor(x / 100)];
+	if (x % 100 < 20 && x % 100 > 9) t6t = t6tns[x % 10];
+	if (x >= 10) t6f = t6h + t6t;
+	return t6f;
 }
 
 function t7format(x, m) {
