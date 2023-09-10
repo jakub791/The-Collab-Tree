@@ -194,287 +194,328 @@ function t3format(x, mult = false, y, z) {
 	if (x >= 100 && x % 100 < 10) t3f = t3h + t3ones[x % 10];
 	return t3f;
 }
-function t4format(x,mult=false,y,z) {
-  let t4ills = ["","Kol","Mug","Gog","Tar","Put","Eli","Zat","Yut","Xan"]
-  let t4ones = ["","eT","oD","tR","tE","pT","eX","zE","yO","xN"]
-  let t4tns = ["Dak","Hen","Dok","Tra","Ted","Ped","Exd","Zed","Yod","Ned"]
-  let t4to = ["k","k","c","c","c","k","k","c","k","c"]
-  if (mult && y>0 && x<10) t4ones = ["","","D","Tr","T","P","Ex","Z","Y","N"]
-  let t4tens = ["","","I","Tr","Te","P","E","Z","Y","N"]
-  let t4hunds = ["","Hot","Bot","Trot","Tot","Pot","Exot","Zot","Yoot","Not"]
-  let t4f = t4ills[x]
-  if ((mult && y>0) || z>=1e3) t4f = t4ones[x]
-  let t4t = t4tens[Math.floor(x/10)%10]
-  let t4h = t4hunds[Math.floor(x/100)]
-  if (x%100==0) t4h+='T'
-  if (x%100<20&&x%100>9) t4t = t4tns[x%10]
-  if (x%100>19) t4t += t4to[x%10]+t4ones[x%10]
-  if (x>=10) t4f = t4h+t4t
-  return t4f
+function t4format(x, mult = false, y, z) {
+	let t4ills = [
+		"",
+		"Kol",
+		"Mug",
+		"Gog",
+		"Tar",
+		"Put",
+		"Eli",
+		"Zat",
+		"Yut",
+		"Xan",
+	];
+	let t4ones = ["", "eT", "oD", "tR", "tE", "pT", "eX", "zE", "yO", "xN"];
+	let t4tns = [
+		"Dak",
+		"Hen",
+		"Dok",
+		"Tra",
+		"Ted",
+		"Ped",
+		"Exd",
+		"Zed",
+		"Yod",
+		"Ned",
+	];
+	let t4to = ["k", "k", "c", "c", "c", "k", "k", "c", "k", "c"];
+	if (mult && y > 0 && x < 10)
+		t4ones = ["", "", "D", "Tr", "T", "P", "Ex", "Z", "Y", "N"];
+	let t4tens = ["", "", "I", "Tr", "Te", "P", "E", "Z", "Y", "N"];
+	let t4hunds = [
+		"",
+		"Hot",
+		"Bot",
+		"Trot",
+		"Tot",
+		"Pot",
+		"Exot",
+		"Zot",
+		"Yoot",
+		"Not",
+	];
+	let t4f = t4ills[x];
+	if ((mult && y > 0) || z >= 1e3) t4f = t4ones[x];
+	let t4t = t4tens[Math.floor(x / 10) % 10];
+	let t4h = t4hunds[Math.floor(x / 100)];
+	if (x % 100 == 0) t4h += "T";
+	if (x % 100 < 20 && x % 100 > 9) t4t = t4tns[x % 10];
+	if (x % 100 > 19) t4t += t4to[x % 10] + t4ones[x % 10];
+	if (x >= 10) t4f = t4h + t4t;
+	return t4f;
 }
 
 function t7format(x, m) {
-  let t7ills = [
-    "",
-    "aL",
-    "eJ",
-    "iJ",
-    "AsT",
-    "uN",
-    "rM",
-    "oV",
-    "oL",
-    "eT",
-    "O",
-    "aX",
-    "uP",
-    "rS",
-    "lT",
-    "eT",
-    "eN",
-    "yP",
-    "rC",
-    "lR",
-    "mN",
-    "rA",
-    "uC",
-    "olT",
-    "rieV",
-    "esoN",
-    "emP",
-    "esT",
-    "entI",
-    "otaE",
-    "ameL",
-    "eglE",
-    "hI",
-    "obA",
-    "akU",
-    "auR",
-    "ikU",
-    "enkI",
-    "atA",
-    "amI",
-    "uzU",
-    "aG",
-    "deN",
-  ]; //eT is the start of the extending, beginning at 10^10^10^45. Currently at 10^10^10^126 (Edenillion). Previous extensions: 10^10^10^123 (Lagillion), 10^10^10^120 (Suzumillion), 10^10^10^117 (Namillion), 10^10^10^114 (Matatabillion), 10^10^10^111 (Genkillion) 10^10^10^108 (Mikuillion), 10^10^10^105 (Laurillion), 10^10^10^102 (Sakuzillion), 10^10^10^99 (Kobarillion), 10^10^10^96 (Phigrillion), 10^10^10^93 (Aeglesillion), 10^10^10^90 (Camellillion), 10^10^10^87 (Rotaenillion), 10^10^10^84 (Pentimentillion), 10^10^10^81 (Testifillion) 10^10^10^78 (Tempestillion), 10^10^10^75 (Resonillion) 10^10^10^72 (Grievillion), 10^10^10^69 (nice)(Voltillion), 10^10^10^66 (Yucillion), 10^10^10^63 (Fractillion), 10^10^10^60 (Omnillion), Ultrillion (10^10^10^57), Archillion (10^10^10^54), Hyperillion (10^10^10^51), Xenoillion (10^10^10^48), Metaillion (10^10^10^45)
-  let t7m = [
-    "",
-    "K",
-    "M",
-    "G",
-    "",
-    "L",
-    "F",
-    "J",
-    "S",
-    "B",
-    "Gl",
-    "G",
-    "S",
-    "V",
-    "M",
-    "M",
-    "X",
-    "H",
-    "A",
-    "U",
-    "O",
-    "F",
-    "Y",
-    "V",
-    "G",
-    "R",
-    "T",
-    "T",
-    "P",
-    "R",
-    "C",
-    "A",
-    "P",
-    "K",
-    "S",
-    "L",
-    "M",
-    "G",
-    "M",
-    "N",
-    "S",
-    "L",
-    "E",
-  ];
-  let t7f = t7ills[x];
-  if (m < 2) t7f = t7m[x] + t7f;
-  return t7f;
+	let t7ills = [
+		"",
+		"aL",
+		"eJ",
+		"iJ",
+		"AsT",
+		"uN",
+		"rM",
+		"oV",
+		"oL",
+		"eT",
+		"O",
+		"aX",
+		"uP",
+		"rS",
+		"lT",
+		"eT",
+		"eN",
+		"yP",
+		"rC",
+		"lR",
+		"mN",
+		"rA",
+		"uC",
+		"olT",
+		"rieV",
+		"esoN",
+		"emP",
+		"esT",
+		"entI",
+		"otaE",
+		"ameL",
+		"eglE",
+		"hI",
+		"obA",
+		"akU",
+		"auR",
+		"ikU",
+		"enkI",
+		"atA",
+		"amI",
+		"uzU",
+		"aG",
+		"deN",
+	]; //eT is the start of the extending, beginning at 10^10^10^45. Currently at 10^10^10^126 (Edenillion). Previous extensions: 10^10^10^123 (Lagillion), 10^10^10^120 (Suzumillion), 10^10^10^117 (Namillion), 10^10^10^114 (Matatabillion), 10^10^10^111 (Genkillion) 10^10^10^108 (Mikuillion), 10^10^10^105 (Laurillion), 10^10^10^102 (Sakuzillion), 10^10^10^99 (Kobarillion), 10^10^10^96 (Phigrillion), 10^10^10^93 (Aeglesillion), 10^10^10^90 (Camellillion), 10^10^10^87 (Rotaenillion), 10^10^10^84 (Pentimentillion), 10^10^10^81 (Testifillion) 10^10^10^78 (Tempestillion), 10^10^10^75 (Resonillion) 10^10^10^72 (Grievillion), 10^10^10^69 (nice)(Voltillion), 10^10^10^66 (Yucillion), 10^10^10^63 (Fractillion), 10^10^10^60 (Omnillion), Ultrillion (10^10^10^57), Archillion (10^10^10^54), Hyperillion (10^10^10^51), Xenoillion (10^10^10^48), Metaillion (10^10^10^45)
+	let t7m = [
+		"",
+		"K",
+		"M",
+		"G",
+		"",
+		"L",
+		"F",
+		"J",
+		"S",
+		"B",
+		"Gl",
+		"G",
+		"S",
+		"V",
+		"M",
+		"M",
+		"X",
+		"H",
+		"A",
+		"U",
+		"O",
+		"F",
+		"Y",
+		"V",
+		"G",
+		"R",
+		"T",
+		"T",
+		"P",
+		"R",
+		"C",
+		"A",
+		"P",
+		"K",
+		"S",
+		"L",
+		"M",
+		"G",
+		"M",
+		"N",
+		"S",
+		"L",
+		"E",
+	];
+	let t7f = t7ills[x];
+	if (m < 2) t7f = t7m[x] + t7f;
+	return t7f;
 }
 
 function standard(decimal, precision) {
-  decimal = new Decimal(decimal);
-  if (decimal.sign < 0) return "-" + standard(decimal.neg(), precision);
-  if (
-    (decimal.layer > 7 && decimal.mag >= 0) ||
-    (decimal.mag >= Math.log10(3e123) && decimal.layer == 7)
-  ) {
-    var slog = decimal.slog();
-    if (slog.gte(1e9)) return "F" + formatWhole(slog.floor());
-    if (slog.gte(100))
-      return (
-        Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(3) +
-        "F" +
-        commaFormat(slog.floor(), 0)
-      );
-    else
-      return (
-        Decimal.pow(10, slog.sub(slog.floor())).toStringWithDecimalPlaces(4) +
-        "F" +
-        commaFormat(slog.floor(), 0)
-      );
-  }
-  let illion = decimal.log10().div(3).floor().sub(1);
-  let m = decimal.div(Decimal.pow(1e3, illion.add(1)));
-  if (m.toStringWithDecimalPlaces(precision) == 1000) {
-    m = new Decimal(1);
-    illion = illion.add(1);
-  }
-  if (decimal.log10().lt(1e9)) m = m.toStringWithDecimalPlaces(precision) + " ";
-  else m = "";
-  let t2illion = illion.max(1).log10().div(3).floor();
-  let t3illion = t2illion.max(1).log10().div(3).floor();
-  let t4illion = t3illion.max(1).log10().div(3).floor();
-  let t5illion = t4illion.max(1).log10().div(3).floor();
-  let t6illion = t5illion.max(1).log10().div(3).floor();
-  let t7illion = t6illion.max(1).log10().div(3).floor();
-  let t1 = illion
-    .div(Decimal.pow(1e3, t2illion.sub(2)))
-    .floor()
-    .toNumber();
-  if (illion.lt(1e3)) t1 = illion.toNumber();
-  let t2 = t2illion
-    .div(Decimal.pow(1e3, t3illion.sub(2)))
-    .floor()
-    .toNumber();
-  if (t2illion.lt(1e3)) t2 = t2illion.toNumber();
-  let t3 = t3illion
-    .div(Decimal.pow(1e3, t4illion.sub(2)))
-    .floor()
-    .toNumber();
-  if (t3illion.lt(1e3)) t3 = t3illion.toNumber();
-  let t4 = t4illion
-    .div(Decimal.pow(1e3, t5illion.sub(2)))
-    .floor()
-    .toNumber();
-  if (t3illion.lt(1e3)) t4 = t4illion.toNumber();
-  let t5 = t5illion
-    .div(Decimal.pow(1e3, t6illion.sub(2)))
-    .floor()
-    .toNumber();
-  if (t3illion.lt(1e3)) t5 = t5illion.toNumber();
-  let t6 = t6illion
-    .div(Decimal.pow(1e3, t7illion.sub(2)))
-    .floor()
-    .toNumber();
-  if (t3illion.lt(1e3)) t6 = t6illion.toNumber();
-  let t7 = t7illion.toNumber();
-  let st = t1format(t1);
-  if (illion.gte(1e3))
-    st =
-      t1format(Math.floor(t1 / 1e6), true, t2) +
-      t2format(t2) +
-      (Math.floor(t1 / 1e3) % 1e3 > 0
-        ? "-" +
-          t1format(Math.floor(t1 / 1e3) % 1e3, true, t2 - 1) +
-          t2format(t2 - 1)
-        : "");
-  if (illion.gte(1e6))
-    st +=
-      t1 % 1e3 > 0
-        ? "-" + t1format(t1 % 1e3, true, t2 - 2) + t2format(t2 - 2)
-        : "";
-  if (t2illion.gte(1e3))
-    st =
-      t2format(Math.floor(t2 / 1e6), true, t3) +
-      t3format(t3) +
-      (Math.floor(t2 / 1e3) % 1e3 > 0
-        ? "a'-" +
-          t2format(Math.floor(t2 / 1e3) % 1e3, true, t3 - 1) +
-          t3format(t3 - 1)
-        : "");
-  if (t2illion.gte(1e6))
-    st +=
-      t2 % 1e3 > 0
-        ? "a'-" + t2format(t2 % 1e3, true, t3 - 2) + t3format(t3 - 2)
-        : "";
-  if (t3illion.gte(1e3))
-    st =
-      t3format(Math.floor(t3 / 1e6), true, t4) +
-      t4format(t4, Math.floor(t3 / 1e6)) +
-      (Math.floor(t3 / 1e3) % 1e3 > 0
-        ? "`-" +
-          t3format(Math.floor(t3 / 1e3) % 1e3, true, t4 - 1, t3) +
-          t4format(t4 - 1, Math.floor(t3 / 1e3) % 1e3)
-        : "");
-  if (t3illion.gte(1e6))
-    st +=
-      t3 % 1e3 > 0
-        ? "`-" +
-          t3format(t3 % 1e3, true, t4 - 2, t3) +
-          t4format(t4 - 2, t3 % 1e3)
-        : "";
-  if (t4illion.gte(1e3))
-    st =
-      t4format(Math.floor(t4 / 1e6), true, t5) +
-      t5format(t5, Math.floor(t4 / 1e6)) +
-      (Math.floor(t4 / 1e3) % 1e3 > 0
-        ? "`-" +
-          t4format(Math.floor(t4 / 1e3) % 1e3, true, t5 - 1, t4) +
-          t5format(t5 - 1, Math.floor(t4 / 1e3) % 1e3)
-        : "");
-  if (t4illion.gte(1e6))
-    st +=
-      t4 % 1e3 > 0
-        ? "`-" +
-          t4format(t4 % 1e3, true, t5 - 2, t4) +
-          t5format(t5 - 2, t4 % 1e3)
-        : "";
-        if (t5illion.gte(1e3))
-        st =
-          t5format(Math.floor(t5 / 1e6), true, t6) +
-          t6format(t6, Math.floor(t5 / 1e6)) +
-          (Math.floor(t5 / 1e3) % 1e3 > 0
-            ? "`-" +
-              t5format(Math.floor(t5 / 1e3) % 1e3, true, t6 - 1, t5) +
-              t6format(t6 - 1, Math.floor(t5 / 1e3) % 1e3)
-            : "");
-      if (t5illion.gte(1e6))
-        st +=
-          t5 % 1e3 > 0
-            ? "`-" +
-              t5format(t5 % 1e3, true, t6 - 2, t5) +
-              t6format(t6 - 2, t5 % 1e3)
-            : "";
-            if (t6illion.gte(1e3))
-            st =
-              t6format(Math.floor(t6 / 1e6), true, t7) +
-              t7format(t7, Math.floor(t6 / 1e6)) +
-              (Math.floor(t6 / 1e3) % 1e3 > 0
-                ? "`-" +
-                  t6format(Math.floor(t6 / 1e3) % 1e3, true, t7 - 1, t6) +
-                  t7format(t7 - 1, Math.floor(t6 / 1e3) % 1e3)
-                : "");
-          if (t6illion.gte(1e6))
-            st +=
-              t6 % 1e3 > 0
-                ? "`-" +
-                  t6format(t6 % 1e3, true, t7 - 2, t6) +
-                  t7format(t7 - 2, t6 % 1e3)
-                : "";
-  if (decimal.mag >= 1e9 || (decimal.layer > 0 && decimal.mag >= 0))
-    return m + st;
-  if (decimal.mag >= 1e3) return commaFormat(decimal, 0);
-  if (decimal.mag >= 0.001) return regularFormat(decimal, precision);
-  if (decimal.sign != 0) return "1/" + standard(decimal.recip(), precision);
-  return regularFormat(decimal, precision);
+	decimal = new Decimal(decimal);
+	if (decimal.sign < 0) return "-" + standard(decimal.neg(), precision);
+	if (
+		(decimal.layer > 7 && decimal.mag >= 0) ||
+		(decimal.mag >= Math.log10(3e123) && decimal.layer == 7)
+	) {
+		var slog = decimal.slog();
+		if (slog.gte(1e9)) return "F" + formatWhole(slog.floor());
+		if (slog.gte(100))
+			return (
+				Decimal.pow(
+					10,
+					slog.sub(slog.floor()),
+				).toStringWithDecimalPlaces(3) +
+				"F" +
+				commaFormat(slog.floor(), 0)
+			);
+		else
+			return (
+				Decimal.pow(
+					10,
+					slog.sub(slog.floor()),
+				).toStringWithDecimalPlaces(4) +
+				"F" +
+				commaFormat(slog.floor(), 0)
+			);
+	}
+	let illion = decimal.log10().div(3).floor().sub(1);
+	let m = decimal.div(Decimal.pow(1e3, illion.add(1)));
+	if (m.toStringWithDecimalPlaces(precision) == 1000) {
+		m = new Decimal(1);
+		illion = illion.add(1);
+	}
+	if (decimal.log10().lt(1e9))
+		m = m.toStringWithDecimalPlaces(precision) + " ";
+	else m = "";
+	let t2illion = illion.max(1).log10().div(3).floor();
+	let t3illion = t2illion.max(1).log10().div(3).floor();
+	let t4illion = t3illion.max(1).log10().div(3).floor();
+	let t5illion = t4illion.max(1).log10().div(3).floor();
+	let t6illion = t5illion.max(1).log10().div(3).floor();
+	let t7illion = t6illion.max(1).log10().div(3).floor();
+	let t1 = illion
+		.div(Decimal.pow(1e3, t2illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (illion.lt(1e3)) t1 = illion.toNumber();
+	let t2 = t2illion
+		.div(Decimal.pow(1e3, t3illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t2illion.lt(1e3)) t2 = t2illion.toNumber();
+	let t3 = t3illion
+		.div(Decimal.pow(1e3, t4illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t3 = t3illion.toNumber();
+	let t4 = t4illion
+		.div(Decimal.pow(1e3, t5illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t4 = t4illion.toNumber();
+	let t5 = t5illion
+		.div(Decimal.pow(1e3, t6illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t5 = t5illion.toNumber();
+	let t6 = t6illion
+		.div(Decimal.pow(1e3, t7illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t6 = t6illion.toNumber();
+	let t7 = t7illion.toNumber();
+	let st = t1format(t1);
+	if (illion.gte(1e3))
+		st =
+			t1format(Math.floor(t1 / 1e6), true, t2) +
+			t2format(t2) +
+			(Math.floor(t1 / 1e3) % 1e3 > 0
+				? "-" +
+				  t1format(Math.floor(t1 / 1e3) % 1e3, true, t2 - 1) +
+				  t2format(t2 - 1)
+				: "");
+	if (illion.gte(1e6))
+		st +=
+			t1 % 1e3 > 0
+				? "-" + t1format(t1 % 1e3, true, t2 - 2) + t2format(t2 - 2)
+				: "";
+	if (t2illion.gte(1e3))
+		st =
+			t2format(Math.floor(t2 / 1e6), true, t3) +
+			t3format(t3) +
+			(Math.floor(t2 / 1e3) % 1e3 > 0
+				? "a'-" +
+				  t2format(Math.floor(t2 / 1e3) % 1e3, true, t3 - 1) +
+				  t3format(t3 - 1)
+				: "");
+	if (t2illion.gte(1e6))
+		st +=
+			t2 % 1e3 > 0
+				? "a'-" + t2format(t2 % 1e3, true, t3 - 2) + t3format(t3 - 2)
+				: "";
+	if (t3illion.gte(1e3))
+		st =
+			t3format(Math.floor(t3 / 1e6), true, t4) +
+			t4format(t4, Math.floor(t3 / 1e6)) +
+			(Math.floor(t3 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t3format(Math.floor(t3 / 1e3) % 1e3, true, t4 - 1, t3) +
+				  t4format(t4 - 1, Math.floor(t3 / 1e3) % 1e3)
+				: "");
+	if (t3illion.gte(1e6))
+		st +=
+			t3 % 1e3 > 0
+				? "`-" +
+				  t3format(t3 % 1e3, true, t4 - 2, t3) +
+				  t4format(t4 - 2, t3 % 1e3)
+				: "";
+	if (t4illion.gte(1e3))
+		st =
+			t4format(Math.floor(t4 / 1e6), true, t5) +
+			t5format(t5, Math.floor(t4 / 1e6)) +
+			(Math.floor(t4 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t4format(Math.floor(t4 / 1e3) % 1e3, true, t5 - 1, t4) +
+				  t5format(t5 - 1, Math.floor(t4 / 1e3) % 1e3)
+				: "");
+	if (t4illion.gte(1e6))
+		st +=
+			t4 % 1e3 > 0
+				? "`-" +
+				  t4format(t4 % 1e3, true, t5 - 2, t4) +
+				  t5format(t5 - 2, t4 % 1e3)
+				: "";
+	if (t5illion.gte(1e3))
+		st =
+			t5format(Math.floor(t5 / 1e6), true, t6) +
+			t6format(t6, Math.floor(t5 / 1e6)) +
+			(Math.floor(t5 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t5format(Math.floor(t5 / 1e3) % 1e3, true, t6 - 1, t5) +
+				  t6format(t6 - 1, Math.floor(t5 / 1e3) % 1e3)
+				: "");
+	if (t5illion.gte(1e6))
+		st +=
+			t5 % 1e3 > 0
+				? "`-" +
+				  t5format(t5 % 1e3, true, t6 - 2, t5) +
+				  t6format(t6 - 2, t5 % 1e3)
+				: "";
+	if (t6illion.gte(1e3))
+		st =
+			t6format(Math.floor(t6 / 1e6), true, t7) +
+			t7format(t7, Math.floor(t6 / 1e6)) +
+			(Math.floor(t6 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t6format(Math.floor(t6 / 1e3) % 1e3, true, t7 - 1, t6) +
+				  t7format(t7 - 1, Math.floor(t6 / 1e3) % 1e3)
+				: "");
+	if (t6illion.gte(1e6))
+		st +=
+			t6 % 1e3 > 0
+				? "`-" +
+				  t6format(t6 % 1e3, true, t7 - 2, t6) +
+				  t7format(t7 - 2, t6 % 1e3)
+				: "";
+	if (decimal.mag >= 1e9 || (decimal.layer > 0 && decimal.mag >= 0))
+		return m + st;
+	if (decimal.mag >= 1e3) return commaFormat(decimal, 0);
+	if (decimal.mag >= 0.001) return regularFormat(decimal, precision);
+	if (decimal.sign != 0) return "1/" + standard(decimal.recip(), precision);
+	return regularFormat(decimal, precision);
 }
 
 function hyperEformat(decimal, precision) {
@@ -1302,9 +1343,27 @@ function formatTimeLong(s) {
 	if (years.gte("ee9"))
 		return format(mlt[0].div(arv1[id])) + " " + mverse + "verse ages";
 	let scale1 = [
-		5.39121e-44, 1e-30, 1e-27, 1e-24, 1e-21, 1e-18, 1e-15, 1e-12, 1e-9,
-		1e-6, 0.001, 1, 60, 3600, 86400, 31556952, 31556952e3, 31556952e9,
-		31556952e40, 31556952e100, "31556952e7270",
+		5.39121e-44,
+		1e-30,
+		1e-27,
+		1e-24,
+		1e-21,
+		1e-18,
+		1e-15,
+		1e-12,
+		1e-9,
+		1e-6,
+		0.001,
+		1,
+		60,
+		3600,
+		86400,
+		31556952,
+		31556952e3,
+		31556952e9,
+		31556952e40,
+		31556952e100,
+		"31556952e7270",
 	];
 	let scale2 = [
 		" Planck Times",
@@ -1327,7 +1386,7 @@ function formatTimeLong(s) {
 		" aeons",
 		" degenerate eras",
 		" black hole eras",
-    " Eden Eras",
+		" Eden Eras",
 	];
 	let id2 = 0;
 	if (s.gte(scale1[scale1.length - 1])) id2 = scale1.length - 1;
@@ -1496,51 +1555,51 @@ function heightComp(s) {
 }
 
 function formatComp(s) {
-  // SARS-CoV-2 radius: 50 nm, Volume = 4/3(πr^3) = 5.23598e-22 m^3, 523,598 nm^3
-  s = new Decimal(s);
-  let scale1 = [
-    5.23598e-22,
-    9e-17,
-    6.2e-11,
-    3.555e-6,
-    4.73176e-4,
-    0.062,
-    2.5e3,
-    4.1887902e12,
-    1.08e21,
-    1.53e24,
-    1.41e27,
-    1.4017341e37,
-    6.7742e60,
-    4e80,
-    "e10310",
-    "1e1e211",
-  ];
-  let scale2 = [
-    " SARS-CoV-2 viruses.",
-    " red blood cells.",
-    " grains of sand.",
-    " teaspoons.",
-    " infectant bottles.",
-    " infected people.",
-    " Olympic-sized swimming pools.",
-    " Chicxulub asteroids.",
-    " Earths.",
-    " Jupiters.",
-    " Suns.",
-    " Stephenson 2-18s.",
-    " Milky Ways.",
-    " observable universes.",
-    " symptom-verses.",
-    " paths to Arcana Eden.",
-  ];
-  let id = 0;
-  if (s.gte(scale1[scale1.length - 1])) id = scale1.length - 1;
-  else {
-    while (s.gte(scale1[id])) id++;
-    if (id > 0) id--;
-  }
-  return format(s.div(scale1[id])) + scale2[id];
+	// SARS-CoV-2 radius: 50 nm, Volume = 4/3(πr^3) = 5.23598e-22 m^3, 523,598 nm^3
+	s = new Decimal(s);
+	let scale1 = [
+		5.23598e-22,
+		9e-17,
+		6.2e-11,
+		3.555e-6,
+		4.73176e-4,
+		0.062,
+		2.5e3,
+		4.1887902e12,
+		1.08e21,
+		1.53e24,
+		1.41e27,
+		1.4017341e37,
+		6.7742e60,
+		4e80,
+		"e10310",
+		"1e1e211",
+	];
+	let scale2 = [
+		" SARS-CoV-2 viruses.",
+		" red blood cells.",
+		" grains of sand.",
+		" teaspoons.",
+		" infectant bottles.",
+		" infected people.",
+		" Olympic-sized swimming pools.",
+		" Chicxulub asteroids.",
+		" Earths.",
+		" Jupiters.",
+		" Suns.",
+		" Stephenson 2-18s.",
+		" Milky Ways.",
+		" observable universes.",
+		" symptom-verses.",
+		" paths to Arcana Eden.",
+	];
+	let id = 0;
+	if (s.gte(scale1[scale1.length - 1])) id = scale1.length - 1;
+	else {
+		while (s.gte(scale1[id])) id++;
+		if (id > 0) id--;
+	}
+	return format(s.div(scale1[id])) + scale2[id];
 }
 
 function eventsTime(years) {
