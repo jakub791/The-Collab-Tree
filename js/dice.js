@@ -267,7 +267,7 @@ addLayer("tdr", {
 		11: {
 			name: "Luck Testing",
 			fullDisplay:
-				"You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from base roll cooldown.",
+				"You have 1d20 seconds to complete this challenge. If you complete this challenge, you will be able to lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from base roll cooldown.",
 			canComplete() {
 				return player.points.gte(1e16);
 			},
@@ -330,6 +330,7 @@ addLayer("tdr", {
 				: 1) *
 			(hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
 		if (hasChallenge("tdr", 13)) cooldownRate *= 20;
+				if (hasUpgrade("poi", 16)) cooldownRate *= 2.5;
 		if (player.tdr.cooldown > 0) {
 			player.tdr.cooldown -= cooldownRate;
 		}
