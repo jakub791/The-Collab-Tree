@@ -16,13 +16,13 @@
 	margin: 5px;
 	border-radius: 10px;
 	border: 2px solid;
-	transform: rotate(spin)
+	transform: rotate(spin);
 }
 
 .tabButton:hover {
 	transform: scale(1.1, 1.1);
 	text-shadow: 0 0 7px var(--color);
-	transform: rotate(spin)
+	transform: rotate(spin);
 }
 
 .tooltip {
@@ -45,7 +45,7 @@
 	background-color: var(--background_tooltip);
 	color: var(--points);
 	content: attr(tooltip);
-	transform: rotate(spin)
+	transform: rotate(spin);
 }
 
 .tooltip::after {
@@ -58,7 +58,7 @@
 	border-width: 5px;
 	border-style: solid;
 	border-color: var(--background_tooltip) transparent transparent transparent;
-	transform: rotate(spin)
+	transform: rotate(spin);
 }
 
 /* Horizontal/vertical lines */
