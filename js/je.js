@@ -36,7 +36,7 @@ addLayer("je", {
 		if (hasUpgrade("ba", 11) && player.e.points.gte(4))
 			mult = mult.mul(tmp.ba.upgrades[11].effect1);
 		if (hasMilestone("tdr", 5)) mult = mult.mul(20);
-		if (hasUpgrade("poi", 14)) mult = mult.mul(2.72)
+		if (hasUpgrade("poi", 14)) mult = mult.mul(2.72);
 		return mult;
 	},
 	gainExp() {
