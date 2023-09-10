@@ -14,7 +14,7 @@ addLayer("Hr", {
 			female: new Decimal(1),
 			baby: new Decimal(0),
 			total: new Decimal(2),
-			interval: 0.05,
+			interval: 30,
 			gtick: 0,
 		};
 	},
