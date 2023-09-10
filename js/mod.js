@@ -103,6 +103,12 @@ function isEndgame() {
 
 const backgroundStyle = {};
 
+function spinEternal() {
+	let spin = new Decimal(0)
+	if (inChallenge("e", 14)) spin = Math.random(0, 360)
+	return spin
+}
+
 function maxTickLength() {
 	return 3600;
 }

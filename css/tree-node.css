@@ -31,6 +31,7 @@
 	color: rgba(0, 0, 0, 0.5);
 	text-shadow: var(--hqProperty3);
 	padding: 0;
+	transform: rotate(spin)
 }
 
 .smallNode {
