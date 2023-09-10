@@ -298,7 +298,7 @@ addLayer("tdr", {
     13: {
       name: "Luck Testing III",
       fullDisplay:
-        "You have 1d15 seconds to complete this challenge. Every second, you lose 100% of points and row 1 resources. If the challenge is failed or you quit, you lose all your lycoris flowers and challenge completions.<br>Goal: 1e10 sickness<br>Reward: Dice effect ^4 and cooldown /20",
+        "You have 1d15 seconds to complete this challenge. Every second, you lose 100% of points and row 1 resources. If the challenge is failed or you quit, you lose all your lycoris flowers and gain all lycoris challenge completions.<br>Goal: 1e10 sickness<br>Reward: Dice effect ^4 and cooldown /20",
       canComplete() {
         return player.points.gte(1e10);
       },
@@ -310,7 +310,7 @@ addLayer("tdr", {
         player.e.points = new Decimal(0);
         player.e.total = new Decimal(0);
         for (let i in player.e.challenges) {
-          player.e.challenges[i] = 0;
+          player.e.challenges[i] = 1;
         }
       },
       unlocked() {
