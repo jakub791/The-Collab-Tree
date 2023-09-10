@@ -57,7 +57,7 @@ function getPointGen() {
 	if (hasUpgrade("poi", 11)) gain = gain.mul(2);
 	if (hasUpgrade("cheese", "ab31")) gain = gain.mul(4);
 	if (hasUpgrade("poi", 12))
-		gain = gain.times(player.poi.upgrades.length).add(1).pow(1.25);
+		gain = gain.times(player.poi.upgrades.length.add(1).pow(1.25));
 	gain = gain.mul(tmp.tdr.rollSumEffect);
 	if (hasMilestone("e", 0)) gain = gain.mul(5);
 	gain = gain.mul(tmp.je.effect);
@@ -68,7 +68,7 @@ function getPointGen() {
 	if (inChallenge("e", 13)) gain = gain.pow(Math.random());
 	if (inChallenge("tdr", 12))
 		gain = gain.div(player.tdr.points.mul(tmp.tdr.effect).max(1));
-	return gain;
+	return gain.mul(player.Hr.total.max(1).log10().mul(2).add(1));
 }
 
 function addedPlayerData() {

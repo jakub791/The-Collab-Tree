@@ -14,7 +14,7 @@ addLayer("Hr", {
 			female: new Decimal(1),
 			baby: new Decimal(0),
 			total: new Decimal(2),
-			interval: 0.05,
+			interval: 30,
 			gtick: 0,
 		};
 	},
@@ -70,6 +70,14 @@ addLayer("Hr", {
 					},
 				],
 				"blank",
+				[
+					"display-text",
+					() => {
+						return `Rabbits boost points by x${format(
+							player.Hr.total.max(1).log10().mul(2).add(1),
+						)} after ALL nerfs.`;
+					},
+				],
 				"blank",
 				"blank",
 				[
