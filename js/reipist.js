@@ -19,10 +19,10 @@ addLayer("poi", {
 	tabFormat: [
 		[
 			"display-text",
-			() => `You have ${format(player.points)} points<br><br>`,],
+			() => `You have ${format(player.points)} points<br><br>`,
+		],
 		"upgrades",
 		"blank",
-		
 	],
 	upgrades: {
 		11: {
@@ -65,7 +65,7 @@ addLayer("poi", {
 			currencyDisplayName: "bacterias",
 			currencyLayer: "ba",
 		},
-				16: {
+		16: {
 			title: "Contaminated Dice.",
 			description: "Dice reroll cooldown is x2.5 faster.",
 			cost: new Decimal(1e14),
