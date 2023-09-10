@@ -1304,7 +1304,7 @@ function formatTimeLong(s) {
 	let scale1 = [
 		5.39121e-44, 1e-30, 1e-27, 1e-24, 1e-21, 1e-18, 1e-15, 1e-12, 1e-9,
 		1e-6, 0.001, 1, 60, 3600, 86400, 31556952, 31556952e3, 31556952e9,
-		31556952e40, 31556952e100,
+		31556952e40, 31556952e100, "31556952e7270",
 	];
 	let scale2 = [
 		" Planck Times",
@@ -1327,6 +1327,7 @@ function formatTimeLong(s) {
 		" aeons",
 		" degenerate eras",
 		" black hole eras",
+    " Eden Eras",
 	];
 	let id2 = 0;
 	if (s.gte(scale1[scale1.length - 1])) id2 = scale1.length - 1;
