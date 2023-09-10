@@ -231,7 +231,7 @@ addLayer("tb", {
 			description() {
 				return (
 					"Time speed affects roll cooldown at a reduced rate. Currently sped up by: x" +
-					format(tmp.t.timeCalculation.add(10).log5())
+					format(tmp.t.timeCalculation.add(10).log(5))
 				);
 			},
 			cost: new Decimal(390625),
