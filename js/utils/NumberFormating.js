@@ -319,7 +319,7 @@ function t6format(x, mult = false, y, z) {
 		"Ock",
 		"Eks",
 	];
-	let t6ones = ["", "hN", "dU", "eT", "cU", "qU", "sW", "pY", "oI", "eI"];
+	let t6ones = ["", "hN", "dY", "tY", "tA", "pA", "hX", "hP", "oT", "eA"];
 	let t6tns = [
 		"Dek",
 		"Hdk",
