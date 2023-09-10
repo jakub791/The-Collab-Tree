@@ -12,7 +12,7 @@ addLayer("je", {
   layerShown() {
     return true;
   }, // Returns a bool for if this layer's node should be visible in the tree.
-  requires: new Decimal(3e9), // Can be a function that takes requirement increases into account
+  requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
   resource: "Jacorbian Energy", // Name of prestige currency
   baseResource: "tuberculosis", // Name of resource prestige is based on
   baseAmount() {

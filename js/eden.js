@@ -28,7 +28,7 @@ addLayer("e", {
   gainMult: Decimal.dOne,
   gainExp: Decimal.dOne,
   layerShown() {
-    return player.tdr.points.gte(15) || player.e.unlocked;
+    return player.tdr.points.gte(12) || player.e.unlocked;
   },
   tabFormat: {
     "Milestones of Amnehilesie": {
