@@ -128,14 +128,15 @@ addLayer("Hr", {
 		if (tmp.Hr.sum.gt(1e20)) {
 			// don't go below 1e20
 			const maxDivide = tmp.Hr.sum.div(1e20);
+			const toDivide = tmp.Hr.soft2.pow(tick).min(maxDivide);
 			player.Hr.male = player.Hr.male.div(
-				tmp.Hr.soft2.pow(tick).min(maxDivide),
+				toDivide,
 			);
 			player.Hr.female = player.Hr.female.div(
-				tmp.Hr.soft2.pow(tick).min(maxDivide),
+				toDivide,
 			);
 			player.Hr.baby = player.Hr.baby.div(
-				tmp.Hr.soft2.pow(tick).min(maxDivide),
+				toDivide,
 			);
 		}
 
