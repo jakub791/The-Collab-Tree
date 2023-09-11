@@ -330,9 +330,9 @@ addLayer("tdr", {
 				: 1) *
 			(hasUpgrade("je", 13) ? upgradeEffect("je", 13).toNumber() : 1);
 		if (hasChallenge("tdr", 13)) cooldownRate *= 20;
-				if (hasUpgrade("poi", 16)) cooldownRate *= 2.5;
-	if (hasAchievement("a", 15)) cooldownRate *= 2;
-	if (hasAchievement("a", 16)) cooldownRate *= 1.3;
+		if (hasUpgrade("poi", 16)) cooldownRate *= 2.5;
+		if (hasAchievement("a", 15)) cooldownRate *= 2;
+		if (hasAchievement("a", 16)) cooldownRate *= 1.3;
 		if (player.tdr.cooldown > 0) {
 			player.tdr.cooldown -= cooldownRate;
 		}

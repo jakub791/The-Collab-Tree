@@ -56,7 +56,7 @@ function getPointGen() {
 	if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb", 13));
 	if (hasUpgrade("poi", 11)) gain = gain.mul(2);
 	if (hasUpgrade("poi", 15)) gain = gain.mul(12);
-if (hasAchievement("a", 13)) gain = gain.mul(12);
+	if (hasAchievement("a", 13)) gain = gain.mul(12);
 	if (hasUpgrade("cheese", "ab31")) gain = gain.mul(4);
 	if (hasUpgrade("poi", 12))
 		gain = gain.times(player.poi.upgrades.length).add(1).pow(1.25);
