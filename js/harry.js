@@ -110,15 +110,16 @@ addLayer("Hr", {
 		return new Decimal(1.041).pow(tmp.Hr.sum.div(1e20).max(1).log(10));
 	},
 	production() {
-		return player.Hr.male.min(player.Hr.female).mul(0.075).pow(tmp.Hr.soft1);
+		return player.Hr.male
+			.min(player.Hr.female)
+			.mul(0.075)
+			.pow(tmp.Hr.soft1);
 	},
 	sum() {
-		return player.Hr.male
-			.add(player.Hr.female)
-			.add(player.Hr.baby);
+		return player.Hr.male.add(player.Hr.female).add(player.Hr.baby);
 	},
 	interval() {
-		return 30
+		return 30;
 	},
 	update(tick) {
 		player.Hr.gtick += tick;
@@ -137,7 +138,7 @@ addLayer("Hr", {
 				tmp.Hr.soft2.pow(tick).min(maxDivide),
 			);
 		}
-		
+
 		if (player.Hr.gtick >= tmp.Hr.interval) {
 			let grow = player.Hr.baby.div(2);
 			player.Hr.baby = player.Hr.baby.div(2);
