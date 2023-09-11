@@ -90,7 +90,7 @@ addLayer("Hr", {
                             <big>Debuffs:</big><br>
                             Baby rabbit gain ^${format(tmp.Hr.soft1)}<br>
                             ${
-								player.Hr.sum.gt(1e20)
+								tmp.Hr.sum.gt(1e20)
 									? `Rabbit amount reduced by ÷${format(
 											tmp.Hr.soft2,
 									  )} every second<br>`
