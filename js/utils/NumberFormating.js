@@ -466,7 +466,7 @@ function standard(decimal, precision) {
 	if (decimal.sign < 0) return "-" + standard(decimal.neg(), precision);
 	if (
 		(decimal.layer > 7 && decimal.mag >= 0) ||
-		(decimal.mag >= Math.log10(3e123) && decimal.layer == 7)
+		(decimal.mag >= Math.log10(3e126) && decimal.layer == 7)
 	) {
 		var slog = decimal.slog();
 		if (slog.gte(1e9)) return "F" + formatWhole(slog.floor());
