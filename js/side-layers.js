@@ -28,11 +28,39 @@ addLayer("a", {
 			tooltip: "Get PU11.",
 		},
 		12: {
-			name: "Dice?",
+			name: "RNG?",
 			done() {
 				return player.tdr.points.gte(1);
 			},
 			tooltip: "Unlock dice.",
+		},
+		13: {
+		  name: "Cheesy Cheese confirmed?",
+		  done() {
+		    return player.cheese.points.gte(1e6);
+		  },
+		  tooltip: "Get 1 million cheese. Reward: Multiply sickness gain by 2.",
+		},
+		14: {
+		  name: "Buyable Buyable.",
+		  done() {
+		    return player.tdr.points.gte(10);
+		  },
+		  tooltip: "Get 10 dice.",
+		},
+		15: {
+		  name: "The Timewall Begins.",
+		  done() {
+		    return player.tdr.points.gte(15);
+		  },
+		  tooltip: "Get 15 dice. Reward: Dice cooldown speed is x2.",
+		},
+		16: {
+		  name: "Lycoris or Licorice?",
+		  done() {
+		    return player.e.points.gte(1);
+		  },
+		  tooltip: "Get 1 lycoris flower. Reward: Dice cooldown speed is x1.3",
 		},
 	},
 });
