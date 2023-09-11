@@ -125,7 +125,7 @@ addLayer("Hr", {
 		player.Hr.gtick += tick;
 		player.Hr.baby = player.Hr.baby.add(tmp.Hr.production.mul(tick));
 
-		if (player.Hr.total.gt(1e20)) {
+		if (tmp.Hr.sum.gt(1e20)) {
 			// don't go below 1e20
 			const maxDivide = tmp.Hr.sum.div(1e20);
 			player.Hr.male = player.Hr.male.div(
