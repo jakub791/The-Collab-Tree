@@ -7,12 +7,14 @@ addLayer("Hr", {
 	color: "#5f575c",
 	position: 2,
 	symbol: "🐰",
+	effect() {return player.Hr.sum.max(1).log10().pow(0.5).add(1)},
 	startData() {
 		return {
 			unlocked: true,
 			male: new Decimal(1),
 			female: new Decimal(1),
 			baby: new Decimal(0),
+			sum: new Decimal(2),
 			interval: 30,
 			gtick: 0,
 		};
@@ -68,6 +70,12 @@ addLayer("Hr", {
 						)} seconds until growth.</small>`;
 					},
 				],
+				[
+					"display-text",
+					() => {
+						return `Rabbits boost your point gain by ${format(tmp.Hr.effect)}x after ALL nerfs.`;
+					},
+				]
 			],
 		},
 	},
@@ -93,6 +101,7 @@ addLayer("Hr", {
 			}
 			player.Hr.gtick = 0;
 		}
+		player.Hr.sum = player.Hr.male.add(player.Hr.female).add(player.Hr.baby)
 	},
 });
 
