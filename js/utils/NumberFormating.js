@@ -580,7 +580,6 @@ function standard(decimal, precision) {
 				  t3format(t3 % 1e3, true, t4 - 2, t3) +
 				  t4format(t4 - 2, t3 % 1e3)
 				: "";
-	/*
 	if (t4illion.gte(1e3))
 		st =
 			t4format(Math.floor(t4 / 1e6), true, t5) +
@@ -629,7 +628,6 @@ function standard(decimal, precision) {
 				  t6format(t6 % 1e3, true, t7 - 2, t6) +
 				  t7format(t7 - 2, t6 % 1e3)
 				: "";
-	*/
 	if (decimal.mag >= 1e9 || (decimal.layer > 0 && decimal.mag >= 0))
 		return m + st;
 	if (decimal.mag >= 1e3) return commaFormat(decimal, 0);
