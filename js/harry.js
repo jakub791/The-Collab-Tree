@@ -66,7 +66,7 @@ addLayer("Hr", {
 					"display-text",
 					() => {
 						return `<small>${Math.round(
-							player.Hr.interval - player.Hr.gtick,
+							tmp.Hr.interval - player.Hr.gtick,
 						)} seconds until growth.</small>`;
 					},
 				],
