@@ -62,9 +62,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Infection spread",
@@ -73,9 +73,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Get hospitalized",
@@ -85,9 +85,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		14: {
 			title: "Perish",
@@ -96,9 +96,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		21: {
 			title: "TBD",
@@ -110,9 +110,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		22: {
 			title: "TBD",
@@ -124,9 +124,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		23: {
 			title: "TBD",
@@ -138,9 +138,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		24: {
 			title: "TBD",
@@ -152,9 +152,9 @@ addLayer("cv", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	doReset(l) {
@@ -240,9 +240,9 @@ addLayer("tb", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Lung Damage",
@@ -259,9 +259,9 @@ addLayer("tb", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Double Disease",
@@ -278,9 +278,9 @@ addLayer("tb", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		14: {
 			title: "Test Tubes",
@@ -294,9 +294,9 @@ addLayer("tb", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		15: {
 			title: "Tube Boost",
@@ -313,9 +313,9 @@ addLayer("tb", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		16: {
 			title: "Enter the Balancing Zone",
@@ -329,9 +329,9 @@ addLayer("tb", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	doReset(l) {

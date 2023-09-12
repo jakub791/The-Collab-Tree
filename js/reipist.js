@@ -35,9 +35,9 @@ addLayer("poi", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Nausea.",
@@ -49,9 +49,9 @@ addLayer("poi", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Bacterial Infection.",
@@ -63,9 +63,9 @@ addLayer("poi", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		14: {
 			title: "Jacorb is sick.",
@@ -77,9 +77,9 @@ addLayer("poi", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		15: {
 			title: "Bacterial Infection II.",
@@ -91,9 +91,9 @@ addLayer("poi", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		16: {
 			title: "Contaminated Dice.",
@@ -105,9 +105,9 @@ addLayer("poi", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		17: {
 			title: "SARS?",
@@ -158,9 +158,11 @@ addLayer("ba", {
 	upgrades: {
 		11: {
 			title: "Pathogens",
-			style: { width: "300px",
-			transform: `rotate(${spinEternally()}deg)`,
-			transitionDuration: "0s transform" },
+			style: {
+				width: "300px",
+				transform: `rotate(${spinEternally()}deg)`,
+				transitionDuration: "0s transform",
+			},
 			cost: new Decimal(1),
 			description() {
 				let s = `Per lycoris flower up to 5 unlock a new effect.<br>Keep all bacteria upgrades on Lycoris reset.<br><br><b>Effects:</b>`;
@@ -184,9 +186,11 @@ addLayer("ba", {
 		},
 		21: {
 			title: "The Massive QoL Upgrade",
-			style: { width: "300px",
-			transform: `rotate(${spinEternally()}deg)`,
-			transitionDuration: "0s transform"},
+			style: {
+				width: "300px",
+				transform: `rotate(${spinEternally()}deg)`,
+				transitionDuration: "0s transform",
+			},
 			cost: new Decimal(10),
 			description() {
 				let s = `Every 2 lycoris flowers unlocks a new effect, up to 10 flowers.<br><br><b>Effects:</b>`;

@@ -74,9 +74,9 @@ addLayer("je", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title() {
@@ -94,9 +94,9 @@ addLayer("je", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	buyables: {
@@ -133,9 +133,9 @@ addLayer("je", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	upgrades: {
@@ -160,9 +160,9 @@ addLayer("je", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Jacorb Upgrade II",
@@ -179,9 +179,9 @@ addLayer("je", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Jacorb Upgrade III",
@@ -204,9 +204,9 @@ addLayer("je", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	tabFormat: [

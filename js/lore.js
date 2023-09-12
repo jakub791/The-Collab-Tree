@@ -29,9 +29,9 @@ addLayer("lore", {
 			style() {
 				return {
 					transform: `rotate(${spinEternally()}deg)`,
-					transitionDuration: "0s transform"
-				}
-			}
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	tabFormat: [
