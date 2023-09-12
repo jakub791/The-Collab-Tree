@@ -109,6 +109,14 @@ addLayer("poi", {
 				}
 			}
 		},
+		17: {
+			title: "SARS?",
+			description: "Unlock a new layer.",
+			cost: new Decimal(1e16),
+			currencyDisplayName: "points",
+
+			currencyInternalName: "points",
+		},
 	},
 });
 addLayer("ba", {

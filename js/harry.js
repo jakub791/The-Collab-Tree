@@ -7,13 +7,15 @@ addLayer("Hr", {
 	color: "#5f575c",
 	position: 2,
 	symbol: "🐰",
+	effect() {
+		return tmp.Hr.sum.max(1).log10().pow(0.5).add(1);
+	},
 	startData() {
 		return {
 			unlocked: true,
 			male: new Decimal(1),
 			female: new Decimal(1),
 			baby: new Decimal(0),
-			interval: 30,
 			gtick: 0,
 		};
 	},
@@ -57,27 +59,82 @@ addLayer("Hr", {
 				[
 					"display-text",
 					() => {
-						return `Half of your baby rabbits are growing up every ${player.Hr.interval} seconds.`;
+						return `Half of your baby rabbits are growing up every ${tmp.Hr.interval} seconds.`;
 					},
 				],
 				[
 					"display-text",
 					() => {
 						return `<small>${Math.round(
-							player.Hr.interval - player.Hr.gtick,
+							tmp.Hr.interval - player.Hr.gtick,
 						)} seconds until growth.</small>`;
+					},
+				],
+				[
+					"display-text",
+					() => {
+						return `Rabbits boost your point gain by ${format(
+							tmp.Hr.effect,
+						)}x after ALL nerfs.`;
+					},
+				],
+				"blank",
+				"blank",
+				[
+					"display-text",
+					() => {
+						return tmp.Hr.sum.lte(1e12)
+							? ``
+							: `
+                            Your rabbits are experiencing overcrowdedness!<br>
+                            <big>Debuffs:</big><br>
+                            Baby rabbit gain ^${format(tmp.Hr.soft1)}<br>
+                            ${
+								tmp.Hr.sum.gt(1e20)
+									? `Rabbit amount reduced by ÷${format(
+											tmp.Hr.soft2,
+									  )} every second<br>`
+									: ""
+							}
+                            Rabbits are feeling sad :(
+                        `;
 					},
 				],
 			],
 		},
 	},
+	soft1() {
+		return new Decimal(0.99).pow(tmp.Hr.sum.div(1e12).max(1).log(10));
+	},
+	soft2() {
+		return new Decimal(1.041).pow(tmp.Hr.sum.div(1e20).max(1).log(10));
+	},
 	production() {
-		return player.Hr.male.min(player.Hr.female).mul(0.075);
+		return player.Hr.male
+			.min(player.Hr.female)
+			.mul(0.075)
+			.pow(tmp.Hr.soft1);
+	},
+	sum() {
+		return player.Hr.male.add(player.Hr.female).add(player.Hr.baby);
+	},
+	interval() {
+		return 30;
 	},
 	update(tick) {
 		player.Hr.gtick += tick;
 		player.Hr.baby = player.Hr.baby.add(tmp.Hr.production.mul(tick));
-		if (player.Hr.gtick >= player.Hr.interval) {
+
+		if (tmp.Hr.sum.gt(1e20)) {
+			// don't go below 1e20
+			const maxDivide = tmp.Hr.sum.div(1e20);
+			const toDivide = tmp.Hr.soft2.pow(tick).min(maxDivide);
+			player.Hr.male = player.Hr.male.div(toDivide);
+			player.Hr.female = player.Hr.female.div(toDivide);
+			player.Hr.baby = player.Hr.baby.div(toDivide);
+		}
+
+		if (player.Hr.gtick >= tmp.Hr.interval) {
 			let grow = player.Hr.baby.div(2);
 			player.Hr.baby = player.Hr.baby.div(2);
 			if (grow.lte(100)) {
