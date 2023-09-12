@@ -59,22 +59,46 @@ addLayer("cv", {
 			description:
 				"Your coughs spread the sickness around. Double sickness gain.",
 			cost: new Decimal(1),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			title: "Infection spread",
 			description: "Double coronavirus gain",
 			cost: new Decimal(10),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		13: {
 			title: "Get hospitalized",
 			description:
 				"Triple coronavirus gain. Also raise sickness to the 1.25",
 			cost: new Decimal(69),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		14: {
 			title: "Perish",
 			description: "Unlock dice.",
 			cost: new Decimal(420),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		21: {
 			title: "TBD",
@@ -83,6 +107,12 @@ addLayer("cv", {
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		22: {
 			title: "TBD",
@@ -91,6 +121,12 @@ addLayer("cv", {
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		23: {
 			title: "TBD",
@@ -99,14 +135,26 @@ addLayer("cv", {
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		24: {
 			title: "TBD",
 			description: "Placeholder",
-			cost: new Decimal(1e400),
+			cost: new Decimal("1e400"),
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	doReset(l) {
@@ -189,6 +237,12 @@ addLayer("tb", {
 			effect() {
 				return player.tb.points.add(player.cv.points).pow(0.25);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			title: "Lung Damage",
@@ -202,6 +256,12 @@ addLayer("tb", {
 			effect() {
 				return player.tb.points.add(player.cv.points).pow(0.25).add(1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		13: {
 			title: "Double Disease",
@@ -215,6 +275,12 @@ addLayer("tb", {
 			effect() {
 				return player.tb.points.add(1).ln().add(2);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		14: {
 			title: "Test Tubes",
@@ -225,6 +291,12 @@ addLayer("tb", {
 			unlocked() {
 				return player.tdr.unlocked;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		15: {
 			title: "Tube Boost",
@@ -238,6 +310,12 @@ addLayer("tb", {
 			unlocked() {
 				return player.tdr.unlocked;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		16: {
 			title: "Enter the Balancing Zone",
@@ -248,6 +326,12 @@ addLayer("tb", {
 			unlocked() {
 				return hasMilestone("tdr", 1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	doReset(l) {

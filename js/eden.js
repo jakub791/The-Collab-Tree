@@ -98,6 +98,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		1: {
 			requirementDescription:
@@ -107,6 +113,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(2);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		2: {
 			requirementDescription:
@@ -116,6 +128,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		3: {
 			requirementDescription:
@@ -125,6 +143,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(10);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		4: {
 			requirementDescription:
@@ -134,6 +158,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(25);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	achievements: {
@@ -147,6 +177,12 @@ addLayer("e", {
 			done() {
 				return player.e.points.gte(69);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			name: "That was an overpowered failure...",
@@ -158,6 +194,12 @@ addLayer("e", {
 			done() {
 				return player.e.fail == true;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	challenges: {
@@ -186,6 +228,12 @@ addLayer("e", {
 				player.e.bpm = new Decimal(0);
 				player.e.tre = new Decimal(0);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			name: "Kowloon",
@@ -204,6 +252,12 @@ addLayer("e", {
 			},
 			rewardDescription:
 				"Roll time is cut in half, and CV and TB gain are boosted by ^1.255.",
+				style() {
+					return {
+						transform: `rotate(${spinEternally()}deg)`,
+						transitionDuration: "0s transform"
+					}
+				}
 		},
 		13: {
 			name: "Compute it with some Devilish Alcoholic Steampunk Engines",
@@ -222,6 +276,12 @@ addLayer("e", {
 			},
 			rewardDescription:
 				"Might as well *hic* give you a key to keep your *hic* stuff on *hic* resetttt...",
+				style() {
+					return {
+						transform: `rotate(${spinEternally()}deg)`,
+						transitionDuration: "0s transform"
+					}
+				}
 		},
 		14: {
 			name: "Spin Eternally",
@@ -239,6 +299,12 @@ addLayer("e", {
 				return player.points.gte(1e22);
 			},
 			rewardDescription: "Jacorbian Energy is boosted by 222x.",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	update(diff) {

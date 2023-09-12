@@ -127,6 +127,12 @@ addLayer("tdr", {
 				}</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			title: "Do the <b>Weekly</b> Roll",
@@ -149,6 +155,12 @@ addLayer("tdr", {
 			unlocked() {
 				return hasChallenge("tdr", 12);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	buyables: {
@@ -182,6 +194,12 @@ addLayer("tdr", {
 			unlocked() {
 				return hasMilestone(this.layer, 1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			title: "Increased Luck",
@@ -216,6 +234,12 @@ addLayer("tdr", {
 			unlocked() {
 				return hasMilestone(this.layer, 3);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	milestones: {
@@ -228,6 +252,12 @@ addLayer("tdr", {
 					(hasUpgrade("ba", 21) && player.e.points.gte(10))
 				);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		2: {
 			requirementDescription: "6 6s rolled",
@@ -236,6 +266,12 @@ addLayer("tdr", {
 			done() {
 				return false;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		3: {
 			requirementDescription: "20 dice",
@@ -247,6 +283,12 @@ addLayer("tdr", {
 					(hasUpgrade("ba", 21) && player.e.points.gte(4))
 				);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		4: {
 			requirementDescription: "30 dice",
@@ -254,6 +296,12 @@ addLayer("tdr", {
 			done() {
 				return player.tdr.points.gte(30);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		5: {
 			requirementDescription: "Roll a 20",
@@ -261,6 +309,12 @@ addLayer("tdr", {
 			done() {
 				return false;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	challenges: {
@@ -279,6 +333,12 @@ addLayer("tdr", {
 				player.e.points = new Decimal(0);
 				player.e.total = new Decimal(0);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		12: {
 			name: "Luck Testing II",
@@ -298,6 +358,12 @@ addLayer("tdr", {
 			unlocked() {
 				return hasChallenge("tdr", 11);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 		13: {
 			name: "Luck Testing III",
@@ -320,6 +386,12 @@ addLayer("tdr", {
 			unlocked() {
 				return hasChallenge("tdr", 12);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	update(diff) {

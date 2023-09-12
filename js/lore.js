@@ -26,6 +26,12 @@ addLayer("lore", {
 			body() {
 				return "I've been watching these mod creators try make something great. Suprised to see how it's going. Everytime these people get together and work it fails. This time they might have a chance. I won't say who I am, but I've been watching and observing for a very long time. I was sent by somebody to scout the modding tree's mod creators and take notes. Certainly this mix of mod-creators won't do anything special, right? We have C.V.T.C, the infectious modder, who's two layers have sprouted in your premises. If you want to find success, get through all of these mod creator's work.";
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform"
+				}
+			}
 		},
 	},
 	tabFormat: [
