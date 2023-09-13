@@ -107,7 +107,7 @@ addLayer("Hr", {
 		return new Decimal(0.99).pow(tmp.Hr.sum.div(1e12).max(1).log(10));
 	},
 	soft2() {
-		return new Decimal(1.041).pow(tmp.Hr.sum.div(1e20).max(1).log(10));
+		return new Decimal(1.002).pow(tmp.Hr.sum.div(1e20).max(1).log(10));
 	},
 	production() {
 		return player.Hr.male
