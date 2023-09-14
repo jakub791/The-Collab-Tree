@@ -30,7 +30,7 @@ addLayer("e", {
 	gainMult: Decimal.dOne,
 	gainExp: Decimal.dOne,
 	layerShown() {
-		return player.tdr.points.gte(15) || player.e.unlocked;
+		return player.tdr.points.gte(12) || player.e.unlocked;
 	},
 	tabFormat: {
 		"Milestones of Amnehilesie": {
@@ -98,6 +98,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		1: {
 			requirementDescription:
@@ -106,6 +112,12 @@ addLayer("e", {
 				"Maybe you'll need some more help. Don't worry, we will support you with upgrades and passive gain to your previous endenavors, although, passive gain will have to be at a minimum since this is still experimental for us. Only 1%!",
 			done() {
 				return player.e.total.gte(2);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		2: {
@@ -116,6 +128,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		3: {
 			requirementDescription:
@@ -125,6 +143,12 @@ addLayer("e", {
 			done() {
 				return player.e.total.gte(10);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		4: {
 			requirementDescription:
@@ -133,6 +157,12 @@ addLayer("e", {
 				"I think you deserve a challenge for this reward.",
 			done() {
 				return player.e.total.gte(25);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},
@@ -147,6 +177,12 @@ addLayer("e", {
 			done() {
 				return player.e.points.gte(69);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			name: "That was an overpowered failure...",
@@ -157,6 +193,12 @@ addLayer("e", {
 			},
 			done() {
 				return player.e.fail == true;
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},
@@ -186,6 +228,12 @@ addLayer("e", {
 				player.e.bpm = new Decimal(0);
 				player.e.tre = new Decimal(0);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			name: "Kowloon",
@@ -204,6 +252,12 @@ addLayer("e", {
 			},
 			rewardDescription:
 				"Roll time is cut in half, and CV and TB gain are boosted by ^1.255.",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			name: "Compute it with some Devilish Alcoholic Steampunk Engines",
@@ -222,6 +276,12 @@ addLayer("e", {
 			},
 			rewardDescription:
 				"Might as well *hic* give you a key to keep your *hic* stuff on *hic* resetttt...",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		14: {
 			name: "Spin Eternally",
@@ -239,6 +299,12 @@ addLayer("e", {
 				return player.points.gte(1e22);
 			},
 			rewardDescription: "Jacorbian Energy is boosted by 222x.",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	update(diff) {

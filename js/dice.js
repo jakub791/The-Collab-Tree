@@ -62,7 +62,7 @@ addLayer("tdr", {
 		let effect = player.tdr.totalroll.add(1);
 		let exponent = Decimal.dOne;
 		if (hasMilestone("tdr", 4)) exponent = exponent.mul(1.5);
-		if (hasChallenge("tdr", 13)) exponent = exponent.mul(4);
+		if (hasChallenge("tdr", 13)) exponent = exponent.mul(1.6);
 		return effect.pow(exponent);
 	},
 	roll() {
@@ -127,6 +127,12 @@ addLayer("tdr", {
 				}</b> HOURS.</span>
                 Cooldown: ${formatTime(player.tdr.cooldown)}`;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Do the <b>Weekly</b> Roll",
@@ -148,6 +154,12 @@ addLayer("tdr", {
 			},
 			unlocked() {
 				return hasChallenge("tdr", 12);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},
@@ -181,6 +193,12 @@ addLayer("tdr", {
 			},
 			unlocked() {
 				return hasMilestone(this.layer, 1);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		12: {
@@ -216,6 +234,12 @@ addLayer("tdr", {
 			unlocked() {
 				return hasMilestone(this.layer, 3);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	milestones: {
@@ -228,6 +252,12 @@ addLayer("tdr", {
 					(hasUpgrade("ba", 21) && player.e.points.gte(10))
 				);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		2: {
 			requirementDescription: "6 6s rolled",
@@ -235,6 +265,12 @@ addLayer("tdr", {
 				"Gain 666x coronavirus, and keep coronavirus upgrades on dice reset",
 			done() {
 				return false;
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		3: {
@@ -247,12 +283,24 @@ addLayer("tdr", {
 					(hasUpgrade("ba", 21) && player.e.points.gte(4))
 				);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		4: {
 			requirementDescription: "30 dice",
 			effectDescription: "Raise the dice effect to the 1.5",
 			done() {
 				return player.tdr.points.gte(30);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		5: {
@@ -261,13 +309,19 @@ addLayer("tdr", {
 			done() {
 				return false;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	challenges: {
 		11: {
 			name: "Luck Testing",
 			fullDisplay:
-				"You have 1d20 seconds to complete this challenge. Completion is required for lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from base roll cooldown.",
+				"You have 1d20 seconds to complete this challenge. If you complete this challenge, you will be able to lycoris reset. If the challenge is failed or you quit, you lose all your lycoris flowers.<br>Goal: 1e16 sickness<br>Reward: The first 20 lycoris flowers each subtract 1 hour from base roll cooldown.",
 			canComplete() {
 				return player.points.gte(1e16);
 			},
@@ -278,6 +332,12 @@ addLayer("tdr", {
 			onExit() {
 				player.e.points = new Decimal(0);
 				player.e.total = new Decimal(0);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		12: {
@@ -298,11 +358,17 @@ addLayer("tdr", {
 			unlocked() {
 				return hasChallenge("tdr", 11);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			name: "Luck Testing III",
 			fullDisplay:
-				"You have 1d15 seconds to complete this challenge. Every second, you lose 100% of points and row 1 resources. If the challenge is failed or you quit, you lose all your lycoris flowers and challenge completions.<br>Goal: 1e10 sickness<br>Reward: Dice effect ^4 and cooldown /20",
+				"You have 1d15 seconds to complete this challenge. Every second, you lose 100% of points and row 1 resources. If the challenge is failed or you quit, you lose all your lycoris flowers and gain all lycoris challenge completions.<br>Goal: 1e10 sickness<br>Reward: Dice effect ^1.6 and cooldown /20",
 			canComplete() {
 				return player.points.gte(1e10);
 			},
@@ -314,11 +380,17 @@ addLayer("tdr", {
 				player.e.points = new Decimal(0);
 				player.e.total = new Decimal(0);
 				for (let i in player.e.challenges) {
-					player.e.challenges[i] = 0;
+					player.e.challenges[i] = 1;
 				}
 			},
 			unlocked() {
 				return hasChallenge("tdr", 12);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},

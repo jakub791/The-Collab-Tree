@@ -1,7 +1,7 @@
 const modInfo = {
 	name: "The Collab Tree",
 	id: "thecollabtree-9978665485",
-	author: "incremental_gamer, harry(psi), niko, thenonymous, downvoid, icecreamdude, reip, and jakub",
+	author: "incremental_gamer, harry(psi), niko, thenonymous, downvoid, icecreamdude, and jakub",
 	pointsName: "sickness",
 	modFiles: [
 		"cheese.js",
@@ -55,6 +55,8 @@ function getPointGen() {
 	if (hasUpgrade("cv", 11)) gain = gain.mul(Decimal.dTwo);
 	if (hasUpgrade("tb", 13)) gain = gain.mul(upgradeEffect("tb", 13));
 	if (hasUpgrade("poi", 11)) gain = gain.mul(2);
+	if (hasUpgrade("poi", 15)) gain = gain.mul(12);
+	if (hasAchievement("a", 13)) gain = gain.mul(12);
 	if (hasUpgrade("cheese", "ab31")) gain = gain.mul(4);
 	if (hasUpgrade("poi", 12))
 		gain = gain.times(player.poi.upgrades.length).add(1).pow(1.25);
@@ -68,7 +70,7 @@ function getPointGen() {
 	if (inChallenge("e", 13)) gain = gain.pow(Math.random());
 	if (inChallenge("tdr", 12))
 		gain = gain.div(player.tdr.points.mul(tmp.tdr.effect).max(1));
-	return gain;
+	return gain.mul(tmp.Hr.effect);
 }
 
 function addedPlayerData() {
@@ -106,5 +108,9 @@ const backgroundStyle = {};
 function maxTickLength() {
 	return 3600;
 }
-
+function spinEternally() {
+	let spin = new Decimal(0);
+	if (inChallenge("e", 14)) spin = Math.random().times(360);
+	return spin;
+}
 function fixOldSave(oldVersion) {}

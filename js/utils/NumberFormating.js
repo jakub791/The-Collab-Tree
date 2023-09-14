@@ -194,9 +194,179 @@ function t3format(x, mult = false, y, z) {
 	if (x >= 100 && x % 100 < 10) t3f = t3h + t3ones[x % 10];
 	return t3f;
 }
-
-function t4format(x, m) {
+function t4format(x, mult = false, y, z) {
 	let t4ills = [
+		"",
+		"Kol",
+		"Mug",
+		"Gog",
+		"Tar",
+		"Put",
+		"Eli",
+		"Zat",
+		"Yut",
+		"Xan",
+	];
+	let t4ones = ["", "eT", "oW", "tS", "tV", "pR", "eZ", "zK", "yR", "xO"];
+	let t4tns = [
+		"Duk",
+		"Hun",
+		"Dek",
+		"Tia",
+		"Tud",
+		"Pud",
+		"Eud",
+		"Zud",
+		"Yud",
+		"Nod",
+	];
+	let t4to = ["k", "k", "c", "c", "c", "k", "k", "c", "k", "c"];
+	if (mult && y > 0 && x < 10)
+		t4ones = ["", "", "D", "Tr", "T", "P", "Ex", "Z", "Y", "N"];
+	let t4tens = ["", "", "I", "Tr", "Te", "P", "E", "Z", "Y", "N"];
+	let t4hunds = [
+		"",
+		"Hut",
+		"But",
+		"Trut",
+		"Tut",
+		"Put",
+		"Exut",
+		"Zut",
+		"Yut",
+		"Nut",
+	];
+	let t4f = t4ills[x];
+	if ((mult && y > 0) || z >= 1e3) t4f = t4ones[x];
+	let t4t = t4tens[Math.floor(x / 10) % 10];
+	let t4h = t4hunds[Math.floor(x / 100)];
+	if (x % 100 == 0) t4h += "T";
+	if (x % 100 < 20 && x % 100 > 9) t4t = t4tns[x % 10];
+	if (x % 100 > 19) t4t += t4to[x % 10] + t4ones[x % 10];
+	if (x >= 10) t4f = t4h + t4t;
+	return t4f;
+}
+
+function t5format(x, mult = false, y, z) {
+	let t5ills = [
+		"",
+		"Unv",
+		"Duv",
+		"Eti",
+		"Cuv",
+		"Quv",
+		"Swi",
+		"Pyr",
+		"Oiv",
+		"Eni",
+	];
+	let t5ones = ["", "uN", "dU", "eT", "cU", "qU", "sW", "pY", "oI", "eI"];
+	let t5tns = [
+		"Ek",
+		"Ev",
+		"Twy",
+		"Ekt",
+		"Ecv",
+		"Eqv",
+		"Esi",
+		"Eyr",
+		"Eiv",
+		"Ekn",
+	];
+	let t5tens = [
+		"",
+		"",
+		"Lan",
+		"Etk",
+		"Cuk",
+		"Quk",
+		"Swk",
+		"Pyk",
+		"Oik",
+		"Enk",
+	];
+	let t5hunds = [
+		"",
+		"Eva",
+		"Dva",
+		"Eta",
+		"Cva",
+		"Qva",
+		"Sva",
+		"Pva",
+		"Ova",
+		"Env",
+	];
+	let t5f = t5ills[x];
+	if ((mult && y > 0) || z >= 1e3) t5f = t5ones[x];
+	let t5t = t5tens[Math.floor(x / 10) % 10];
+	let t5h = t5hunds[Math.floor(x / 100)];
+	if (x % 100 < 20 && x % 100 > 9) t5t = t5tns[x % 10];
+	if (x >= 10) t5f = t5h + t5t;
+	return t5f;
+}
+
+function t6format(x, mult = false, y, z) {
+	let t6ills = [
+		"",
+		"Hap",
+		"Dis",
+		"Tri",
+		"Tek",
+		"Pek",
+		"Hek",
+		"Hpk",
+		"Ock",
+		"Eks",
+	];
+	let t6ones = ["", "hN", "dY", "tY", "tA", "pA", "hX", "hP", "oT", "eA"];
+	let t6tns = [
+		"Dek",
+		"Hdk",
+		"Ddk",
+		"Dtk",
+		"Drk",
+		"Dpk",
+		"Dxk",
+		"Dhk",
+		"Dck",
+		"Dnk",
+	];
+	let t6tens = [
+		"",
+		"",
+		"Isk",
+		"Tck",
+		"Tsk",
+		"Pck",
+		"Hxs",
+		"Hdk",
+		"Odk",
+		"Ens",
+	];
+	let t6hunds = [
+		"",
+		"Hcts",
+		"Dias",
+		"Tras",
+		"Teas",
+		"Pens",
+		"Heas",
+		"Hpas",
+		"Ocas",
+		"Enas",
+	];
+	let t6f = t6ills[x];
+	if ((mult && y > 0) || z >= 1e3) t6f = t6ones[x];
+	let t6t = t6tens[Math.floor(x / 10) % 10];
+	let t6h = t6hunds[Math.floor(x / 100)];
+	if (x % 100 < 20 && x % 100 > 9) t6t = t6tns[x % 10];
+	if (x >= 10) t6f = t6h + t6t;
+	return t6f;
+}
+
+function t7format(x, m) {
+	let t7ills = [
 		"",
 		"aL",
 		"eJ",
@@ -241,7 +411,7 @@ function t4format(x, m) {
 		"aG",
 		"deN",
 	]; //eT is the start of the extending, beginning at 10^10^10^45. Currently at 10^10^10^126 (Edenillion). Previous extensions: 10^10^10^123 (Lagillion), 10^10^10^120 (Suzumillion), 10^10^10^117 (Namillion), 10^10^10^114 (Matatabillion), 10^10^10^111 (Genkillion) 10^10^10^108 (Mikuillion), 10^10^10^105 (Laurillion), 10^10^10^102 (Sakuzillion), 10^10^10^99 (Kobarillion), 10^10^10^96 (Phigrillion), 10^10^10^93 (Aeglesillion), 10^10^10^90 (Camellillion), 10^10^10^87 (Rotaenillion), 10^10^10^84 (Pentimentillion), 10^10^10^81 (Testifillion) 10^10^10^78 (Tempestillion), 10^10^10^75 (Resonillion) 10^10^10^72 (Grievillion), 10^10^10^69 (nice)(Voltillion), 10^10^10^66 (Yucillion), 10^10^10^63 (Fractillion), 10^10^10^60 (Omnillion), Ultrillion (10^10^10^57), Archillion (10^10^10^54), Hyperillion (10^10^10^51), Xenoillion (10^10^10^48), Metaillion (10^10^10^45)
-	let t4m = [
+	let t7m = [
 		"",
 		"K",
 		"M",
@@ -286,17 +456,17 @@ function t4format(x, m) {
 		"L",
 		"E",
 	];
-	let t4f = t4ills[x];
-	if (m < 2) t4f = t4m[x] + t4f;
-	return t4f;
+	let t7f = t7ills[x];
+	if (m < 2) t7f = t7m[x] + t7f;
+	return t7f;
 }
 
 function standard(decimal, precision) {
 	decimal = new Decimal(decimal);
 	if (decimal.sign < 0) return "-" + standard(decimal.neg(), precision);
 	if (
-		(decimal.layer > 4 && decimal.mag >= 0) ||
-		(decimal.mag >= Math.log10(3e123) && decimal.layer == 4)
+		(decimal.layer > 7 && decimal.mag >= 0) ||
+		(decimal.mag >= Math.log10(3e126) && decimal.layer == 7)
 	) {
 		var slog = decimal.slog();
 		if (slog.gte(1e9)) return "F" + formatWhole(slog.floor());
@@ -331,6 +501,9 @@ function standard(decimal, precision) {
 	let t2illion = illion.max(1).log10().div(3).floor();
 	let t3illion = t2illion.max(1).log10().div(3).floor();
 	let t4illion = t3illion.max(1).log10().div(3).floor();
+	let t5illion = t4illion.max(1).log10().div(3).floor();
+	let t6illion = t5illion.max(1).log10().div(3).floor();
+	let t7illion = t6illion.max(1).log10().div(3).floor();
 	let t1 = illion
 		.div(Decimal.pow(1e3, t2illion.sub(2)))
 		.floor()
@@ -346,7 +519,22 @@ function standard(decimal, precision) {
 		.floor()
 		.toNumber();
 	if (t3illion.lt(1e3)) t3 = t3illion.toNumber();
-	let t4 = t4illion.toNumber();
+	let t4 = t4illion
+		.div(Decimal.pow(1e3, t5illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t4 = t4illion.toNumber();
+	let t5 = t5illion
+		.div(Decimal.pow(1e3, t6illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t5 = t5illion.toNumber();
+	let t6 = t6illion
+		.div(Decimal.pow(1e3, t7illion.sub(2)))
+		.floor()
+		.toNumber();
+	if (t3illion.lt(1e3)) t6 = t6illion.toNumber();
+	let t7 = t7illion.toNumber();
 	let st = t1format(t1);
 	if (illion.gte(1e3))
 		st =
@@ -391,6 +579,54 @@ function standard(decimal, precision) {
 				? "`-" +
 				  t3format(t3 % 1e3, true, t4 - 2, t3) +
 				  t4format(t4 - 2, t3 % 1e3)
+				: "";
+	if (t4illion.gte(1e3))
+		st =
+			t4format(Math.floor(t4 / 1e6), true, t5) +
+			t5format(t5, Math.floor(t4 / 1e6)) +
+			(Math.floor(t4 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t4format(Math.floor(t4 / 1e3) % 1e3, true, t5 - 1, t4) +
+				  t5format(t5 - 1, Math.floor(t4 / 1e3) % 1e3)
+				: "");
+	if (t4illion.gte(1e6))
+		st +=
+			t4 % 1e3 > 0
+				? "`-" +
+				  t4format(t4 % 1e3, true, t5 - 2, t4) +
+				  t5format(t5 - 2, t4 % 1e3)
+				: "";
+	if (t5illion.gte(1e3))
+		st =
+			t5format(Math.floor(t5 / 1e6), true, t6) +
+			t6format(t6, Math.floor(t5 / 1e6)) +
+			(Math.floor(t5 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t5format(Math.floor(t5 / 1e3) % 1e3, true, t6 - 1, t5) +
+				  t6format(t6 - 1, Math.floor(t5 / 1e3) % 1e3)
+				: "");
+	if (t5illion.gte(1e6))
+		st +=
+			t5 % 1e3 > 0
+				? "`-" +
+				  t5format(t5 % 1e3, true, t6 - 2, t5) +
+				  t6format(t6 - 2, t5 % 1e3)
+				: "";
+	if (t6illion.gte(1e3))
+		st =
+			t6format(Math.floor(t6 / 1e6), true, t7) +
+			t7format(t7, Math.floor(t6 / 1e6)) +
+			(Math.floor(t6 / 1e3) % 1e3 > 0
+				? "`-" +
+				  t6format(Math.floor(t6 / 1e3) % 1e3, true, t7 - 1, t6) +
+				  t7format(t7 - 1, Math.floor(t6 / 1e3) % 1e3)
+				: "");
+	if (t6illion.gte(1e6))
+		st +=
+			t6 % 1e3 > 0
+				? "`-" +
+				  t6format(t6 % 1e3, true, t7 - 2, t6) +
+				  t7format(t7 - 2, t6 % 1e3)
 				: "";
 	if (decimal.mag >= 1e9 || (decimal.layer > 0 && decimal.mag >= 0))
 		return m + st;
@@ -1056,7 +1292,6 @@ function formatSciEng(decimal, precision) {
 	if (isNaN(decimal.sign) || isNaN(decimal.layer) || isNaN(decimal.mag)) {
 		player.hasNaN = true;
 		console.log(decimal);
-		Decimal(0);
 		for (i in player) {
 			if (player[i] == undefined) continue;
 			if (player[i].points != undefined) {
@@ -1225,9 +1460,27 @@ function formatTimeLong(s) {
 	if (years.gte("ee9"))
 		return format(mlt[0].div(arv1[id])) + " " + mverse + "verse ages";
 	let scale1 = [
-		5.39121e-44, 1e-30, 1e-27, 1e-24, 1e-21, 1e-18, 1e-15, 1e-12, 1e-9,
-		1e-6, 0.001, 1, 60, 3600, 86400, 31556952, 31556952e3, 31556952e9,
-		31556952e40, 31556952e100,
+		5.39121e-44,
+		1e-30,
+		1e-27,
+		1e-24,
+		1e-21,
+		1e-18,
+		1e-15,
+		1e-12,
+		1e-9,
+		1e-6,
+		0.001,
+		1,
+		60,
+		3600,
+		86400,
+		31556952,
+		31556952e3,
+		31556952e9,
+		31556952e40,
+		31556952e100,
+		"31556952e7270",
 	];
 	let scale2 = [
 		" Planck Times",
@@ -1250,6 +1503,7 @@ function formatTimeLong(s) {
 		" aeons",
 		" degenerate eras",
 		" black hole eras",
+		" Eden Eras",
 	];
 	let id2 = 0;
 	if (s.gte(scale1[scale1.length - 1])) id2 = scale1.length - 1;
@@ -1436,6 +1690,7 @@ function formatComp(s) {
 		6.7742e60,
 		4e80,
 		"e10310",
+		"1e1e211",
 	];
 	let scale2 = [
 		" SARS-CoV-2 viruses.",
@@ -1453,6 +1708,7 @@ function formatComp(s) {
 		" Milky Ways.",
 		" observable universes.",
 		" symptom-verses.",
+		" paths to Arcana Eden.",
 	];
 	let id = 0;
 	if (s.gte(scale1[scale1.length - 1])) id = scale1.length - 1;

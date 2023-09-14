@@ -140,6 +140,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -291,6 +293,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -320,6 +324,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -344,6 +350,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -369,6 +377,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -408,6 +418,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -447,6 +459,8 @@ addLayer("cheese", {
 						: "",
 					color: "black",
 					"border-color": "rgba(0,0,0,0.125)",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -637,6 +651,8 @@ addLayer("cheese", {
 					height: "80px",
 					"border-color": "rgba(0,0,0,0.125)",
 					"background-color": this.canAfford() ? "#006080" : "",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -742,6 +758,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "150px",
@@ -753,6 +771,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 		},
@@ -827,6 +847,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "125px",
@@ -839,6 +861,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 		},
@@ -915,6 +939,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "125px",
@@ -928,6 +954,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 		},
@@ -1008,6 +1036,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "125px",
@@ -1020,6 +1050,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 		},
@@ -1094,6 +1126,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "125px",
@@ -1107,6 +1141,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 			unlocked() {
@@ -1187,6 +1223,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "125px",
@@ -1201,6 +1239,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 			unlocked() {
@@ -1266,6 +1306,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "125px",
@@ -1279,6 +1321,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 			unlocked() {
@@ -1342,6 +1386,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "150px",
@@ -1353,6 +1399,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 		},
@@ -1418,6 +1466,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  }
 					: {
 							height: "150px",
@@ -1429,6 +1479,8 @@ addLayer("cheese", {
 								? "rgb(255,172,51)"
 								: "",
 							color: this.canAfford() ? "rgb(244,144,12)" : "",
+							transform: `rotate(${spinEternally()}deg)`,
+							transitionDuration: "0s transform",
 					  };
 			},
 			unlocked() {
@@ -1475,6 +1527,8 @@ addLayer("cheese", {
 					width: "192px",
 					"border-color": "rgba(0,0,0,0.125)",
 					"background-color": this.canAfford() ? "#006080" : "",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -1513,6 +1567,8 @@ addLayer("cheese", {
 					width: "192px",
 					"border-color": "rgba(0,0,0,0.125)",
 					"background-color": this.canAfford() ? "#006080" : "",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -1558,6 +1614,8 @@ addLayer("cheese", {
 					width: "192px",
 					"border-color": "rgba(0,0,0,0.125)",
 					"background-color": this.canAfford() ? "#006080" : "",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 		},
@@ -1701,6 +1759,8 @@ addLayer("cheese", {
 					borderRadius: "50px",
 					borderColor: "rgb(0,84,112)",
 					backgroundColor: "#006080",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				},
 				unlocked() {
 					return hasUpgrade("cheese", "b2");
@@ -1750,6 +1810,8 @@ addLayer("cheese", {
 					borderRadius: "50px",
 					borderColor: "rgb(0,84,112)",
 					backgroundColor: "#006080",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				},
 				unlocked() {
 					return hasUpgrade("cheese", "b2");
@@ -1789,6 +1851,8 @@ addLayer("cheese", {
 				borderRadius: "50px",
 				borderColor: "rgb(0,84,112)",
 				backgroundColor: "#006080",
+				transform: `rotate(${spinEternally()}deg)`,
+				transitionDuration: "0s transform",
 			},
 		},
 		Cheese: {
@@ -1885,6 +1949,8 @@ addLayer("cheese", {
 			buttonStyle: {
 				color: "rgb(244,144,12)",
 				borderRadius: "50px",
+				transform: `rotate(${spinEternally()}deg)`,
+				transitionDuration: "0s transform",
 			},
 		},
 		"Cheese Overlord's Heaven": {
@@ -2053,6 +2119,8 @@ addLayer("cheese", {
 			buttonStyle: {
 				color: "rgb(244,144,12)",
 				borderRadius: "50px",
+				transform: `rotate(${spinEternally()}deg)`,
+				transitionDuration: "0s transform",
 			},
 			unlocked() {
 				return (
@@ -2091,6 +2159,8 @@ addLayer("cheese", {
 			buttonStyle: {
 				color: "rgb(244,144,12)",
 				borderRadius: "50px",
+				transform: `rotate(${spinEternally()}deg)`,
+				transitionDuration: "0s transform",
 			},
 		},
 	},
@@ -2098,6 +2168,8 @@ addLayer("cheese", {
 	nodeStyle: {
 		color: "rgb(244,144,12)",
 		borderColor: "rgb(255,172,51)",
+		transform: `rotate(${spinEternally()}deg)`,
+		transitionDuration: "0s transform",
 	},
 	layerShown: true,
 });
@@ -2132,5 +2204,9 @@ addNode("ab", {
 				: "Oh, hey there.<br>I'm not quite sure how did I get here, but you don't have to worry about me...<br>Speaking of which. Could you get some 🧀 for me please?")
 		);
 	},
-	nodeStyle: { borderRadius: "50%" },
+	nodeStyle: {
+		borderRadius: "50%",
+		transform: `rotate(${spinEternally()}deg)`,
+		transitionDuration: "0s transform",
+	},
 });

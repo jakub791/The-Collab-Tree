@@ -59,22 +59,46 @@ addLayer("cv", {
 			description:
 				"Your coughs spread the sickness around. Double sickness gain.",
 			cost: new Decimal(1),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Infection spread",
 			description: "Double coronavirus gain",
 			cost: new Decimal(10),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Get hospitalized",
 			description:
 				"Triple coronavirus gain. Also raise sickness to the 1.25",
 			cost: new Decimal(69),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		14: {
 			title: "Perish",
 			description: "Unlock dice.",
 			cost: new Decimal(420),
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		21: {
 			title: "TBD",
@@ -82,6 +106,12 @@ addLayer("cv", {
 			cost: new Decimal(1e100),
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		22: {
@@ -91,6 +121,12 @@ addLayer("cv", {
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		23: {
 			title: "TBD",
@@ -99,13 +135,25 @@ addLayer("cv", {
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		24: {
 			title: "TBD",
 			description: "Placeholder",
-			cost: new Decimal(1e400),
+			cost: new Decimal("1e400"),
 			unlocked() {
 				return hasUpgrade("ba", 11) && player.e.points.gte(5);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},
@@ -178,16 +226,22 @@ addLayer("tb", {
 	},
 	upgrades: {
 		11: {
-			title: "Bacterial Invasion",
+			title: "Bacterial Infection",
 			description() {
 				return (
-					"Total Coronavirus and Tuberculosis increase your sickness gain. Currently: +" +
+					"Total diseases increase your sickness gain. Currently: +" +
 					format(this.effect())
 				);
 			},
 			cost: new Decimal(1),
 			effect() {
 				return player.tb.points.add(player.cv.points).pow(0.25);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		12: {
@@ -202,6 +256,12 @@ addLayer("tb", {
 			effect() {
 				return player.tb.points.add(player.cv.points).pow(0.25).add(1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Double Disease",
@@ -215,6 +275,12 @@ addLayer("tb", {
 			effect() {
 				return player.tb.points.add(1).ln().add(2);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		14: {
 			title: "Test Tubes",
@@ -225,18 +291,30 @@ addLayer("tb", {
 			unlocked() {
 				return player.tdr.unlocked;
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		15: {
 			title: "Tube Boost",
 			description() {
 				return (
 					"Time speed affects roll cooldown at a reduced rate. Currently sped up by: x" +
-					format(tmp.t.timeCalculation.add(10).log5())
+					format(tmp.t.timeCalculation.add(10).log(5))
 				);
 			},
 			cost: new Decimal(390625),
 			unlocked() {
 				return player.tdr.unlocked;
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 		16: {
@@ -247,6 +325,12 @@ addLayer("tb", {
 			cost: new Decimal(152587890625),
 			unlocked() {
 				return hasMilestone("tdr", 1);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},

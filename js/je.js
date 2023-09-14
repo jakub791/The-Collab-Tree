@@ -12,7 +12,7 @@ addLayer("je", {
 	layerShown() {
 		return true;
 	}, // Returns a bool for if this layer's node should be visible in the tree.
-	requires: new Decimal(3e9), // Can be a function that takes requirement increases into account
+	requires: new Decimal(1e9), // Can be a function that takes requirement increases into account
 	resource: "Jacorbian Energy", // Name of prestige currency
 	baseResource: "tuberculosis", // Name of resource prestige is based on
 	baseAmount() {
@@ -36,6 +36,7 @@ addLayer("je", {
 		if (hasUpgrade("ba", 11) && player.e.points.gte(4))
 			mult = mult.mul(tmp.ba.upgrades[11].effect1);
 		if (hasMilestone("tdr", 5)) mult = mult.mul(20);
+		if (hasUpgrade("poi", 14)) mult = mult.mul(2.72);
 		return mult;
 	},
 	gainExp() {
@@ -70,6 +71,12 @@ addLayer("je", {
 			onClick() {
 				player.jacorbscene = player.jacorbscene.add(1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title() {
@@ -83,6 +90,12 @@ addLayer("je", {
 			},
 			onClick() {
 				player.jacorbscene = player.jacorbscene.sub(1);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},
@@ -117,6 +130,12 @@ addLayer("je", {
 			unlocked() {
 				return hasUpgrade("je", 12);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	upgrades: {
@@ -138,6 +157,12 @@ addLayer("je", {
 			}, // Add formatting to the effect
 			currencyDisplayName: "Jacorbian Energy",
 			currencyInternalName: "points",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Jacorb Upgrade II",
@@ -151,6 +176,12 @@ addLayer("je", {
 			}, // Add formatting to the effect
 			currencyDisplayName: "Jacorbian Energy",
 			currencyInternalName: "points",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Jacorb Upgrade III",
@@ -170,6 +201,12 @@ addLayer("je", {
 			}, // Add formatting to the effect
 			currencyDisplayName: "Jacorbian Energy",
 			currencyInternalName: "points",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	tabFormat: [
@@ -375,6 +412,10 @@ addLayer("je", {
 		],
 	],
 	layerShown() {
-		return hasUpgrade("tb", 16) || player.je.points.gt(0);
+		return (
+			hasUpgrade("tb", 16) ||
+			player.je.points.gt(0) ||
+			player.e.points.gte(1)
+		);
 	},
 });
