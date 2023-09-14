@@ -3,11 +3,11 @@ function save(force) {
 	if (NaNalert && !force) return;
 	localStorage.setItem(
 		modInfo.id,
-		btoa(unescape(encodeURIComponent(JSON.stringify(player))))
+		btoa(unescape(encodeURIComponent(JSON.stringify(player)))),
 	);
 	localStorage.setItem(
 		modInfo.id + "_options",
-		btoa(unescape(encodeURIComponent(JSON.stringify(options))))
+		btoa(unescape(encodeURIComponent(JSON.stringify(options)))),
 	);
 }
 function startPlayerBase() {
@@ -49,7 +49,7 @@ function getStartPlayer() {
 		) {
 			playerdata.subtabs[layer] = {};
 			playerdata.subtabs[layer].mainTabs = Object.keys(
-				layers[layer].tabFormat
+				layers[layer].tabFormat,
 			)[0];
 		}
 		if (layers[layer].microtabs) {
@@ -57,7 +57,7 @@ function getStartPlayer() {
 				playerdata.subtabs[layer] = {};
 			for (item in layers[layer].microtabs)
 				playerdata.subtabs[layer][item] = Object.keys(
-					layers[layer].microtabs[item]
+					layers[layer].microtabs[item],
 				)[0];
 		}
 		if (layers[layer].infoboxes) {
@@ -157,22 +157,22 @@ function fixSave() {
 		) {
 			if (
 				!Object.keys(layers[layer].tabFormat).includes(
-					player.subtabs[layer].mainTabs
+					player.subtabs[layer].mainTabs,
 				)
 			)
 				player.subtabs[layer].mainTabs = Object.keys(
-					layers[layer].tabFormat
+					layers[layer].tabFormat,
 				)[0];
 		}
 		if (layers[layer].microtabs) {
 			for (item in layers[layer].microtabs)
 				if (
 					!Object.keys(layers[layer].microtabs[item]).includes(
-						player.subtabs[layer][item]
+						player.subtabs[layer][item],
 					)
 				)
 					player.subtabs[layer][item] = Object.keys(
-						layers[layer].microtabs[item]
+						layers[layer].microtabs[item],
 					)[0];
 		}
 	}
@@ -212,7 +212,7 @@ function load() {
 	} else {
 		player = Object.assign(
 			getStartPlayer(),
-			JSON.parse(decodeURIComponent(escape(atob(get))))
+			JSON.parse(decodeURIComponent(escape(atob(get)))),
 		);
 		fixSave();
 		loadOptions();
@@ -241,7 +241,7 @@ function loadOptions() {
 	if (get2)
 		options = Object.assign(
 			getStartOptions(),
-			JSON.parse(decodeURIComponent(escape(atob(get2))))
+			JSON.parse(decodeURIComponent(escape(atob(get2)))),
 		);
 	else options = getStartOptions();
 	if (themes.indexOf(options.theme) < 0) theme = "default";
@@ -269,7 +269,7 @@ function NaNcheck(data) {
 				alert(
 					"Invalid value found in player, named '" +
 						item +
-						"'. Please let the creator of this mod know! You can refresh the page, and you will be un-NaNed."
+						"'. Please let the creator of this mod know! You can refresh the page, and you will be un-NaNed.",
 				);
 				return;
 			}
@@ -300,7 +300,7 @@ function importSave(imported = undefined, forced = false) {
 			tempPlr.versionType != modInfo.id &&
 			!forced &&
 			!confirm(
-				"This save appears to be for a different mod! Are you sure you want to import?"
+				"This save appears to be for a different mod! Are you sure you want to import?",
 			)
 		)
 			// Wrong save (use "Forced" to force it to accept.)
