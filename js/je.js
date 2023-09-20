@@ -71,6 +71,12 @@ addLayer("je", {
 			onClick() {
 				player.jacorbscene = player.jacorbscene.add(1);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title() {
@@ -84,6 +90,12 @@ addLayer("je", {
 			},
 			onClick() {
 				player.jacorbscene = player.jacorbscene.sub(1);
+			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
 			},
 		},
 	},
@@ -118,6 +130,12 @@ addLayer("je", {
 			unlocked() {
 				return hasUpgrade("je", 12);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	upgrades: {
@@ -139,6 +157,12 @@ addLayer("je", {
 			}, // Add formatting to the effect
 			currencyDisplayName: "Jacorbian Energy",
 			currencyInternalName: "points",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			title: "Jacorb Upgrade II",
@@ -152,6 +176,12 @@ addLayer("je", {
 			}, // Add formatting to the effect
 			currencyDisplayName: "Jacorbian Energy",
 			currencyInternalName: "points",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			title: "Jacorb Upgrade III",
@@ -171,6 +201,12 @@ addLayer("je", {
 			}, // Add formatting to the effect
 			currencyDisplayName: "Jacorbian Energy",
 			currencyInternalName: "points",
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	tabFormat: [

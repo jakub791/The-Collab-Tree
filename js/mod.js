@@ -110,7 +110,7 @@ function maxTickLength() {
 }
 function spinEternally() {
 	let spin = new Decimal(0);
-	if (inChallenge("e", 14)) spin = Math.random(0, 360);
+	if (inChallenge("e", 14)) spin = Math.random().times(360);
 	return spin;
 }
 function fixOldSave(oldVersion) {}

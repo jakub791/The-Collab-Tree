@@ -96,6 +96,12 @@ addLayer("t", {
 			canAfford() {
 				return player[this.layer].time.gte(this.cost());
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		BetterBaseI: {
 			title() {
@@ -148,6 +154,12 @@ addLayer("t", {
 			unlocked() {
 				return player[this.layer].buyables["FasterTimeI"].gte(5);
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		FasterTimeII: {
 			title() {
@@ -198,6 +210,12 @@ addLayer("t", {
 			canAfford() {
 				return player[this.layer].time.gte(this.cost());
 			},
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 	},
 	achievements: {
@@ -207,6 +225,12 @@ addLayer("t", {
 				return player.t.buyables["FasterTimeI"].gte(1);
 			},
 			tooltip: `Get a buyable`,
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		12: {
 			name: `The Hourglass`,
@@ -214,6 +238,12 @@ addLayer("t", {
 				return player.t.time.gte(3600);
 			},
 			tooltip: `Make time go over 3,600 seconds`,
+			style() {
+				return {
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
+				};
+			},
 		},
 		13: {
 			name: `POV`,
@@ -224,6 +254,8 @@ addLayer("t", {
 				return {
 					background: `url('whar/yeah.jpg')`,
 					"background-size": "180%",
+					transform: `rotate(${spinEternally()}deg)`,
+					transitionDuration: "0s transform",
 				};
 			},
 			tooltip: `you just got super-scaled lmafo`,

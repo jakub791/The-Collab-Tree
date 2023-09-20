@@ -1,4 +1,3 @@
-// ************ Save stuff ************
 function save(force) {
 	NaNcheck(player);
 	if (NaNalert && !force) return;
@@ -70,6 +69,7 @@ function getStartPlayer() {
 	}
 	return playerdata;
 }
+
 function getStartLayerData(layer) {
 	layerdata = {};
 	if (layers[layer].startData) layerdata = layers[layer].startData();
@@ -96,6 +96,7 @@ function getStartLayerData(layer) {
 
 	return layerdata;
 }
+
 function getStartBuyables(layer) {
 	let data = {};
 	if (layers[layer].buyables) {
@@ -105,6 +106,7 @@ function getStartBuyables(layer) {
 	}
 	return data;
 }
+
 function getStartClickables(layer) {
 	let data = {};
 	if (layers[layer].clickables) {
@@ -113,6 +115,7 @@ function getStartClickables(layer) {
 	}
 	return data;
 }
+
 function getStartChallenges(layer) {
 	let data = {};
 	if (layers[layer].challenges) {
@@ -121,6 +124,7 @@ function getStartChallenges(layer) {
 	}
 	return data;
 }
+
 function getStartGrid(layer) {
 	let data = {};
 	if (!layers[layer].grid) return data;
@@ -275,6 +279,7 @@ function NaNcheck(data) {
 		}
 	}
 }
+
 function exportSave() {
 	//if (NaNalert) return
 	let str = btoa(JSON.stringify(player));
